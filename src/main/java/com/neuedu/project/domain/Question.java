@@ -4,11 +4,15 @@ import java.util.List;
 
 public class Question {
 
+    private int questionId;
+
     private int courseId;
 
     private int questionType;
 
     private String questionContent;
+
+    private int score;
 
     private String choicesString;
 
@@ -40,6 +44,10 @@ public class Question {
         this.questionContent = questionContent;
         this.rightAnswerString = rightAnswerString;
         this.resources = resources;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public int getCourseId() {

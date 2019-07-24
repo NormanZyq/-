@@ -1,5 +1,6 @@
 package com.neuedu.project.service;
 
+import com.neuedu.project.dao.QuestionMapper;
 import com.neuedu.project.domain.Question;
 import org.springframework.stereotype.Service;
 

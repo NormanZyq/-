@@ -20,6 +20,17 @@ public class UserController {
     //    @Autowired
     private UserService userService;
 
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "../login.html";
+    }
+
+    @GetMapping(value = "/register")
+    public String register() {
+        return "../register.html";
+    }
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -28,6 +39,7 @@ public class UserController {
     @GetMapping(value = "/get/login")
     @ResponseBody
     public User getLoginUser(HttpServletRequest request) {
+        // todo 需要拦截器，判断是否已登录
         return (User) request.getSession().getAttribute("loggedUser");
     }
 
@@ -50,12 +62,12 @@ public class UserController {
         return "does not exist";
     }
 
-    @PostMapping(value = "register")
+    @PostMapping(value = "/register")
     public String resister(String userId, String password,
                            String name, int identity,
                            HttpServletResponse response) {
         System.out.println("In");
-        userService.register(userId, password, name, 0);
+        userService.register(userId, password, name, identity);
         return "../success.html";
     }
 

@@ -6,10 +6,27 @@
 
 <mapper namespace="com.neuedu.project.dao.QuestionMapper">
 
+    <resultMap id="questionMap" type="Question">
+        <id column="question_id" property="questionId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="question_type" property="questionType"/>
+        <result column="question_content" property="questionContent"/>
+        <result column="score" property="score"/>
+        <result column="choices" property="choicesString"/>
+        <result column="choices_string" property="choicesString"/>
+        <result column="question_answer" property="rightAnswerString"/>
+        <result column="resources" property="resources"/>
+    </resultMap>
 
-    <insert id="addChoiceQuestion">
-        insert into questions (question_type, question_content, choices, question_answer, resources)
-        values (0, #{questionContent}, #{choicesString}, #{rightAnswerString}, #{resources});
+    <insert id="addChoiceQuestion" parameterType="Question">
+        insert into questions (course_id, question_type, question_content, choices, question_answer, resources)
+        values (#{courseId}, 0, #{questionContent}, #{choicesString}, #{rightAnswerString}, #{resources});
+    </insert>
+
+    <insert id="addSubjectiveQuestion" parameterType="Question">
+        insert into questions (course_id, question_type, question_content, question_answer,
+                               resources)
+        values (#{courseId}, 1, #{questionContent}, #{rightAnswerString}, #{resources});
     </insert>
 
 

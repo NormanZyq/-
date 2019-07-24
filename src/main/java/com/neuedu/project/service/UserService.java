@@ -45,14 +45,33 @@ public interface UserService {
     void register(String userId, String password, String name, int identity)
             throws DataAccessException;
 
+//    /**
+//     * login for a user if the username and password are matched.
+//     * then add to session to mark logged in.
+//     *
+//     * @param userId   user id
+//     * @param password password
+//     * @return true iff login successfully
+//     */
+//    boolean login(String userId, String password) throws DataAccessException;
+
     /**
      * login for a user if the username and password are matched.
      * then add to session to mark logged in.
      *
-     * @param userId   user id
-     * @param password password
-     * @return true iff login successfully
+     * @param userForLogin store userId and password in this object,
+     *                     then the method matches these properties
+     * @return  true iff user id and password are matched
      */
-    boolean login(String userId, String password) throws DataAccessException;
+    boolean login(User userForLogin);
+
+    /**
+     * get user object by user id and password.
+     *
+     * @param userId
+     * @param password
+     * @return
+     */
+    User getUser(String userId, String password);
 
 }

@@ -3,9 +3,12 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.dao.UserMapper;
 import com.neuedu.project.domain.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -54,15 +57,34 @@ public class UserServiceImpl implements UserService {
                          String name,
                          int identity) throws DataAccessException {
         User newUser = new User(userId, password, name, identity);
-        userMapper.addUser(newUser);
+//        userMapper.addUser(newUser);
+        throw new UnsupportedOperationException();
+    }
+
+//    @Override
+//    public boolean login(String userId, String password)
+//            throws DataAccessException {
+//        User forLogin = new User();
+//        forLogin.setUserId(userId);
+//        forLogin.setUserId(password);
+//        return userMapper.queryUser(forLogin).size() == 1;
+//    }
+
+    @Override
+    public boolean login(User userForLogin) {
+        return userMapper.queryUser(userForLogin).size() == 1;
     }
 
     @Override
-    public boolean login(String userId, String password)
-            throws DataAccessException {
-        User forLogin = new User();
-        forLogin.setUserId(userId);
-        forLogin.setUserId(password);
-        return userMapper.queryUser(forLogin).size() == 1;
+    public User getUser(String userId, String password) {
+        User user = new User();
+        user.setUserId(userId);
+        user.setPassword(password);
+        List<User> matchedUser = userMapper.queryUser(user);
+        if (matchedUser.size() == 1) {
+            return matchedUser.get(0);
+        } else {
+            return null;
+        }
     }
 }

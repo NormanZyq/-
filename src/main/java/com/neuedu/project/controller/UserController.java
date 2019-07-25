@@ -56,6 +56,10 @@ public class UserController {
             request.getSession().setAttribute("loggedUserId", userId);
             request.getSession().setAttribute("loggedUser", loggedIn);
             request.getSession().setAttribute("loggedIn", true);
+
+            //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
+            //request.getSession().setAttribute("loggedIdentity",0);
+            request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             return "ok";
 
         }

@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController2 {
     private Logger log = Logger.getLogger(PageController2.class);
 
-    @GetMapping(value = "/{page}.html")
-    public String htmlRedirect(@PathVariable String page) {
-        log.info("Trying to visit " + page + ".html");
-        return page;
-    }
-
-    @GetMapping(value = "/{page}.jsp")
-    public String jspRedirect(@PathVariable String page) {
-        log.info("Trying to visit " + page + ".jsp");
-        return page;
-    }
+//    @GetMapping(value = "/{page}.html")
+//    public String htmlRedirect(@PathVariable String page) {
+//        log.info("Trying to visit " + page + ".html");
+//        return page + ".html";
+//    }
+//
+//    @GetMapping(value = "/{page}.jsp")
+//    public String jspRedirect(@PathVariable String page) {
+//        log.info("Trying to visit " + page + ".jsp");
+//        return page + ".html";
+//    }
 }

@@ -10,7 +10,9 @@ import java.util.List;
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
-
+    /**
+     * question mapper for question service
+     */
     private final QuestionMapper questionMapper;
 
     @Autowired

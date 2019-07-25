@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Question {
 
-    private Integer questionId = null;
+    private int questionId;
 
-    private Integer courseId;
+    private int courseId;
 
-    private Integer questionType;
+    private int questionType;
 
     private String questionContent;
 
-    private Integer score = 0;
+    private int score;
 
     private String choicesString;
 
@@ -44,6 +44,20 @@ public class Question {
         this.questionContent = questionContent;
         this.rightAnswerString = rightAnswerString;
         this.resources = resources;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", courseId=" + courseId +
+                ", questionType=" + questionType +
+                ", questionContent='" + questionContent + '\'' +
+                ", score=" + score +
+                ", choicesString='" + choicesString + '\'' +
+                ", rightAnswerString='" + rightAnswerString + '\'' +
+                ", resources='" + resources + '\'' +
+                '}';
     }
 
     public int getScore() {

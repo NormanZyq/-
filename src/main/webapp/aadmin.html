@@ -5,19 +5,28 @@
 		<title></title>
 		<!-- 新 Bootstrap4 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-		
+
 		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-		
+
 		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
 		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-		
+
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-		
+		<script type="text/javascript">
+			function display() {
+				var traget2 = document.getElementById('pasedi');
+				if (traget2.style.display == "none") {
+					traget2.style.display = "";
+				} else {
+					traget2.style.display = "none";
+				}
+			}
+		</script>
 	</head>
-	<body>
-		
+	<body class="text-center">
+
 		<div class="container">
 			<ul class="nav ">
 				<li class="nav-item">
@@ -27,55 +36,318 @@
 				<li class="nav-item">
 					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
 				</li>
-		
+
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
 					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
 				</form>
-		
+
 			</ul>
-		
+
 		</div>
-		
+
 		<br /><br />
 		<div class="container">
 			<!-- Nav pills -->
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="pill" href="#home">个人中心</a>
+					<a class="nav-link active" data-toggle="pill" href="#1">个人中心</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#menu1">用户表</a>
+					<a class="nav-link" data-toggle="pill" href="#2">用户表</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#home">课程信息表</a>
+					<a class="nav-link" data-toggle="pill" href="#3">课程信息表</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#home">选课关系表</a>
+					<a class="nav-link" data-toggle="pill" href="#4">选课关系表</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#home">教授关系表</a>
+					<a class="nav-link" data-toggle="pill" href="#5">教授关系表</a>
 				</li>
-				
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#6">申诉信息</a>
+				</li>
+
 			</ul>
-		
+
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div id="home" class="container tab-pane active"><br>
-					<h3>HOME</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-						magna aliqua.</p>
+				<div id="1" class="container tab-pane active"><br>
+					<br /><br /><br /><br />
+					<h1 class="display-4" align="center">个人信息</h1>
+
+					<br /><br /><br /><br />
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>学号</th>
+								<th>SOME</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>姓名</td>
+								<td>SOME</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>类型</td>
+								<td>管理员</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>用户密码</td>
+								<td>SOME</td>
+								<td>
+									<div id="pasedi" style="display: none;" class="pa">
+										<button type="button" class="btn btn-outline-primary">修改</button>
+									</div>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+
+					<br /><br />
+					<div class="float-right">
+						<div class="col-md-8">
+							<ul class="nav nav-tabs">
+								<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+							</ul>
+						</div>
+					</div>
 				</div>
-				<div id="menu1" class="container tab-pane fade"><br>
-					<h3>Menu 1</h3>
-					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div id="2" class="container tab-pane fade"><br>
+					<br />
+
+
+
+
+					<div class="float-right">
+						<div class="btn-group btn-group-lg ">
+							<button type="button" class="btn btn-sm btn-outline-primary">编辑</button>
+							<button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#myModal">注册</button>
+						</div>
+					</div>
+
+					<div class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+
+									<img class="card-img-top" src="register.png" alt="Card image" style="width:60% ">
+									<div class="card-body">
+										<h2 class="card-title">注册</h2>
+										<br /><br />
+										<form>
+											<table class="table">
+												<thead>
+													<tr>
+														<th><label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;学生类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
+														<th><label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;教师类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
+
+													</tr>
+												</thead>
+											</table>
+
+										</form>
+										<label for="inputid" class="sr-only">ID</label>
+										<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
+										<br />
+										<label for="inputid" class="sr-only">姓名</label>
+										<input type="text" id="inputid" class="form-control" placeholder="姓名" required autofocus>
+										<br />
+										<label for="inputPassword" class="sr-only">密码</label>
+										<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+										<br />
+										<button id="sbm" type="button" class="btn btn-info  btn-lg" onclick="submi()">&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+									<div class="card-footer">
+										<p class="text-primary m-auto">成为管理员请主动PY开发方</p>
+									</div>
+								</div>
+								<!-- 模态框底部 -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+								</div>
+							</div>
+
+							
+
+						</div>
+					</div>
+
+					<br /><br />
+					<br /><br />
+					<table class="table  table-striped">
+						<thead>
+							<tr>
+								<th>用户ID</th>
+								<th>密码</th>
+								<th>类型</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+
 				</div>
-				<div id="menu2" class="container tab-pane fade"><br>
-					<h3>Menu 2</h3>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-						aperiam.</p>
+				<div id="3" class="container tab-pane fade"><br>
+					<br /><br />
+					<table class="table  table-striped">
+						<thead>
+							<tr>
+								<th>课程ID</th>
+								<th>课程名字</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+				<div id="4" class="container tab-pane fade"><br>
+					<br /><br />
+
+					<div class="dropdown float-right">
+						<br />
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							课程ID
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">class 1</a>
+							<a class="dropdown-item" href="#">class 2</a>
+							<a class="dropdown-item" href="#">class 3</a>
+						</div>
+					</div>
+					<br /><br />
+					<br /><br />
+					<table class="table ">
+						<thead>
+							<tr>
+								<th>学生ID</th>
+								<th>学生姓名</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+				<div id="5" class="container tab-pane fade"><br>
+					<br /><br />
+					<table class="table  table-striped">
+						<thead>
+							<tr>
+								<th>课程ID</th>
+								<th>教师ID</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+					
+					
+						</tbody>
+					</table>
+				</div>
+				<div id="6" class="container tab-pane fade"><br>
+					<br /><br />
+					<table class="table  table-striped">
+						<thead>
+							<tr>
+								<th>申请记录ID</th>
+								<th>考试ID</th>
+								<th>学生ID</th>
+								<th>申请说明</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+					
+					
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		
+
 	</body>
 </html>

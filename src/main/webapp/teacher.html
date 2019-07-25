@@ -16,12 +16,6 @@
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			function display() {
-				var traget = document.getElementById('namedi');
-				if (traget.style.display == "none") {
-					traget.style.display = "";
-				} else {
-					traget.style.display = "none";
-				}
 				var traget2 = document.getElementById('pasedi');
 				if (traget2.style.display == "none") {
 					traget2.style.display = "";
@@ -60,8 +54,8 @@
 	</head>
 	<body class="text-center">
 		<div class="container">
-			
-			
+
+
 			<ul class="nav ">
 				<li class="nav-item">
 					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
@@ -70,14 +64,14 @@
 				<li class="nav-item">
 					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
 				</li>
-			
+
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
 					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
 				</form>
-			
+
 			</ul>
 			<br /><br /><br />
-			
+
 			<!-- Nav pills -->
 			<ul class="nav nav-pills" role="tablist">
 				<li class="nav-item">
@@ -87,16 +81,16 @@
 					<a class="nav-link" data-toggle="pill" href="#2">题库管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#menu1">试卷管理</a>
+					<a class="nav-link" data-toggle="pill" href="#3">试卷管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#menu2">试卷批阅</a>
+					<a class="nav-link" data-toggle="pill" href="#4">试卷批阅</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#home">成绩管理</a>
+					<a class="nav-link" data-toggle="pill" href="#5">成绩管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#home">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
 				</li>
 			</ul>
 
@@ -124,18 +118,10 @@
 							</tr>
 							<tr>
 								<td>类型</td>
-								<td>学生</td>
+								<td>教师</td>
 								<td></td>
 							</tr>
-							<tr>
-								<td>用户名</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi" style="display: none;" class="na">
-										<button type="button" class="btn btn-outline-primary">修改</button>
-									</div>
-								</td>
-							</tr>
+							
 							<tr>
 								<td>用户密码</td>
 								<td>SOME</td>
@@ -170,7 +156,7 @@
 							<a class="dropdown-item" href="#">class 3</a>
 						</div>
 					</div>
-					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+					<br /><br /><br /><br /><br /><br /><br /><br />
 					<table class="table">
 
 						<tbody id="body2">
@@ -217,14 +203,75 @@
 					<div class="float-right">
 						<div class="col-md-8">
 							<ul class="nav nav-tabs">
-								<button id="edit2" type="button" 
-								class="btn btn-lg btn-outline-primary" 
-								onclick="window.location.href = 'exercise.html'">添加</button>
+								<button id="edit2" type="button" class="btn btn-lg btn-outline-primary" onclick="window.location.href = 'exercise.html'">添加</button>
 							</ul>
 						</div>
 					</div>
 				</div>
+
+				<div id="3" class="container tab-pane active"><br>
+					<br /><br /><br /><br />
+
+
+
+
+				</div>
+				<div id="4" class="container tab-pane active"><br>
+					<br /><br /><br /><br />
+				
+				
+				
+				
+				</div>
+				<div id="5" class="container tab-pane active"><br>
+					<br /><br /><br />
+				
+				<table class="table  table-striped">
+					<thead>
+						<tr>
+							<th>课程ID</th>
+							<th>平均成绩</th>
+							<th>平均分排名</th>
+							<th>及格率</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>课程A</td>
+							<td>SOME</td>
+							<td>SOME</td>
+							<td>SOME</td>
+						</tr>
+						<tr>
+							<td>课程B</td>
+							<td>SOME</td>
+							<td>SOME</td>
+							<td>SOME</td>
+						</tr>
+						<tr>
+							<td>课程C</td>
+							<td>SOME</td>
+							<td>SOME</td>
+							<td>SOME</td>
+						</tr>
+				
+				
+					</tbody>
+				</table>
+				
+				
+				</div>
+				
+				<div id="6" class="container tab-pane active"><br>
+					<br /><br /><br /><br />
+				
+				
+				
+				
+				</div>
+
 			</div>
+
 
 
 		</div>

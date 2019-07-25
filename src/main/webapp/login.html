@@ -29,7 +29,18 @@
 
 	</head>
 	<body class="text-center">
-		
+		<div class="float-left">
+			<marquee behavior="alternate" scrollamount="50" direction="up" height="1000" width="300">
+				<li>
+					<a href="admin.html">
+						<img src="我拒绝.jpg" class="float-right img-thumbnail" height="300" width="300" /></a>
+				</li>
+				<li class="active">
+					<a href="admin.html">
+						<img src="kono.jpg" class="float-right img-thumbnail" height="300" width="300" /></a>
+				</li>
+			</marquee>
+		</div>
 		<div class="container">
 			<ul class="nav ">
 				<li class="nav-item">
@@ -41,8 +52,7 @@
 				</li>
 
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
-					<button class="btn btn-lg btn-outline-warning " type="button" 
-					onclick="window.close();">EXIT</button>
+					<button class="btn btn-lg btn-outline-warning " type="button" onclick="window.close();">EXIT</button>
 				</form>
 
 			</ul>
@@ -54,22 +64,12 @@
 
 		<div class="container">
 			<div class="card m-auto shadow shadow-sm" style="width:500px">
-				<img class="card-img-top" src="bg.png" alt="Card image" style="width:100% ">
+				<img class="card-img-top" src="bg1.png" alt="Card image" style="width:100% ">
 				<div class="card-body">
 					<h3 class="card-title">登陆</h3>
-					
+
 					<br /><br />
-					<form>
-						<table class="table">
-							<thead>
-								<tr>
-									<th><label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;我是学生&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-									<th><label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;我是教师&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-									<th></th>
-								</tr>
-							</thead>
-						</table>
-					</form>
+					
 					<label for="inputid" class="sr-only">ID</label>
 					<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
 					<br />
@@ -82,9 +82,7 @@
 			</div>
 		</div>
 
-
-
-
+<!-- 
 		<div class="row  container-fluid float-right">
 			<div class="col-md-2">
 				<ul class="nav nav-tabs">
@@ -100,7 +98,7 @@
 			</div>
 		</div>
 
-
+ -->
 		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 

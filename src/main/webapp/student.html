@@ -124,9 +124,9 @@
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-8">
-							<ul class="nav nav-tabs">
-								<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
-							</ul>
+
+							<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+
 						</div>
 					</div>
 				</div>
@@ -407,29 +407,137 @@
 				</div>
 
 				<div id="5" class="container tab-pane fade"><br>
-					
+					<div class="dropdown float-right">
+						<br /><br /><br />
+						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的课程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">class 1</a>
+							<a class="dropdown-item" href="#">class 2</a>
+							<a class="dropdown-item" href="#">class 3</a>
+						</div>
+					</div>
+					<br /><br /><br />
+					<br />
+					<br /><br /><br />
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>课程ID</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
+
+											<input type="email" class="form-control" placeholder="课程ID">
+										</div>
+										<button type="submit" class="btn btn-outline-success">确认</button>
+									</form>
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>题目ID</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
+
+											<input type="email" class="form-control" placeholder="题目ID">
+										</div>
+										<button type="submit" class="btn btn-outline-success">确认</button>
+									</form>
+								</td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td>题目内容</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
+
+											<input type="email" class="form-control" placeholder="题目内容">
+										</div>
+										<button type="submit" class="btn btn-outline-success">确认</button>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>默认分值</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
+
+											<input type="email" class="form-control" placeholder="默认分值">
+										</div>
+										<button type="submit" class="btn btn-outline-success">确认</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br /><br />
+					<div class="float-right">
+						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-info">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+
+					</div>
 
 				</div>
 				<div id="6" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
 
-				</div>
 
 
 
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>复核课程ID</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
 
+											<input type="email" class="form-control" placeholder="课程ID">
+										</div>
+										<button type="submit" class="btn btn-info">确认</button>
+									</form>
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>授课教师</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
 
+											<input type="email" class="form-control" placeholder="题目ID">
+										</div>
+										<button type="submit" class="btn btn-info">确认</button>
+									</form>
+								</td>
+								<td></td>
+							</tr>
 
+							<tr>
+								<td>复核说明</td>
+								<td>
+									<form class="form-inline float-right">
+										<div class="form-group">
 
+											<input type="email" class="form-control" placeholder="题目内容">
+										</div>
+										<button type="submit" class="btn btn-info">确认</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br /><br /><br />
+					<div class="float-right">
+						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
 
-				<div id="menu1" class="container tab-pane fade"><br>
-					<h3>Menu 1</h3>
-					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-				<div id="menu2" class="container tab-pane fade"><br>
-					<h3>Menu 2</h3>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-						aperiam.</p>
+					</div>
+
 				</div>
 			</div>
 		</div>

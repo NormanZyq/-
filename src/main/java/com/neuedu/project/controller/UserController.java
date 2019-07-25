@@ -20,17 +20,6 @@ public class UserController {
     //    @Autowired
     private UserService userService;
 
-
-    @GetMapping(value = "/login")
-    public String login() {
-        return "../login.html";
-    }
-
-    @GetMapping(value = "/register")
-    public String register() {
-        return "../register.html";
-    }
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;

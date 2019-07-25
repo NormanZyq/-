@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 新 Bootstrap4 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+		<script type="text/javascript">
+			function display() {
+				var traget2 = document.getElementById('pasedi');
+				if (traget2.style.display == "none") {
+					traget2.style.display = "";
+				} else {
+					traget2.style.display = "none";
+				}
+			}
+		</script>
+
+
+	</head>
+
+
+	<body class="text-center">
+
+
+
+		<div class="container">
+			<ul class="nav ">
+				<li class="nav-item">
+					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+				</li>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<li class="nav-item">
+					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+				</li>
+
+				<form class="form-inline col-md-1 offset-md-11 m-auto">
+					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
+				</form>
+
+			</ul>
+
+		</div>
+
+		<br /><br />
+
+
+
+
+
+		<div class="container">
+			<!-- Nav pills -->
+			<ul class="nav nav-pills" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="pill" href="#1">个人中心</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#2">在线答题</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#menu2">考试管理</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#home">成绩管理</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#home">教学评价</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#home">申请复核</a>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div id="1" class="container tab-pane active"><br>
+					<br /><br /><br /><br />
+					<h1 class="display-4" align="center">个人信息</h1>
+
+					<br /><br /><br /><br />
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>学号</th>
+								<th>SOME</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>姓名</td>
+								<td>SOME</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>类型</td>
+								<td>学生</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>用户密码</td>
+								<td>SOME</td>
+								<td>
+									<div id="pasedi" style="display: none;" class="pa">
+										<button type="button" class="btn btn-outline-primary">修改</button>
+									</div>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<br /><br />
+					<div class="float-right">
+						<div class="col-md-8">
+							<ul class="nav nav-tabs">
+								<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="2" class="container tab-pane fade"><br>
+					<br /><br /><br /><br />
+					<div id="accordion">
+						<div class="card">
+							<div class="card-header">
+								<a class="card-link" data-toggle="collapse" href="#collapseOne">
+									<div class="float-left">
+										考 试 一
+									</div>
+									<div class="float-right">
+										<button id="te" onclick="window.open('exam.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+									</div>
+
+								</a>
+							</div>
+							<div id="collapseOne" class="collapse show" data-parent="#accordion">
+								<div class="card-body">
+									<div class=" m-auto">
+										考试信息 考试时间
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header">
+								<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+									<div class="float-left">
+										考 试 二
+									</div>
+									<div class="float-right">
+										<button id="te" onclick="window.open('exam.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+									</div>
+								</a>
+							</div>
+							<div id="collapseTwo" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class=" m-auto">
+										考试信息 考试时间
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header">
+								<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+									<div class="float-left">
+										考 试 三
+									</div>
+									<div class="float-right">
+										<button id="te" onclick="window.open('exam.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+									</div>
+								</a>
+							</div>
+							<div id="collapseThree" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class=" m-auto">
+										考试信息 考试时间
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="menu1" class="container tab-pane fade"><br>
+					<h3>Menu 1</h3>
+					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+				<div id="menu2" class="container tab-pane fade"><br>
+					<h3>Menu 2</h3>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+						aperiam.</p>
+				</div>
+			</div>
+		</div>
+
+
+
+	</body>
+</html>

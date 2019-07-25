@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.CourseMapper">
+
+    <resultMap id="courseMap" type="Course">
+        <id column="course_id" property="courseId"/>
+        <result column="course_name" property="courseName"/>
+    </resultMap>
+
+    <insert id="addCourse" parameterType="Course">
+        <selectKey keyProperty="courseId" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        insert into course (course_name)
+        values (#{courseName});
+    </insert>
+
+    <insert id="addTeacherToCourse">
+        insert into course_teaching (teacher_id, course_id)
+        values (#{teacherId}, #{courseId});
+    </insert>
+
+    <insert id="addStudentToCourse">
+        insert into course_selection (student_id, course_id)
+        VALUES (#{studentId}, #{courseId})
+    </insert>
+
+    <select id="queryCourse" resultMap="courseMap">
+        select course_id, course_name from course
+        <where>
+            <if test="courseId != 0">
+                and course_id = #{courseId}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                and course_name = #{courseName}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

@@ -52,6 +52,14 @@ public class ChoiceQuestion extends Question {
         return super.getRightAnswerString();
     }
 
+    @Override
+    public String toString() {
+        return "ChoiceQuestion{" +
+                "choices=" + choices +
+                ", answers=" + answers +
+                '}';
+    }
+
     public boolean isMultipleChoice() {
         return answers.size() > 1;
     }

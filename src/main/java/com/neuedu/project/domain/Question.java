@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Question {
 
-    private Integer questionId;
+    private int questionId;
 
-    private Integer courseId;
+    private int courseId;
 
-    private Integer questionType;
+    private int questionType;
 
     private String questionContent;
 
-    private Integer score;
+    private int score;
 
     private String choicesString;
 

@@ -35,11 +35,20 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> getChoiceQuestionByCourseId(int courseId) {
-        return null;
+        Question forQuery = new Question();
+        forQuery.setCourseId(courseId);
+        forQuery.setQuestionType(0);
+        List<Question> questions = questionMapper.getQuestionsByCondition(forQuery);
+        System.out.println(questions);
+
+        return questions;
     }
 
     @Override
     public List<Question> getSubjectiveQuestionByCourseId(int courseId) {
-        return null;
+        Question forQuery = new Question();
+        forQuery.setCourseId(courseId);
+        forQuery.setQuestionType(1);
+        return questionMapper.getQuestionsByCondition(forQuery);
     }
 }

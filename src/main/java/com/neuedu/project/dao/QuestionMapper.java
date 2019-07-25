@@ -12,7 +12,18 @@ public interface QuestionMapper {
 
     void addSubjectiveQuestion(Question subjectiveQuestion);
 
+    /**
+     * get all questions of the required course.
+     * @param courseId  course id
+     * @return  a list contains all question of this course
+     */
     List<Question> getQuestionsByCourseId(int courseId);
+
+    List<Question> getQuestionsByCondition(Question forQuery);
+
+//    List<Question> getSubjectiveQuestionsByCourseId(int coueseId);
+
+
 
 
 }

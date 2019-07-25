@@ -13,7 +13,7 @@
         <result column="question_content" property="questionContent"/>
         <result column="score" property="score"/>
         <result column="choices" property="choicesString"/>
-        <result column="choices_string" property="choicesString"/>
+        <!--<result column="choices_string" property="choicesString"/>-->
         <result column="question_answer" property="rightAnswerString"/>
         <result column="resources" property="resources"/>
     </resultMap>
@@ -29,5 +29,21 @@
         values (#{courseId}, 1, #{questionContent}, #{rightAnswerString}, #{resources});
     </insert>
 
+    <select id="getQuestionsByCondition" parameterType="Question" resultMap="questionMap" resultType="Question">
+        select question_id, question_content, choices, question_answer
+        from questions
+        <where>
+            <if test="courseId != null and courseId != 0">
+                and courseId = #{courseId}
+            </if>
+            <if test="questionId != null and questionId != 0">
+                and question_id = #{questionId}
+            </if>
+            <if test="score != null and score != 0">
+                and score = #{score}
+            </if>
+        </where>
+        # where course_id = #{courseId} and question_type = #{questionType}
+    </select>
 
 </mapper>

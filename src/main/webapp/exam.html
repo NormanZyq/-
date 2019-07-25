@@ -15,6 +15,41 @@
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+
+		<script type="text/javascript">
+			function check() {
+				var bo = false;
+
+				//var exs = $("radio");
+				for (var i = 0; i < 3; i++) {
+					var name = "optradio" + i;
+					var exschild = $("input[name='" + name + "']");
+					bo = false;
+					//alert(exschild.length);
+
+					for (var j = 0; j < exschild.length; j++) {
+						//alert("inner for"+$(exschild[j]).attr("type"));
+						//alert($(exschild[j]).prop("checked"));
+						if ($(exschild[j]).prop("checked") == true) {
+							bo = true;
+							continue;
+						}
+					}
+					if (bo == false) {
+						alert("第" + (i + 1) + "题没有做鸭 ヽ(。>д<)ｐ");
+					}
+				}
+
+				if (bo == true) {
+					alert("提交成功惹d(´ω｀*)")
+				} else {
+					alert("提交失败惹(◍´꒳`◍)")
+				}
+			}
+		</script>
+
+
+
 		<script type="text/javascript">
 			var time_now_server, time_now_client, time_end, time_server_client;
 
@@ -94,29 +129,6 @@
 					</form>
 				</ul>
 			</nav>
-
-
-			<!-- <ul class="nav ">
-				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
-				</li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
-				</li>
-				<form class="form-inline mx-auto">
-					<font color="coral" size="5px">
-						<b>
-							<div id="timer"></div>
-						</b>
-					</font>
-				</form>
-				<form class="form-inline col-md-1 offset-md-11 m-auto">
-					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
-				</form>
-
-			</ul>
- -->
 		</div>
 
 
@@ -139,20 +151,20 @@
 
 		<br /><br /><br /><br />
 
-		<div class="container">
+		<div class="container" id="exer">
 			<div class="card w-75 mx-auto shadow shadow-sm">
 				<div class="card-header">第一题</div>
 				<div class="card-body">
 					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
 				</div>
 				<div class="card-footer">
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio0" id="ex">
 						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio0" id="ex">
 						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio0" id="ex">
 						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio0" id="ex">
 						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</div>
@@ -163,13 +175,13 @@
 					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
 				</div>
 				<div class="card-footer">
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio1" id="ex">
 						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio1" id="ex">
 						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio1" id="ex">
 						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio1" id="ex">
 						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</div>
@@ -180,19 +192,25 @@
 					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
 				</div>
 				<div class="card-footer">
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio2" id="ex">
 						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio2" id="ex">
 						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio2" id="ex">
 						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio" id="ex" checked="none">
+					<label><input type="radio" name="optradio2" id="ex">
 						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</div>
 		</div>
 
+		<br /><br /><br />
 
+		<form class="form-inline col-md-1 offset-md-11 m-auto">
+			<button class="btn btn-lg btn-info" type="button" onclick="check()">&nbsp;&nbsp;交&nbsp;卷&nbsp;&nbsp;</button>
+			<p><br /><br /><br /><br /><br /><br /><br /><br /><br />&nbsp;</p>
+
+		</form>
 
 
 	</body>

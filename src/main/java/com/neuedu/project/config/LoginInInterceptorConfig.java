@@ -13,7 +13,7 @@ public class LoginInInterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //服务器请求拦截器起作用
         String[] interceptee = {"/student","/teacher","/admin"};
-        //String[] interceptee = {"/hello"};
+//        String[] interceptee = {"/hello"};
         registry.addInterceptor(new LoginInInterceptor()).addPathPatterns(interceptee);
     }
 }

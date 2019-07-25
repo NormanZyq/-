@@ -1,5 +1,6 @@
 package com.neuedu.project.interceptor;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 
 public class LoginInInterceptor implements HandlerInterceptor {
+
+    private Logger logger = Logger.getLogger(LoginInInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -44,6 +47,6 @@ public class LoginInInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        //response.sendRedirect("/user/login");
+
     }
 }

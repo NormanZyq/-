@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
+    @GetMapping("/")
+    public String index() {
+        return "/login";
+    }
+
     @GetMapping(value = "/student")
     public String studentPage() {
         // todo 需要拦截器

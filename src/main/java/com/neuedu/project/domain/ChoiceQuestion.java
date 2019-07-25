@@ -34,7 +34,7 @@ public class ChoiceQuestion extends Question {
                 choicesString, rightAnswerString, resources);
 
         choices = QuestionUtils.getInstance()
-                .parseChoiseString(choicesString);
+                .parseChoiceString(choicesString);
 
         answers = new HashSet<>();
         String[] answerArray = rightAnswerString.split("\\s+");

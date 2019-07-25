@@ -21,7 +21,7 @@ public class QuestionUtils {
     }
 
 
-    public Map<String, String> parseChoiseString(String choiceString) {
+    public Map<String, String> parseChoiceString(String choiceString) {
 
         // 待返回的map，key是选项，value是选项的内容
         Map<String, String> mapChoiceContent = new HashMap<>();

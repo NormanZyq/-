@@ -1,0 +1,7 @@
+function getMyCourse() {
+    $.ajax({
+        url:
+    })
+
+}
+

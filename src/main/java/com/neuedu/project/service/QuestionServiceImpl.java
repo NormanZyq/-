@@ -38,6 +38,7 @@ public class QuestionServiceImpl implements QuestionService {
         Question forQuery = new Question();
         forQuery.setCourseId(courseId);
         forQuery.setQuestionType(0);
+        System.out.println(forQuery);
         List<Question> questions = questionMapper.getQuestionsByCondition(forQuery);
         System.out.println(questions);
 

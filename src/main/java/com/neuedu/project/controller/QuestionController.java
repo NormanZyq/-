@@ -1,14 +1,12 @@
 package com.neuedu.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.ChoiceQuestion;
 import com.neuedu.project.domain.Question;
 import com.neuedu.project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -75,6 +73,20 @@ public class QuestionController {
                         + "包括%d道客观题和%d道主观题。",
                 length, choiceCount, subjectiveCount);
     }
+
+    @GetMapping(value = "/get/cq/{id}")
+    @ResponseBody
+    public String getChoiceQuestionsByCourseId(@PathVariable int id) {
+        return JSON.toJSONString(questionService.getChoiceQuestionByCourseId(id));
+    }
+
+    @GetMapping(value = "/get/sq/{id}")
+    @ResponseBody
+    public String getSubjectiveQuestionsByCourseId(@PathVariable int id) {
+        return JSON.toJSONString(questionService.getSubjectiveQuestionByCourseId(id));
+    }
+
+
 
 }
 

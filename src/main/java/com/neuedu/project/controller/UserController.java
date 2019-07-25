@@ -20,17 +20,6 @@ public class UserController {
     //    @Autowired
     private UserService userService;
 
-
-    @GetMapping(value = "/login")
-    public String login() {
-        return "../login.html";
-    }
-
-    @GetMapping(value = "/register")
-    public String register() {
-        return "../register.html";
-    }
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -53,15 +42,27 @@ public class UserController {
         if (userService.login(user)) {
             User loggedIn = userService.getUser(userId, password);
             // 标记为成功登录
-            request.getSession().setAttribute("loggedUserId", userId);
+//            request.getSession().setAttribute("loggedUserId", userId);
             request.getSession().setAttribute("loggedUser", loggedIn);
-            request.getSession().setAttribute("loggedIn", true);
+//            request.getSession().setAttribute("loggedIn", true);
 
             //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
             //request.getSession().setAttribute("loggedIdentity",0);
+            String allowPage = "/login";
+            switch (loggedIn.getIdentity()) {
+                case 0:
+                    allowPage = "/student";
+                    break;
+                case 1:
+                    allowPage = "/teacher";
+                    break;
+                case 2:
+                    allowPage = "/admin";
+                    break;
+            }
+            request.getSession().setAttribute("allowPage", allowPage);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             return "ok";
-
         }
         return "does not exist";
     }

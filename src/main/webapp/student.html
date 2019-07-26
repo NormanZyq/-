@@ -26,6 +26,13 @@
 				}
 			}
 		</script>
+		
+		<script type="text/javascript">
+			function changepsw() {
+				$("#psw").prop("hidden",true);
+				$("#pswchange").prop("hidden",false);
+			}
+		</script>
 
 
 	</head>
@@ -111,10 +118,21 @@
 							</tr>
 							<tr>
 								<td>用户密码</td>
-								<td>SOME</td>
+								<td id="psw">SOME</td>
+								<td id="pswchange" hidden="">
+									<form class="form-inline ">
+										<div class="form-group mx-auto">
+									
+											<input type="email" class="form-control" placeholder="新密码">
+											<button type="submit" class="btn btn-outline-success">确认</button>
+										</div>
+										
+									</form>
+								</td>
 								<td>
 									<div id="pasedi" style="display: none;" class="pa">
-										<button type="button" class="btn btn-outline-primary">修改</button>
+										<button type="button" class="btn btn-outline-info"
+										onclick="changepsw()">修改</button>
 									</div>
 								</td>
 							</tr>

@@ -1,5 +1,6 @@
 package com.neuedu.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,10 @@ public class UserController {
     public String login(String userId, String password,
                         HttpServletRequest request) {
         User user = new User();
+        if (userId == null || "".equals(userId.trim())
+                || password == null || "".equals(password.trim())) {
+            return "用户名和密码不能为空";
+        }
         user.setUserId(userId);
         user.setPassword(password);
         if (userService.login(user)) {
@@ -64,7 +69,7 @@ public class UserController {
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             return "ok";
         }
-        return "does not exist";
+        return "用户不存在或密码不正确";
     }
 
     @PostMapping(value = "/register")

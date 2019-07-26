@@ -14,6 +14,28 @@
 
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		
+		
+		
+		<script type="text/javascript">
+			function typ() {
+				/* alert($("#ke").prop("checked"))
+				 */
+				if ($("#ke").prop("checked") == true) {
+					$("#sel").prop("hidden",false);
+					$("#tex").prop("hidden",true);
+				}
+				else if ($("#zu").prop("checked") == true) {
+					$("#tex").prop("hidden",false);
+					$("#sel").prop("hidden",true);
+				}
+				$("#")
+			}
+		</script>
+		
+		
+		
+		
 	</head>
 	<body class="text-center">
 		<div class="container">
@@ -68,9 +90,9 @@
 						<td>题目类型</td>
 						<td>
 							<form class="form-inline float-right">
-								<label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;&nbsp;&nbsp;客观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio" id="ke" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;客观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;&nbsp;&nbsp;主观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio" id="zu" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;主观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
 							</form>
 						</td>
 					</tr>
@@ -98,10 +120,45 @@
 							</form>
 						</td>
 					</tr>
+					<tr hidden="hidden" id="sel">
+						<td>选项设置</td>
+						<td>
+							<form class="form-inline float-right">
+								<input type="radio" name="optradio0" id="ex">
+									&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label><input type="radio" name="optradio0" id="ex">
+									&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio0" id="ex">
+									&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio0" id="ex">
+									&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<button type="submit" class="btn btn-outline-info">确认</button>
+							</form>
+						</td>
+					</tr>
+					<tr hidden="hidden" id="tex">
+						
+							<td>正确答案</td>
+							<td>
+								<form class="form-inline float-right">
+									<div class="form-group">
+						
+										<input type="email" class="form-control" placeholder="正确答案">
+									</div>
+									<button type="submit" class="btn btn-outline-info">确认</button>
+								</form>
+							</td>
+						
+					</tr>
 				</tbody>
 			</table>
 			
 			<br /><br /><br /><br />
+			
+			
+			
+							
+			
 			<button id="sbm" type="button" class="btn btn-outline-success btn-lg " onclick="submi()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 		<div class="container">

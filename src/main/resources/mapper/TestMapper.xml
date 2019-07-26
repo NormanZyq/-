@@ -15,15 +15,24 @@
         <result column="duration" property="duration"/>
     </resultMap>
 
-    <select id="getStudentTests" resultMap="testMap">
-        select *
-        from tests t_table,
-             course_selection cs_table
-        where cs_table.student_id = #{studentId}
-          and t_table.course_id = cs_table.course_id
-    </select>
+    <!--<select id="getStudentTests" resultMap="testMap">-->
+<!--#           select test_id, duration from arrangement-->
+<!--#         select *-->
+<!--#         from tests t_table,-->
+<!--#              course_selection cs_table-->
+<!--#         where cs_table.student_id = #{studentId}-->
+<!--#           and t_table.course_id = cs_table.course_id-->
+    <!--</select>-->
 
+    <delete id="deleteTestByTestId">
+        delete
+        from tests
+        where test_id = #{id};
+    </delete>
 
+    <update id="updateTest">
+
+    </update>
 
     <insert id="addTest" parameterType="Test">
         insert into tests (course_id,choice_question,subjective_question,release_datetime,duration)

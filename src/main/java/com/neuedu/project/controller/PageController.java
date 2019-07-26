@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
+    @GetMapping(value = "mypage")
+    public String hhh() {
+        return "/student";
+    }
+
     @GetMapping({"/", "/index"})
     public String index() {
         return "/login";

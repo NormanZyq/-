@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/user")
@@ -31,54 +32,51 @@ public class UserController {
     @GetMapping(value = "/get/login")
     @ResponseBody
     public User getLoginUser(HttpServletRequest request) {
-        // todo 需要拦截器，判断是否已登录
         return (User) request.getSession().getAttribute("loggedUser");
     }
 
     @PostMapping(value = "/login")
-    @ResponseBody
     public String login(String userId, String password,
                         HttpServletRequest request,
-                        HttpServletResponse response) {
+                        HttpServletResponse response) throws IOException {
         User user = new User();
-
+        String pageAvailable = "/login";
         if (userId == null || "".equals(userId.trim())
                 || password == null || "".equals(password.trim())) {
             response.setStatus(MyHttpStatus.EMPTY.value());
-            return "用户名和密码不能为空";
-        }
-        // 设置用户名密码供数据库的查询
-        user.setUserId(userId);
-        user.setPassword(password);
+//            return pageAvailable;
+        } else {
+            // 设置用户名密码供数据库的查询
+            user.setUserId(userId);
+            user.setPassword(password);
+            if (userService.login(user)) {
+                User loggedIn = userService.getUser(userId, password);
+                // 标记为成功登录
+                request.getSession().setAttribute("loggedUser", loggedIn);
 
-        if (userService.login(user)) {
-            User loggedIn = userService.getUser(userId, password);
-            // 标记为成功登录
-            request.getSession().setAttribute("loggedUser", loggedIn);
+                //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
+                //request.getSession().setAttribute("loggedIdentity",0);
+                switch (loggedIn.getIdentity()) {
+                    case 0:
+                        pageAvailable = "/student";
+                        break;
+                    case 1:
+                        pageAvailable = "/teacher";
+                        break;
+                    case 2:
+                        pageAvailable = "/admin";
+                        break;
+                }
+                request.getSession().setAttribute("pageAvailable", pageAvailable);
+                request.getSession().setAttribute("loggedIdentity", loggedIn.getIdentity());
+                response.setStatus(MyHttpStatus.OK.value());
 
-            //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
-            //request.getSession().setAttribute("loggedIdentity",0);
-            String allowPage = "/login";
-            switch (loggedIn.getIdentity()) {
-                case 0:
-                    allowPage = "/student";
-                    break;
-                case 1:
-                    allowPage = "/teacher";
-                    break;
-                case 2:
-                    allowPage = "/admin";
-                    break;
+                log.info("Redirect to " + pageAvailable);
+            } else {
+                response.setStatus(MyHttpStatus.FAIL.value());
             }
-            request.getSession().setAttribute("allowPage", allowPage);
-            request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
-            response.setStatus(MyHttpStatus.OK.value());
-            // 设置密码并返回前端
-            loggedIn.setPassword(password);
-            return JSON.toJSONString(loggedIn);
         }
-        response.setStatus(MyHttpStatus.FAIL.value());
-        return "用户名和密码不匹配";
+        return "redirect:" + pageAvailable;
     }
 
     @PostMapping(value = "/register")

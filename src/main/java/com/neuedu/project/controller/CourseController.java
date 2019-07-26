@@ -18,20 +18,17 @@ public class CourseController {
     @PostMapping(value = "/add")
     @ResponseBody
     public void addCourse(String teacherId, String courseName) {
-        // todo 需要拦截器，只允许教师执行操作
         courseService.addCourse(teacherId, courseName);
     }
 
     @PostMapping(value = "/addTeacher")
     @ResponseBody
     public void addTeacherToCourse(String teacherId, int courseId) {
-        // todo 需要拦截器，只允许教师执行操作
         courseService.addTeacherToCourse(teacherId, courseId);
     }
 
     @PostMapping(value = "/selectCourse")
     public void studentSelectCourse(String studentId, int courseId) {
-        // todo 需要拦截器，只允许学生执行操作
         courseService.addStudentToCourse(studentId, courseId);
     }
 

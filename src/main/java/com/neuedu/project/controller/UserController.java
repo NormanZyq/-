@@ -1,5 +1,6 @@
 package com.neuedu.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.service.UserService;
@@ -40,22 +41,20 @@ public class UserController {
                         HttpServletRequest request,
                         HttpServletResponse response) {
         User user = new User();
-        log.info("Using id: " + userId);
-        log.info("Using password: " + password);
 
         if (userId == null || "".equals(userId.trim())
                 || password == null || "".equals(password.trim())) {
             response.setStatus(MyHttpStatus.EMPTY.value());
             return "用户名和密码不能为空";
         }
+        // 设置用户名密码供数据库的查询
         user.setUserId(userId);
         user.setPassword(password);
+
         if (userService.login(user)) {
             User loggedIn = userService.getUser(userId, password);
             // 标记为成功登录
-//            request.getSession().setAttribute("loggedUserId", userId);
             request.getSession().setAttribute("loggedUser", loggedIn);
-//            request.getSession().setAttribute("loggedIn", true);
 
             //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
             //request.getSession().setAttribute("loggedIdentity",0);
@@ -74,19 +73,22 @@ public class UserController {
             request.getSession().setAttribute("allowPage", allowPage);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());
-            return "ok";
+            // 设置密码并返回前端
+            loggedIn.setPassword(password);
+            return JSON.toJSONString(loggedIn);
         }
         response.setStatus(MyHttpStatus.FAIL.value());
-        return "用户不存在或密码不正确";
+        return "用户名和密码不匹配";
     }
 
     @PostMapping(value = "/register")
     public String resister(String userId, String password,
                            String name, int identity,
                            HttpServletResponse response) {
-        System.out.println("In");
-        userService.register(userId, password, name, identity);
+        response.setStatus(HttpStatus.FORBIDDEN.value());
         return "../success.html";
+//        System.out.println("In");
+//        userService.register(userId, password, name, identity);
     }
 
 

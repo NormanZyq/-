@@ -33,7 +33,7 @@
 	<body class="bg-light">
 
 
-        <div class="bloc bloc-lg" style="background-image: url(/img/blue.svg);min-height: 1000px;">
+        <div class="bloc bloc-lg" style="background-image: url(/img/blue.svg);min-height: 850px; background-repeat:no-repeat; background-attachment:fixed">
 
             <div class="container">
                 <!--<div class="row">-->
@@ -72,14 +72,6 @@
                                     userId: $('#userId').val(),
                                     password: $('#password').val()
                                 },
-                                // success: function (result) {
-                                //     if (result == 'ok') {
-                                //         alert("登录成功");
-                                //         userId = id;
-                                //     } else {
-                                //         alert(result);
-                                //     }
-                                // },
                                 statusCode: {
                                     200: function () {
                                         alert("登录成功");

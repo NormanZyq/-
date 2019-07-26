@@ -6,7 +6,6 @@
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-
 		<script src="../js/jquery-3.3.1.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
 
@@ -52,12 +51,13 @@
         </div>
     </nav>
 
-    <div class="bloc bloc-fill-screen">
+    <div class="bloc bloc-lg">
 
 
         <div class="container">
             <!--<div class="row">-->
-                <div class="card mt-4 shadow shadow-lg col-md-6 offset-md-3 align-self-center align-content-center">
+                <div class="card mt-4 shadow shadow-lg col-md-6 offset-md-3 img-rd-lg
+                 align-self-center align-content-center">
                     <div class="card-body">
                         <div class="mt-5">
                             <span class="mt-5"></span>
@@ -67,21 +67,43 @@
                             <div class="mt-5">
                                 <div class="col-md-8 offset-md-2">
                                     <label for="userId" class="sr-only">ID</label>
-                                    <input type="text" id="userId" class="form-control" name="userId" placeholder="学工号" required autofocus>
+                                    <input type="text" id="userId" class="form-control img-rd-lg" name="userId" placeholder="学工号" required autofocus>
 
                                     <label for="password" class="sr-only">密码</label>
-                                    <input type="password" id="password" class="form-control mt-4" placeholder="密码" required>
+                                    <input type="password" id="password" class="form-control mt-4 img-rd-lg" placeholder="密码" required>
                                 </div>
-
-
-                                <button id="sbm" type="submit" class="btn col-md-6 offset-md-3 mt-5 mb-5 font-weight-bold" onclick="login($('#userId').val(), $('#password').val())" style="background-color: #c9ecfd;">&nbsp;&nbsp;&nbsp;&nbsp;登录&nbsp;&nbsp;&nbsp;&nbsp;</button>
                             </div>
+
+                        <div class="text-center">
+                            <button id="sbm" type="button" class="btn col-md-6 offset-md-3 mt-5 mb-5 font-weight-bold img-rd-lg" onclick="login()" style="background-color: #c9ecfd;">&nbsp;&nbsp;&nbsp;&nbsp;登录&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </div>
                         <!--</form>-->
                     </div>
                 </div>
-                <div class="mt-5">
 
-                </div>
+                <script>
+                    function login() {
+                        let id = $('#userId').val();
+                        $.ajax({
+                            url: "/user/login",
+                            dataType: "text",
+                            method: "POST",
+                            data: {
+                                userId: $('#userId').val(),
+                                password: $('#password').val()
+                            },
+                            success: function (result) {
+                                if (result == 'ok') {
+                                    alert("登录成功");
+                                    userId = id;
+                                } else {
+                                    alert(result);
+                                }
+                            }
+                        })
+                    }
+                </script>
+
             <!--</div>-->
 
         </div>

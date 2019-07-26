@@ -25,13 +25,13 @@
 			}
 		</script>
 		
-		
 		<script type="text/javascript">
 			function changepsw() {
 				$("#psw").prop("hidden",true);
 				$("#pswchange").prop("hidden",false);
 			}
 		</script>
+		
 	</head>
 	<body class="text-center">
 		<div class="container">
@@ -80,9 +80,9 @@
 				<div id="1" class="container tab-pane active"><br>
 					<br /><br /><br /><br />
 					<h1 class="display-4" align="center">个人信息</h1>
-
+					
 					<br /><br /><br /><br />
-
+					
 					<table class="table">
 						<thead>
 							<tr>
@@ -99,10 +99,9 @@
 							</tr>
 							<tr>
 								<td>类型</td>
-								<td>教师</td>
+								<td>学生</td>
 								<td></td>
 							</tr>
-
 							<tr>
 								<td>用户密码</td>
 								<td id="psw">SOME</td>
@@ -110,7 +109,7 @@
 									<form class="form-inline ">
 										<div class="form-group mx-auto">
 									
-											<input type="email" class="form-control" placeholder="新密码">
+											<input type="text" class="form-control" placeholder="新密码">
 											<button type="submit" class="btn btn-outline-success">确认</button>
 										</div>
 										
@@ -123,15 +122,15 @@
 									</div>
 								</td>
 							</tr>
-
+					
 						</tbody>
 					</table>
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-8">
-							<ul class="nav nav-tabs">
-								<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
-							</ul>
+					
+							<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+					
 						</div>
 					</div>
 				</div>
@@ -146,8 +145,38 @@
 							<a class="dropdown-item" href="#">class 1</a>
 							<a class="dropdown-item" href="#">class 2</a>
 							<a class="dropdown-item" href="#">class 3</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal">添加新课程</a>
 						</div>
 					</div>
+
+					<div class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+
+									<div class="card-body">
+										<br /><br />
+										<h2 class="card-title">添加课程</h2>
+										<br /><br />
+										<input type="text" id="inputid" placeholder="课程名字(*/ω＼*)"  class="form-control" required autofocus>
+										<br />
+										
+										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+										&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+								</div>
+								<!-- 模态框底部 -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<br /><br /><br /><br /><br /><br /><br /><br />
 					<table class="table">
 
@@ -284,8 +313,7 @@
 										试 卷 一
 									</div>
 									<div class="float-right">
-										<button id="te" onclick="window.location.href = 'answer.html'" 
-										type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+										<button id="te" onclick="window.location.href = 'answer.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
 									</div>
 
 								</a>
@@ -306,8 +334,7 @@
 										试 卷 二
 									</div>
 									<div class="float-right">
-										<button id="te" onclick="window.location.href = 'answer.html'" 
-										type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+										<button id="te" onclick="window.location.href = 'answer.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
 									</div>
 								</a>
 							</div>
@@ -327,8 +354,7 @@
 										试 卷 三
 									</div>
 									<div class="float-right">
-										<button id="te" onclick="window.location.href('answer.html')" 
-										type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+										<button id="te" onclick="window.location.href('answer.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
 									</div>
 								</a>
 							</div>
@@ -398,7 +424,7 @@
 					</div>
 					<br />
 					<br /><br /><br />
-					<table class="table w-75 mx-auto" >
+					<table class="table w-75 mx-auto">
 						<tbody>
 							<tr>
 								<td>难易程度</td>

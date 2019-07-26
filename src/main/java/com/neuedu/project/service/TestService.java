@@ -8,8 +8,10 @@ import java.util.List;
 @Service
 public interface TestService {
 
-    void autoCreateTest(int courseId, int cqCount, int sqConut);
+    void autoCreateTest(int courseId, int cqCount, int sqCount, String currentTime,int duration);
 
     List<Test> getArrangedTestsByCourseId();
+
+//    int Calcualte_OJLD(int i, int j);
 
 }

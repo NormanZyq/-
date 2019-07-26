@@ -6,7 +6,14 @@
 
 <mapper namespace="com.neuedu.project.dao.TestMapper">
 
-
+    <resultMap id="testMap" type="com.neuedu.project.domain.Test">
+        <id column="test_id" property="testId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="choice_question" property="choiceQuestionIds"/>
+        <result column="subjective_question" property="subjectiveQuestionIds"/>
+        <result column="release_datetime" property="releaseDate"/>
+        <result column="duration" property="duration"/>
+    </resultMap>
 
     <select id="getStudentTests" resultMap="testMap">
         select *
@@ -16,5 +23,11 @@
           and t_table.course_id = cs_table.course_id
     </select>
 
+
+
+    <insert id="addTest" parameterType="Test">
+        insert into tests (course_id,choice_question,subjective_question,release_datetime,duration)
+        values (#{courseId}, #{choiceQuestionIds}, #{subjectiveQuestionIds}, #{releaseDate}, #{duration});
+    </insert>
 
 </mapper>

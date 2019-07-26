@@ -6,12 +6,29 @@ import java.util.*;
 
 public class ChoiceQuestion extends Question {
 
-    private Map<String, String> choices;
+    private final Map<String, String> choices;
 
-    private Set<String> answers;
+    private final Set<String> answers;
 
-    public ChoiceQuestion(Map<String, String> choices) {
-        this.choices = choices;
+//    public ChoiceQuestion(Map<String, String> choices) {
+//        this.choices = choices;
+//    }
+
+    public ChoiceQuestion(Question simpleQuestion) {
+        super(simpleQuestion.getCourseId(),
+                simpleQuestion.getQuestionType(),
+                simpleQuestion.getQuestionContent(),
+                simpleQuestion.getChoicesString(),
+                simpleQuestion.getRightAnswerString(),
+                simpleQuestion.getResources());
+        choices = QuestionUtils.getInstance()
+                .parseChoiceString(simpleQuestion.getChoicesString());
+
+        answers = new HashSet<>();
+        String[] answerArray = simpleQuestion.getRightAnswerString()
+                .split("\\s+");
+
+        this.answers.addAll(Arrays.asList(answerArray));
     }
 
     /**
@@ -40,16 +57,15 @@ public class ChoiceQuestion extends Question {
         String[] answerArray = rightAnswerString.split("\\s+");
 
         this.answers.addAll(Arrays.asList(answerArray));
-
-
     }
 
     public String getChoiceContent(String choice) {
         return choices.getOrDefault(choice.toUpperCase(), "");
     }
 
-    public String getRightAnswer() {
-        return super.getRightAnswerString();
+
+    public Set<String> getRightAnswer() {
+        return Collections.unmodifiableSet(this.answers);
     }
 
     @Override
@@ -60,8 +76,14 @@ public class ChoiceQuestion extends Question {
                 '}';
     }
 
+    /**
+     * 返回此选择题是否为多选题。
+     * @return  多选题返回true，单选返回false
+     */
     public boolean isMultipleChoice() {
         return answers.size() > 1;
     }
+
+
 
 }

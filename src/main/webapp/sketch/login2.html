@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ch">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/fontawesome.min.css">
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+		<script src="../js/jquery-3.3.1.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+
+		<title>登录</title>
+        <script src="../js/utils.js"></script>
+
+
+    </head>
+
+    <script type="text/javascript">
+        function submi() {
+            if ($("#stu").is(':checked')) {
+                window.location.href = 'student.html'
+            } else if ($("#tea").is(':checked')) {
+                window.location.href = 'teacher.html'
+            }
+        }
+    </script>
+
+	<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light shadow shadow-sm rounded rounded-bottom rounded-top" style="background-color: #c9ecfd;">
+        <a class="navbar-brand" href="#"><img src="/rua.jpg" height="44px"><span class="text-primary"> [谁来起个名字(￣∇￣)]</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <!--<form class="form-inline">-->
+            <!--<input class="form-control ml-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-primary my-2 my-sm-0 ml-1 rounded-circle" type="submit"><i class="fa fa-search"></i></button>-->
+            <!--</form>-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">首页</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">登录 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">关于</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="bloc bloc-lg">
+
+
+        <div class="container">
+            <!--<div class="row">-->
+                <div class="card mt-4 shadow shadow-lg col-md-6 offset-md-3 img-rd-lg
+                 align-self-center align-content-center">
+                    <div class="card-body">
+                        <div class="mt-5">
+                            <span class="mt-5"></span>
+                            <h3 class="card-title text-center">登录</h3>
+                        </div>
+                        <!--<form action="">-->
+                            <div class="mt-5">
+                                <div class="col-md-8 offset-md-2">
+                                    <label for="userId" class="sr-only">ID</label>
+                                    <input type="text" id="userId" class="form-control img-rd-lg" name="userId" placeholder="学工号" required autofocus>
+
+                                    <label for="password" class="sr-only">密码</label>
+                                    <input type="password" id="password" class="form-control mt-4 img-rd-lg" placeholder="密码" required>
+                                </div>
+                            </div>
+
+                        <div class="text-center">
+                            <button id="sbm" type="button" class="btn col-md-6 offset-md-3 mt-5 mb-5 font-weight-bold img-rd-lg" onclick="login()" style="background-color: #c9ecfd;">&nbsp;&nbsp;&nbsp;&nbsp;登录&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </div>
+                        <!--</form>-->
+                    </div>
+                </div>
+
+                <script>
+                    function login() {
+                        let id = $('#userId').val();
+                        $.ajax({
+                            url: "/user/login",
+                            dataType: "text",
+                            method: "POST",
+                            data: {
+                                userId: $('#userId').val(),
+                                password: $('#password').val()
+                            },
+                            success: function (result) {
+                                if (result == 'ok') {
+                                    alert("登录成功");
+                                    userId = id;
+                                } else {
+                                    alert(result);
+                                }
+                            }
+                        })
+                    }
+                </script>
+
+            <!--</div>-->
+
+        </div>
+
+        </div>
+
+	</body>
+</html>

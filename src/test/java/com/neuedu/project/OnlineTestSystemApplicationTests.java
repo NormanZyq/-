@@ -1,9 +1,15 @@
 package com.neuedu.project;
 
 import com.neuedu.project.dao.CourseMapper;
+import com.neuedu.project.dao.QuestionMapper;
+import com.neuedu.project.domain.ChoiceQuestion;
 import com.neuedu.project.domain.Course;
+import com.neuedu.project.domain.Question;
 import com.neuedu.project.domain.User;
+import com.neuedu.project.domain.factories.QuestionFactory;
+import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.CourseService;
+import com.neuedu.project.service.QuestionService;
 import com.neuedu.project.service.UserService;
 import com.neuedu.project.service.UserServiceImpl;
 import org.junit.Test;
@@ -20,6 +26,9 @@ public class OnlineTestSystemApplicationTests {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @Test
     public void contextLoads() {
@@ -53,6 +62,21 @@ public class OnlineTestSystemApplicationTests {
     @Test
     public void testAddTeacherToCourse() {
 //        courseService.addTeacherToCourse(testTeacherId, testCourseId);
+    }
+
+    @Test
+    public void testParse() {
+        Question forQuery = new Question();
+        forQuery.setCourseId(1);
+        forQuery.setQuestionType(1);
+
+        List<Question> results = questionService.getChoiceQuestionByCourseId(1);
+
+        ChoiceQuestion cq = new ChoiceQuestion(results.get(0));
+//        System.out.println(cq);
+        List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestions(results);
+
+        System.out.println(choiceQuestions);
     }
 
 }

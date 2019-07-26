@@ -29,14 +29,14 @@
         values (#{courseId}, 1, #{questionContent}, #{rightAnswerString}, #{resources});
     </insert>
 
-    <select id="getQuestionsByCondition"
+    <select id="getQuestionsByCourseId"
             parameterType="Question"
             resultMap="questionMap">
         select question_id, question_type, question_content, choices_string, question_answer
         from questions
         <!--<where>-->
             <!--<if test="courseId != null and courseId != 0">-->
-                <!--courseId = #{courseId}-->
+                <!--course_id = #{courseId}-->
             <!--</if>-->
             <!--<if test="questionType != null and questionType != -1">-->
                 <!--and question_type = #{questionType}-->

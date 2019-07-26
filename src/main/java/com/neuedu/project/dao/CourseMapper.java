@@ -26,7 +26,7 @@ public interface CourseMapper {
     List<Course> queryCourse(Course courseForQuery);
 
     /**
-     * 将教师加入授课列表。
+     * 将老师添加到授课列表的dao层，提供新教师的ID和课程ID完成添加。
      *
      * @param teacherId 教师ID
      * @param courseId  课程ID
@@ -35,7 +35,7 @@ public interface CourseMapper {
                             @Param("courseId") int courseId);
 
     /**
-     * 学生选课。
+     * 学生选课，提供学生ID和课程ID完成选课。
      *
      * @param studentId 学生学号
      * @param courseId  课程ID

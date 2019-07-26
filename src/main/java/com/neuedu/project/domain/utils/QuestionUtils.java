@@ -53,37 +53,6 @@ public class QuestionUtils {
         List<ChoiceQuestion> returnList = new ArrayList<>();
         for (Question q : questions) {
             returnList.add(new ChoiceQuestion(q));
-//            JSONObject choices = JSON.parseObject(q.getChoicesString());
-//
-//            Map<String, String> mapChoiceContent = new HashMap<>();
-//
-//
-//            int choiceCount = choices.size();
-//            for (int i = 0; i < choiceCount; i++) {
-//                String lower = String.valueOf((char)(97 + i));
-//                String capital = String.valueOf((char) (65 + i));
-//                String choiceContent = choices.getString(lower);
-//                if (choiceContent == null) {
-//                    choiceContent = choices.getString(capital);
-//                    if (choiceContent == null) {
-//                        throw new RuntimeException();
-//                    }
-//                }
-//                // now choiceContent has value
-//                mapChoiceContent.put(capital, choiceContent);
-//            }
-//
-//
-//            ChoiceQuestion choiceQuestion = new ChoiceQuestion(mapChoiceContent);
-//            choiceQuestion.setQuestionType(q.getQuestionType());
-//            choiceQuestion.setCourseId(q.getCourseId());
-//            choiceQuestion.setRightAnswerString(q.getRightAnswerString());
-//            choiceQuestion.setQuestionContent(q.getQuestionContent());
-//            choiceQuestion.setResources(q.getResources());
-//
-//
-//
-//            returnList.add(choiceQuestion);
         }
         return returnList;
     }

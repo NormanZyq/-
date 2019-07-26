@@ -22,12 +22,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void addChoiceQuestion(Question question) {
-
+        questionMapper.addChoiceQuestion(question);
     }
 
     @Override
     public void addSubjectiveQuestion(Question subjectiveQuestion) {
-
+        questionMapper.addSubjectiveQuestion(subjectiveQuestion);
     }
 
     @Override

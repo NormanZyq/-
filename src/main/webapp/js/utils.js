@@ -1,8 +1,3 @@
 var userId;
 
 
-function navBar() {
-
-
-}
-

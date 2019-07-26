@@ -19,7 +19,7 @@ public interface QuestionMapper {
      */
 //    List<Question> getQuestionsByCourseId(int courseId);
 
-    List<Question> getQuestionsByCondition(Question forQuery);
+    List<Question> getQuestionsByCourseId(Question forQuery);
 
 //    List<Question> getSubjectiveQuestionsByCourseId(int coueseId);
 

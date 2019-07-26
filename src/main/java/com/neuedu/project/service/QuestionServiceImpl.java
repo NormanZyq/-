@@ -40,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
         Question forQuery = new Question();
         forQuery.setCourseId(courseId);
         forQuery.setQuestionType(0);
-        List<Question> questions = questionMapper.getQuestionsByCondition(forQuery);
+        List<Question> questions = questionMapper.getQuestionsByCourseId(forQuery);
         System.out.println(questions);
 
         return questions;
@@ -51,6 +51,6 @@ public class QuestionServiceImpl implements QuestionService {
         Question forQuery = new Question();
         forQuery.setCourseId(courseId);
         forQuery.setQuestionType(1);
-        return questionMapper.getQuestionsByCondition(forQuery);
+        return questionMapper.getQuestionsByCourseId(forQuery);
     }
 }

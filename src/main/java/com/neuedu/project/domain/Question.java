@@ -111,4 +111,12 @@ public class Question {
     public void setResources(String resources) {
         this.resources = resources;
     }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
 }

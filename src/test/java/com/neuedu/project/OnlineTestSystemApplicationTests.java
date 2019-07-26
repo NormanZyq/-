@@ -8,10 +8,7 @@ import com.neuedu.project.domain.Question;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.domain.factories.QuestionFactory;
 import com.neuedu.project.domain.utils.QuestionUtils;
-import com.neuedu.project.service.CourseService;
-import com.neuedu.project.service.QuestionService;
-import com.neuedu.project.service.UserService;
-import com.neuedu.project.service.UserServiceImpl;
+import com.neuedu.project.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,9 @@ public class OnlineTestSystemApplicationTests {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private TestService testService;
 
     @Test
     public void contextLoads() {
@@ -79,4 +79,21 @@ public class OnlineTestSystemApplicationTests {
         System.out.println(choiceQuestions);
     }
 
+   /* @Test
+    public void testOJLD(){
+        System.out.println(testService.Calcualte_OJLD(10,5));
+        System.out.println(testService.Calcualte_OJLD(5,10));
+        System.out.println(testService.Calcualte_OJLD(5,7));
+        System.out.println(testService.Calcualte_OJLD(7,5));
+        System.out.println(testService.Calcualte_OJLD(5,5));
+    }*/
+
+   @Test
+    public void testTest(){
+       java.util.Date dt = new java.util.Date();
+       java.text.SimpleDateFormat sdf =
+               new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       String currentTime = sdf.format(dt);
+       testService.autoCreateTest(1,7,4,currentTime,90);
+   }
 }

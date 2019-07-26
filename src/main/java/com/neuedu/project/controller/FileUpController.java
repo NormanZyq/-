@@ -13,7 +13,7 @@ import java.io.IOException;
 public class FileUpController {
 
     //fileUp
-    @RequestMapping(value = "fileUp",method = RequestMethod.POST)
+    @RequestMapping(value = "/fileUp",method = RequestMethod.POST)
     public String up(MultipartFile img){
         System.out.println(img);
         //img  ----服务器的D://images   ---虚拟目录

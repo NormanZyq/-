@@ -24,18 +24,68 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void autoCreateTest(int courseId, int cqCount, int sqConut) {
+    public void autoCreateTest(int courseId, int cqCount, int sqCount, String currentTime,int duration) {
         Random random = new Random(System.currentTimeMillis());
-        int num = random.nextInt();
-        List<Question> cq = questionMapper.getQuestionsByCondition()
-
-//        questionMapper.getQuestionsByCourseId()
-
+        int num = Math.abs(random.nextInt());
+        //新建Question做选择标准
+        Question temp = new Question();
+        temp.setCourseId(courseId);
+        temp.setQuestionType(0);
+        //选出选择题
+        List<Question> cq = questionMapper.getQuestionsByCourseId(temp);
+        temp.setQuestionType(1);
+        //选出主观题
+        List<Question> sq = questionMapper.getQuestionsByCourseId(temp);
+        //如果题目过少，返回null
+        if(cq.size()<cqCount || sq.size()<sqCount)
+            testMapper.addTest(null);
+        else {
+            //运用随机函数实现随机生成题目
+            Test test = new Test();
+            //生成题目组id字符串
+            String cIds = ProduceIds(cqCount, cq, num);
+            String sIds = ProduceIds(sqCount, sq, num);
+            test.setCourseId(courseId);
+            test.setSubjectiveQuestionIds(sIds);
+            test.setChoiceQuestionIds(cIds);
+            test.setReleaseDate(currentTime);
+            test.setDuration(duration);
+            testMapper.addTest(test);
+        }
     }
 
     @Override
     public List<Test> getArrangedTestsByCourseId() {
         // todo
         return null;
+    }
+
+    private String ProduceIds(int sqCount,List<Question> sq,int num){
+        String sIds = "";
+        //避免选题数为0的情况,返回null
+        if(sqCount==0)
+            return null;
+        for (int i = 0; i < sqCount; i++) {
+            int size = sq.size();//选择题库大小
+            int choose = Calcualte_OJLD(size, num) - 1;//List下标减一
+            if (i != 0)
+                sIds = sIds + " ";
+            sIds = sIds + sq.get(choose).getQuestionId();
+            sq.remove(choose);
+            }
+
+        return sIds;
+    }
+
+    //i为数组大小，j为顺次选择数
+    private int Calcualte_OJLD(int i, int j){
+        if(i<j) {
+            int sum = i;
+            while (sum < j) {
+                sum += i;
+            }
+            return i+j-sum;
+        }
+        return j;
     }
 }

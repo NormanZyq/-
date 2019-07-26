@@ -1,87 +1,571 @@
 <!DOCTYPE html>
-<html lang="ch">
+<html>
 	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../css/fontawesome.min.css">
-		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 新 Bootstrap4 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
 		<link rel="stylesheet" href="../css/style.css">
 
 
-		<script src="../js/jquery-3.3.1.js"></script>
-		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-
-		<title>登录</title>
+		<script type="text/javascript">
+			function display() {
+				var traget2 = document.getElementById('pasedi');
+				if (traget2.style.display == "none") {
+					traget2.style.display = "";
+				} else {
+					traget2.style.display = "none";
+				}
+			}
+		</script>
 
 
 	</head>
 
-	<script type="text/javascript">
-		function display() {
-			var traget2 = document.getElementById('pasedi');
-			if (traget2.style.display == "none") {
-				traget2.style.display = "";
-			} else {
-				traget2.style.display = "none";
-			}
-		}
-	</script>
-	<body class="bg-light">
-		<nav class="navbar navbar-expand-lg navbar-light shadow shadow-sm rounded rounded-bottom rounded-top" style="background-color: #c9ecfd;">
-			<a class="navbar-brand" href="#"><img src="/rua.jpg" height="44px"><span class="text-primary"> [谁来起个名字(￣∇￣)]</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navbarColor03">
-				<!--<form class="form-inline">-->
-				<!--<input class="form-control ml-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-				<!--<button class="btn btn-outline-primary my-2 my-sm-0 ml-1 rounded-circle" type="submit"><i class="fa fa-search"></i></button>-->
-				<!--</form>-->
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="/index">首页</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="/sketch/student.html">个人中心 <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/index">退出</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+	<body class="text-center">
 
 
 
+	<nav class="navbar navbar-expand-lg navbar-light shadow shadow-sm rounded rounded-bottom rounded-top" style="background-color: #c9ecfd;">
+		<a class="navbar-brand" href="#"><img src="/rua.jpg" height="44px"><span class="text-primary"> [谁来起个名字(￣∇￣)]</span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarColor03">
+			<!--<form class="form-inline">-->
+			<!--<input class="form-control ml-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+			<!--<button class="btn btn-outline-primary my-2 my-sm-0 ml-1 rounded-circle" type="submit"><i class="fa fa-search"></i></button>-->
+			<!--</form>-->
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/index">首页</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/sketch/student.html">个人中心 <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/index">退出</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+		<br /><br />
+
+
+
+		<div class="container">
 			<div class="row">
-				<div class="col-3">
-					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-						<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+				<div class="card col-md-12 shadow shadow-lg img-rd-md" style="min-height: 700px;">
+					<div class="card-body">
+						<div class="row">
+							<!-- Nav pills -->
+							<ul class="nav nav-pills col-12" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" data-toggle="pill" href="#1">个人中心</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="pill" href="#2">在线答题</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="pill" href="#3">考试管理</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="pill" href="#4">成绩管理</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="pill" href="#5">教学评价</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" data-toggle="pill" href="#6">申请复核</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content col-12">
+								<div id="1" class="container tab-pane active"><br>
+									<br /><br /><br /><br />
+									<h1 class="display-4" align="center">个人信息</h1>
+
+									<br /><br /><br /><br />
+
+									<table class="table">
+										<thead>
+										<tr>
+											<th>学号</th>
+											<th>SOME</th>
+											<th></th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>姓名</td>
+											<td>SOME</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>类型</td>
+											<td>学生</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>用户密码</td>
+											<td>SOME</td>
+											<td>
+												<div id="pasedi" style="display: none;" class="pa">
+													<button type="button" class="btn btn-outline-primary">修改</button>
+												</div>
+											</td>
+										</tr>
+
+										</tbody>
+									</table>
+									<br /><br />
+									<div class="float-right">
+										<div class="col-md-8">
+
+											<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div id="2" class="container tab-pane fade"><br>
+									<br /><br /><br /><br />
+									<div id="accordion">
+										<div class="card">
+											<div class="card-header">
+												<a class="card-link" data-toggle="collapse" href="#collapseOne">
+													<div class="float-left">
+														考 试 一
+													</div>
+													<div class="float-right">
+														<button id="te" onclick="window.location.href = 'exam.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+													</div>
+
+												</a>
+											</div>
+											<div id="collapseOne" class="collapse show" data-parent="#accordion">
+												<div class="card-body">
+													<div class=" m-auto">
+														考试信息 考试时间
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header">
+												<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+													<div class="float-left">
+														考 试 二
+													</div>
+													<div class="float-right">
+														<button id="te" onclick="window.location.href = 'exam.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+													</div>
+												</a>
+											</div>
+											<div id="collapseTwo" class="collapse" data-parent="#accordion">
+												<div class="card-body">
+													<div class=" m-auto">
+														考试信息 考试时间
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header">
+												<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+													<div class="float-left">
+														考 试 三
+													</div>
+													<div class="float-right">
+														<button id="te" onclick="window.location.href('exam.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+													</div>
+												</a>
+											</div>
+											<div id="collapseThree" class="collapse" data-parent="#accordion">
+												<div class="card-body">
+													<div class=" m-auto">
+														考试信息 考试时间
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="3" class="container tab-pane fade"><br>
+									<br /><br /><br /><br />
+									<div class="row">
+										<div class="col">
+											<div class="card m-auto shadow shadow-sm img-rd-md" style="width:300px">
+
+												<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;A</h3>
+												<div class="card-body">
+													<br />
+
+													<table class="table">
+														<thead>
+														<tr>
+															<th>
+																<h5>考试 &nbsp;I D</h5>
+															</th>
+															<th>SOME</th>
+														</tr>
+														</thead>
+														<tbody>
+														<tr>
+															<td>
+																<h5>考试时间</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试地点</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试时长</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="card m-auto shadow shadow-sm" style="width:300px">
+
+												<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;B</h3>
+												<div class="card-body">
+													<br />
+
+													<table class="table">
+														<thead>
+														<tr>
+															<th>
+																<h5>考试 &nbsp;I D</h5>
+															</th>
+															<th>SOME</th>
+														</tr>
+														</thead>
+														<tbody>
+														<tr>
+															<td>
+																<h5>考试时间</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试地点</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试时长</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+
+										</div>
+										<div class="col">
+											<div class="card m-auto shadow shadow-sm" style="width:300px">
+
+												<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;C</h3>
+												<div class="card-body">
+													<br />
+
+													<table class="table">
+														<thead>
+														<tr>
+															<th>
+																<h5>考试 &nbsp;I D</h5>
+															</th>
+															<th>SOME</th>
+														</tr>
+														</thead>
+														<tbody>
+														<tr>
+															<td>
+																<h5>考试时间</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试地点</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														<tr>
+															<td>
+																<h5>考试时长</h5>
+															</td>
+															<td>SOME</td>
+														</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+
+
+
+								</div>
+
+								<div id="4" class="container tab-pane fade"><br>
+									<br /><br /><br /><br />
+
+									<div class="float-right">
+										<form class="form-inline ">
+
+											<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+											<button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#myModal">Search</button>
+
+										</form>
+									</div>
+									<div class="modal fade" id="myModal">
+										<div class="modal-dialog">
+											<div class="modal-content">
+
+												<!-- 模态框头部 -->
+												<div class="modal-header">
+													<h4 class="modal-title">成绩查询结果</h4>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+												</div>
+
+												<!-- 模态框主体 -->
+												<div class="modal-body">
+													<br /><br />
+													<h5>课程 I D： SOME</h5>
+													<br /><br />
+													<h5>课程成绩： SOME</h5>
+													<br /><br />
+													<h5>教学班排名： SOME</h5>
+													<br /><br />
+												</div>
+
+												<!-- 模态框底部 -->
+												<div class="modal-footer">
+													<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<br /><br /><br />
+
+									<table class="table  table-striped">
+										<thead>
+										<tr>
+											<th>课程ID</th>
+											<th>成绩</th>
+											<th>教学班排名</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>课程A</td>
+											<td>SOME</td>
+											<td>SOME</td>
+										</tr>
+										<tr>
+											<td>课程B</td>
+											<td>SOME</td>
+											<td>SOME</td>
+										</tr>
+										<tr>
+											<td>课程C</td>
+											<td>SOME</td>
+											<td>SOME</td>
+										</tr>
+
+
+										</tbody>
+									</table>
+								</div>
+
+								<div id="5" class="container tab-pane fade"><br>
+									<div class="dropdown float-right">
+										<br /><br /><br />
+										<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的课程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="#">class 1</a>
+											<a class="dropdown-item" href="#">class 2</a>
+											<a class="dropdown-item" href="#">class 3</a>
+										</div>
+									</div>
+									<br /><br /><br />
+									<br />
+									<br /><br /><br />
+									<table class="table">
+										<tbody>
+										<tr>
+											<td>SOME</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="1~5">
+													</div>
+													<button type="submit" class="btn btn-outline-success">确认</button>
+												</form>
+											</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>SOME</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="1~5">
+													</div>
+													<button type="submit" class="btn btn-outline-success">确认</button>
+												</form>
+											</td>
+											<td></td>
+										</tr>
+
+										<tr>
+											<td>SOME</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="1~5">
+													</div>
+													<button type="submit" class="btn btn-outline-success">确认</button>
+												</form>
+											</td>
+										</tr>
+										<tr>
+											<td>SOME</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="1~5">
+													</div>
+													<button type="submit" class="btn btn-outline-success">确认</button>
+												</form>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+									<br /><br />
+									<div class="float-right">
+										<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-info">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+
+								</div>
+								<div id="6" class="container tab-pane fade"><br>
+									<br /><br /><br /><br />
+
+
+
+
+									<table class="table">
+										<tbody>
+										<tr>
+											<td>复核课程ID</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="课程ID">
+													</div>
+													<button type="submit" class="btn btn-info">确认</button>
+												</form>
+											</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>授课教师</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="题目ID">
+													</div>
+													<button type="submit" class="btn btn-info">确认</button>
+												</form>
+											</td>
+											<td></td>
+										</tr>
+
+										<tr>
+											<td>复核说明</td>
+											<td>
+												<form class="form-inline float-right">
+													<div class="form-group">
+
+														<input type="email" class="form-control" placeholder="题目内容">
+													</div>
+													<button type="submit" class="btn btn-info">确认</button>
+												</form>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+									<br /><br /><br />
+									<div class="float-right">
+										<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+
+
+
 					</div>
-				</div>
-				<div class="col-9">
-					<div class="tab-content" id="v-pills-tabContent">
-						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-					</div>
+
 				</div>
 			</div>
 
 
 
-
-
-
-
-
-
-
+		</div>
 
 
 

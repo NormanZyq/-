@@ -17,7 +17,7 @@
 
 
 
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			function submi() {
 				if ($("#stu").is(':checked')) {
 					window.location.href = 'student.html'
@@ -25,7 +25,47 @@
 					window.location.href = 'teacher.html'
 				}
 			}
+		</script> -->
+
+
+		<script type="text/javascript">
+			$(function() {
+				$("#sbm").click(function() {
+					var username = $("#inputid").val(); //取值
+					var password = $("#inputPassword").val();
+					/* alert(username);
+					alert(password); */
+					
+					if (!username) {
+						alert("用户名必填!");
+						$("#inputid").focus(); //获取焦点
+						return;
+					}
+					if (!password) {
+						alert("密码必填!");
+						$("#inputPassword").focus(); //获取焦点
+						return;
+					}
+					//var param = "username="+username+"&password="+password;  
+					
+					//alert("1!");
+					var param = {
+						"username": username,
+						"password": password
+					};
+					//alert("2!");
+					$.post("http://192.168.8.120:8080/user/login", param, function(result) {
+						if (result) {
+							window.location.href = "student.html";
+						} else {
+							alert("用户名或者密码错误!");
+						}
+					});
+				});
+			});
 		</script>
+
+
 
 	</head>
 	<body class="text-center">
@@ -70,20 +110,21 @@
 					<h3 class="card-title">登陆</h3>
 
 					<br /><br />
-					
+
 					<label for="inputid" class="sr-only">ID</label>
 					<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
 					<br />
 					<label for="inputPassword" class="sr-only">密码</label>
 					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 					<br /><br />
-					<button id="sbm" type="button" class="btn btn-info btn-primary btn-lg" onclick="submi()">&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button id="sbm" type="button" class="btn btn-info btn-primary btn-lg">
+						&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
 				</div>
 			</div>
 		</div>
 
-<!-- 
+		<!-- 
 		<div class="row  container-fluid float-right">
 			<div class="col-md-2">
 				<ul class="nav nav-tabs">

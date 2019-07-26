@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 新 Bootstrap4 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+		<script type="text/javascript">
+			function chec() {
+				var a = $("#zuin").val();
+
+				if (a == "") {
+					alert("还没有打分鸭|ू･ω･` ）")
+				} else if ((parseFloat(a)) < 0) {
+					alert("打分要写正数鸭|ू･ω･` ）")
+				} else if ((parseFloat(a)) > 60) {
+					alert("打分不要溢出鸭|ू･ω･` ）")
+				} else {
+					window.history.back()
+				}
+
+			}
+		</script>
+	</head>
+	<body class="text-center">
+
+		<div class="container">
+			<ul class="nav ">
+				<li class="nav-item">
+					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+				</li>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<li class="nav-item">
+					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+				</li>
+
+				<form class="form-inline col-md-1 offset-md-11 m-auto">
+					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
+				</form>
+
+			</ul>
+
+		</div>
+
+		<br /><br />
+		<div class="container">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>客观题得分</th>
+						<th><mark>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mark></th>
+						<th>满分</th>
+						<th><mark>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								40&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mark></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>主观题得分</td>
+						<td>
+							<form class=" form-inline ">
+								<div class="form-group">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="text" class="form-control" placeholder="得分" id="zuin">
+
+									<button type="submit" class="btn btn-outline-success">填入</button>
+								</div>
+
+							</form>
+						</td>
+						<td>满分</td>
+						<td><mark>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								60&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mark></td>
+					</tr>
+				</tbody>
+
+			</table>
+			<br /><br />
+
+			<h1 class="font-weight-light">主观题作答情况</h1>
+			<br /><br />
+
+			<table class="table table-bordered">
+				<thead>
+					<p class="lead font-weight-light"> 第一题</p>
+					<br />
+					<tr>
+						<th>参考答案</th>
+						<th>blabla</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>学生作答</td>
+						<td>巴拉巴拉</td>
+					</tr>
+					<tr>
+						<td>本题得分</td>
+						<td>
+							<form class="form-inline float-right">
+								<div class="form-group">
+
+									<input type="email" class="form-control" placeholder="得分">
+								</div>
+								<button type="submit" class="btn btn-outline-info">确认</button>
+							</form>
+
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+			<br /><br /><br />
+			<table class="table table-bordered">
+				<thead>
+					<p class="lead font-weight-light"> 第二题</p>
+					<br />
+					<tr>
+						<th>参考答案</th>
+						<th>blabla</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>学生作答</td>
+						<td>巴拉巴拉</td>
+					</tr>
+					<tr>
+						<td>本题得分</td>
+						<td>
+							<form class="form-inline float-right">
+								<div class="form-group">
+
+									<input type="email" class="form-control" placeholder="得分">
+								</div>
+								<button type="submit" class="btn btn-outline-info">确认</button>
+							</form>
+
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+
+			<br /><br /><br />
+
+
+			<form class="form-inline col-md-1 offset-md-11 m-auto">
+				<button class="btn btn-lg btn-info" type="button" onclick="chec()">&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;</button>
+				<p><br /><br /><br /><br /><br /><br /><br /><br /><br />&nbsp;</p>
+
+			</form>
+
+
+		</div>
+
+	</body>
+</html>

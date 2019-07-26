@@ -27,16 +27,16 @@ public class LoginInInterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //服务器请求拦截器起作用
-        String[] interceptor = {"/student", "/teacher",
-                "/admin", "/*.html"};
-//        String[] interceptor = {"/hello"};
-
-        InterceptorRegistration registration = registry.addInterceptor(loginInInterceptor);
-
-        registration.addPathPatterns(beforeLoginForbid);
-
-        registration.excludePathPatterns("/login.html");
-        registration.excludePathPatterns("/hello.html");
+//        String[] interceptor = {"/student", "/teacher",
+//                "/admin", "/*.html"};
+////        String[] interceptor = {"/hello"};
+//
+//        InterceptorRegistration registration = registry.addInterceptor(loginInInterceptor);
+//
+//        registration.addPathPatterns(beforeLoginForbid);
+//
+//        registration.excludePathPatterns("/login.html");
+//        registration.excludePathPatterns("/hello.html");
 
     }
 

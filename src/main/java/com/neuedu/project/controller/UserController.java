@@ -1,12 +1,11 @@
 package com.neuedu.project.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
+
+    private Logger log = Logger.getLogger(UserController.class);
 
     //    @Autowired
     private UserService userService;
@@ -36,10 +37,15 @@ public class UserController {
     @PostMapping(value = "/login")
     @ResponseBody
     public String login(String userId, String password,
-                        HttpServletRequest request) {
+                        HttpServletRequest request,
+                        HttpServletResponse response) {
         User user = new User();
+        log.info("Using id: " + userId);
+        log.info("Using password: " + password);
+
         if (userId == null || "".equals(userId.trim())
                 || password == null || "".equals(password.trim())) {
+            response.setStatus(MyHttpStatus.EMPTY.value());
             return "用户名和密码不能为空";
         }
         user.setUserId(userId);
@@ -67,8 +73,10 @@ public class UserController {
             }
             request.getSession().setAttribute("allowPage", allowPage);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
+            response.setStatus(MyHttpStatus.OK.value());
             return "ok";
         }
+        response.setStatus(MyHttpStatus.FAIL.value());
         return "用户不存在或密码不正确";
     }
 

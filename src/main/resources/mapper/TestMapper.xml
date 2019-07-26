@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.TestMapper">
+
+    <resultMap id="TestMap" type="com.neuedu.project.dao.TestMapper">
+        <id column="test_id" property="testId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="choice_question" property="choiceQuestion"/>
+        <result column="subjective_question" property="subjectQuestion"/>
+        <result column="release_datetime" property="releaseDatetime"/>
+        <result column="duration" property="duration"/>
+    </resultMap>
+
+    <insert id="addTest" parameterType="Test">
+        insert into tests (test_id, course_id,choice_question,subjective_question,release_datetime,duration)
+        values (#{testId}, #{courseId}, #{choiceQuestion}, #{subjectQuestion}, #{releaseDatetime}, #{duration});
+    </insert>
+
+</mapper>

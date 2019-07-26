@@ -2,6 +2,7 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.dao.QuestionMapper;
 import com.neuedu.project.dao.TestMapper;
+import com.neuedu.project.domain.Question;
 import com.neuedu.project.domain.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class TestServiceImpl implements TestService {
     @Override
     public void autoCreateTest(int courseId, int cqCount, int sqConut) {
         Random random = new Random(System.currentTimeMillis());
-
         int num = random.nextInt();
+        List<Question> cq = questionMapper.getQuestionsByCondition()
 
 //        questionMapper.getQuestionsByCourseId()
 

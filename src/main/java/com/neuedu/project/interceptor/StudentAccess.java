@@ -20,9 +20,13 @@ public class StudentAccess implements HandlerInterceptor {
         if (obj == null) {
             response.sendRedirect("/login");
             return false;
-        } else if ((int) obj != 0) {
-            response.sendRedirect((String) request.getSession().getAttribute("allowPage"));
-            return false;
+        } else {
+            int identity = (int) obj;
+            if (identity != 0) {
+                logger.info("一个身份代号为 " + identity + " 的人正在访问学生页面，现在他被带走了...");
+                response.sendRedirect((String) request.getSession().getAttribute("allowPage"));
+                return false;
+            }
         }
         return true;
 

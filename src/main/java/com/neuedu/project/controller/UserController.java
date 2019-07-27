@@ -38,45 +38,48 @@ public class UserController {
     @PostMapping(value = "/login")
     public String login(String userId, String password,
                         HttpServletRequest request,
-                        HttpServletResponse response) throws IOException {
+                        HttpServletResponse response) {
         User user = new User();
-        String pageAvailable = "/login";
+
         if (userId == null || "".equals(userId.trim())
                 || password == null || "".equals(password.trim())) {
             response.setStatus(MyHttpStatus.EMPTY.value());
-//            return pageAvailable;
-        } else {
-            // 设置用户名密码供数据库的查询
-            user.setUserId(userId);
-            user.setPassword(password);
-            if (userService.login(user)) {
-                User loggedIn = userService.getUser(userId, password);
-                // 标记为成功登录
-                request.getSession().setAttribute("loggedUser", loggedIn);
-
-                //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
-                //request.getSession().setAttribute("loggedIdentity",0);
-                switch (loggedIn.getIdentity()) {
-                    case 0:
-                        pageAvailable = "/student";
-                        break;
-                    case 1:
-                        pageAvailable = "/teacher";
-                        break;
-                    case 2:
-                        pageAvailable = "/admin";
-                        break;
-                }
-                request.getSession().setAttribute("pageAvailable", pageAvailable);
-                request.getSession().setAttribute("loggedIdentity", loggedIn.getIdentity());
-                response.setStatus(MyHttpStatus.OK.value());
-
-                log.info("Redirect to " + pageAvailable);
-            } else {
-                response.setStatus(MyHttpStatus.FAIL.value());
-            }
+            return null;
         }
-        return "redirect:" + pageAvailable;
+        // 设置用户名密码供数据库的查询
+        user.setUserId(userId);
+        user.setPassword(password);
+
+        if (userService.login(user)) {
+            User loggedIn = userService.getUser(userId, password);
+            // 标记为成功登录
+            request.getSession().setAttribute("loggedUser", loggedIn);
+
+            //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
+            //request.getSession().setAttribute("loggedIdentity",0);
+            String pageAvailable = "/login";
+            switch (loggedIn.getIdentity()) {
+                case 0:
+                    pageAvailable = "/student";
+                    break;
+                case 1:
+                    pageAvailable = "/teacher";
+                    break;
+                case 2:
+                    pageAvailable = "/admin";
+                    break;
+            }
+            request.getSession().setAttribute("allowPage", pageAvailable);
+            request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
+            response.setStatus(MyHttpStatus.OK.value());
+
+            log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
+//            response.sendRedirect(pageAvailable);
+            return "redirect:" + pageAvailable;
+
+        }
+        response.setStatus(MyHttpStatus.FAIL.value());
+        return null;
     }
 
     @PostMapping(value = "/register")

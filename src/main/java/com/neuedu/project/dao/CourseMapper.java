@@ -43,5 +43,12 @@ public interface CourseMapper {
     void addStudentToCourse(@Param("studentId") String studentId,
                              @Param("courseId") int courseId);
 
+    /**
+     * 获取学生选的课程。
+     *
+     * @param studentId 学号
+     * @return 学生所选的课程列表
+     */
+    List<Course> queryStudentSelectedCourse(String studentId);
 
 }

@@ -41,5 +41,13 @@
         </where>
     </select>
 
+    <select id="queryStudentSelectedCourse" resultMap="courseMap">
+        select course_table.*
+        from course course_table,
+             course_selection selection_table
+        where selection_table.student_id = #{studentId}
+          and selection_table.course_id = course_table.course_id
+    </select>
+
 
 </mapper>

@@ -1,4 +1,4 @@
-function getMyCourse() {
+function getSelectedCourse() {
     $.ajax({
         url: "/course/get/my",
         dataType: "json",
@@ -9,4 +9,11 @@ function getMyCourse() {
         }
     })
 }
+
+function getTeachCourse() {
+
+
+
+}
+
 

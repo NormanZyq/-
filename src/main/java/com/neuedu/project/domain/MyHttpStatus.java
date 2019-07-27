@@ -3,17 +3,18 @@ package com.neuedu.project.domain;
 public enum MyHttpStatus {
 
     /**
-     * 一切成功都是这个
+     * 一切成功都是这个.
      */
     OK(200, "OK"),
 
     /**
-     * 登录失败，用户名密码不匹配
+     * 登录失败，用户名密码不匹配.
+     * 其他所有失败
      */
     FAIL(701, "FAIL"),
 
     /**
-     * 用户名或密码为空
+     * 用户名或密码为空.
      */
     EMPTY(702, "EMPTY");
 

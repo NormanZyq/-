@@ -2,6 +2,7 @@ package com.neuedu.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.ChoiceQuestion;
+import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.Question;
 import com.neuedu.project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,11 @@ public class QuestionController {
         int type = question.getQuestionType();
         if (type == 0) {
             questionService.addChoiceQuestion(question);
+            response.setStatus(MyHttpStatus.OK.value());
             return "success";
         } else {
             questionService.addSubjectiveQuestion(question);
+            response.setStatus(MyHttpStatus.FAIL.value());
             return "failed";
         }
     }

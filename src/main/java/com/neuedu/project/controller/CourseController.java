@@ -33,7 +33,9 @@ public class CourseController {
 
     @PostMapping(value = "/selectCourse")
     @ResponseBody
-    public void studentSelectCourse(int courseId, HttpSession session, HttpServletResponse response) {
+    public void studentSelectCourse(int courseId,
+                                    HttpSession session,
+                                    HttpServletResponse response) {
         Object obj = session.getAttribute("loggedUser");
         if (obj != null) {
             User user = (User) obj;
@@ -57,11 +59,24 @@ public class CourseController {
         Object obj = session.getAttribute("loggedUser");
         if (obj == null) {
             return null;
-        }
-        User user = (User) obj;
-        String id = user.getUserId();
+        } else {
+            User user = (User) obj;
 
-        return courseService.getStudentCourse(id);
+            int identity = (int) session.getAttribute("loggedIdentity");
+
+            if (identity == 0) {
+                // 获得学生所选课程
+
+            } else {
+                // 获得教师所教课程
+
+            }
+
+            String id = user.getUserId();
+
+            return courseService.getStudentCourse(id);
+        }
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.neuedu.project.controller;
 
 import com.neuedu.project.domain.Test;
+import com.neuedu.project.service.ArrangeService;
 import com.neuedu.project.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+    private ArrangeService arrangeService;
 
     @PostMapping(value = "/autoCreate/{id}")
     @ResponseBody
@@ -32,8 +34,16 @@ public class TestController {
                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(dt);
         testService.autoCreateTest(id,cqCount,sqCount,currentTime,duration);
-        return "success for adding test!!!!!!!";
+        return "ok";
 
     }
 
+    @PostMapping(value = "/arrange")
+    @ResponseBody
+    public String arrangeTest(int testId, String startTime, int duration) {
+
+        //Test for Temporary
+        arrangeService.arrangeTest(testId,startTime,duration);
+        return "ok";
+    }
 }

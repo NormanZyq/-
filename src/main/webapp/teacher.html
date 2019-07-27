@@ -24,14 +24,14 @@
 				}
 			}
 		</script>
-		
+
 		<script type="text/javascript">
 			function changepsw() {
-				$("#psw").prop("hidden",true);
-				$("#pswchange").prop("hidden",false);
+				$("#psw").prop("hidden", true);
+				$("#pswchange").prop("hidden", false);
 			}
 		</script>
-		
+
 	</head>
 	<body class="text-center">
 		<div class="container">
@@ -62,16 +62,19 @@
 					<a class="nav-link" data-toggle="pill" href="#2">题库管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#3">试卷管理</a>
+					<a class="nav-link" data-toggle="pill" href="#3">课程管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#4">试卷批阅</a>
+					<a class="nav-link" data-toggle="pill" href="#4">试卷管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#5">成绩管理</a>
+					<a class="nav-link" data-toggle="pill" href="#5">试卷批阅</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6">成绩管理</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="pill" href="#7">教学评价</a>
 				</li>
 			</ul>
 
@@ -80,9 +83,9 @@
 				<div id="1" class="container tab-pane active"><br>
 					<br /><br /><br /><br />
 					<h1 class="display-4" align="center">个人信息</h1>
-					
+
 					<br /><br /><br /><br />
-					
+
 					<table class="table">
 						<thead>
 							<tr>
@@ -108,29 +111,28 @@
 								<td id="pswchange" hidden="">
 									<form class="form-inline ">
 										<div class="form-group mx-auto">
-									
+
 											<input type="text" class="form-control" placeholder="新密码">
 											<button type="submit" class="btn btn-outline-success">确认</button>
 										</div>
-										
+
 									</form>
 								</td>
 								<td>
 									<div id="pasedi" style="display: none;" class="pa">
-										<button type="button" class="btn btn-outline-info"
-										onclick="changepsw()">修改</button>
+										<button type="button" class="btn btn-outline-info" onclick="changepsw()">修改</button>
 									</div>
 								</td>
 							</tr>
-					
+
 						</tbody>
 					</table>
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-8">
-					
+
 							<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
-					
+
 						</div>
 					</div>
 				</div>
@@ -145,35 +147,6 @@
 							<a class="dropdown-item" href="#">class 1</a>
 							<a class="dropdown-item" href="#">class 2</a>
 							<a class="dropdown-item" href="#">class 3</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal">添加新课程</a>
-						</div>
-					</div>
-
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-
-								<!-- 模态框主体 -->
-								<div class="modal-body">
-
-									<div class="card-body">
-										<br /><br />
-										<h2 class="card-title">添加课程</h2>
-										<br /><br />
-										<input type="text" id="inputid" placeholder="课程名字(*/ω＼*)"  class="form-control" required autofocus>
-										<br />
-										
-										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
-										&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
-
-									</div>
-								</div>
-								<!-- 模态框底部 -->
-								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
-								</div>
-							</div>
 						</div>
 					</div>
 
@@ -186,18 +159,20 @@
 								<td>SOME</td>
 								<td>
 									<div id="namedi" style="display: ">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
+										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改
+										</button>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>题目2</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi2" style="display: ">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
-									</div>
-								</td>
+							<td>题目2</td>
+							<td>SOME</td>
+							<td>
+								<div id="namedi2" style="display: ">
+									<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改
+									</button>
+								</div>
+							</td>
 							</tr>
 							<tr>
 								<td>题目3</td>
@@ -231,6 +206,78 @@
 				</div>
 
 				<div id="3" class="container tab-pane "><br>
+					<br /><br />
+					<div class="dropdown float-right">
+						<br /><br /><br />
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+							我的课程
+						</button>
+
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">class 1</a>
+							<a class="dropdown-item" href="#">class 2</a>
+							<a class="dropdown-item" href="#">class 3</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal">添加新课程</a>
+						</div>
+					</div>
+					<br /><br /><br /><br />
+
+					<div class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+
+									<div class="card-body">
+										<br /><br />
+										<h2 class="card-title">添加课程</h2>
+										<br /><br />
+										<input type="text" id="inputid" placeholder="课程名字(*/ω＼*)" class="form-control" required autofocus>
+										<br />
+
+										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+								</div>
+								<!-- 模态框底部 -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br /><br />
+					<br /><br />
+					<table class="table ">
+						<thead>
+							<tr>
+								<th>学生ID</th>
+								<th>学生姓名</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+							<tr>
+								<td>SOME</td>
+								<td>SOME</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+
+				<div id="4" class="container tab-pane "><br>
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-4 offset-md-2">
@@ -286,23 +333,8 @@
 
 					</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				</div>
-				<div id="4" class="container tab-pane "><br>
+				<div id="5" class="container tab-pane "><br>
 					<br /><br /><br /><br />
 
 					<div id="accordion">
@@ -371,7 +403,7 @@
 
 
 				</div>
-				<div id="5" class="container tab-pane "><br>
+				<div id="6" class="container tab-pane "><br>
 					<br /><br /><br />
 
 					<table class="table  table-striped">
@@ -410,7 +442,7 @@
 
 				</div>
 
-				<div id="6" class="container tab-pane "><br>
+				<div id="7" class="container tab-pane "><br>
 					<br /><br />
 					<div class="dropdown col-md-1 offset-md-9">
 						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
@@ -457,11 +489,9 @@
 
 				</div>
 
+
 			</div>
 
-
-
 		</div>
-
 	</body>
 </html>

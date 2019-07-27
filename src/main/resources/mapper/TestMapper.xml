@@ -39,4 +39,13 @@
         values (#{courseId}, #{choiceQuestionIds}, #{subjectiveQuestionIds}, #{releaseDate}, #{duration});
     </insert>
 
+    <select id="queryTest" parameterType="int" resultType="Test" resultMap="testMap">
+        select  *
+        from tests
+        where test_id = #{tId}
+    </select>
+
+
+
+
 </mapper>

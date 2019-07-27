@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.ArrangementMapper">
+
+    <resultMap id="arrangementMap" type="Arrangement">
+        <id column="arrangement_id" property="arrangementId"/>
+        <result column="test_id" property="testId"/>
+        <result column="start_time" property="startTime"/>
+        <result column="duration" property="duration"/>
+    </resultMap>
+
+    <insert id="addArrangement" parameterType="Arrangement">
+        insert into arrangement (test_id, start_time, duration)
+        values (#{testId}, #{startTime}, #{duration});
+    </insert>
+
+    <update id="updateArrangement" parameterType="Arrangement">
+        UPDATE arrangement
+        <set>
+            <if test="test_id!=null and test_id!=0">
+                test_id = #{testId}
+            </if>
+            <if test="start_time!=null and start_time!=''">
+                start_time = #{startTime}
+            </if>
+            <if test="duration!=null and duration!=0">
+                duration = #{duration}
+            </if>
+        </set>
+        WHERE arrangement_id = #{arrangementId};
+    </update>
+
+    <delete id="deleteArrangement" parameterType="int">
+        DELETE
+        FROM arrangement
+        WHERE arrangement_id = #{arrangeId}
+    </delete>
+
+</mapper>

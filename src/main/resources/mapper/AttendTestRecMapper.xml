@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.AttendTestRecMapper">
+
+    <resultMap id="attendTestRecMap" type="AttendTestRec">
+        <id column="attend_record_id" property="attendRecordId"/>
+        <result column="student_id" property="studentId"/>
+        <result column="test_id" property="testId"/>
+    </resultMap>
+
+    <insert id="addAttendTestRec" parameterType="AttendTestRec">
+        insert into test_attend_records (student_id,test_id)
+        values (#{studentId},#{testId});
+    </insert>
+
+    <delete id="deleteAttendTestRec" parameterType="int">
+        DELETE
+        FROM test_attend_records
+        WHERE attend_record_id= #{atrId}
+    </delete>
+
+</mapper>

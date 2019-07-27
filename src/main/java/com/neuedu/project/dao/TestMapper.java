@@ -33,5 +33,13 @@ public interface TestMapper {
      */
     List<Test> getStudentTests(String studentId);
 
+    /**
+     * 基本查询功能，有testId获取整个test信息
+     *
+     * @param tId testId
+     * @return test_id为testId的test表
+     */
+    Test queryTest(int tId);
+
 
 }

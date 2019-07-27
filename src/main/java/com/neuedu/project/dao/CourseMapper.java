@@ -1,6 +1,7 @@
 package com.neuedu.project.dao;
 
 import com.neuedu.project.domain.Course;
+import com.neuedu.project.domain.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -50,5 +51,13 @@ public interface CourseMapper {
      * @return 学生所选的课程列表
      */
     List<Course> queryStudentSelectedCourse(String studentId);
+    /**
+     * 获取选择这一课的学生
+     *
+     * @param courseId 课程ID
+     * @return 选择课程的学生集合
+     */
+    List<String> getStudentIdFromCourse(int courseId);
+
 
 }

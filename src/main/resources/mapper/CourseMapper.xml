@@ -41,6 +41,11 @@
         </where>
     </select>
 
+    <select id="getStudentIdFromCourse" resultType="String">
+        select student_id from course_selection
+        where course_id = #{courseId}
+    </select>
+
     <select id="queryStudentSelectedCourse" resultMap="courseMap">
         select course_table.*
         from course course_table,

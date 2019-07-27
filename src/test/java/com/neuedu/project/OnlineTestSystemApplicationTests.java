@@ -30,6 +30,9 @@ public class OnlineTestSystemApplicationTests {
     @Autowired
     private TestService testService;
 
+    @Autowired
+    private ArrangeService arrangeService;
+
     @Test
     public void contextLoads() {
         assert true;
@@ -95,5 +98,10 @@ public class OnlineTestSystemApplicationTests {
                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
        String currentTime = sdf.format(dt);
        testService.autoCreateTest(1,7,4,currentTime,90);
+   }
+
+   @Test
+    public void testArrange(){
+       arrangeService.arrangeTest(1,"2019-02-09 22:22:22",100);
    }
 }

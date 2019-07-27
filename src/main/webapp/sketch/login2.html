@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="mt-5">
                                 <!--<span class="mt-5"><i class="fa fa-paperclip"></i></span>-->
-                                <h3 class="card-title text-center">登录</h3>
+                                <h1 class="card-title text-center font-weight-bold">登录</h1>
                             </div>
                             <!--<form action="">-->
                                 <div class="mt-5">
@@ -63,19 +63,20 @@
 
                     <script>
                         function login() {
-                            let id = $('#userId').val();
                             $.ajax({
                                 url: "/user/login",
-                                dataType: "text",
+                                // dataType: "text",
                                 method: "POST",
                                 data: {
                                     userId: $('#userId').val(),
                                     password: $('#password').val()
                                 },
+                                success: function () {
+
+                                },
                                 statusCode: {
                                     200: function () {
-                                        alert("登录成功");
-                                        userId = id;
+                                        window.location.href = "/mypage";
                                     },
                                     404: function () {
                                         alert("无法连接到服务器");

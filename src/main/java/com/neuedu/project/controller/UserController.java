@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import static java.lang.String.valueOf;
 
@@ -33,12 +34,10 @@ public class UserController {
     @GetMapping(value = "/get/login")
     @ResponseBody
     public User getLoginUser(HttpServletRequest request) {
-        // todo 需要拦截器，判断是否已登录
         return (User) request.getSession().getAttribute("loggedUser");
     }
 
     @PostMapping(value = "/login")
-    @ResponseBody
     public String login(String userId, String password,
                         HttpServletRequest request,
                         HttpServletResponse response) {
@@ -47,7 +46,7 @@ public class UserController {
         if (userId == null || "".equals(userId.trim())
                 || password == null || "".equals(password.trim())) {
             response.setStatus(MyHttpStatus.EMPTY.value());
-            return "用户名和密码不能为空";
+            return null;
         }
         // 设置用户名密码供数据库的查询
         user.setUserId(userId);
@@ -60,27 +59,29 @@ public class UserController {
 
             //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
             //request.getSession().setAttribute("loggedIdentity",0);
-            String allowPage = "/login";
+            String pageAvailable = "/login";
             switch (loggedIn.getIdentity()) {
                 case 0:
-                    allowPage = "/student";
+                    pageAvailable = "/student";
                     break;
                 case 1:
-                    allowPage = "/teacher";
+                    pageAvailable = "/teacher";
                     break;
                 case 2:
-                    allowPage = "/admin";
+                    pageAvailable = "/admin";
                     break;
             }
-            request.getSession().setAttribute("allowPage", allowPage);
+            request.getSession().setAttribute("allowPage", pageAvailable);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());
-            // 设置密码并返回前端
-            loggedIn.setPassword(password);
-            return JSON.toJSONString(loggedIn);
+
+            log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
+//            response.sendRedirect(pageAvailable);
+            return "redirect:" + pageAvailable;
+
         }
         response.setStatus(MyHttpStatus.FAIL.value());
-        return "用户名和密码不匹配";
+        return null;
     }
 
     @PostMapping(value = "/register")

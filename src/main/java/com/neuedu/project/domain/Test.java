@@ -5,6 +5,8 @@ package com.neuedu.project.domain;
  */
 public class Test {
 
+    private int testId;
+
     private int courseId;
 
     private int id;
@@ -71,6 +73,15 @@ public class Test {
 
     public int getDuration() {
         return duration;
+    }
+
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
     }
 
     public void setDuration(int duration) {

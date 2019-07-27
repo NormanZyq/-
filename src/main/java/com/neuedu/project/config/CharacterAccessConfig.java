@@ -1,5 +1,6 @@
 package com.neuedu.project.config;
 
+import com.neuedu.project.interceptor.AdminAccess;
 import com.neuedu.project.interceptor.StudentAccess;
 import com.neuedu.project.interceptor.TeacherAccess;
 import org.apache.log4j.Logger;
@@ -23,13 +24,14 @@ public class CharacterAccessConfig implements WebMvcConfigurer {
 
     private final String[] studentCanAccess = {"/course/selectCourse", "/student", "/student.html"};
 
-    private final String[] exclude = {"/index", "/login", "/login.html"};
+    private final String[] adminCanAccess = {"/admin", "/admin.html"};
 
-    private final String[] adminCanAccess = {"/"};
+    private final String[] exclude = {"/index", "/index.html", "/login", "/login.html"};
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TeacherAccess()).addPathPatterns(teacherCanAccess).excludePathPatterns(exclude);
         registry.addInterceptor(new StudentAccess()).addPathPatterns(studentCanAccess).excludePathPatterns(exclude);
+        registry.addInterceptor(new AdminAccess()).addPathPatterns(adminCanAccess).excludePathPatterns(exclude);
     }
 }

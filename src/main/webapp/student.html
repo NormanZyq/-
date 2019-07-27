@@ -101,14 +101,14 @@
 						<thead>
 							<tr>
 								<th>学号</th>
-								<th>SOME</th>
+								<th id="t1"></th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>姓名</td>
-								<td>SOME</td>
+								<td id="t2"></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -118,7 +118,7 @@
 							</tr>
 							<tr>
 								<td>用户密码</td>
-								<td id="psw">SOME</td>
+								<td id="psw"></td>
 								<td id="pswchange" hidden="">
 									<form class="form-inline ">
 										<div class="form-group mx-auto">
@@ -148,7 +148,29 @@
 						</div>
 					</div>
 				</div>
-
+<script>
+	 $(function(){
+    $.ajax({
+        url:'data.json',
+        type:'get',
+        dataType:'json',
+        success:function(data){
+            //方法中传入的参数data为后台获取的数据
+            //for(i in data.data) //data.data指的是数组，数组里是8个对象，i为数组的索引
+                var tr1;
+				tr1=data.data[0].name
+                $("#t1").append(tr1)
+				var tr2;
+				tr2=data.data[0].startTime
+				$("#t2").append(tr2)
+				var tr3;
+				tr3=data.data[0].is_true
+				$("#psw").append(tr3)
+            
+        }
+    })
+})
+ </script>
 
 				<div id="2" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />

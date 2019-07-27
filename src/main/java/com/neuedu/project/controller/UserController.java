@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static java.lang.String.valueOf;
+
 @Controller
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
 
-    private Logger log = Logger.getLogger(UserController.class);
+    private Logger log = Logger.getLogger(valueOf(UserController.class));
 
     //    @Autowired
     private UserService userService;

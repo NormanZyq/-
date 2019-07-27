@@ -1,11 +1,15 @@
 package com.neuedu.project.controller;
 
 import com.neuedu.project.domain.Course;
+import com.neuedu.project.domain.MyHttpStatus;
+import com.neuedu.project.domain.User;
 import com.neuedu.project.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,8 +32,18 @@ public class CourseController {
     }
 
     @PostMapping(value = "/selectCourse")
-    public void studentSelectCourse(String studentId, int courseId) {
-        courseService.addStudentToCourse(studentId, courseId);
+    @ResponseBody
+    public void studentSelectCourse(int courseId, HttpSession session, HttpServletResponse response) {
+        Object obj = session.getAttribute("loggedUser");
+        if (obj != null) {
+            User user = (User) obj;
+            String id = user.getUserId();
+            courseService.addStudentToCourse(id, courseId);
+            response.setStatus(MyHttpStatus.OK.value());
+        } else {
+            response.setStatus(MyHttpStatus.FAIL.value());
+        }
+
     }
 
     @GetMapping(value = "/get/{name}")
@@ -37,6 +51,18 @@ public class CourseController {
         return courseService.getCourseByName(name);
     }
 
+    @GetMapping(value = "/get/my")
+    @ResponseBody
+    public List<Course> getAll(HttpSession session) {
+        Object obj = session.getAttribute("loggedUser");
+        if (obj == null) {
+            return null;
+        }
+        User user = (User) obj;
+        String id = user.getUserId();
+
+        return courseService.getStudentCourse(id);
+    }
 
 
 }

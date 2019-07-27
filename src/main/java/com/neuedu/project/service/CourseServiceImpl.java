@@ -2,7 +2,6 @@ package com.neuedu.project.service;
 
 
 import com.neuedu.project.dao.CourseMapper;
-import com.neuedu.project.dao.UserMapper;
 import com.neuedu.project.domain.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +45,10 @@ public class CourseServiceImpl implements CourseService {
         Course course = new Course();
         course.setCourseName(courseName);
         return courseMapper.queryCourse(course);
+    }
+
+    @Override
+    public List<Course> getStudentCourse(String studentId) {
+        return courseMapper.queryStudentSelectedCourse(studentId);
     }
 }

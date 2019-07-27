@@ -40,4 +40,12 @@ public interface CourseService {
      */
     List<Course> getCourseByName(String courseName);
 
+    /**
+     * 获取学生选的课程。
+     *
+     * @param studentId 学号
+     * @return 学生所选的课程列表
+     */
+    List<Course> getStudentCourse(String studentId);
+
 }

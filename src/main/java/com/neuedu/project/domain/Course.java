@@ -6,6 +6,8 @@ public class Course {
 
     private String courseName;
 
+    private String teacher;
+
     public Course() {
     }
 
@@ -21,15 +23,15 @@ public class Course {
         return courseName;
     }
 
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "courseId=" + courseId +
                 ", courseName='" + courseName + '\'' +
                 '}';
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
     }
 }

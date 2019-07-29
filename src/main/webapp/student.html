@@ -15,6 +15,8 @@
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+        <script src="js/utils.js"></script>
+        <script src="js/fetchData.js"></script>
 
 		<script type="text/javascript">
 			function display() {
@@ -35,7 +37,8 @@
 		</script>
 
 
-	</head>
+
+    </head>
 
 
 	<body class="text-center">
@@ -79,7 +82,7 @@
 					<a class="nav-link" data-toggle="pill" href="#3">在线答题</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#4">考试管理</a>
+					<a class="nav-link" data-toggle="pill" href="#4" onclick="getTests()">考试管理</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="pill" href="#5">成绩管理</a>
@@ -178,10 +181,10 @@
 				<div id="2" class="container tab-pane"><br>
 					<br /><br /><br /><br />
 					<div class="float-right">
-						<form class="form-inline ">
+						<form class="form-inline">
 					
-							<input class="form-control" type="text" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-info" type="button">Search</button>
+							<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search-content">
+							<button class="btn btn-outline-info" type="button" onclick="searchCourses()">Search</button>
 					
 						</form>
 					</div>
@@ -195,34 +198,8 @@
 								<th>加入课程</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>课程A</td>
-								<td>SOME</td>
-								<td>
-									<div >
-										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>课程B</td>
-								<td>SOME</td>
-								<td>
-									<div >
-										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>课程C</td>
-								<td>SOME</td>
-								<td>
-									<div >
-										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
-									</div>
-								</td>
-							</tr>
+						<tbody id="course-table-body">
+
 						</tbody>
 					</table>
 					
@@ -303,7 +280,7 @@
 
 				<div id="4" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
-					<div class="row">
+					<div class="row" id="test-list">
 						<div class="col">
 							<div class="card m-auto shadow shadow-sm" style="width:300px">
 

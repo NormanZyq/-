@@ -44,6 +44,7 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getCourseByName(String courseName) {
         Course course = new Course();
         course.setCourseName(courseName);
+
         return courseMapper.queryCourse(course);
     }
 

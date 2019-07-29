@@ -9,6 +9,7 @@
     <resultMap id="courseMap" type="Course">
         <id column="course_id" property="courseId"/>
         <result column="course_name" property="courseName"/>
+        <result column="user.name" property="teacher"/>
     </resultMap>
 
     <insert id="addCourse" parameterType="Course">
@@ -53,6 +54,5 @@
         where selection_table.student_id = #{studentId}
           and selection_table.course_id = course_table.course_id
     </select>
-
 
 </mapper>

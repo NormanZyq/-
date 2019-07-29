@@ -4,6 +4,7 @@ import com.neuedu.project.domain.Course;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.service.CourseService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
+
+    private Logger log = Logger.getLogger(CourseController.class);
 
     /**
      * course service for course controller.
@@ -88,8 +91,12 @@ public class CourseController {
      * @return  a list that courses' names are all name @param name
      */
     @GetMapping(value = "/get/{name}")
+    @ResponseBody
     public List<Course> getCoursesByName(@PathVariable String name) {
-        return courseService.getCourseByName(name);
+        log.info(name);
+        List<Course> courseByName = courseService.getCourseByName(name);
+        System.out.println(courseByName);
+        return courseByName;
     }
 
     /**

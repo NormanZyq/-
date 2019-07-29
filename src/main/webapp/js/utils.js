@@ -47,6 +47,7 @@ function makeActive(id) {
 
 
 function selectCourse(id) {
+    alert(id);
     $.ajax({
         url: "/course/selectCourse",
         method: "POST",
@@ -56,7 +57,9 @@ function selectCourse(id) {
         statusCode: {
             200: function () {
                 alert("选课成功");
-                // todo 更改按钮为已选
+                $('#btn-select-' + id).addClass('disabled').html('已选').onclick = function () {
+                    alert('已选此课')
+                };
             },
             404: function () {
                 alert("无法连接到服务器");
@@ -131,3 +134,21 @@ function appendTestCard(test) {
     $('#test-list').append(card);
 
 }
+
+function appendSearchResult(course) {
+    let content = `<tr>
+                        <td id="search-result-id" style="display: none;">${course.courseId}</td>
+                        <td>${course.courseName}</td>
+                        <td>${course.teacher}</td>
+                        <td>
+                            <div >
+                                <button type="button" id="btn-select-${course.courseId}" class="btn btn-outline-success" onclick="selectCourse(${course.courseId})">加入</button>
+                            </div>
+                        </td>
+                    </tr>`;
+
+    $('#course-table-body').append(content);
+
+
+}
+

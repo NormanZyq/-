@@ -72,8 +72,7 @@ public class UserController {
 
         if (userService.login(user)) {
             User loggedIn = userService.getUser(userId, password);
-            // 标记为成功登录
-            request.getSession().setAttribute("loggedUser", loggedIn);
+            log.info(loggedIn);
 
             //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
             //request.getSession().setAttribute("loggedIdentity",0);
@@ -89,6 +88,8 @@ public class UserController {
                     pageAvailable = "/admin";
                     break;
             }
+            // 标记为成功登录
+            request.getSession().setAttribute("loggedUser", loggedIn);
             request.getSession().setAttribute("allowPage", pageAvailable);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());

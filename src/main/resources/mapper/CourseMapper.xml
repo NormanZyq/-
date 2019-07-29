@@ -39,14 +39,13 @@
         from course c_table, users u_table, course_teaching ct_table
         <where>
             <if test="courseName != null and courseName != ''">
-                and course_name = #{courseName}
+                and c_table.course_name = #{courseName}
             </if>
             <if test="courseId != 0">
-                and course_id = #{courseId}
+                and c_table.course_id = #{courseId}
                 and ct_table.course_id = c_table.course_id
-                and u_table.identity = 1
-                group by ct_table.course_id;
             </if>
+            and ct_table.teacher_id = u_table.user_id
         </where>
     </select>
 
@@ -57,10 +56,14 @@
     </select>
 
     <select id="queryStudentSelectedCourse" resultMap="courseMap">
-        select course_table.*
+        select course_table.*, u_table.name
         from course course_table,
-             course_selection selection_table
+             course_selection selection_table,
+             users u_table,
+             course_teaching ct_table
         where selection_table.student_id = #{studentId}
+          and ct_table.course_id = selection_table.course_id
+          and u_table.user_id = ct_table.teacher_id
           and selection_table.course_id = course_table.course_id
     </select>
 

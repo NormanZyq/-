@@ -125,11 +125,13 @@ public class CourseController {
 
             if (identity == 0) {
                 // 获得学生所选课程
+                log.info("学生请求获取所选课程");
                 return courseService.getStudentCourse(id);
             } else {
                 // 获得教师所教课程
                 assert identity == 1;
                 // todo
+                log.info("教师请求获取所教课程");
                 return null;
             }
         }

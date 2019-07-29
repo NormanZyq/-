@@ -193,7 +193,7 @@
 								<a class="nav-link active" data-toggle="pill" href="#11">待选课程</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="pill" href="#22">已选课程</a>
+								<a class="nav-link" data-toggle="pill" href="#22" onclick="getSelectedCourse()">已选课程</a>
 							</li>
 						</ul>
 
@@ -231,7 +231,17 @@
 							</div>
 							<div id="22" class="container tab-pane "><br>
 								<br /><br /><br /><br />
+								<table class="table  table-striped">
+									<thead>
+									<tr>
+										<th>课程名字</th>
+										<th>授课教师</th>
+									</tr>
+									</thead>
+									<tbody id="selected-table-body">
 
+									</tbody>
+								</table>
 
 							</div>
 						</div>

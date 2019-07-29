@@ -3,6 +3,7 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.dao.CourseMapper;
 import com.neuedu.project.domain.Course;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Service
 public class CourseServiceImpl implements CourseService {
+
+    private final Logger log = Logger.getLogger(CourseServiceImpl.class);
 
     private final CourseMapper courseMapper;
 
@@ -50,6 +53,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getStudentCourse(String studentId) {
-        return courseMapper.queryStudentSelectedCourse(studentId);
+        List<Course> courses = courseMapper.queryStudentSelectedCourse(studentId);
+        log.info(courses);
+        return courses;
     }
 }

@@ -1,13 +1,16 @@
 // import * as $ from "/js/jquery-3.3.1";
 
 function getSelectedCourse() {
+    $('#selected-table-body').html('');
     $.ajax({
         url: "/course/get/my",
         dataType: "json",
 
         success: function (result) {
             // 解析选课内容
-            console.log(result);
+            for (let course of result) {
+                appendSelectedResult(course);
+            }
         }
     })
 }
@@ -18,7 +21,6 @@ function getUserInfo() {
         dataType: "json",
         async: false,
         success: function (result) {
-            console.log(result);
             $('#t1').html(result.userId);
             $('#t2').html(result.name);
             $('#psw').html('---');

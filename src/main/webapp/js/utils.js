@@ -136,25 +136,26 @@ function appendTestCard(test) {
 }
 
 function appendSearchResult(course) {
-    console.log(course);
-    var teacher = '';
+    var teacherString = '';
 
-    let length = course.teachers.length;
+    var teachers = new Set(course.teachers);
 
-    if (length === 1) {
-        teacher += course.teachers[0].name;
-    } else if (length >= 2) {
-        teacher += course.teachers[0].name;
-        teacher += '、' + course.teachers[1].name;
-        if (length > 2) {
-            teacher += "等" + length + "人";
+    let size = teachers.size;
+
+    var count = 0;
+    for (let t of teachers) {
+        count ++;
+        teacherString += t.name + " ";
+        if (size >= 2) {
+            teacherString += "等多人";
+            break;
         }
     }
 
     let content = `<tr>
                         <td id="search-result-id" style="display: none;">${course.courseId}</td>
                         <td>${course.courseName}</td>
-                        <td>${teacher}</td>
+                        <td>${teacherString}</td>
                         <td>
                             <div >
                                 <button type="button" id="btn-select-${course.courseId}" class="btn btn-outline-success" onclick="selectCourse(${course.courseId})">加入</button>
@@ -163,7 +164,31 @@ function appendSearchResult(course) {
                     </tr>`;
 
     $('#course-table-body').append(content);
+}
 
+function appendSelectedResult(course) {
+    var teacherString = '';
 
+    var teachers = new Set(course.teachers);
+
+    let size = teachers.size;
+
+    var count = 0;
+    for (let t of teachers) {
+        count ++;
+        teacherString += t.name + " ";
+        if (size >= 2) {
+            teacherString += "等多人";
+            break;
+        }
+    }
+
+    let content = `<tr>
+                        <td id="search-result-id" style="display: none;">${course.courseId}</td>
+                        <td>${course.courseName}</td>
+                        <td>${teacherString}</td>
+                    </tr>`;
+
+    $('#selected-table-body').append(content);
 }
 

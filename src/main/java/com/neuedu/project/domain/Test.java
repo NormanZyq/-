@@ -5,11 +5,9 @@ package com.neuedu.project.domain;
  */
 public class Test {
 
-    private int testId;
-
     private int courseId;
 
-    private int id;
+    private int testId;
 
     private String choiceQuestionIds;
 
@@ -22,9 +20,9 @@ public class Test {
     public Test() {
     }
 
-    public Test(int courseId, int id, String choiceQuestionIds, String subjectiveQuestionIds, String releaseDate, int duration) {
+    public Test(int courseId, int testId, String choiceQuestionIds, String subjectiveQuestionIds, String releaseDate, int duration) {
         this.courseId = courseId;
-        this.id = id;
+        this.testId = testId;
         this.choiceQuestionIds = choiceQuestionIds;
         this.subjectiveQuestionIds = subjectiveQuestionIds;
         this.releaseDate = releaseDate;
@@ -39,12 +37,12 @@ public class Test {
         this.courseId = courseId;
     }
 
-    public int getId() {
-        return id;
+    public int getTestId() {
+        return testId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTestId(int testId) {
+        this.testId = testId;
     }
 
     public String getChoiceQuestionIds() {
@@ -74,16 +72,7 @@ public class Test {
     public int getDuration() {
         return duration;
     }
-
-
-    public int getTestId() {
-        return testId;
-    }
-
-    public void setTestId(int testId) {
-        this.testId = testId;
-    }
-
+    
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -92,7 +81,7 @@ public class Test {
     public String toString() {
         return "Test{" +
                 "courseId=" + courseId +
-                ", id=" + id +
+                ", id=" + testId +
                 ", choiceQuestionIds='" + choiceQuestionIds + '\'' +
                 ", subjectiveQuestionIds='" + subjectiveQuestionIds + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +

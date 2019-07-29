@@ -48,6 +48,10 @@
         where course_id = #{courseId} and question_type = #{questionType}
     </select>
 
-
+    <select id="getQuestionById" resultMap="questionMap">
+        select *
+        from questions
+        where question_id = #{id};
+    </select>
 
 </mapper>

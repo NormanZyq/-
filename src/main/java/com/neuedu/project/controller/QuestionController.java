@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.ChoiceQuestion;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.Question;
+import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,8 +89,6 @@ public class QuestionController {
     public String getSubjectiveQuestionsByCourseId(@PathVariable int id) {
         return JSON.toJSONString(questionService.getSubjectiveQuestionByCourseId(id));
     }
-
-
 
 }
 

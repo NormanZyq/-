@@ -65,9 +65,36 @@ function getTests() {
         dataType: "json",
 
         success: function (result) {
-            // 解析选课内容
-            console.log(result);
+
+        },
+        error: function (result) {
+            alert(result)
         }
     })
 }
 
+function getTest(testId) {
+    $('#exer').html('');
+    let name = $('#search-content').val();
+    $.ajax({
+        url: "/test/get/xuanze",
+        type: "POST",
+        dataType: "json",
+        data: {
+            testId: testId
+        },
+        success: function (result) {
+            // 解析选择题
+            console.log(result);
+            var index = 1;
+            for (question of result) {
+                appendCQ(question, index);
+                index++;
+            }
+        },
+        error: function (result) {
+            alert(result);
+            console.log(result);
+        }
+    })
+}

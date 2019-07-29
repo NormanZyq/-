@@ -4,12 +4,20 @@ package com.neuedu.project.controller;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PageController {
 
-    @GetMapping(value = "mypage")
+    @GetMapping(value = "/exam/{id}")
+    public String exam(HttpServletRequest request, @PathVariable int id) {
+        return "/exam.html?testId=" + id;
+    }
+
+    @GetMapping(value = "/mypage")
     public String hhh() {
         return "/student";
     }

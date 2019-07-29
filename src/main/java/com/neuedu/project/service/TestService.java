@@ -21,6 +21,8 @@ public interface TestService {
 
     List<Test> getArrangedTestsByCourseId();
 
+    Test getTestById(int id);
+
 //    int Calcualte_OJLD(int i, int j);
 
 }

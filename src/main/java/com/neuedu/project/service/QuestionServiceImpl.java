@@ -53,4 +53,9 @@ public class QuestionServiceImpl implements QuestionService {
         forQuery.setQuestionType(1);
         return questionMapper.getQuestionsByCourseId(forQuery);
     }
+
+    @Override
+    public Question getQuestionById(int id) {
+        return questionMapper.getQuestionById(id);
+    }
 }

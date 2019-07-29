@@ -21,6 +21,8 @@ public interface QuestionMapper {
 
     List<Question> getQuestionsByCourseId(Question forQuery);
 
+    Question getQuestionById(int id);
+
 //    List<Question> getSubjectiveQuestionsByCourseId(int coueseId);
 
 

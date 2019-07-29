@@ -68,6 +68,14 @@ public class ChoiceQuestion extends Question {
         return Collections.unmodifiableSet(this.answers);
     }
 
+    public Map<String, String> getChoices() {
+        return choices;
+    }
+
+    public Set<String> getAnswers() {
+        return answers;
+    }
+
     @Override
     public String toString() {
         return "ChoiceQuestion{" +

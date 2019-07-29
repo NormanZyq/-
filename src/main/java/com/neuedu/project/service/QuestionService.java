@@ -32,4 +32,6 @@ public interface QuestionService {
 
     List<Question> getSubjectiveQuestionByCourseId(int courseId);
 
+    Question getQuestionById(int id);
+
 }

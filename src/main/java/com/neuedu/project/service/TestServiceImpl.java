@@ -60,6 +60,11 @@ public class TestServiceImpl implements TestService {
         return null;
     }
 
+    @Override
+    public Test getTestById(int id) {
+        return testMapper.queryTest(id);
+    }
+
     private String produceIds(int sqCount, List<Question> sq, int num) {
         StringBuilder sIds = new StringBuilder();
         //避免选题数为0的情况,返回null

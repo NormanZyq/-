@@ -15,8 +15,18 @@
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+		<script src="/js/utils.js"></script>
+		<script src="/js/fetchData.js"></script>
 
 		<script type="text/javascript">
+
+			let params = getRequestParam();
+			let testId = params.testId;
+			if (testId === undefined) {
+				window.location.href = "/mypage";
+			}
+			getTest(testId);
+
 			function check() {
 				var bo = false;
 
@@ -153,56 +163,7 @@
 		<br /><br /><br /><br />
 
 		<div class="container" id="exer">
-			<div class="card w-75 mx-auto shadow shadow-sm">
-				<div class="card-header">第一题</div>
-				<div class="card-body">
-					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
-				</div>
-				<div class="card-footer">
-					<label><input type="radio" name="optradio0" id="ex">
-						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
-						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
-						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
-						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				</div>
-			</div>
-			<br />
-			<div class="card w-75 mx-auto shadow shadow-sm">
-				<div class="card-header">第二题</div>
-				<div class="card-body">
-					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
-				</div>
-				<div class="card-footer">
-					<label><input type="radio" name="optradio1" id="ex">
-						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio1" id="ex">
-						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio1" id="ex">
-						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio1" id="ex">
-						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				</div>
-			</div>
-			<br />
-			<div class="card w-75 mx-auto shadow shadow-sm">
-				<div class="card-header">第三题</div>
-				<div class="card-body">
-					题目内容<br /><br />A<br /><br />B<br /><br />C<br /><br />D<br /><br />
-				</div>
-				<div class="card-footer">
-					<label><input type="radio" name="optradio2" id="ex">
-						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio2" id="ex">
-						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio2" id="ex">
-						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio2" id="ex">
-						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				</div>
-			</div>
+
 		</div>
 
 		<br /><br /><br />

@@ -144,7 +144,7 @@ function appendSearchResult(course) {
 
     var count = 0;
     for (let t of teachers) {
-        count ++;
+        count++;
         teacherString += t.name + " ";
         if (size >= 2) {
             teacherString += "等多人";
@@ -175,7 +175,7 @@ function appendSelectedResult(course) {
 
     var count = 0;
     for (let t of teachers) {
-        count ++;
+        count++;
         teacherString += t.name + " ";
         if (size >= 2) {
             teacherString += "等多人";
@@ -190,5 +190,52 @@ function appendSelectedResult(course) {
                     </tr>`;
 
     $('#selected-table-body').append(content);
+}
+
+function appendCQ(question, count) {
+    let choicesCount = question.choices.length;
+
+    let content = `<div class="card w-75 mx-auto shadow shadow-sm">
+				<div class="card-header">第${count}题</div>
+				<div class="card-body">${question.questionContent}`;
+
+    let choicesString = ``;
+    for (var key in question.choices) {
+        choicesString += `<br><br>${key}: ${question.choices[key]}`;
+    }
+    choicesString += `<br><br>`;
+
+    content += choicesString;
+
+    // 题目内容<br /><br />${question.d}<br /><br />B<br /><br />C<br /><br />D<br /><br />
+    let selectField = `</div>
+				<div class="card-footer">
+					<label><input type="radio" name="optradio0" id="ex">
+						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<label><input type="radio" name="optradio0" id="ex">
+						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<label><input type="radio" name="optradio0" id="ex">
+						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<label><input type="radio" name="optradio0" id="ex">
+						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				</div>
+			</div>
+			<br />`;
+    content += selectField;
+    $('#exer').append(content);
+
+}
+
+function getRequestParam() {
+    let params = location.search;
+    let request = {};
+    if (params.indexOf('?') !== -1) {
+        let str = params.substr(1);
+        strs = str.split('&');
+        for (let i = 0; i < strs.length; i++) {
+            request[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
+        }
+        return request;
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.neuedu.project.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.neuedu.project.domain.ChoiceQuestion;
 import com.neuedu.project.domain.Course;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
@@ -135,8 +136,6 @@ public class CourseController {
                 return null;
             }
         }
-
     }
-
 
 }

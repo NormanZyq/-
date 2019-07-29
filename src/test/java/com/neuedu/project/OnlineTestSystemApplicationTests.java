@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -119,5 +120,40 @@ public class OnlineTestSystemApplicationTests {
         System.out.println(courseService.getStudentCourse("abc"));
     }
 
+    @Test
+    public void testExam() {
+        com.neuedu.project.domain.Test test = testService.getTestById(1);
+        String cqIds = test.getChoiceQuestionIds();
+        String sqIds = test.getSubjectiveQuestionIds();
+
+
+        if (cqIds != null && !"".equals(cqIds.trim())) {
+            // 解析选择题
+            List<Question> forChoiceQuestions = new ArrayList<>();
+            for (String idString : cqIds.split("\\s+")) {
+                int id = Integer.parseInt(idString);
+                Question question = questionService.getQuestionById(id);
+                forChoiceQuestions.add(question);
+            }
+            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestions(forChoiceQuestions);
+            // 解析选择题完成
+            System.out.println(choiceQuestions);
+        }
+
+        if (sqIds != null && !"".equals(sqIds.trim())) {
+            // 解析主观题
+            List<Question> subjectiveQuestions = new ArrayList<>();
+            for (String idString : sqIds.split("\\s+")) {
+                int id = Integer.parseInt(idString);
+                subjectiveQuestions.add(questionService.getQuestionById(id));
+            }
+            System.out.println(subjectiveQuestions);
+        }
+
+
+
+
+
+    }
 
 }

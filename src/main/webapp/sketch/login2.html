@@ -30,6 +30,36 @@
         };
     </script>
 
+    <script type="text/javascript">
+        function login2() {
+            var userId = $("#userId").val();
+            var password = $("#password").val();
+            /* alert(userId)
+            alert(password) */
+            $.ajax({
+                url: "http://localhost:8080/user/login",
+                //alert(url)
+                method: "POST",
+                data: {
+                    userId: userId,
+                    password: password
+                },
+                success: function() {
+                    window.location.href="/student";
+                },
+                /* error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    // 状态码
+                    console.log(XMLHttpRequest.status);
+                    // 状态
+                    console.log(XMLHttpRequest.readyState);
+                    // 错误信息
+                    console.log(textStatus);
+                } */
+            });
+            /* alert("1!") */
+        }
+    </script>
+
 	<body class="bg-light">
 
 
@@ -65,18 +95,23 @@
                         function login() {
                             $.ajax({
                                 url: "/user/login",
-                                // dataType: "text",
+                                dataType: "text",
                                 method: "POST",
                                 data: {
                                     userId: $('#userId').val(),
                                     password: $('#password').val()
                                 },
-                                success: function () {
-
-                                },
+                                // success: function (result) {
+                                //     if (result == 'ok') {
+                                //         alert("登录成功");
+                                //         userId = id;
+                                //     } else {
+                                //         alert(result);
+                                //     }
+                                // },
                                 statusCode: {
                                     200: function () {
-                                        window.location.href = "/mypage";
+
                                     },
                                     404: function () {
                                         alert("无法连接到服务器");

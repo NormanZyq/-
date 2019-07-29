@@ -1,557 +1,595 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<!-- 新 Bootstrap4 核心 CSS 文件 -->
-		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<!-- 新 Bootstrap4 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 
-		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 
-		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
-		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+	<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+	<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
 
-		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			function display() {
-				var traget2 = document.getElementById('pasedi');
-				if (traget2.style.display == "none") {
-					traget2.style.display = "";
-				} else {
-					traget2.style.display = "none";
+	<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function display() {
+			var traget2 = document.getElementById('pasedi');
+			if (traget2.style.display == "none") {
+				traget2.style.display = "";
+			} else {
+				traget2.style.display = "none";
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function changepsw() {
+			$("#psw").prop("hidden", true);
+			$("#pswchange").prop("hidden", false);
+
+			var newpwd = $("#changepsw");
+			$.ajax({
+				type:"POST",
+				url:'data.json',
+				data:{"newpwd":newpwd},
+				dataType:"json",
+				success:function(newP){
+					var newcode;
+					newcode=newP
+					$("#psw").append(newcode)
 				}
-			}
-		</script>
-		
-		<script type="text/javascript">
-			function changepsw() {
-				//alert("cd")
-				$("#psw").prop("hidden",true);
-				//alert("cd1")
-				$("#pswchange").prop("hidden",false);
-			}
-		</script>
-		
-	</head>
-	<body class="text-center">
+			});
+		}
+	</script>
+	<script>
+		function update(){
+			$("#pwd").prop("hidden", true);
+			$("#uID").prop("hidden", true);
+			$("#uType").prop("hidden", true);
+			$("#edition").prop("hidden", true);
+			$("#del").prop("hidden", true);
+			$("#changeID").prop("hidden", false);
+			$("#changeType").prop("hidden", false);
+			$("#changepwd").prop("hidden", false);
+			$("#besure").prop("hidden",false);
 
-		<div class="container">
-			<ul class="nav ">
-				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
-				</li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
-				</li>
+			var newID = $("#chID");
+			var newpwd = $("#chpwd");
+			var newType = $("#chType")
+			$.ajax({
+				type:"POST",
+				url:'data.json',
+				data:{"newID":newID,"newpwd":newpwd,"newType":newType},
+				dataType:"json",
+				success:function(data,i){
+					var nID=data.data[i].ID
+					$("#uID").append(nID)
+					var newcode=data.data[i].Password
+					$("#pwd").append(newcode)
+					var nType=data.data[i].Type
+					$("#uType").append(nType)
+				}
+			});
 
-				<form class="form-inline col-md-1 offset-md-11 m-auto">
-					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
-				</form>
+		}
+	</script>
 
-			</ul>
+</head>
+<body class="text-center">
 
-		</div>
+<div class="container">
+	<ul class="nav ">
+		<li class="nav-item">
+			<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+		</li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<li class="nav-item">
+			<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+		</li>
 
-		<br /><br />
-		<div class="container">
-			<!-- Nav pills -->
-			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" data-toggle="pill" href="#1">个人中心</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#2">用户表</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#3">课程信息表</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#4">选课关系表</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#5">教授关系表</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">申诉信息</a>
-				</li>
+		<form class="form-inline col-md-1 offset-md-11 m-auto">
+			<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
+		</form>
 
-			</ul>
+	</ul>
 
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<div id="1" class="container tab-pane active"><br>
-					<br /><br /><br /><br />
-					<h1 class="display-4" align="center">个人信息</h1>
+</div>
 
-					<br /><br /><br /><br />
+<br /><br />
+<div class="container">
+	<!-- Nav pills -->
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="pill" href="#1">个人中心</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="pill" href="#2">用户表</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="pill" href="#3">课程信息表</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="pill" href="#4">选课关系表</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="pill" href="#5">教授关系表</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="pill" href="#6">申诉信息</a>
+		</li>
 
-					<table class="table">
-						<thead>
-							<tr>
-								<th>学号</th>
-								<th id="t1"></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>姓名</td>
-								<td id="t2"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>类型</td>
-								<td>管理员</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>用户密码</td>
-								<td id="psw"></td>
-								<td id="pswchange" hidden="">
-									<form class="form-inline ">
-										<div class="form-group mx-auto">
-									
-											<input type="text" class="form-control" placeholder="新密码">
-											<button type="submit" class="btn btn-outline-success">确认</button>
-										</div>
-										
-									</form>
-								</td>
-								<td>
-									<div id="pasedi" style="display: none;" class="pa">
-										<button type="button" class="btn btn-outline-info"
-										onclick="changepsw()">修改</button>
-									</div>
-								</td>
-							</tr>
+	</ul>
 
-						</tbody>
-					</table>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div id="1" class="container tab-pane active"><br>
+			<br /><br /><br /><br />
+			<h1 class="display-4" align="center">个人信息</h1>
 
+			<br /><br /><br /><br />
 
-					<br /><br />
-					<div class="float-right">
-						<div class="col-md-8">
-							<ul class="nav nav-tabs">
-								<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<script>
-					 $(function(){
-				    $.ajax({
-				        url:'data.json',
-				        type:'get',
-				        dataType:'json',
-				        success:function(data){
-				            //方法中传入的参数data为后台获取的数据
-				            //for(i in data.data) //data.data指的是数组，数组里是8个对象，i为数组的索引
-				                var tr1;
-								tr1=data.data[2].name
-				                $("#t1").append(tr1)
-								var tr2;
-								tr2=data.data[2].startTime
-								$("#t2").append(tr2)
-								var tr3;
-								tr3=data.data[2].is_true
-								$("#psw").append(tr3)
-				            
-				        }
-				    })
-				})
-				 </script>
-				<div id="2" class="container tab-pane fade"><br>
-					<br />
+			<table class="table">
+				<thead>
+				<tr>
+					<th>学号</th>
+					<th id="t1"></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>姓名</td>
+					<td id="t2"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>类型</td>
+					<td>管理员</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>用户密码</td>
+					<td id="psw"></td>
+					<td id="pswchange" hidden="">
+						<form class="form-inline ">
+							<div class="form-group mx-auto">
 
-
-
-
-					<div class="float-right">
-						<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal">注册</button>
-					</div>
-
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-
-								<!-- 模态框主体 -->
-								<div class="modal-body">
-
-									<img class="card-img-top" src="register.png" alt="Card image" style="width:60% ">
-									<div class="card-body">
-										<h2 class="card-title">注册</h2>
-										<br /><br />
-										<form>
-											<table class="table">
-												<thead>
-													<tr>
-														<th><label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;学生类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-														<th><label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;教师类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-
-													</tr>
-												</thead>
-											</table>
-
-										</form>
-										<label for="inputid" class="sr-only">ID</label>
-										<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
-										<br />
-										<label for="inputid" class="sr-only">姓名</label>
-										<input type="text" id="inputid" class="form-control" placeholder="姓名" required autofocus>
-										<br />
-										<label for="inputPassword" class="sr-only">密码</label>
-										<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-										<br />
-										<button id="sbm" type="button" class="btn btn-info  btn-lg" data-dismiss="modal">
-											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
-
-									</div>
-									<div class="card-footer">
-										<p class="text-primary m-auto">成为管理员请主动PY开发方</p>
-									</div>
-								</div>
-								<!-- 模态框底部 -->
-								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
-								</div>
+								<input type="text" class="form-control" id="changepsw" placeholder="新密码">
+								<button type="submit" class="btn btn-outline-success">确认</button>
 							</div>
 
-
-
+						</form>
+					</td>
+					<td>
+						<div id="pasedi" style="display: none;" class="pa">
+							<button type="button" class="btn btn-outline-info"
+									onclick="changepsw()">修改</button>
 						</div>
-					</div>
+					</td>
+				</tr>
 
-					<br /><br />
-					<br /><br />
-					<table class="table  table-striped">
-						<thead>
-							<tr>
-								<th>用户ID</th>
-								<th>密码</th>
-								<th>类型</th>
-								<th>更改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				</tbody>
+			</table>
 
 
-				</div>
-				<div id="3" class="container tab-pane fade"><br>
-					<br />
-					<div class="float-right">
-						<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal2">添加</button>
-					</div>
-
-					<div class="modal fade w-75 mx-auto" id="myModal2">
-						<div class="modal-dialog">
-							<div class="modal-content">
-
-								<!-- 模态框主体 -->
-								<div class="modal-body">
-
-									<div class="card-body ">
-										<h2 class="card-title">添加课程</h2>
-										<br /><br /><br /><br />
-										<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
-										<br />
-										<input type="text" id="inputid" placeholder="课程名字" class="form-control" required autofocus>
-										<br />
-										<br /><br />
-										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
-											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
-										<br /><br />
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<br /><br />
-					<br /><br />
-					<table class="table  table-striped">
-						<thead>
-							<tr>
-								<th>课程ID</th>
-								<th>课程名字</th>
-								<th>更改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<div class="btn-group btn-group ">
-										<button type="button" class="btn  btn-outline-danger">编辑</button>
-										<button type="button" class="btn  btn-outline-dark">删除</button>
-									</div>
-								</td>
-							</tr>
-
-
-						</tbody>
-					</table>
-				</div>
-				<div id="4" class="container tab-pane fade"><br>
-					<br /><br />
-
-
-
-					<div class="float-right">
-						<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal3">添加</button>
-					</div>
-
-					<div class="modal fade w-75 mx-auto" id="myModal3">
-						<div class="modal-dialog">
-							<div class="modal-content">
-
-								<!-- 模态框主体 -->
-								<div class="modal-body">
-
-									<div class="card-body ">
-										<h2 class="card-title">添加选课关系</h2>
-										<br /><br /><br /><br />
-										<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
-										<br />
-										<input type="text" id="inputid" placeholder="学生 I D" class="form-control" required autofocus>
-										<br />
-										<br /><br />
-										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
-											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
-										<br /><br />
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="dropdown float-left">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-							课程 I D
-						</button>
-
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">class 1</a>
-							<a class="dropdown-item" href="#">class 2</a>
-							<a class="dropdown-item" href="#">class 3</a>
-						</div>
-					</div>
-					<br /><br />
-					<br /><br />
-					<br /><br />
-					<table class="table ">
-						<thead>
-							<tr>
-								<th>学生ID</th>
-								<th>学生姓名</th>
-								<th>更改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="5" class="container tab-pane fade"><br>
-					<br /><br />
-					
-					
-					
-					<div class="float-right">
-						<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal4">添加</button>
-					</div>
-					
-					<div class="modal fade w-75 mx-auto" id="myModal4">
-						<div class="modal-dialog">
-							<div class="modal-content">
-					
-								<!-- 模态框主体 -->
-								<div class="modal-body">
-					
-									<div class="card-body ">
-										<h2 class="card-title">添加教授关系</h2>
-										<br /><br /><br /><br />
-										<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
-										<br />
-										<input type="text" id="inputid" placeholder="教师 I D" class="form-control" required autofocus>
-										<br />
-										<br /><br />
-										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
-											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
-										<br /><br />
-					
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="dropdown float-left">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-							课程 I D
-						</button>
-					
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">class 1</a>
-							<a class="dropdown-item" href="#">class 2</a>
-							<a class="dropdown-item" href="#">class 3</a>
-						</div>
-					</div>
-					<br /><br />
-					<br /><br />
-					<br /><br />
-					<table class="table ">
-						<thead>
-							<tr>
-								<th>教师ID</th>
-								<th>教师姓名</th>
-								<th>更改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-					
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn  btn-outline-danger">删除</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
-				</div>
-				<div id="6" class="container tab-pane fade"><br>
-					<br /><br />
-					<table class="table  table-striped">
-						<thead>
-							<tr>
-								<th>申请记录ID</th>
-								<th>考试ID</th>
-								<th>学生ID</th>
-								<th>申请说明</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-
-
-						</tbody>
-					</table>
+			<br /><br />
+			<div class="float-right">
+				<div class="col-md-8">
+					<ul class="nav nav-tabs">
+						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
+					</ul>
 				</div>
 			</div>
 		</div>
+		<script>
+			$(function(){
+				$.ajax({
+					url:'data.json',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						//方法中传入的参数data为后台获取的数据
+						//for(i in data.data) //data.data指的是数组，数组里是8个对象，i为数组的索引
+						var tr1;
+						tr1=data.data[2].ID
+						$("#t1").append(tr1)
+						var tr2;
+						tr2=data.data[2].Name
+						$("#t2").append(tr2)
+						var tr3;
+						tr3=data.data[2].Password
+						$("#psw").append(tr3)
 
-	</body>
+					}
+				})
+			})
+		</script>
+		<div id="2" class="container tab-pane fade"><br>
+			<br />
+
+
+
+
+			<div class="float-right">
+				<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal">注册</button>
+			</div>
+
+			<div class="modal fade" id="myModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+
+							<img class="card-img-top" src="register.png" alt="Card image" style="width:60% ">
+							<div class="card-body">
+								<h2 class="card-title">注册</h2>
+								<br /><br />
+								<form>
+									<table class="table">
+										<thead>
+										<tr>
+											<th><label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;学生类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
+											<th><label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;教师类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
+
+										</tr>
+										</thead>
+									</table>
+
+								</form>
+								<label for="inputid" class="sr-only">ID</label>
+								<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
+								<br />
+								<label for="inputid" class="sr-only">姓名</label>
+								<input type="text" id="inputid" class="form-control" placeholder="姓名" required autofocus>
+								<br />
+								<label for="inputPassword" class="sr-only">密码</label>
+								<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+								<br />
+								<button id="sbm" type="button" class="btn btn-info  btn-lg" data-dismiss="modal">
+									&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+							</div>
+							<div class="card-footer">
+								<p class="text-primary m-auto">成为管理员请主动PY开发方</p>
+							</div>
+						</div>
+						<!-- 模态框底部 -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+
+			<br /><br />
+			<br /><br />
+			<table class="table  table-striped">
+				<thead>
+				<tr>
+					<th>用户ID</th>
+					<th>密码</th>
+					<th>类型</th>
+					<th>更改</th>
+				</tr>
+				</thead>
+				<tbody id="userList">
+
+				</tbody>
+			</table>
+
+
+		</div>
+		<script>
+			$(function(){
+				$.ajax({
+					url:'data.json',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						//方法中传入的参数data为后台获取的数据
+						for(i in data.data){
+							//ID格式
+							//var t11=data.data[i].ID
+							var tr1='<td id="uID">'+data.data[i].ID+'</td>'+'<td id=changeID hidden="">'+'<form class="form-inline ">'+'<div  class="form-group mx-auto">'+'<input type="text" class="form-control" id="chID" placeholder="'+data.data[i].ID+'">'+'</div>'+'</td>'
+							var tr3='<td id="uType">'+data.data[i].Type+'</td>'+'<td id=changeType hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chType" placeholder="'+data.data[i].Type+'">'+'</div>'+'</td>'
+							var tr2='<td id="pwd">'+data.data[i].Password+'</td>'+'<td id=changepwd hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chpwd" placeholder="'+data.data[i].Password+'">'+'</div>'+'</td>'
+							var str1='<button type="button" id="edition" class="btn  btn-outline-danger" onclick="update()">'+'编辑'+'</button>'
+							var str2='<button type="button" id="del" class="btn  btn-outline-dark" onclick="del()">'+'删除'+'</button>'
+							var str3='<button type="submit" id="besure" class="btn btn-outline-success" onclick="window.location.reload()" hidden="">'+'确认'+'</button>'+'</form>'
+							$("#userList").append('<tr>'+tr1+tr2+tr3+'<td>'+'<div class="btn-group btn-group ">'+str1+str2+'</div>'+str3+'</td>'+'</tr>')
+							//$("#userList").append(tr4)
+						} //data.data指的是数组，数组里是8个对象，i为数组的索引
+
+
+					}
+				})
+			})
+		</script>
+
+		<div id="3" class="container tab-pane fade"><br>
+			<br />
+			<div class="float-right">
+				<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal2">添加</button>
+			</div>
+
+			<div class="modal fade w-75 mx-auto" id="myModal2">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+
+							<div class="card-body ">
+								<h2 class="card-title">添加课程</h2>
+								<br /><br /><br /><br />
+								<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
+								<br />
+								<input type="text" id="inputid" placeholder="课程名字" class="form-control" required autofocus>
+								<br />
+								<br /><br />
+								<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+									&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<br /><br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br /><br />
+			<br /><br />
+			<table class="table  table-striped">
+				<thead>
+				<tr>
+					<th>课程ID</th>
+					<th>课程名字</th>
+					<th>更改</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<div class="btn-group btn-group ">
+							<button type="button" class="btn  btn-outline-danger">编辑</button>
+							<button type="button" class="btn  btn-outline-dark">删除</button>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<div class="btn-group btn-group ">
+							<button type="button" class="btn  btn-outline-danger">编辑</button>
+							<button type="button" class="btn  btn-outline-dark">删除</button>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<div class="btn-group btn-group ">
+							<button type="button" class="btn  btn-outline-danger">编辑</button>
+							<button type="button" class="btn  btn-outline-dark">删除</button>
+						</div>
+					</td>
+				</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+		<div id="4" class="container tab-pane fade"><br>
+			<br /><br />
+
+
+
+			<div class="float-right">
+				<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal3">添加</button>
+			</div>
+
+			<div class="modal fade w-75 mx-auto" id="myModal3">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+
+							<div class="card-body ">
+								<h2 class="card-title">添加选课关系</h2>
+								<br /><br /><br /><br />
+								<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
+								<br />
+								<input type="text" id="inputid" placeholder="学生 I D" class="form-control" required autofocus>
+								<br />
+								<br /><br />
+								<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+									&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<br /><br />
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="dropdown float-left">
+				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+					课程 I D
+				</button>
+
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">class 1</a>
+					<a class="dropdown-item" href="#">class 2</a>
+					<a class="dropdown-item" href="#">class 3</a>
+				</div>
+			</div>
+			<br /><br />
+			<br /><br />
+			<br /><br />
+			<table class="table ">
+				<thead>
+				<tr>
+					<th>学生ID</th>
+					<th>学生姓名</th>
+					<th>更改</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="5" class="container tab-pane fade"><br>
+			<br /><br />
+
+
+
+			<div class="float-right">
+				<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal4">添加</button>
+			</div>
+
+			<div class="modal fade w-75 mx-auto" id="myModal4">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+
+							<div class="card-body ">
+								<h2 class="card-title">添加教授关系</h2>
+								<br /><br /><br /><br />
+								<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
+								<br />
+								<input type="text" id="inputid" placeholder="教师 I D" class="form-control" required autofocus>
+								<br />
+								<br /><br />
+								<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+									&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<br /><br />
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="dropdown float-left">
+				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+					课程 I D
+				</button>
+
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">class 1</a>
+					<a class="dropdown-item" href="#">class 2</a>
+					<a class="dropdown-item" href="#">class 3</a>
+				</div>
+			</div>
+			<br /><br />
+			<br /><br />
+			<br /><br />
+			<table class="table ">
+				<thead>
+				<tr>
+					<th>教师ID</th>
+					<th>教师姓名</th>
+					<th>更改</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>
+						<button type="button" class="btn  btn-outline-danger">删除</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div id="6" class="container tab-pane fade"><br>
+			<br /><br />
+			<table class="table  table-striped">
+				<thead>
+				<tr>
+					<th>申请记录ID</th>
+					<th>考试ID</th>
+					<th>学生ID</th>
+					<th>申请说明</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+				</tr>
+				<tr>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+					<td>SOME</td>
+				</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+</body>
 </html>

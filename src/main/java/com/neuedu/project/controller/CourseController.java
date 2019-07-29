@@ -1,9 +1,11 @@
 package com.neuedu.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.Course;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
 import com.neuedu.project.service.CourseService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
+
+    private Logger log = Logger.getLogger(CourseController.class);
 
     /**
      * course service for course controller.
@@ -88,8 +92,11 @@ public class CourseController {
      * @return  a list that courses' names are all name @param name
      */
     @GetMapping(value = "/get/{name}")
-    public List<Course> getCoursesByName(@PathVariable String name) {
-        return courseService.getCourseByName(name);
+    @ResponseBody
+    public String getCoursesByName(@PathVariable String name) {
+        List<Course> courseByName = courseService.getCourseByName(name);
+        log.info(courseByName);
+        return JSON.toJSONString(courseByName);
     }
 
     /**
@@ -118,11 +125,13 @@ public class CourseController {
 
             if (identity == 0) {
                 // 获得学生所选课程
+                log.info("学生请求获取所选课程");
                 return courseService.getStudentCourse(id);
             } else {
                 // 获得教师所教课程
                 assert identity == 1;
                 // todo
+                log.info("教师请求获取所教课程");
                 return null;
             }
         }

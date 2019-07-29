@@ -9,6 +9,11 @@
     <resultMap id="courseMap" type="Course">
         <id column="course_id" property="courseId"/>
         <result column="course_name" property="courseName"/>
+        <!--<result column="u_table.name" property="teacher"/>-->
+        <collection property="teachers" ofType="User">
+            <id column="user_id" property="userId"/>
+            <result column="name" property="name"/>
+        </collection>
     </resultMap>
 
     <insert id="addCourse" parameterType="Course">
@@ -30,29 +35,36 @@
     </insert>
 
     <select id="queryCourse" resultMap="courseMap">
-        select course_id, course_name from course
+        select c_table.course_id, c_table.course_name, u_table.name
+        from course c_table, users u_table, course_teaching ct_table
         <where>
-            <if test="courseId != 0">
-                and course_id = #{courseId}
-            </if>
             <if test="courseName != null and courseName != ''">
-                and course_name = #{courseName}
+                and c_table.course_name = #{courseName}
             </if>
+            <if test="courseId != 0">
+                and c_table.course_id = #{courseId}
+                and ct_table.course_id = c_table.course_id
+            </if>
+            and ct_table.teacher_id = u_table.user_id
         </where>
     </select>
 
     <select id="getStudentIdFromCourse" resultType="String">
-        select student_id from course_selection
+        select student_id
+        from course_selection
         where course_id = #{courseId}
     </select>
 
     <select id="queryStudentSelectedCourse" resultMap="courseMap">
-        select course_table.*
+        select course_table.*, u_table.name
         from course course_table,
-             course_selection selection_table
+             course_selection selection_table,
+             users u_table,
+             course_teaching ct_table
         where selection_table.student_id = #{studentId}
+          and ct_table.course_id = selection_table.course_id
+          and u_table.user_id = ct_table.teacher_id
           and selection_table.course_id = course_table.course_id
     </select>
-
 
 </mapper>

@@ -87,4 +87,16 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public User getUserInfo(String userId) {
+        User forQuery = new User();
+        forQuery.setUserId(userId);
+        List<User> users = userMapper.queryUser(forQuery);
+        if (users.size() >= 1) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
 }

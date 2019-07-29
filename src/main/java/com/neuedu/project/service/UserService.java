@@ -74,4 +74,6 @@ public interface UserService {
      */
     User getUser(String userId, String password);
 
+    User getUserInfo(String userId);
+
 }

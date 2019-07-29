@@ -8,7 +8,6 @@
 
     <resultMap id="arrangementMap" type="Arrangement">
         <result column="test_id" property="testId"/>
-        <result column="course_name" property="courseName"/>
         <result column="start_time" property="startTime"/>
         <result column="duration" property="duration"/>
         

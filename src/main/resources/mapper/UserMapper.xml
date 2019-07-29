@@ -18,8 +18,6 @@
         values (#{userId}, #{password}, #{name}, #{identity});
     </insert>
 
-
-
     <select id="queryUser" parameterType="User" resultMap="userMap">
         select user_id, name, identity from users
         <where>

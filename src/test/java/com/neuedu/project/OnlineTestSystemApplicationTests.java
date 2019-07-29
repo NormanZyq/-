@@ -21,6 +21,12 @@ import java.util.List;
 @SpringBootTest
 public class OnlineTestSystemApplicationTests {
 
+    private final String testTeacherId = "iii";
+
+    private final int testCourseId = 1;
+
+    private final String testCourseName = "语文";
+
     @Autowired
     private CourseService courseService;
 
@@ -37,11 +43,6 @@ public class OnlineTestSystemApplicationTests {
     public void contextLoads() {
         assert true;
     }
-
-
-    private final String testTeacherId = "iii";
-    private final int testCourseId = 1;
-    private final String testCourseName = "语文";
 
     @Test
     public void testGetCourses() {
@@ -91,17 +92,25 @@ public class OnlineTestSystemApplicationTests {
         System.out.println(testService.Calcualte_OJLD(5,5));
     }*/
 
-   @Test
-    public void testTest(){
-       java.util.Date dt = new java.util.Date();
-       java.text.SimpleDateFormat sdf =
-               new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-       String currentTime = sdf.format(dt);
-       testService.autoCreateTest(1,7,4,currentTime,90);
-   }
+    @Test
+    public void testTest() {
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(dt);
+        testService.autoCreateTest(1, 1, 0, currentTime, 90);
+    }
 
-   @Test
-    public void testArrange(){
-       arrangeService.arrangeTest(1,"2019-02-09 22:22:22",100);
-   }
+    @Test
+    public void testArrange() {
+        arrangeService.arrangeTest(1, "2019-02-09 22:22:22", 100);
+    }
+
+
+
+    @Test
+    public void testGetArrangement() {
+        System.out.println(arrangeService.getTestArrangement("abc"));
+
+    }
 }

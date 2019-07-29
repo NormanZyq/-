@@ -21,6 +21,8 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
     private ArrangeService arrangeService;
 
     @PostMapping(value = "/autoCreate/{id}")

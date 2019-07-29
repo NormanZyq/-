@@ -3,7 +3,11 @@ package com.neuedu.project.domain;
 public class Arrangement {
 
     private int testId;
+
+    private String courseName;
+
     private String startTime;
+
     private int duration;
 
     public int getTestId() {
@@ -43,8 +47,9 @@ public class Arrangement {
     public String toString() {
         return "Arrangement{" +
                 "testId=" + testId +
+                ", courseName='" + courseName + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", duration=" + duration +
-                '}';
+                '}' + '\n';
     }
 }

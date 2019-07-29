@@ -34,5 +34,8 @@ public interface ArrangementMapper {
      */
     void deleteArrangement(int arrangeId);
 
+    List<Arrangement> getTestArrangement(String studentId);
+
+
 
 }

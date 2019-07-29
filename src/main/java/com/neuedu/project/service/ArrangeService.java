@@ -1,6 +1,8 @@
 package com.neuedu.project.service;
 
+import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.Student;
+import com.neuedu.project.domain.Test;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +19,8 @@ public interface ArrangeService {
      * @param duration 考试持续时间
      */
     void arrangeTest(int testId, String startTime, int duration);
+
+    List<Arrangement> getTestArrangement(String studentId);
+
+
 }

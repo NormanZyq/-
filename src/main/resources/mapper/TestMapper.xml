@@ -13,16 +13,8 @@
         <result column="subjective_question" property="subjectiveQuestionIds"/>
         <result column="release_datetime" property="releaseDate"/>
         <result column="duration" property="duration"/>
-    </resultMap>
 
-    <!--<select id="getStudentTests" resultMap="testMap">-->
-<!--#           select test_id, duration from arrangement-->
-<!--#         select *-->
-<!--#         from tests t_table,-->
-<!--#              course_selection cs_table-->
-<!--#         where cs_table.student_id = #{studentId}-->
-<!--#           and t_table.course_id = cs_table.course_id-->
-    <!--</select>-->
+    </resultMap>
 
     <delete id="deleteTestByTestId">
         delete
@@ -35,17 +27,15 @@
     </update>
 
     <insert id="addTest" parameterType="Test">
-        insert into tests (course_id,choice_question,subjective_question,release_datetime,duration)
+        insert into tests (course_id, choice_question, subjective_question, release_datetime, duration)
         values (#{courseId}, #{choiceQuestionIds}, #{subjectiveQuestionIds}, #{releaseDate}, #{duration});
     </insert>
 
     <select id="queryTest" parameterType="int" resultType="Test" resultMap="testMap">
-        select  *
+        select *
         from tests
         where test_id = #{tId}
     </select>
-
-
 
 
 </mapper>

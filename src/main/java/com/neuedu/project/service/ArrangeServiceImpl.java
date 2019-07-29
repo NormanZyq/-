@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class ArrangeServiceImpl implements ArrangeService {
 
-
     private final TestMapper testMapper;
 
     private final CourseMapper courseMapper;
@@ -52,5 +51,10 @@ public class ArrangeServiceImpl implements ArrangeService {
             attendTestRec.setStudentId(stuId);
             attendTestRecMapper.addAttendTestRec(attendTestRec);
         }
+    }
+
+    @Override
+    public List<Arrangement> getTestArrangement(String studentId) {
+        return arrangementMapper.getTestArrangement(studentId);
     }
 }

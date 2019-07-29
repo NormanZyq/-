@@ -4,7 +4,7 @@ public class Arrangement {
 
     private int testId;
 
-    private String courseName = null;
+    private String courseName = "";
 
     private String startTime;
 
@@ -32,6 +32,14 @@ public class Arrangement {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public Arrangement(int testId, String startTime, int duration) {

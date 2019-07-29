@@ -20,7 +20,7 @@ public interface ArrangeService {
      */
     void arrangeTest(int testId, String startTime, int duration);
 
-    List<Arrangement> getTestArrangement(String studentId);
+    Arrangement getTestArrangement(int testId);
 
 
 }

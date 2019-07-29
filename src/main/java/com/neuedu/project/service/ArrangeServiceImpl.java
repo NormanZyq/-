@@ -57,7 +57,7 @@ public class ArrangeServiceImpl implements ArrangeService {
     }
 
     @Override
-    public List<Arrangement> getTestArrangement(String studentId) {
-        return arrangementMapper.getTestArrangement(studentId);
+    public Arrangement getTestArrangement(int testId) {
+        return arrangementMapper.getTestArrangement(testId);
     }
 }

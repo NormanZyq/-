@@ -4,6 +4,8 @@ import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.AttendTestRec;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AttendTestRecMapper {
 
@@ -24,6 +26,14 @@ public interface AttendTestRecMapper {
      *
      */
     void deleteAttendTestRec(int atrId);
+
+    /**
+     * 获取学生考试信息
+     *
+     * @param studentId 查询考试信息的学生Id
+     * @return 考试ID集
+     */
+    List<Integer> getTestIdFromStudentId(String studentId);
 
 
 }

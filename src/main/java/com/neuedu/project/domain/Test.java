@@ -15,20 +15,16 @@ public class Test {
 
     private String subjectiveQuestionIds;
 
-    private String releaseDate;
-
-    private int duration;
 
     public Test() {
     }
 
-    public Test(int courseId, int id, String choiceQuestionIds, String subjectiveQuestionIds, String releaseDate, int duration) {
+    public Test(int courseId, int id, String choiceQuestionIds, String subjectiveQuestionIds) {
         this.courseId = courseId;
         this.id = id;
         this.choiceQuestionIds = choiceQuestionIds;
         this.subjectiveQuestionIds = subjectiveQuestionIds;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
+
     }
 
     public int getCourseId() {
@@ -63,17 +59,6 @@ public class Test {
         this.subjectiveQuestionIds = subjectiveQuestionIds;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
 
 
     public int getTestId() {
@@ -84,19 +69,14 @@ public class Test {
         this.testId = testId;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
 
     @Override
     public String toString() {
         return "Test{" +
                 "courseId=" + courseId +
-                ", id=" + id +
+                ", id=" +
                 ", choiceQuestionIds='" + choiceQuestionIds + '\'' +
                 ", subjectiveQuestionIds='" + subjectiveQuestionIds + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", duration=" + duration +
                 '}';
     }
 

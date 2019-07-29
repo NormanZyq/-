@@ -173,20 +173,20 @@
 						})
 					})
 				</script>
-				
-				
+
+
 				<div id="2" class="container tab-pane"><br>
 					<br /><br /><br /><br />
 					<div class="float-right">
 						<form class="form-inline ">
-					
+
 							<input class="form-control" type="text" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-info" type="button">Search</button>
-					
+
 						</form>
 					</div>
 					<br /><br /><br /><br />
-					
+
 					<table class="table  table-striped">
 						<thead>
 							<tr>
@@ -200,7 +200,7 @@
 								<td>课程A</td>
 								<td>SOME</td>
 								<td>
-									<div >
+									<div>
 										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
 									</div>
 								</td>
@@ -209,7 +209,7 @@
 								<td>课程B</td>
 								<td>SOME</td>
 								<td>
-									<div >
+									<div>
 										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
 									</div>
 								</td>
@@ -218,19 +218,19 @@
 								<td>课程C</td>
 								<td>SOME</td>
 								<td>
-									<div >
+									<div>
 										<button type="button" class="btn btn-outline-success" onclick="changepsw()">加入</button>
 									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
 				</div>
 
 				<div id="3" class="container tab-pane fade"><br>
@@ -303,7 +303,7 @@
 
 				<div id="4" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
-					<div class="row">
+					<div class="row" id="exam">
 						<div class="col">
 							<div class="card m-auto shadow shadow-sm" style="width:300px">
 
@@ -344,95 +344,66 @@
 								</div>
 							</div>
 						</div>
-						<div class="col">
-							<div class="card m-auto shadow shadow-sm" style="width:300px">
-
-								<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;B</h3>
-								<div class="card-body">
-									<br />
-
-									<table class="table">
-										<thead>
-											<tr>
-												<th>
-													<h5>考试 &nbsp;I D</h5>
-												</th>
-												<th>SOME</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>
-													<h5>考试时间</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试地点</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试时长</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-
-
-						</div>
-						<div class="col">
-							<div class="card m-auto shadow shadow-sm" style="width:300px">
-
-								<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;C</h3>
-								<div class="card-body">
-									<br />
-
-									<table class="table">
-										<thead>
-											<tr>
-												<th>
-													<h5>考试 &nbsp;I D</h5>
-												</th>
-												<th>SOME</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>
-													<h5>考试时间</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试地点</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试时长</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-
-						</div>
+						
+						
 					</div>
 
-
-
-
 				</div>
+
+
+				<script>
+					$(function(){
+						$.ajax({
+							url:'data1.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+							//方法中传入的参数data为后台获取的数据
+								for(i in data.data){ //data.data指的是数组，数组里是8个对象，i为数组的索引
+								
+								var tr1;
+								tr1='<div class="col">'+'<div class="card m-auto shadow shadow-sm" style="width:300px">'
+								
+								tr1=tr1+'<h3 class="card-title">'+'<br />'+'<br />'+'<br />'+'考&nbsp;&nbsp;试&nbsp;&nbsp;'+i+'</h3>'
+									
+								tr1=tr1+'<div class="card-body">'+'<br />'+'<table class="table">'+'<thead>'+'<tr>'			
+											
+								tr1=tr1+'<th>'+'<h5>'+'考试 &nbsp;I D'+'</h5>'+'</th>'
+									
+								tr1=tr1+'<th>'+data.data[i].id+'</th>'+'</tr>'+'</thead>'				
+													
+								tr1=tr1+'<tbody>'+'<tr>'+'<td>'+'<h5>'+'考试时间'+'</h5>'+'</td>'							
+															
+								tr1=tr1+'<td>'+data.data[i].startTime+'</td>'+'</tr>'						
+													
+								tr1=tr1+'<tr>'+'<td>'+'<h5>'+'考试地点'+'</h5>'+'</td>'					
+														
+								tr1=tr1+'<td>'+data.data[i].address+'</td>'+'</tr>'						
+															
+								tr1=tr1+'<tr>'+'<td>'+'<h5>'+'考试时长'+'</h5>'+'</td>'
+				
+								tr1=tr1+'<td>'+data.data[i].time+'</td>'
+																									
+								tr1=tr1+'</tr>'+'</tbody>'+'</table>'+'</div>'+'</div>'+'</div>';
+										
+											
+														
+								$("#exam").append(tr1)
+								
+								
+								}
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息   
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
 
 				<div id="5" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />

@@ -15,8 +15,8 @@
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-        <script src="js/utils.js"></script>
-        <script src="js/fetchData.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/fetchData.js"></script>
 
 		<script type="text/javascript">
 			function display() {
@@ -43,7 +43,7 @@
 
 
 
-    </head>
+	</head>
 
 
 	<body class="text-center">
@@ -184,35 +184,58 @@
 
 
 				<div id="2" class="container tab-pane"><br>
-					<br /><br /><br /><br />
-					<div class="float-right">
-						<form class="form-inline">
+					<br />
 
-							<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search-content">
-							<button class="btn btn-outline-info" type="button" onclick="searchCourses()">Search</button>
-					
-						</form>
+					<div class="container">
+						<!-- Nav pills -->
+						<ul class="nav nav-tabs">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="pill" href="#11">待选课程</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#22">已选课程</a>
+							</li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div id="11" class="container tab-pane active"><br>
+								<br /><br />
+
+								<div class="float-right">
+									<form class="form-inline">
+
+										<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search-content">
+										<button class="btn btn-outline-info" type="button" onclick="searchCourses()">Search</button>
+
+									</form>
+								</div>
+								<br /><br /><br /><br />
+
+								<table class="table  table-striped">
+									<thead>
+										<tr>
+											<th>课程名字</th>
+											<th>授课教师</th>
+											<th>加入课程</th>
+										</tr>
+									</thead>
+									<tbody id="course-table-body">
+
+									</tbody>
+								</table>
+
+
+
+
+							</div>
+							<div id="22" class="container tab-pane "><br>
+								<br /><br /><br /><br />
+
+
+							</div>
+						</div>
 					</div>
-					<br /><br /><br /><br />
-
-					<table class="table  table-striped">
-						<thead>
-							<tr>
-								<th>课程名字</th>
-								<th>授课教师</th>
-								<th>加入课程</th>
-							</tr>
-						</thead>
-						<tbody id="course-table-body">
-
-						</tbody>
-					</table>
-					
-					
-					
-					
-					
-					
 				</div>
 
 				<div id="3" class="container tab-pane fade"><br>
@@ -286,50 +309,8 @@
 				<div id="4" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
 					<div class="row" id="exam">
-						<div class="col">
-							<div class="card m-auto shadow shadow-sm" style="width:300px">
-
-								<h3 class="card-title"><br /><br /><br />考&nbsp;&nbsp;试&nbsp;&nbsp;A</h3>
-								<div class="card-body">
-									<br />
-
-									<table class="table">
-										<thead>
-											<tr>
-												<th>
-													<h5>考试 &nbsp;I D</h5>
-												</th>
-												<th>SOME</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>
-													<h5>考试时间</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试地点</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-											<tr>
-												<td>
-													<h5>考试时长</h5>
-												</td>
-												<td>SOME</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-
 
 					</div>
-
 				</div>
 
 

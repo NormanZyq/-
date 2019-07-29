@@ -16,21 +16,39 @@ import java.io.IOException;
 
 import static java.lang.String.valueOf;
 
+/**
+ * 处理所有和user相关的请求。
+ * @author zyq
+ */
 @Controller
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
 
+    /**
+     * logger.
+     */
     private Logger log = Logger.getLogger(valueOf(UserController.class));
 
-    //    @Autowired
+    /**
+     * 强制注入service.
+     */
     private UserService userService;
 
+    /**
+     * 强制注入service.
+     * @param userService service
+     */
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * 获取登录用户的信息.
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/get/login")
     @ResponseBody
     public User getLoginUser(HttpServletRequest request) {

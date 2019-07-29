@@ -11,6 +11,7 @@
         <result column="test_id" property="testId"/>
         <result column="start_time" property="startTime"/>
         <result column="duration" property="duration"/>
+        
     </resultMap>
 
     <insert id="addArrangement" parameterType="Arrangement">
@@ -40,16 +41,13 @@
         WHERE arrangement_id = #{arrangeId}
     </delete>
 
-    <select id="getTestArrangement" resultMap="arrangementMap">
-        select a_table.test_id, a_table.start_time, a_table.duration, c_table.course_name
+    <select id="getTestArrangement" resultMap="arrangementMap" resultType="Arrangement">
+        select a_table.test_id, a_table.start_time, a_table.duration
         from arrangement a_table,
-             tests t_table,
-             course_selection cs_table,
-             course c_table
-        where cs_table.student_id = #{studentId}
-          and t_table.course_id = cs_table.course_id
-          and a_table.test_id = t_table.test_id
-          and c_table.course_id = t_table.course_id;
+             test_attend_records tar_table
+        where tar_table.student_id = #{studentId}
+          and a_table.test_id = tar_table.test_id;
+
 
 
 

@@ -113,4 +113,11 @@ public class OnlineTestSystemApplicationTests {
         System.out.println(arrangeService.getTestArrangement("abc"));
 
     }
+
+    @Test
+    public void testGetStudentSelectedCourse() {
+        System.out.println(courseService.getStudentCourse("abc"));
+    }
+
+
 }

@@ -4,7 +4,7 @@ public class Arrangement {
 
     private int testId;
 
-    private String courseName;
+    private String courseName = null;
 
     private String startTime;
 

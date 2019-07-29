@@ -34,7 +34,13 @@ public interface ArrangementMapper {
      */
     void deleteArrangement(int arrangeId);
 
-    List<Arrangement> getTestArrangement(String studentId);
+    /**
+     *由考试ID获取考试安排信息
+     *
+     * @param testId
+     * @return
+     */
+    Arrangement getTestArrangement(int testId);
 
 
 

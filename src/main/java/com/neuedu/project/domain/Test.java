@@ -13,20 +13,16 @@ public class Test {
 
     private String subjectiveQuestionIds;
 
-    private String releaseDate;
-
-    private int duration;
 
     public Test() {
     }
 
-    public Test(int courseId, int testId, String choiceQuestionIds, String subjectiveQuestionIds, String releaseDate, int duration) {
+    public Test(int courseId, int testId, String choiceQuestionIds, String subjectiveQuestionIds) {
         this.courseId = courseId;
         this.testId = testId;
         this.choiceQuestionIds = choiceQuestionIds;
         this.subjectiveQuestionIds = subjectiveQuestionIds;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
+
     }
 
     public int getCourseId() {
@@ -72,7 +68,7 @@ public class Test {
     public int getDuration() {
         return duration;
     }
-    
+
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -84,8 +80,6 @@ public class Test {
                 ", id=" + testId +
                 ", choiceQuestionIds='" + choiceQuestionIds + '\'' +
                 ", subjectiveQuestionIds='" + subjectiveQuestionIds + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", duration=" + duration +
                 '}';
     }
 

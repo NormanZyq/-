@@ -1,6 +1,7 @@
 package com.neuedu.project.controller;
 
 import com.neuedu.project.domain.ChoiceQuestion;
+import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.Question;
 import com.neuedu.project.domain.Test;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,15 +39,10 @@ public class TestController {
     public String autoCreateByCourseId(@PathVariable int id,
                                        int cqCount,
                                        int sqCount,
-                                       int duration,
                                        HttpServletResponse response) {
 
         //Test for Temporary
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentTime = sdf.format(dt);
-        testService.autoCreateTest(id, cqCount, sqCount, currentTime, duration);
+        testService.autoCreateTest(id, cqCount, sqCount);
         response.setStatus(MyHttpStatus.OK.value());
         return "ok";
     }
@@ -60,6 +57,12 @@ public class TestController {
         return "ok";
     }
 
+    @PostMapping(value = "/get/tests")
+    @ResponseBody
+    public List<Arrangement> getArrangedTestsByStudentId(HttpSession httpSession) {
+        String studentId = (String)httpSession.getAttribute("loggedId");
+        return testService.getArrangedTestsByStudentId(studentId);
+    }
     /**
      * 参与考试。
      * @param id    考试ID
@@ -134,3 +137,5 @@ public class TestController {
     }
 
 }
+
+

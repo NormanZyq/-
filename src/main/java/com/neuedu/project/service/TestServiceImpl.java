@@ -1,12 +1,11 @@
 package com.neuedu.project.service;
 
-import com.neuedu.project.dao.QuestionMapper;
-import com.neuedu.project.dao.TestMapper;
-import com.neuedu.project.domain.Question;
-import com.neuedu.project.domain.Test;
+import com.neuedu.project.dao.*;
+import com.neuedu.project.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,14 +16,23 @@ public class TestServiceImpl implements TestService {
 
     private final QuestionMapper questionMapper;
 
+    private final AttendTestRecMapper attendTestRecMapper;
+
+    private final ArrangementMapper arrangementMapper;
+
+    private final CourseMapper courseMapper;
+
     @Autowired
-    public TestServiceImpl(TestMapper testMapper, QuestionMapper questionMapper) {
+    public TestServiceImpl(TestMapper testMapper, QuestionMapper questionMapper,AttendTestRecMapper attendTestRecMapper,ArrangementMapper arrangementMapper,CourseMapper courseMapper) {
         this.testMapper = testMapper;
         this.questionMapper = questionMapper;
+        this.attendTestRecMapper = attendTestRecMapper;
+        this.arrangementMapper = arrangementMapper;
+        this.courseMapper = courseMapper;
     }
 
     @Override
-    public void autoCreateTest(int courseId, int cqCount, int sqCount, String currentTime, int duration) {
+    public void autoCreateTest(int courseId, int cqCount, int sqCount) {
         Random random = new Random(System.currentTimeMillis());
         int num = Math.abs(random.nextInt());
         //新建Question做选择标准
@@ -38,7 +46,7 @@ public class TestServiceImpl implements TestService {
         List<Question> sq = questionMapper.getQuestionsByCourseId(temp);
         //如果题目过少，返回null
         if (cq.size() < cqCount || sq.size() < sqCount)
-            testMapper.addTest(null);
+            return;
         else {
             //运用随机函数实现随机生成题目
             Test test = new Test();
@@ -48,16 +56,33 @@ public class TestServiceImpl implements TestService {
             test.setCourseId(courseId);
             test.setSubjectiveQuestionIds(sIds);
             test.setChoiceQuestionIds(cIds);
-            test.setReleaseDate(currentTime);
-            test.setDuration(duration);
             testMapper.addTest(test);
         }
     }
 
     @Override
-    public List<Test> getArrangedTestsByCourseId() {
-        // todo
-        return null;
+    public List<Arrangement> getArrangedTestsByStudentId(String studentId){
+        //获取学生的testIds
+        List<Integer> testIds = attendTestRecMapper.getTestIdFromStudentId(studentId);
+        //由testId获取考试安排信息
+        List<Arrangement> arrangements = new ArrayList<>();
+        for (int tId : testIds) {
+            Arrangement arr = arrangementMapper.getTestArrangement(tId);
+            System.out.println(arr);
+            //get courseId
+            int cId = testMapper.queryTest(tId).getCourseId();
+            //get courseName
+            Course course = new Course();
+            course.setCourseId(cId);
+            System.out.println("cId="+cId);
+            String courseName = courseMapper.queryCourse(course).get(0).getCourseName();
+            System.out.println(courseName);
+            if(courseName!=null) {
+                arr.setCourseName(courseName);
+                arrangements.add(arr);
+            }
+        }
+         return arrangements;
     }
 
     @Override
@@ -65,11 +90,15 @@ public class TestServiceImpl implements TestService {
         return testMapper.queryTest(id);
     }
 
+    /**
+     * autoCreateTest的辅助函数：已通过测试
+     *
+     */
     private String produceIds(int sqCount, List<Question> sq, int num) {
         StringBuilder sIds = new StringBuilder();
         //避免选题数为0的情况,返回null
         if (sqCount == 0)
-            return null;
+            return "";
         for (int i = 0; i < sqCount; i++) {
             int size = sq.size();//选择题库大小
             int choose = calcualteOJLD(size, num) - 1;//List下标减一
@@ -82,8 +111,12 @@ public class TestServiceImpl implements TestService {
         return sIds.toString();
     }
 
-    //i为数组大小，j为顺次选择数
+    /**
+     * autoCreateTest的辅助函数：已彻底测试
+     *
+     */
     private int calcualteOJLD(int i, int j) {
+        //i为数组大小，j为顺次选择数
         if (i < j) {
             int sum = i;
             while (sum < j) {

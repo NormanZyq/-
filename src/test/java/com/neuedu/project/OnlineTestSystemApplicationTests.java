@@ -95,25 +95,14 @@ public class OnlineTestSystemApplicationTests {
 
     @Test
     public void testTest() {
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentTime = sdf.format(dt);
-        testService.autoCreateTest(1, 1, 0, currentTime, 90);
+        testService.autoCreateTest(1, 5, 2);
     }
 
     @Test
     public void testArrange() {
-        arrangeService.arrangeTest(1, "2019-02-09 22:22:22", 100);
+        arrangeService.arrangeTest(5, "2019-07-08 22:22:22", 70);
     }
 
-
-
-    @Test
-    public void testGetArrangement() {
-        System.out.println(arrangeService.getTestArrangement("abc"));
-
-    }
 
     @Test
     public void testGetStudentSelectedCourse() {
@@ -154,6 +143,10 @@ public class OnlineTestSystemApplicationTests {
 
 
 
+    }
+    @Test
+    public void testgetArrangedTestsByStudentId(){
+        System.out.println(testService.getArrangedTestsByStudentId("aaaa"));
     }
 
 }

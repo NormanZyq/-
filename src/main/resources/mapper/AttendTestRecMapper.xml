@@ -23,4 +23,10 @@
         WHERE attend_record_id= #{atrId}
     </delete>
 
+    <select id="getTestIdFromStudentId" parameterType="String" resultType="int">
+        select test_id
+        FROM test_attend_records
+        where student_id = #{studentId}
+    </select>
+
 </mapper>

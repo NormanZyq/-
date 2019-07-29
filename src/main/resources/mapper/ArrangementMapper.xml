@@ -7,11 +7,10 @@
 <mapper namespace="com.neuedu.project.dao.ArrangementMapper">
 
     <resultMap id="arrangementMap" type="Arrangement">
-        <id column="arrangement_id" property="arrangementId"/>
         <result column="test_id" property="testId"/>
         <result column="start_time" property="startTime"/>
         <result column="duration" property="duration"/>
-
+        
     </resultMap>
 
     <insert id="addArrangement" parameterType="Arrangement">
@@ -41,32 +40,10 @@
         WHERE arrangement_id = #{arrangeId}
     </delete>
 
-    <select id="getTestArrangement" parameterType="String" resultMap="arrangementMap" resultType="Arrangement">
-        select a_table.test_id, a_table.start_time, a_table.duration
-        from arrangement a_table,
-             test_attend_records tar_table
-        where tar_table.student_id = #{studentId}
-          and a_table.test_id = tar_table.test_id;
-
-
-
-
-        #         select a_table.test_id, c_table.course_name courseName, a_table.start_time, a_table.duration
-        #         from arrangement a_table,
-        #              course c_table,
-        #              tests t_table,
-        #              course_selection cs_table
-        #         where cs_table.student_id = #{studentId}
-        #           and c_table.course_id = cs_table.course_id
-        #           and t_table.course_id = cs_table.course_id
-        #           and a_table.test_id = t_table.test_id;
-
-
-        #                 where cs_table.student_id = #{studentId}
-        #                   and t_table.course_id = cs_table.course_id
-        #                   and c_table.course_id = t_table.course_id
-        #                   and a_table.test_id = t_table.test_id
-
+    <select id="getTestArrangement" parameterType="int" resultMap="arrangementMap">
+        select *
+        FROM arrangement
+        where test_id = #{testId}
     </select>
 
 </mapper>

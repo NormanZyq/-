@@ -1,3 +1,5 @@
+// import * as $ from "/js/jquery-3.3.1";
+
 function getSelectedCourse() {
     $.ajax({
         url: "/course/get/my",
@@ -6,6 +8,21 @@ function getSelectedCourse() {
         success: function (result) {
             // 解析选课内容
             console.log(result);
+        }
+    })
+}
+
+function getUserInfo() {
+    $.ajax({
+        url: "/user/get/login",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+            console.log(result);
+            $('#t1').html(result.userId);
+            $('#t2').html(result.name);
+            $('#psw').html('---');
+
         }
     })
 }
@@ -24,6 +41,7 @@ function searchCourses() {
         type: "GET",
         dataType: "json",
         success: function (result) {
+            console.log(result);
             // 解析结果
             if (result.length === 0) {
                 $('#course-table-body').html("<p class='text-center'>未找到课程</p>")

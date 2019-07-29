@@ -1,14 +1,25 @@
 package com.neuedu.project.domain;
 
+import java.util.List;
+
 public class Course {
 
     private int courseId;
 
     private String courseName;
 
-    private String teacher;
+    private List<User> teachers;
 
     public Course() {
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseName='" + courseName + '\'' +
+                ", teachers=" + teachers +
+                '}';
     }
 
     public int getCourseId() {
@@ -27,11 +38,7 @@ public class Course {
         this.courseName = courseName;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseId=" + courseId +
-                ", courseName='" + courseName + '\'' +
-                '}';
+    public List<User> getTeachers() {
+        return teachers;
     }
 }

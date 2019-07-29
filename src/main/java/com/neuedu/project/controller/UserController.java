@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static java.lang.String.valueOf;
@@ -46,13 +47,16 @@ public class UserController {
 
     /**
      * 获取登录用户的信息.
-     * @param request
+//     * @param request
      * @return
      */
     @GetMapping(value = "/get/login")
     @ResponseBody
-    public User getLoginUser(HttpServletRequest request) {
-        return (User) request.getSession().getAttribute("loggedUser");
+    public User getLoginUser(HttpSession session) {
+        log.info("正在获取用户数据");
+//        User user = (User) request.getSession().getAttribute("loggedUser");
+//        log.info(user);
+        return userService.getUserInfo((String) session.getAttribute("loggedId"));
     }
 
     @PostMapping(value = "/login")
@@ -90,6 +94,7 @@ public class UserController {
             }
             // 标记为成功登录
             request.getSession().setAttribute("loggedUser", loggedIn);
+            request.getSession().setAttribute("loggedId", userId);
             request.getSession().setAttribute("allowPage", pageAvailable);
             request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());

@@ -1,5 +1,6 @@
 package com.neuedu.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.Course;
 import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.User;
@@ -92,11 +93,10 @@ public class CourseController {
      */
     @GetMapping(value = "/get/{name}")
     @ResponseBody
-    public List<Course> getCoursesByName(@PathVariable String name) {
-        log.info(name);
+    public String getCoursesByName(@PathVariable String name) {
         List<Course> courseByName = courseService.getCourseByName(name);
-        System.out.println(courseByName);
-        return courseByName;
+        log.info(courseByName);
+        return JSON.toJSONString(courseByName);
     }
 
     /**

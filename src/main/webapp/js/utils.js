@@ -136,10 +136,25 @@ function appendTestCard(test) {
 }
 
 function appendSearchResult(course) {
+    console.log(course);
+    var teacher = '';
+
+    let length = course.teachers.length;
+
+    if (length === 1) {
+        teacher += course.teachers[0].name;
+    } else if (length >= 2) {
+        teacher += course.teachers[0].name;
+        teacher += '、' + course.teachers[1].name;
+        if (length > 2) {
+            teacher += "等" + length + "人";
+        }
+    }
+
     let content = `<tr>
                         <td id="search-result-id" style="display: none;">${course.courseId}</td>
                         <td>${course.courseName}</td>
-                        <td>${course.teacher}</td>
+                        <td>${teacher}</td>
                         <td>
                             <div >
                                 <button type="button" id="btn-select-${course.courseId}" class="btn btn-outline-success" onclick="selectCourse(${course.courseId})">加入</button>

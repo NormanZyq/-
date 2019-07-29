@@ -11,7 +11,7 @@
         <result column="test_id" property="testId"/>
         <result column="start_time" property="startTime"/>
         <result column="duration" property="duration"/>
-        
+
     </resultMap>
 
     <insert id="addArrangement" parameterType="Arrangement">
@@ -41,7 +41,7 @@
         WHERE arrangement_id = #{arrangeId}
     </delete>
 
-    <select id="getTestArrangement" resultMap="arrangementMap" resultType="Arrangement">
+    <select id="getTestArrangement" parameterType="String" resultMap="arrangementMap" resultType="Arrangement">
         select a_table.test_id, a_table.start_time, a_table.duration
         from arrangement a_table,
              test_attend_records tar_table

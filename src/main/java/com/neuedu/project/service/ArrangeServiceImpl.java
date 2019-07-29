@@ -5,6 +5,7 @@ import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.AttendTestRec;
 import com.neuedu.project.domain.Student;
 import com.neuedu.project.domain.Test;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Service
 public class ArrangeServiceImpl implements ArrangeService {
+
+    private final Logger log = Logger.getLogger(ArrangeServiceImpl.class);
 
     private final TestMapper testMapper;
 

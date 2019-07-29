@@ -92,4 +92,42 @@ function searchCoursesByName() {
     })
 }
 
+function appendTestCard(test) {
 
+    let card = `<div class="col-sm-3">
+        <div class="card m-auto shadow shadow-sm">
+            <span id="test-id" style="display: none;">${test.id}</span>
+            <h3 class="card-title"><br /><br /><br />${test.name}</h3>
+            <div class="card-body">
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h5>考试课程</h5>
+                            </th>
+                            <th>${test.name}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h5>考试时间</h5>
+                            </td>
+                            <td>${test.time}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>考试时长</h5>
+                            </td>
+                            <td>${test.duration}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`;
+
+    $('#test-list').append(card);
+
+}

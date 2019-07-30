@@ -7,6 +7,7 @@
 <mapper namespace="com.neuedu.project.dao.AnswerSheetMapper">
 
     <resultMap id="answersheetMap" type="AnswerSheet">
+        <result column="answer_record_id" property="id"/>
         <result column="attend_record_id" property="attendRecordId"/>
         <result column="choices_answers" property="choiceQuestionAnswer"/>
         <result column="subjective_answers" property="subjectiveQuestionAnswer"/>
@@ -16,5 +17,12 @@
         insert into student_answer_records (attend_record_id,choices_answers,subjective_answers)
         values (#{attendRecordId}, #{choiceQuestionAnswer}, #{subjectiveQuestionAnswer});
     </insert>
+
+    <select id="queryAnswerSheetAboutTest" parameterType="int" resultMap="answersheetMap">
+    select s_table.*
+    from test_attend_records t_table,
+         student_answer_records s_table
+    where s_table.attend_record_id = t_table.attend_record_id;
+    </select>
 
 </mapper>

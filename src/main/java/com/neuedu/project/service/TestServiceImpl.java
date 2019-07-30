@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class TestServiceImpl implements TestService {
@@ -189,5 +186,17 @@ public class TestServiceImpl implements TestService {
         }
         long nowsec=c.getTimeInMillis() / 1000;
         return nowsec-startsec;
+    }
+
+    /**
+     * From Internet
+     * 字符串切割
+     *
+     */
+    private List<String> analyseQuestionId(String questionIds){
+        String[] temp = questionIds.split("#");
+        List<String>  questions = new ArrayList<>();
+        Collections.addAll(questions, temp);
+        return questions;
     }
 }

@@ -35,6 +35,10 @@ public class ArrangeServiceImpl implements ArrangeService {
 
     @Override
     public void arrangeTest(int testId, String startTime, int duration) {
+        //testId仅可以安排一次
+        Arrangement arr = getTestArrangement(testId);
+        if(arr != null)
+            return;
         //获取试卷
         Test test = testMapper.queryTest(testId);
         //从试卷上取出课程id

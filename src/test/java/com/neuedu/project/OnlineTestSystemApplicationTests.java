@@ -101,7 +101,7 @@ public class OnlineTestSystemApplicationTests {
 
     @Test
     public void testArrange() {
-        arrangeService.arrangeTest(7, "2019-07-30 10:22:22", 100);
+        arrangeService.arrangeTest(7, "2119-07-30 11:22:22", 100);
     }
 
 
@@ -172,7 +172,19 @@ public class OnlineTestSystemApplicationTests {
 
         String ca = "A#B#C# #A";
         String sa = "USB#clean";
-        answerService.addAnswerSheet("aaaa",7,ca,sa);
+        answerService.addAnswerSheet("cccc",7,ca,sa);
+        answerService.addAnswerSheet("dddd",7,ca,sa);
+        answerService.addAnswerSheet("eeee",7,ca,sa);
+        answerService.addAnswerSheet("ffff",7,ca,sa);
+        answerService.addAnswerSheet("gggg",7,ca,sa);
+
+
+    }
+
+    @Test
+    public void TestscoreChoiceQuestion(){
+        answerService.scoreChoiceQuestion("iii",7);
+        //System.out.println(answerService.scoreChoiceQuestion("iii",7));
     }
 
 }

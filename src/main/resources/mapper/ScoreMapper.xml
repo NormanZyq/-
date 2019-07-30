@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.ScoreMapper">
+
+    <resultMap id="scoreMap" type="Score">
+        <result column="check_teacher_id" property="teacherId"/>
+        <result column="answer_record_id" property="answerSheetId"/>
+        <result column="choices_score" property="choicesScore"/>
+        <result column="subjective_score" property="subjectiveScore"/>
+    </resultMap>
+
+    <insert id="insertScore" parameterType="Score">
+        insert into check_test_record (check_teacher_id, answer_record_id,choices_score,subjective_score)
+        values (#{teacherId}, #{answerSheetId}, #{choicesScore}, #{subjectiveScore});
+    </insert>
+
+
+</mapper>

@@ -33,6 +33,11 @@ public interface TestService {
 
     Test getTestById(int id);
 
+    /**
+     * 由testid获取
+     */
+    //List<Integer> getAttendRecordIdByTestId(int testId);
+
 //    int Calcualte_OJLD(int i, int j);
 
 }

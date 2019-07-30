@@ -25,15 +25,33 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
+    /**
+     * service for test.
+     */
     @Autowired
     private TestService testService;
 
+    /**
+     * service for arrangement.
+     */
     @Autowired
     private ArrangeService arrangeService;
 
+    /**
+     * service fo question.
+     */
     @Autowired
     private QuestionService questionService;
 
+    /**
+     * auto create a test with passed in number of 客观题和主观题.
+     *
+     * @param id       课程ID
+     * @param cqCount  选择题数量
+     * @param sqCount  主观题数量
+     * @param response response用于设置状态码
+     * @return 成功题书
+     */
     @PostMapping(value = "/autoCreate/{id}")
     @ResponseBody
     public String autoCreateByCourseId(@PathVariable int id,
@@ -44,29 +62,44 @@ public class TestController {
         //Test for Temporary
         testService.autoCreateTest(id, cqCount, sqCount);
         response.setStatus(MyHttpStatus.OK.value());
-        return "ok";
+        return "创建考试成功，确认无误后即可发布";
     }
 
-
+    /**
+     * 发布一场考试。
+     *
+     * @param testId    考试ID
+     * @param startTime 开始时间
+     * @param duration  时长
+     * @return 成功提示
+     */
     @PostMapping(value = "/arrange")
     @ResponseBody
     public String arrangeTest(int testId, String startTime, int duration) {
 
         //Test for Temporary
-        arrangeService.arrangeTest(testId,startTime,duration);
-        return "ok";
+        arrangeService.arrangeTest(testId, startTime, duration);
+        return "发布考试成功，请通知学生按时参加考试";
     }
 
-    @PostMapping(value = "/get/tests")
+    /**
+     * 获得已登录学生所有的考试安排。
+     *
+     * @param httpSession session用于获取学号
+     * @return 所有考试安排
+     */
+    @PostMapping(value = "/get/all")
     @ResponseBody
     public List<Arrangement> getArrangedTestsByStudentId(HttpSession httpSession) {
-        String studentId = (String)httpSession.getAttribute("loggedId");
+        String studentId = (String) httpSession.getAttribute("loggedId");
         return testService.getArrangedTestsByStudentId(studentId);
     }
+
     /**
      * 参与考试。
-     * @param id    考试ID
-     * @return
+     *
+     * @param id 考试ID
+     * @return  考试页面
      */
     @PostMapping(value = "/attend")
     public String attendTest(int id) {
@@ -76,8 +109,9 @@ public class TestController {
 
     /**
      * 获得选择题。
-     * @param testId    考试ID
-     * @return  选择题列表
+     *
+     * @param testId 考试ID
+     * @return 选择题列表
      */
     @PostMapping(value = "/get/xuanze")
     @ResponseBody
@@ -104,6 +138,7 @@ public class TestController {
 
     /**
      * 获得主观题。
+     *
      * @param testId 考试ID
      * @return 主观题列表
      */
@@ -128,12 +163,23 @@ public class TestController {
 
     /**
      * 获得考试剩余时间。
-     * @param testId    考试ID
+     *
+     * @param testId 考试ID
      */
     @GetMapping(value = "/get/time")
     @ResponseBody
     public void getTimeLast(int testId) {
         // todo
+    }
+
+    @PostMapping(value = "/answer/submit")
+    public void submitAnswers() {
+
+    }
+
+    @PostMapping(value = "/answer/check")
+    public void checkAnsers() {
+
     }
 
 }

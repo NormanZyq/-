@@ -1,27 +1,27 @@
 {
   "status": 0,
-    "data": [  
-        {  
-           
-            "name": "1173710101",  
+    "data": [
+        {
+
+            "name": "1173710101",
             "startTime": "张三",
             "is_true":"12345678"
         },
-		{  
-		   
-		    "name": "JS1173710101",  
+		{
+
+		    "name": "JS1173710101",
 		    "startTime": "王忠杰",
 		    "is_true":"12345678"
 		},
-		{  
-		   
-		    "name": "ADM01",  
+		{
+
+		    "name": "ADM01",
 		    "startTime": "大大",
 		    "is_true":"12345678"
 		},
-		{  
-		   
-		    "name": "以下哪个人曾经是美国总统？",  
+		{
+
+		    "name": "以下哪个人曾经是美国总统？",
 		    "optionA": "普京",
 			"optionB": "奥巴马",
 			"optionC": "阿姆斯特朗",

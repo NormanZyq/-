@@ -9,6 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 文件上传控制器.
+ *
+ * @author ljq
+ */
 @Controller
 public class FileUpController {
 

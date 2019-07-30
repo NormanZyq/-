@@ -60,12 +60,17 @@ function searchCourses() {
 }
 
 function getTests() {
+    $('#exam').html('');
+
     $.ajax({
-        url: "/test/get/my",
+        url: "/test/get/all",
+        type: "POST",
         dataType: "json",
-
         success: function (result) {
-
+            for (let test of result) {
+                console.log(test);
+                appendTestCard(test)
+            }
         },
         error: function (result) {
             alert(result)
@@ -73,9 +78,9 @@ function getTests() {
     })
 }
 
-function getTest(testId) {
+function getXuanze(testId) {
     $('#exer').html('');
-    let name = $('#search-content').val();
+    // 获得选择题
     $.ajax({
         url: "/test/get/xuanze",
         type: "POST",
@@ -98,3 +103,39 @@ function getTest(testId) {
         }
     })
 }
+
+
+
+function getZhuguan(testId, clear) {
+    if (clear) {
+        $('#exer').html('');
+    }
+    // 获得主观题
+    $.ajax({
+        url: "/test/get/zhuguan",
+        type: "POST",
+        dataType: "json",
+        data: {
+            testId: testId
+        },
+        success: function (result) {
+            // 解析选择题
+            console.log(result);
+            var index = 1;
+            for (question of result) {
+                appendSQ(question, index);
+                index++;
+            }
+        },
+        error: function (result) {
+            alert(result);
+            console.log(result);
+        }
+    })
+
+}
+
+
+
+
+

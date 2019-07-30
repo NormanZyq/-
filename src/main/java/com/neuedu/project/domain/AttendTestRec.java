@@ -1,7 +1,14 @@
 package com.neuedu.project.domain;
 
 public class AttendTestRec {
+    /**
+     * 学号。
+     */
     private String studentId;
+
+    /**
+     * 考试ID
+     */
     private int testId;
 
     public String getStudentId() {

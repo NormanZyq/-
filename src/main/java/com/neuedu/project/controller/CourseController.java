@@ -24,6 +24,9 @@ import java.util.List;
 @RequestMapping("/course")
 public class CourseController {
 
+    /**
+     * logger.
+     */
     private Logger log = Logger.getLogger(CourseController.class);
 
     /**
@@ -82,7 +85,6 @@ public class CourseController {
         } else {
             response.setStatus(MyHttpStatus.FAIL.value());
         }
-
     }
 
     /**
@@ -137,5 +139,4 @@ public class CourseController {
             }
         }
     }
-
 }

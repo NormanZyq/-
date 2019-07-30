@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //配置拦截器的配置信息
 
 /**
- * 未登录时的拦截。
+ * 角色控制相关的拦截。
  * 登录前只允许访问少量页面，如主页、登录页面
  * 登录后才能访问学生、教师等的页面
  */

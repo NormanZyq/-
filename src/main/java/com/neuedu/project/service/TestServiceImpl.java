@@ -2,6 +2,7 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.dao.*;
 import com.neuedu.project.domain.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,13 @@ public class TestServiceImpl implements TestService {
 
     private final CourseMapper courseMapper;
 
+    /**
+     * logger.
+     */
+    private final Logger log = Logger.getLogger(TestServiceImpl.class);
+
     @Autowired
-    public TestServiceImpl(TestMapper testMapper, QuestionMapper questionMapper,AttendTestRecMapper attendTestRecMapper,ArrangementMapper arrangementMapper,CourseMapper courseMapper) {
+    public TestServiceImpl(TestMapper testMapper, QuestionMapper questionMapper, AttendTestRecMapper attendTestRecMapper, ArrangementMapper arrangementMapper, CourseMapper courseMapper) {
         this.testMapper = testMapper;
         this.questionMapper = questionMapper;
         this.attendTestRecMapper = attendTestRecMapper;
@@ -61,28 +67,25 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<Arrangement> getArrangedTestsByStudentId(String studentId){
+    public List<Arrangement> getArrangedTestsByStudentId(String studentId) {
         //获取学生的testIds
         List<Integer> testIds = attendTestRecMapper.getTestIdFromStudentId(studentId);
         //由testId获取考试安排信息
         List<Arrangement> arrangements = new ArrayList<>();
         for (int tId : testIds) {
             Arrangement arr = arrangementMapper.getTestArrangement(tId);
-            System.out.println(arr);
             //get courseId
             int cId = testMapper.queryTest(tId).getCourseId();
             //get courseName
             Course course = new Course();
             course.setCourseId(cId);
-            System.out.println("cId="+cId);
             String courseName = courseMapper.queryCourse(course).get(0).getCourseName();
-            System.out.println(courseName);
-            if(courseName!=null) {
+            if (courseName != null) {
                 arr.setCourseName(courseName);
                 arrangements.add(arr);
             }
         }
-         return arrangements;
+        return arrangements;
     }
 
     @Override
@@ -92,7 +95,6 @@ public class TestServiceImpl implements TestService {
 
     /**
      * autoCreateTest的辅助函数：已通过测试
-     *
      */
     private String produceIds(int sqCount, List<Question> sq, int num) {
         StringBuilder sIds = new StringBuilder();
@@ -101,7 +103,7 @@ public class TestServiceImpl implements TestService {
             return "";
         for (int i = 0; i < sqCount; i++) {
             int size = sq.size();//选择题库大小
-            int choose = calcualteOJLD(size, num) - 1;//List下标减一
+            int choose = calculateOJLD(size, num) - 1;//List下标减一
             if (i != 0)
                 sIds.append(" ");
             sIds.append(sq.get(choose).getQuestionId());
@@ -113,9 +115,8 @@ public class TestServiceImpl implements TestService {
 
     /**
      * autoCreateTest的辅助函数：已彻底测试
-     *
      */
-    private int calcualteOJLD(int i, int j) {
+    private int calculateOJLD(int i, int j) {
         //i为数组大小，j为顺次选择数
         if (i < j) {
             int sum = i;

@@ -146,7 +146,7 @@ public class OnlineTestSystemApplicationTests {
     }
     @Test
     public void testgetArrangedTestsByStudentId(){
-        System.out.println(testService.getArrangedTestsByStudentId("aaaa"));
+        System.out.println(testService.getArrangedTestsByStudentId("abc"));
     }
 
 }

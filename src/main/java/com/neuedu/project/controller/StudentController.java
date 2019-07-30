@@ -17,9 +17,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/student")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    /**
+     * student service.
+     */
+    private final StudentService studentService;
 
+    /**
+     * force injection.
+     *
+     * @param studentService student service
+     */
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    /**
+     * 为学生注册（分配）。
+     *
+     * @param userId   学号
+     * @param password 密码
+     * @param name     名称
+     * @return todo 待定
+     */
     @PostMapping(value = "/register")
     @ResponseBody
     public String register(String userId,
@@ -28,11 +48,6 @@ public class StudentController {
         studentService.registerStudent(userId, password, name);
         return "";
     }
-
-
-
-
-
 
 
 }

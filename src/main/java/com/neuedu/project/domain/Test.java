@@ -22,7 +22,6 @@ public class Test {
         this.testId = testId;
         this.choiceQuestionIds = choiceQuestionIds;
         this.subjectiveQuestionIds = subjectiveQuestionIds;
-
     }
 
     public int getCourseId() {
@@ -55,22 +54,6 @@ public class Test {
 
     public void setSubjectiveQuestionIds(String subjectiveQuestionIds) {
         this.subjectiveQuestionIds = subjectiveQuestionIds;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     @Override

@@ -96,11 +96,10 @@ function searchCoursesByName() {
 }
 
 function appendTestCard(test) {
-
-    let card = `<div class="col-sm-3">
+    let card = `<div class="col-sm-4 mt-4">
         <div class="card m-auto shadow shadow-sm">
-            <span id="test-id" style="display: none;">${test.id}</span>
-            <h3 class="card-title"><br /><br /><br />${test.name}</h3>
+            <span id="test-id" style="display: none;">${test.testId}</span>
+            <h3 class="card-title"><br /><br /><br />${test.courseName}</h3>
             <div class="card-body">
                 <br />
 
@@ -110,7 +109,7 @@ function appendTestCard(test) {
                             <th>
                                 <h5>考试课程</h5>
                             </th>
-                            <th>${test.name}</th>
+                            <th><h5>${test.courseName}</h5></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,20 +117,20 @@ function appendTestCard(test) {
                             <td>
                                 <h5>考试时间</h5>
                             </td>
-                            <td>${test.time}</td>
+                            <td>${test.startTime}</td>
                         </tr>
                         <tr>
                             <td>
                                 <h5>考试时长</h5>
                             </td>
-                            <td>${test.duration}</td>
+                            <td>${test.duration} 分钟</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>`;
 
-    $('#test-list').append(card);
+    $('#exam').append(card);
 
 }
 
@@ -193,8 +192,6 @@ function appendSelectedResult(course) {
 }
 
 function appendCQ(question, count) {
-    let choicesCount = question.choices.length;
-
     let content = `<div class="card w-75 mx-auto shadow shadow-sm">
 				<div class="card-header">第${count}题</div>
 				<div class="card-body">${question.questionContent}`;
@@ -210,13 +207,13 @@ function appendCQ(question, count) {
     // 题目内容<br /><br />${question.d}<br /><br />B<br /><br />C<br /><br />D<br /><br />
     let selectField = `</div>
 				<div class="card-footer">
-					<label><input type="radio" name="optradio0" id="ex">
+					<label><input type="radio" name="optradio0" id="cq-${count}">
 						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
+					<label><input type="radio" name="optradio0" id="cq-${count}">
 						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
+					<label><input type="radio" name="optradio0" id="cq-${count}">
 						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="ex">
+					<label><input type="radio" name="optradio0" id="cq-${count}">
 						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</div>
@@ -226,6 +223,13 @@ function appendCQ(question, count) {
 
 }
 
+function appendSQ(question, index) {
+    // todo 需要主观题的卡片
+}
+
+/**
+ * 获得URL参数
+ */
 function getRequestParam() {
     let params = location.search;
     let request = {};
@@ -238,4 +242,9 @@ function getRequestParam() {
         return request;
     }
 }
+
+
+
+
+
 

@@ -14,17 +14,39 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 题目控制器。
+ * 负责各种题目相关控制
+ *
+ * @author zyq
+ */
 @Controller
 @RequestMapping("/question")
 public class QuestionController {
 
+    /**
+     * 题目的service。
+     */
     private final QuestionService questionService;
 
+    /**
+     * 强制注入
+     *
+     * @param questionService 题目的service
+     */
     @Autowired
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
+    /**
+     * 添加单个问题。
+     * 要求前端按照Java类中的字段名称传入数据
+     *
+     * @param question 题目对象
+     * @param response response，用于设置状态码
+     * @return 成功或失败
+     */
     @PostMapping("/add/single")
     @ResponseBody
     public String add(@RequestParam Question question,
@@ -33,14 +55,25 @@ public class QuestionController {
         if (type == 0) {
             questionService.addChoiceQuestion(question);
             response.setStatus(MyHttpStatus.OK.value());
-            return "success";
+            return "成功添加一道题";
         } else {
             questionService.addSubjectiveQuestion(question);
             response.setStatus(MyHttpStatus.FAIL.value());
-            return "failed";
+            return "添加失败，请重试";
         }
     }
 
+    /**
+     * 添加多道题，前端传入各个数据的数组，（按照顺序）。
+     *
+     * @param courseId          考试ID数组
+     * @param questionType      问题类型数组
+     * @param questionContent   考试内容数组
+     * @param choicesStrings    选项字符串数组
+     * @param rightAnswerString 正确答案数组
+     * @param resources         资源数组
+     * @return 成功的详细数据，或者抛出异常结束
+     */
     @PostMapping("/add/multiple")
     @ResponseBody
     public String multipleAdd(int[] courseId, int[] questionType, String[] questionContent,
@@ -78,12 +111,24 @@ public class QuestionController {
                 length, choiceCount, subjectiveCount);
     }
 
+    /**
+     * 根据课程ID获得选择题。
+     *
+     * @param id 课程ID
+     * @return 题目的json字符串
+     */
     @GetMapping(value = "/get/cq/{id}")
     @ResponseBody
     public String getChoiceQuestionsByCourseId(@PathVariable int id) {
         return JSON.toJSONString(questionService.getChoiceQuestionByCourseId(id));
     }
 
+    /**
+     * 根据课程ID获得主观题。
+     *
+     * @param id 课程ID
+     * @return 题目的json字符串
+     */
     @GetMapping(value = "/get/sq/{id}")
     @ResponseBody
     public String getSubjectiveQuestionsByCourseId(@PathVariable int id) {

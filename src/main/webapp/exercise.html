@@ -1,172 +1,159 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<!-- 新 Bootstrap4 核心 CSS 文件 -->
-		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 
-		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 
-		<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
-		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
 
-		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-		
-		
-		
-		<script type="text/javascript">
-			function typ() {
-				/* alert($("#ke").prop("checked"))
-				 */
-				if ($("#ke").prop("checked") == true) {
-					$("#sel").prop("hidden",false);
-					$("#tex").prop("hidden",true);
-				}
-				else if ($("#zu").prop("checked") == true) {
-					$("#tex").prop("hidden",false);
-					$("#sel").prop("hidden",true);
-				}
-				$("#")
-			}
-		</script>
-		
-		
-		
-		
-	</head>
-	<body class="text-center">
-		<div class="container">
-			<ul class="nav ">
-				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
-				</li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
-				</li>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-				<form class="form-inline col-md-1 offset-md-11 m-auto">
-					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
-				</form>
+    <script src="js/utils.js"></script>
+    <script src="js/fetchData.js"></script>
 
-			</ul>
+    <script type="text/javascript">
+        // 标记：如果是true表示创建新题目，如果是false，表示更新题目
+        var create;
+        window.onload = function () {
+            let questionId = getRequestParam().id;
+            if (questionId !== undefined) {
+                create = false;
+                // 获得题目的信息
+                let question = getQuestionById(questionId);
+                // 更新界面
+
+                // todo
+
+            } else {
+                // 创建新题目
+                create = true;
+            }
+        };
 
 
-			<br />
-
-			<br /><br /><br /><br />
-			<table class="table">
-				<tbody>
-					<tr>
-						<td>课程ID</td>
-						<td>
-							<form class="form-inline float-right">
-								<div class="form-group">
-
-									<input type="email" class="form-control" placeholder="课程ID">
-								</div>
-								<button type="submit" class="btn btn-outline-info">确认</button>
-							</form>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>题目ID</td>
-						<td>
-							<form class="form-inline float-right">
-								<div class="form-group">
-
-									<input type="email" class="form-control" placeholder="题目ID">
-								</div>
-								<button type="submit" class="btn btn-outline-info">确认</button>
-							</form>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>题目类型</td>
-						<td>
-							<form class="form-inline float-right">
-								<label><input type="radio" name="optradio" id="ke" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;客观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label><input type="radio" name="optradio" id="zu" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;主观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>题目内容</td>
-						<td>
-							<form class="form-inline float-right">
-								<div class="form-group">
-
-									<input type="email" class="form-control" placeholder="题目内容">
-								</div>
-								<button type="submit" class="btn btn-outline-info">确认</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>默认分值</td>
-						<td>
-							<form class="form-inline float-right">
-								<div class="form-group">
-
-									<input type="email" class="form-control" placeholder="默认分值">
-								</div>
-								<button type="submit" class="btn btn-outline-info">确认</button>
-							</form>
-						</td>
-					</tr>
-					<tr hidden="hidden" id="sel">
-						<td>选项设置</td>
-						<td>
-							<form class="form-inline float-right">
-								<input type="radio" name="optradio0" id="ex">
-									&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label><input type="radio" name="optradio0" id="ex">
-									&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								<label><input type="radio" name="optradio0" id="ex">
-									&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								<label><input type="radio" name="optradio0" id="ex">
-									&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								<button type="submit" class="btn btn-outline-info">确认</button>
-							</form>
-						</td>
-					</tr>
-					<tr hidden="hidden" id="tex">
-						
-							<td>正确答案</td>
-							<td>
-								<form class="form-inline float-right">
-									<div class="form-group">
-						
-										<input type="email" class="form-control" placeholder="正确答案">
-									</div>
-									<button type="submit" class="btn btn-outline-info">确认</button>
-								</form>
-							</td>
-						
-					</tr>
-				</tbody>
-			</table>
-			
-			<br /><br /><br /><br />
-			
-			
-			
-							
-			
-			<button id="sbm" type="button" class="btn btn-outline-success btn-lg " 
-			onclick="window.history.back()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-		</div>
-		<div class="container">
-
-			
+        function typ() {
+            /* alert($("#ke").prop("checked"))
+             */
+            if ($("#ke").prop("checked") == true) {
+                $("#sel").prop("hidden", false);
+                $("#tex").prop("hidden", true);
+            } else if ($("#zu").prop("checked") == true) {
+                $("#tex").prop("hidden", false);
+                $("#sel").prop("hidden", true);
+            }
+            $("#")
+        }
+    </script>
 
 
-		</div>
-	</body>
+</head>
+<body class="text-center">
+<div class="container">
+    <ul class="nav ">
+        <li class="nav-item">
+            <img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100"/>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="nav-item">
+            <p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+        </li>
+
+        <form class="form-inline col-md-1 offset-md-11 m-auto">
+            <button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
+        </form>
+
+    </ul>
+
+
+    <br/>
+
+    <br/><br/><br/><br/>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>题目类型</td>
+            <td>
+                <form class="form-inline float-right">
+                    <label><input type="radio" name="optradio" id="ke" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;客观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="optradio" id="zu" onclick="typ()">&nbsp;&nbsp;&nbsp;&nbsp;主观题&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>题目内容</td>
+            <td>
+                <form class="form-inline float-right">
+                    <div class="form-group">
+
+                        <input type="email" class="form-control" placeholder="题目内容">
+                    </div>
+                    <button type="submit" class="btn btn-outline-info">确认</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>默认分值</td>
+            <td>
+                <form class="form-inline float-right">
+                    <div class="form-group">
+
+                        <input type="email" class="form-control" placeholder="默认分值">
+                    </div>
+                    <button type="submit" class="btn btn-outline-info">确认</button>
+                </form>
+            </td>
+        </tr>
+        <tr hidden="hidden" id="sel">
+            <td>选项设置</td>
+            <td>
+                <form class="form-inline float-right">
+                    <input type="checkbox" name="optradio0" id="ex">
+                    &nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" name="optradio0" id="ex">
+                        &nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="checkbox" name="optradio0" id="ex">
+                        &nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="checkbox" name="optradio0" id="ex">
+                        &nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <!--<button type="submit" class="btn btn-outline-info">确认</button>-->
+                </form>
+            </td>
+        </tr>
+        <tr hidden="hidden" id="tex">
+
+            <td>正确答案</td>
+            <td>
+                <form class="form-inline float-right">
+                    <div class="form-group">
+
+                        <input type="email" class="form-control" placeholder="正确答案">
+                    </div>
+                    <button type="submit" class="btn btn-outline-info">确认</button>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <br/><br/><br/><br/>
+
+
+    <button id="sbm" type="button" class="btn btn-outline-success btn-lg "
+            onclick="window.history.back()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+</div>
+<div class="container">
+
+
+</div>
+</body>
 </html>

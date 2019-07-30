@@ -206,7 +206,7 @@ function appendSQ(question, index) {
 }
 
 /**
- * 获得URL参数
+ * 获得URL参数。
  */
 function getRequestParam() {
     let params = location.search;

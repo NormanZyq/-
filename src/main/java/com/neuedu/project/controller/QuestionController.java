@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -143,8 +142,17 @@ public class QuestionController {
     @GetMapping(value = "/get/{id}")
     @ResponseBody
     public Question getQuestion(@PathVariable int id) {
-        // todo
-        return null;
+        Question question = questionService.getQuestionById(id);
+        if (question.getQuestionType() == 0) {
+            // 选择题，解析为选择题后再返回
+            return new ChoiceQuestion(question);
+        } else if (question.getQuestionType() == 1) {
+            // 主观题，直接返回
+            return question;
+        } else {
+            // 不应该存在的题，返回null
+            return null;
+        }
     }
 
     /**

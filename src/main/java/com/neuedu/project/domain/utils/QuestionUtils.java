@@ -20,9 +20,7 @@ public class QuestionUtils {
     private QuestionUtils() {
     }
 
-
     public Map<String, String> parseChoiceString(String choiceString) {
-
         // 待返回的map，key是选项，value是选项的内容
         Map<String, String> mapChoiceContent = new HashMap<>();
 
@@ -45,11 +43,10 @@ public class QuestionUtils {
             mapChoiceContent.put(capital, choiceContent);
         }
         return mapChoiceContent;
-
     }
 
 
-    public List<ChoiceQuestion> parseAsChoiceQuestions(List<Question> questions) {
+    public List<ChoiceQuestion> parseAsChoiceQuestionList(List<Question> questions) {
         List<ChoiceQuestion> returnList = new ArrayList<>();
         for (Question q : questions) {
             returnList.add(new ChoiceQuestion(q));

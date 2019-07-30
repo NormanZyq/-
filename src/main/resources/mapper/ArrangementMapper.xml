@@ -10,7 +10,7 @@
         <result column="test_id" property="testId"/>
         <result column="start_time" property="startTime"/>
         <result column="duration" property="duration"/>
-        
+
     </resultMap>
 
     <insert id="addArrangement" parameterType="Arrangement">
@@ -45,5 +45,15 @@
         FROM arrangement
         where test_id = #{testId}
     </select>
+
+    <!--&lt;!&ndash;使用学号和考试ID获得考试对象，用于判断学生是否拥有此考试安排&ndash;&gt;-->
+    <!--<select id="getTestArrangementWithStudentId" resultMap="arrangementMap">-->
+        <!--select a_table.*-->
+        <!--from arrangement a_table,-->
+             <!--test_attend_records tar_table-->
+        <!--where a_table.test_id = #{testId}-->
+          <!--and tar_table.test_id = #{testId}-->
+          <!--and tar_table.student_id = #{studentId};-->
+    <!--</select>-->
 
 </mapper>

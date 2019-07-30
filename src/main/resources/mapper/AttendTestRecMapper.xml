@@ -6,6 +6,7 @@
 
 <mapper namespace="com.neuedu.project.dao.AttendTestRecMapper">
 
+
     <resultMap id="attendTestRecMap" type="AttendTestRec">
         <id column="attend_record_id" property="attendRecordId"/>
         <result column="student_id" property="studentId"/>
@@ -27,6 +28,13 @@
         select test_id
         FROM test_attend_records
         where student_id = #{studentId}
+    </select>
+
+    <select id="getAttendTestRecId" resultType="int">
+      select attend_record_id
+      FROM test_attend_records
+      where student_id = #{studentId}
+      and test_id = #{testId}
     </select>
 
 </mapper>

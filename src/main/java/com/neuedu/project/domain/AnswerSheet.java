@@ -5,7 +5,7 @@ public class AnswerSheet {
     /**
      * 与考试信息、学生ID关联。
      */
-    private int attendRecord;
+    private int attendRecordId;
 
     private int id;
 
@@ -17,12 +17,12 @@ public class AnswerSheet {
 
     }
 
-    public int getAttendRecord() {
-        return attendRecord;
+    public int getAttendRecordId() {
+        return attendRecordId;
     }
 
-    public void setAttendRecord(int attendRecord) {
-        this.attendRecord = attendRecord;
+    public void setAttendRecordId(int attendRecordId) {
+        this.attendRecordId = attendRecordId;
     }
 
     public int getId() {
@@ -47,5 +47,15 @@ public class AnswerSheet {
 
     public void setSubjectiveQuestionAnswer(String subjectiveQuestionAnswer) {
         this.subjectiveQuestionAnswer = subjectiveQuestionAnswer;
+    }
+
+    @Override
+    public String toString() {
+        return "AnswerSheet{" +
+                "attendRecordId=" + attendRecordId +
+                ", id=" + id +
+                ", choiceQuestionAnswer='" + choiceQuestionAnswer + '\'' +
+                ", subjectiveQuestionAnswer='" + subjectiveQuestionAnswer + '\'' +
+                '}';
     }
 }

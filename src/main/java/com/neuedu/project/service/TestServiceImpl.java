@@ -162,7 +162,7 @@ public class TestServiceImpl implements TestService {
     }
 
     /**
-     * 考试状态信息的辅助函数
+     * 考试状态信息的辅助函数:已测试
      *
      * @param arr 考试安排信息
      * @return 考试剩余时间

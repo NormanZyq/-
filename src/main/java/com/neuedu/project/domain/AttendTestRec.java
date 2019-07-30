@@ -1,6 +1,8 @@
 package com.neuedu.project.domain;
 
 public class AttendTestRec {
+
+    private int attendRecordId;
     /**
      * 学号。
      */
@@ -27,18 +29,30 @@ public class AttendTestRec {
         this.testId = testId;
     }
 
-    public AttendTestRec(String studentId, int testId) {
+    public AttendTestRec(int attendRecordId, String studentId, int testId) {
+        //ToDo Maybe Wrong
+        this.attendRecordId = attendRecordId;
         this.studentId = studentId;
         this.testId = testId;
     }
+
     public AttendTestRec() {
 
     }
 
+    public int getAttendRecordId() {
+        return attendRecordId;
+    }
+
+    public void setAttendRecordId(int attendRecordId) {
+        this.attendRecordId = attendRecordId;
+    }
+
     @Override
     public String toString() {
-        return "AttendTestRecord{" +
-                "studentId='" + studentId + '\'' +
+        return "AttendTestRec{" +
+                "attendRecordId=" + attendRecordId +
+                ", studentId='" + studentId + '\'' +
                 ", testId=" + testId +
                 '}';
     }

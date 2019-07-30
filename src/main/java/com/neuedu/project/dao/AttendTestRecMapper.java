@@ -3,6 +3,7 @@ package com.neuedu.project.dao;
 import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.AttendTestRec;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,6 +35,15 @@ public interface AttendTestRecMapper {
      * @return 考试ID集
      */
     List<Integer> getTestIdFromStudentId(String studentId);
+
+    /**
+     * 查询信息存储为参数的考试参与信息表id
+     *
+     * @param studentId 学生Id
+     * @param testId 考试ID
+     * @return
+     */
+    int getAttendTestRecId(@Param("studentId") String studentId, @Param("testId") int testId);
 
 
 }

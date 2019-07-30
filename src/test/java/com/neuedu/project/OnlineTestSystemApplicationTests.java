@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,9 @@ public class OnlineTestSystemApplicationTests {
 
     @Autowired
     private ArrangeService arrangeService;
+
+    @Autowired
+    private AnswerService answerService;
 
     @Test
     public void contextLoads() {
@@ -161,6 +165,14 @@ public class OnlineTestSystemApplicationTests {
         //System.out.println("------------------------------------------------------");
         System.out.println(arrs);
         //System.out.println("------------------------------------------------------");
+    }
+
+    @Test
+    public void TestaddAnswerSheet(){
+
+        String ca = "A#B#C# #A";
+        String sa = "USB#clean";
+        answerService.addAnswerSheet("aaaa",7,ca,sa);
     }
 
 }

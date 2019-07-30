@@ -1,31 +1,26 @@
 {
-  "status": 0,
-    "data": [
-        {
-
-            "name": "1173710101",
-            "startTime": "张三",
-            "is_true":"12345678"
-        },
+	"status": 0,
+	"data": [
 		{
 
-		    "name": "JS1173710101",
-		    "startTime": "王忠杰",
-		    "is_true":"12345678"
+			"ID": "1173710101",
+			"Name": "张三",
+			"Password":"12345678",
+			"Type":"学生"
 		},
 		{
 
-		    "name": "ADM01",
-		    "startTime": "大大",
-		    "is_true":"12345678"
+			"ID": "JS1173710101",
+			"Name": "王忠杰",
+			"Password":"12345678",
+			"Type":"教师"
 		},
 		{
 
-		    "name": "以下哪个人曾经是美国总统？",
-		    "optionA": "普京",
-			"optionB": "奥巴马",
-			"optionC": "阿姆斯特朗",
-			"optionD": "克洛欧夫斯基"
+			"ID": "ADM01",
+			"Name": "大大",
+			"Password":"12345678",
+			"Type":"管理员"
 		}
-    ]
+	]
 }

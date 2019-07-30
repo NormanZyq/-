@@ -135,6 +135,34 @@ public class QuestionController {
         return JSON.toJSONString(questionService.getSubjectiveQuestionByCourseId(id));
     }
 
+    /**
+     * 用问题ID获得问题详情。
+     * @param
+     * @return
+     */
+    @GetMapping(value = "/get/{id}")
+    @ResponseBody
+    public Question getQuestion(@PathVariable int id) {
+        // todo
+        return null;
+    }
+
+    /**
+     * 根据课程ID获得所有题目
+     *
+     * @param id 课程ID
+     * @return 题目的json字符串
+     */
+    @GetMapping(value = "/get/all/{id}")
+    @ResponseBody
+    public List<Question> getQuestionsByCourseId(@PathVariable int id) {
+        List<Question> cqs = questionService.getChoiceQuestionByCourseId(id);
+        List<Question> sqs = questionService.getSubjectiveQuestionByCourseId(id);
+
+        cqs.addAll(sqs);
+        return cqs;
+    }
+
 }
 
 

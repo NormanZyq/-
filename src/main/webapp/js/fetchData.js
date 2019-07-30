@@ -30,9 +30,60 @@ function getUserInfo() {
 }
 
 function getTeachCourse() {
+    $('#my-course-dropdown').html('');
+    $.ajax({
+        url: "/course/get/my",
+        dataType: "json",
 
+        success: function (result) {
+            // 解析选课内容
+            for (let course of result) {
+                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `')">${course.courseName}</a>`;
+                $('#my-course-dropdown').append(content);
+            }
+        }
+    })
+}
 
+function getQuestions(courseId) {
+    $("#exerbody1").html('');
+    $.ajax({
+        url: '/question/get/cq/' + courseId,
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            if (data.length === 0) {
+                $("#exerbody1").append(`<p class="text-center">该课程还没有题目</p>`);
+                return;
+            }
 
+            var tr1 = `<tr><th>题目内容</th><th>类型</th><th>操作</th></tr>`;
+
+            for (question of data) {
+                tr1 += `<tr><td>${question.questionContent}</td>`;
+                if (question.questionType === 0) {
+                    // 选择题
+                    tr1 += `<td>选择题</td>`
+                } else if (question.questionType === 1) {
+                    // 主观题
+                    tr1 += `<td>主观题</td>`
+                } else {
+                    // 其他（不存在的）
+                }
+                tr1 += `<td><a type="button" class="btn btn-outline-info" href="/exercise.html?id=${question.questionId}">修改</a></td></tr>`;
+            }
+            $("#exerbody1").append(tr1);
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            // 状态码
+            console.log(XMLHttpRequest.status);
+            // 状态
+            console.log(XMLHttpRequest.readyState);
+            // 错误信息
+            console.log(textStatus);
+        }
+    })
 }
 
 function searchCourses() {

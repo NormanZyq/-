@@ -22,7 +22,8 @@ public class CharacterAccessConfig implements WebMvcConfigurer {
 
     private final String[] teacherCanAccess = {"/teacher", "/course/add", "/course/addTeacher", "/teacher.html"};
 
-    private final String[] studentCanAccess = {"/course/selectCourse", "/student", "/student.html", "/exam", "/exam.html"};
+    private final String[] studentCanAccess = {"/course/selectCourse",
+            "/student", "/student.html", "/exam", "/exam.html"};
 
     private final String[] adminCanAccess = {"/admin", "/admin.html"};
 

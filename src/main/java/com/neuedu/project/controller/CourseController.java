@@ -103,9 +103,7 @@ public class CourseController {
     }
 
     /**
-     * get the loggged in user's all courses.
-     *
-     * todo
+     * get the logged in user's all courses.
      *
      * 学生获得他们所选课程
      * 老师获得他们所教课程
@@ -128,13 +126,14 @@ public class CourseController {
 
             if (identity == 0) {
                 // 获得学生所选课程
-                log.info("学生请求获取所选课程");
+                log.info(id + "学生请求获取所选课程");
                 return courseService.getStudentCourse(id);
-            } else {
+            } else if (identity == 1) {
                 // 获得教师所教课程
-                assert identity == 1;
-                // todo
-                log.info("教师请求获取所教课程");
+                log.info(id + " 教师请求获取所教课程");
+                return courseService.getTeacherCourse(id);
+            } else {
+                // identity != 0 或 1
                 return null;
             }
         }

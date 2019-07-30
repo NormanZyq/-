@@ -57,36 +57,15 @@ function selectCourse(id) {
         statusCode: {
             200: function () {
                 alert("选课成功");
-                $('#btn-select-' + id).addClass('disabled').html('已选').onclick = function () {
-                    alert('已选此课')
-                };
+                $('#btn-select-' + id).addClass('disabled').html('已选').onclick(function () {
+                    alert('已选此课');
+                })
             },
             404: function () {
                 alert("无法连接到服务器");
             },
             701: function () {
                 alert("选课失败，请重试");
-            },
-            500: function () {
-                alert("服务器异常");
-            }
-        }
-    })
-}
-
-function searchCoursesByName() {
-    // todo 从搜索框获取name
-    var name = "";
-
-    $.ajax({
-        url: "/course/get/" + name,
-        statusCode: {
-            200: function (result) {
-                console.log(result);
-                // todo 更新列表
-            },
-            404: function () {
-                alert("无法连接到服务器");
             },
             500: function () {
                 alert("服务器异常");
@@ -102,7 +81,6 @@ function appendTestCard(test) {
             <h3 class="card-title"><br /><br /><br />${test.courseName}</h3>
             <div class="card-body">
                 <br />
-
                 <table class="table">
                     <thead>
                         <tr>
@@ -242,6 +220,7 @@ function getRequestParam() {
         return request;
     }
 }
+
 
 
 

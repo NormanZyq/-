@@ -51,6 +51,14 @@ public interface CourseMapper {
      * @return 学生所选的课程列表
      */
     List<Course> queryStudentSelectedCourse(String studentId);
+
+    /**
+     * 获得教师教授的课程。
+     * @param teacherId 工号
+     * @return  课程列表
+     */
+    List<Course> queryTeacherTeachingCourse(String teacherId);
+
     /**
      * 获取选择这一课的学生
      *

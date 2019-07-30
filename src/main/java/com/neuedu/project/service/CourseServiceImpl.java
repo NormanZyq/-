@@ -57,4 +57,9 @@ public class CourseServiceImpl implements CourseService {
         log.info(courses);
         return courses;
     }
+
+    @Override
+    public List<Course> getTeacherCourse(String teacherId) {
+        return courseMapper.queryTeacherTeachingCourse(teacherId);
+    }
 }

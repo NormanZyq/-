@@ -155,8 +155,6 @@ function getXuanze(testId) {
     })
 }
 
-
-
 function getZhuguan(testId, clear) {
     if (clear) {
         $('#exer').html('');
@@ -183,10 +181,22 @@ function getZhuguan(testId, clear) {
             console.log(result);
         }
     })
-
 }
 
-
+function getQuestionById(id) {
+    $.ajax({
+        url: "/question/get/" + id,
+        type: "GET",
+        dataType: "json",
+        success: function (result) {
+            return result;
+        },
+        error: function (result) {
+            alert(result);
+            console.log(result);
+        }
+    })
+}
 
 
 

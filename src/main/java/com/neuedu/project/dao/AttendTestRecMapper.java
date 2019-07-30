@@ -11,25 +11,21 @@ import java.util.List;
 public interface AttendTestRecMapper {
 
     /**
-     * 给学生添加考试信息（暂定：选择软件构造的学生，必须参加猴子过桥的考试）
+     * 给学生添加考试信息（暂定：选择软件构造的学生，必须参加猴子过桥的考试）.
      *
-     * @param attendTestRec
-     *
+     * @param attendTestRec 参加考试记录的对象
      */
     void addAttendTestRec(AttendTestRec attendTestRec);
 
-
-
     /**
-     * 删去学生考试信息（未知用途：可能学生弃考了，亦或是教师停止授课，再者能留下都是精品）
+     * 删去学生考试信息（未知用途：可能学生弃考了，亦或是教师停止授课，再者能留下都是精品）.
      *
      * @param atrId 记录学生参加考试信息表的id
-     *
      */
     void deleteAttendTestRec(int atrId);
 
     /**
-     * 获取学生考试信息
+     * 获取学生考试信息.
      *
      * @param studentId 查询考试信息的学生Id
      * @return 考试ID集
@@ -37,13 +33,14 @@ public interface AttendTestRecMapper {
     List<Integer> getTestIdFromStudentId(String studentId);
 
     /**
-     * 查询信息存储为参数的考试参与信息表id
+     * 查询信息存储为参数的考试参与信息表id.
      *
-     * @param studentId 学生Id
-     * @param testId 考试ID
-     * @return
+     * @param studentId 学生ID
+     * @param testId    考试ID
+     * @return 考试记录的ID
      */
-    int getAttendTestRecId(@Param("studentId") String studentId, @Param("testId") int testId);
+    Integer getAttendTestRecId(@Param("studentId") String studentId,
+                           @Param("testId") int testId);
 
 
 }

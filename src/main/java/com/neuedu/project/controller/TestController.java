@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -127,7 +124,7 @@ public class TestController {
                 Question question = questionService.getQuestionById(id);
                 forChoiceQuestions.add(question);
             }
-            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestions(forChoiceQuestions);
+            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestionList(forChoiceQuestions);
             // 解析选择题完成
             return choiceQuestions;
         } else {

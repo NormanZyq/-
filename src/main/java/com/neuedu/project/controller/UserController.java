@@ -19,6 +19,7 @@ import static java.lang.String.valueOf;
 
 /**
  * 处理所有和user相关的请求。
+ *
  * @author zyq
  */
 @Controller
@@ -38,6 +39,7 @@ public class UserController {
 
     /**
      * 强制注入service.
+     *
      * @param userService service
      */
     @Autowired
@@ -47,7 +49,8 @@ public class UserController {
 
     /**
      * 获取登录用户的信息.
-//     * @param request
+     * //     * @param request
+     *
      * @return
      */
     @GetMapping(value = "/get/login")
@@ -96,7 +99,7 @@ public class UserController {
             request.getSession().setAttribute("loggedUser", loggedIn);
             request.getSession().setAttribute("loggedId", userId);
             request.getSession().setAttribute("allowPage", pageAvailable);
-            request.getSession().setAttribute("loggedIdentity",loggedIn.getIdentity());
+            request.getSession().setAttribute("loggedIdentity", loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());
 
             log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
@@ -117,7 +120,6 @@ public class UserController {
 //        System.out.println("In");
 //        userService.register(userId, password, name, identity);
     }
-
 
 
 }

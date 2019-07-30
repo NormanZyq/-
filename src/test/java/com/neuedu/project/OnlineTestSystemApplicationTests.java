@@ -1,9 +1,6 @@
 package com.neuedu.project;
 
-import com.neuedu.project.dao.CourseMapper;
-import com.neuedu.project.dao.QuestionMapper;
 import com.neuedu.project.domain.*;
-import com.neuedu.project.domain.factories.QuestionFactory;
 import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.*;
 import org.junit.Test;
@@ -80,7 +77,7 @@ public class OnlineTestSystemApplicationTests {
 
         ChoiceQuestion cq = new ChoiceQuestion(results.get(0));
 //        System.out.println(cq);
-        List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestions(results);
+        List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestionList(results);
 
         System.out.println(choiceQuestions);
     }
@@ -125,7 +122,7 @@ public class OnlineTestSystemApplicationTests {
                 Question question = questionService.getQuestionById(id);
                 forChoiceQuestions.add(question);
             }
-            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestions(forChoiceQuestions);
+            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestionList(forChoiceQuestions);
             // 解析选择题完成
             System.out.println(choiceQuestions);
         }

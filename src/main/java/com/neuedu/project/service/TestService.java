@@ -2,6 +2,7 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.domain.Arrangement;
 import com.neuedu.project.domain.Test;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,14 +30,18 @@ public interface TestService {
      * @param testId 考试id
      * @return 考试剩余时间,未开始返回-1，已完成返回0
      */
-    public long getTimeLast(int testId);
+    long getTimeLast(int testId);
 
     Test getTestById(int id);
 
     /**
-     * 由testid获取
+     * 查询信息存储为参数的考试参与信息表id.
+     *
+     * @param studentId 学生ID
+     * @param testId    考试ID
+     * @return 考试记录的ID
      */
-    //List<Integer> getAttendRecordIdByTestId(int testId);
+    Integer getAttendTestRecId(String studentId, int testId);
 
 //    int Calcualte_OJLD(int i, int j);
 

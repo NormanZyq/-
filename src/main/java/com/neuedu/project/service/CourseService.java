@@ -48,4 +48,11 @@ public interface CourseService {
      */
     List<Course> getStudentCourse(String studentId);
 
+    /**
+     * 获得教师教授的课程。
+     * @param teacherId 工号
+     * @return  课程列表
+     */
+    List<Course> getTeacherCourse(String teacherId);
+
 }

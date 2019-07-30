@@ -67,4 +67,17 @@
           and selection_table.course_id = course_table.course_id
     </select>
 
+    <select id="queryTeacherTeachingCourse" resultMap="courseMap">
+        select c_table.*
+        from course c_table,
+             course_teaching ct_table
+        where ct_table.teacher_id = #{teacherId}
+          and ct_table.course_id = c_table.course_id;
+    </select>
+
 </mapper>
+
+
+
+
+

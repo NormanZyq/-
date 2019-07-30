@@ -34,7 +34,7 @@
 			$.ajax({
 				type:"POST",
 				url:'data.json',
-				data:{"newpwd":newpwd},
+				data:{"Password":newpwd},
 				dataType:"json",
 				success:function(newP){
 					var newcode;
@@ -53,115 +53,240 @@
 		}
 	</script>
 	<script>
-		function update(i){
+		function update(i,identity){
 			//alert(i)
-			var IDnum = "uID" + i;
-			var exschild1 = $("#" + IDnum + "");
-			//alert(IDnum)
-			//alert(exschild1.prop("hidden"))
-			var pwdnum = "pwd" + i;
-			var exschild2 = $("#" + pwdnum + "");
-			var Typenum = "uType" + i;
-			var exschild3 = $("#" + Typenum + "");
-			exschild2.prop("hidden", true);
-			exschild1.prop("hidden", true);
-			exschild3.prop("hidden", true);
-			var CIDnum = "changeID" + i;
-			var exschild4 = $("#" + CIDnum + "");
-			var Cpwdnum = "changepwd" + i;
-			var exschild5 = $("#" + Cpwdnum + "");
-			var CTypenum = "changeType" + i;
-			var exschild6 = $("#" + CTypenum + "");
-			var Cedition = "edition" + i;
-			var exschild7 = $("#" + Cedition + "");
-			var Cdel = "del" + i;
-			var exschild8 = $("#" + Cdel + "");
-			var Csure = "besure" + i;
-			var exschild9 = $("#" + Csure + "");
-			exschild7.prop("hidden", true);
-			exschild8.prop("hidden", true);
-			exschild4.prop("hidden", false);
-			exschild5.prop("hidden", false);
-			exschild6.prop("hidden", false);
-			exschild9.prop("hidden",false);
-			//var newID = $("#chID");
-			var NIDnum = "chID" + i;
-			var newID = $("#" + NIDnum + "").val();
-			//alert(newID)
-			//var newpwd = $("#chpwd");
-			var Npwdnum = "chpwd" + i;
-			var newpwd = $("#" + Npwdnum + "").val();
-			//alert(newpwd)
-			//var newType = $("#chType")
-			var NTypenum = "chType" + i;
-			var newType = $("#" + NTypenum + "").val();
-			//alert(newType)
+			//alert(identity)
 
+			if(identity==0){
+				//alert(i)
+				var IDnum = "uID" + i;
+				var exschild1 = $("#" + IDnum + "");
+				//alert(IDnum)
+				//alert(exschild1.prop("hidden"))
+				var pwdnum = "pwd" + i;
+				var exschild2 = $("#" + pwdnum + "");
+				var Typenum = "uType" + i;
+				var exschild3 = $("#" + Typenum + "");
+				exschild2.prop("hidden", true);
+				exschild1.prop("hidden", true);
+				exschild3.prop("hidden", true);
+				var CIDnum = "changeID" + i;
+				var exschild4 = $("#" + CIDnum + "");
+				var Cpwdnum = "changepwd" + i;
+				var exschild5 = $("#" + Cpwdnum + "");
+				var CTypenum = "changeType" + i;
+				var exschild6 = $("#" + CTypenum + "");
+				exschild4.prop("hidden", false);
+				exschild5.prop("hidden", false);
+				exschild6.prop("hidden", false);
+				var Cedition = "edition" + i;
+				var exschild7 = $("#" + Cedition + "");
+				var Cdel = "del" + i;
+				var exschild8 = $("#" + Cdel + "");
+				var Csure = "besure" + i;
+				var exschild9 = $("#" + Csure + "");
+				exschild7.prop("hidden", true);
+				exschild8.prop("hidden", true);
+				exschild9.prop("hidden",false);
+				//var newID = $("#chID");
+				var NIDnum = "chID" + i;
+				var newID = $("#" + NIDnum + "").val();
+				//alert(newID)
+				//var newpwd = $("#chpwd");
+				var Npwdnum = "chpwd" + i;
+				var newpwd = $("#" + Npwdnum + "").val();
+				//alert(newpwd)
+				//var newType = $("#chType")
+				var NTypenum = "chType" + i;
+				var newType = $("#" + NTypenum + "").val();
+				//alert(newType)
+
+				$.ajax({
+					type:"POST",
+					url:'data.json',
+					data:{"ID":newID,"Password":newpwd,"Type":newType},
+					dataType:"json",
+					success:function(data){
+
+						alert("编辑成功啦٩(*Ӧ)و");
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						// 状态码
+						console.log(XMLHttpRequest.status);
+						// 状态
+						console.log(XMLHttpRequest.readyState);
+						// 错误信息
+						console.log(textStatus);
+						alert("出错了！");
+					}
+
+				})
+			}
+			else if(identity==1){
+				var cid = "crsid" + i;
+				var exschild1 = $("#" + cid + "");
+				var cname = "crsname" + i;
+				var exschild2 = $("#" + cname + "");
+				exschild1.prop("hidden", true);
+				exschild2.prop("hidden", true);
+				var ccrid = "ccid" + i;
+				var exschild3 = $("#" + ccrid + "");
+				var ccrname = "ccname" + i;
+				var exschild4 = $("#" + ccrname + "");
+				exschild3.prop("hidden", false);
+				exschild4.prop("hidden", false);
+				var cedition = "cedition" + i;
+				var exschild5 = $("#" + cedition + "");
+				var cdel = "cdel" + i;
+				var exschild6 = $("#" + cdel + "");
+				var csure = "cbesure" + i;
+				var exschild7 = $("#" + csure + "");
+				exschild5.prop("hidden", true);
+				exschild6.prop("hidden", true);
+				exschild7.prop("hidden",false);
+
+				var cIDnum = "chcid" + i;
+				var newID = $("#" + cIDnum + "").val();
+
+				var cpwdnum = "chcname" + i;
+				var newname = $("#" + cpwdnum + "").val();
+				$.ajax({
+					type:"POST",
+					url:'coursedata.json',
+					data:{"course_id":newID,"course_name":newname},
+					dataType:"json",
+					success:function(data){
+
+						alert("编辑成功啦٩(*Ӧ)و");
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						// 状态码
+						console.log(XMLHttpRequest.status);
+						// 状态
+						console.log(XMLHttpRequest.readyState);
+						// 错误信息
+						console.log(textStatus);
+						alert("出错了！");
+					}
+
+				})
+			}
+
+
+		}
+	</script>
+	<script>
+		function del(i,identity){
+			if(identity==0){
+				var IDnum = "uID" + i;
+				var delID = $("#" + IDnum + "").val();
+				alert(IDnum)
+				alert(delID)
+				$.ajax({
+					type:"POST",
+					url:'data.json',
+					data:{"ID":delID},
+					dataType:"json",
+					success:function(data){
+						alert("删除成功啦！");
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						// 状态码
+						console.log(XMLHttpRequest.status);
+						// 状态
+						console.log(XMLHttpRequest.readyState);
+						// 错误信息
+						console.log(textStatus);
+					}
+
+				});
+			}
+			else if(identity==1){
+				var cidnum = "crsid"+i;
+				var cdelID = $("#" + cidnum + "").val();
+				$.ajax({
+					type:"POST",
+					url:'coursedata.json',
+					data:{"course_id":cdelID},
+					dataType:"json",
+					success:function(data){
+						alert("删除成功啦！");
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						alert("出错了！");
+						// 状态码
+						console.log(XMLHttpRequest.status);
+						// 状态
+						console.log(XMLHttpRequest.readyState);
+						// 错误信息
+						console.log(textStatus);
+					}
+
+				});
+			}
+
+		}
+	</script>
+	<script>
+		function check(i,identity){
+			if(identity==0){
+				//var newID = $("#chID");
+				var NIDnum = "chID" + i;
+				var newID = $("#" + NIDnum + "").val();
+				//alert(newID)
+				//var newpwd = $("#chpwd");
+				var Npwdnum = "chpwd" + i;
+				var newpwd = $("#" + Npwdnum + "").val();
+				//alert(newpwd)
+				//var newType = $("#chType")
+				var NTypenum = "chType" + i;
+				var newType = $("#" + NTypenum + "").val();
+				//alert(newType)
+				alert("操作成功啦٩( ´︶` )( ´︶` )۶");
+				window.location.reload();
+			}
+			else if(identity==1){
+				//var newID = $("#chID");
+				var cNIDnum = "chcid" + i;
+				var cnewID = $("#" + cNIDnum + "").val();
+				//alert(newID)
+				//var newpwd = $("#chpwd");
+				var cNpwdnum = "chcname" + i;
+				var cnewname = $("#" + cNpwdnum + "").val();
+				//alert(newpwd)
+				alert("操作成功啦٩( ´︶` )( ´︶` )۶");
+				window.location.reload();
+			}
+
+		}
+	</script>
+	<script>
+		function add(){
+			var courseId = $("#courseid").val();
+			var courseName = $("#coursename").val();
+			var data={
+				"course_id":courseId,
+				"course_name":courseName
+			}
 			$.ajax({
+				url:'coursedata',
+				data:data,
 				type:"POST",
-				url:'data.json',
-				data:{"ID":newID,"Password":newpwd,"Type":newType},
-				dataType:"json",
-				success:function(data){
-
-					alert("编辑成功啦٩(*Ӧ)و");
+				dataType:'json',
+				success:function(result){
+					alert("添加成功啦(✪ω✪)~");
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert("出错了(ಥ_ಥ) ！！！");
 					// 状态码
 					console.log(XMLHttpRequest.status);
 					// 状态
 					console.log(XMLHttpRequest.readyState);
 					// 错误信息
 					console.log(textStatus);
-					alert("出错了！");
 				}
 
 			})
-
-		}
-	</script>
-	<script>
-		function del(i){
-			var IDnum = "uID" + i;
-			var delID = $("#" + IDnum + "").val();
-			alert(IDnum)
-			alert(delID)
-			$.ajax({
-				type:"POST",
-				url:'data.json',
-				data:{"ID":delID},
-				dataType:"json",
-				success:function(data){
-					alert("删除成功啦！");
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					// 状态码
-					console.log(XMLHttpRequest.status);
-					// 状态
-					console.log(XMLHttpRequest.readyState);
-					// 错误信息
-					console.log(textStatus);
-				}
-
-			});
-		}
-	</script>
-	<script>
-		function check(i){
-			//var newID = $("#chID");
-			var NIDnum = "chID" + i;
-			var newID = $("#" + NIDnum + "").val();
-			alert(newID)
-			//var newpwd = $("#chpwd");
-			var Npwdnum = "chpwd" + i;
-			var newpwd = $("#" + Npwdnum + "").val();
-			alert(newpwd)
-			//var newType = $("#chType")
-			var NTypenum = "chType" + i;
-			var newType = $("#" + NTypenum + "").val();
-			alert(newType)
-			alert("操作成功啦٩( ´︶` )( ´︶` )۶");
-			window.location.reload();
 		}
 	</script>
 </head>
@@ -387,9 +512,9 @@
 							var tr1='<td id="uID'+i+'">'+data.data[i].ID+'</td>'+'<td id="changeID'+i+'" hidden="">'+'<form class="form-inline ">'+'<div  class="form-group mx-auto">'+'<input type="text" class="form-control" id="chID'+i+'" placeholder="'+data.data[i].ID+'">'+'</div>'+'</td>'
 							var tr3='<td id="uType'+i+'">'+data.data[i].Type+'</td>'+'<td id="changeType'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chType'+i+'" placeholder="'+data.data[i].Type+'">'+'</div>'+'</td>'
 							var tr2='<td id="pwd'+i+'">'+data.data[i].Password+'</td>'+'<td id="changepwd'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chpwd'+i+'" placeholder="'+data.data[i].Password+'">'+'</div>'+'</td>'
-							var str1='<button type="button" id="edition'+i+'" class="btn  btn-outline-danger" onclick=update('+i+')>'+'编辑'+'</button>'
-							var str2='<button type="button" id="del'+i+'" class="btn  btn-outline-dark" onclick=del('+i+')>'+'删除'+'</button>'
-							var str3='<button type="submit" id="besure'+i+'" class="btn btn-outline-success" onclick=check('+i+') hidden="">'+'确认'+'</button>'+'</form>'
+							var str1='<button type="button" id="edition'+i+'" class="btn  btn-outline-danger" onclick=update('+i+',"0")>'+'编辑'+'</button>'
+							var str2='<button type="button" id="del'+i+'" class="btn  btn-outline-dark" onclick=del('+i+',"0")>'+'删除'+'</button>'
+							var str3='<button type="submit" id="besure'+i+'" class="btn btn-outline-success" onclick=check('+i+',"0") hidden="">'+'确认'+'</button>'+'</form>'
 							$("#userList").append('<tr>'+tr1+tr2+tr3+'<td>'+'<div class="btn-group btn-group ">'+str1+str2+'</div>'+str3+'</td>'+'</tr>')
 							//$("#userList").append(tr4)
 						} //data.data指的是数组，数组里是8个对象，i为数组的索引
@@ -416,12 +541,12 @@
 							<div class="card-body ">
 								<h2 class="card-title">添加课程</h2>
 								<br /><br /><br /><br />
-								<input type="text" id="inputid" placeholder="课程 I D" class="form-control" required autofocus>
+								<input type="text" id="courseid" placeholder="课程 I D" class="form-control" required autofocus>
 								<br />
-								<input type="text" id="inputid" placeholder="课程名字" class="form-control" required autofocus>
+								<input type="text" id="coursename" placeholder="课程名字" class="form-control" required autofocus>
 								<br />
 								<br /><br />
-								<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
+								<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal" onclick="add()">
 									&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 								<br /><br />
 							</div>
@@ -429,6 +554,7 @@
 					</div>
 				</div>
 			</div>
+
 			<br /><br />
 			<br /><br />
 			<table class="table  table-striped">
@@ -439,42 +565,33 @@
 					<th>更改</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr>
-					<td>SOME</td>
-					<td>SOME</td>
-					<td>
-						<div class="btn-group btn-group ">
-							<button type="button" class="btn  btn-outline-danger">编辑</button>
-							<button type="button" class="btn  btn-outline-dark">删除</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>SOME</td>
-					<td>SOME</td>
-					<td>
-						<div class="btn-group btn-group ">
-							<button type="button" class="btn  btn-outline-danger">编辑</button>
-							<button type="button" class="btn  btn-outline-dark">删除</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>SOME</td>
-					<td>SOME</td>
-					<td>
-						<div class="btn-group btn-group ">
-							<button type="button" class="btn  btn-outline-danger">编辑</button>
-							<button type="button" class="btn  btn-outline-dark">删除</button>
-						</div>
-					</td>
-				</tr>
-
-
+				<tbody id="courseList">
 				</tbody>
 			</table>
 		</div>
+		<script>
+			$(function(){
+				$.ajax({
+					url:'coursedata.json',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						//方法中传入的参数data为后台获取的数据
+						for(i in data.data){
+							//ID格式
+							//var t11=data.data[i].ID
+							var tr1='<td id="crsid'+i+'">'+data.data[i].course_id+'</td>'+'<td id="ccid'+i+'" hidden="">'+'<form class="form-inline ">'+'<div  class="form-group mx-auto">'+'<input type="text" class="form-control" id="chcid'+i+'" placeholder="'+data.data[i].course_id+'">'+'</div>'+'</td>'
+							var tr2='<td id="crsname'+i+'">'+data.data[i].course_name+'</td>'+'<td id="ccname'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chcname'+i+'" placeholder="'+data.data[i].course_name+'">'+'</div>'+'</td>'
+							var str1='<button type="button" id="cedition'+i+'" class="btn  btn-outline-danger" onclick=update('+i+',"1")>'+'编辑'+'</button>'
+							var str2='<button type="button" id="cdel'+i+'" class="btn  btn-outline-dark" onclick=del('+i+',"1")>'+'删除'+'</button>'
+							var str3='<button type="submit" id="cbesure'+i+'" class="btn btn-outline-success" onclick=check('+i+',"1") hidden="">'+'确认'+'</button>'+'</form>'
+							$("#courseList").append('<tr>'+tr1+tr2+'<td>'+'<div class="btn-group btn-group ">'+str1+str2+'</div>'+str3+'</td>'+'</tr>')
+							//$("#userList").append(tr4)
+						} //data.data指的是数组，数组里是8个对象，i为数组的索引
+					}
+				})
+			})
+		</script>
 		<div id="4" class="container tab-pane fade"><br>
 			<br /><br />
 

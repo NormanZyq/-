@@ -10,6 +10,8 @@ public class Arrangement {
 
     private int duration;
 
+    private int identity = 0;
+
     public int getTestId() {
         return testId;
     }
@@ -42,6 +44,14 @@ public class Arrangement {
         this.courseName = courseName;
     }
 
+    public int getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(int identity) {
+        this.identity = identity;
+    }
+
     public Arrangement(int testId, String startTime, int duration) {
         this.testId = testId;
         this.startTime = startTime;
@@ -58,6 +68,7 @@ public class Arrangement {
                 ", courseName='" + courseName + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", duration=" + duration +
-                '}' + '\n';
+                ", identity=" + identity +
+                '}';
     }
 }

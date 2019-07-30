@@ -165,12 +165,33 @@ public class TestController {
      * 获得考试剩余时间。
      *
      * @param testId 考试ID
+     * @return 返回考试剩余时间，以秒为单位，未开始返回-1，已完成返回0
      */
     @GetMapping(value = "/get/time")
     @ResponseBody
-    public void getTimeLast(int testId) {
-        // todo
+    public long getTimeLast(int testId) {
+        return testService.getTimeLast(testId);
     }
+
+    /**
+     *
+     * @return 学生已开始的考试
+     */
+    @GetMapping(value = "/get/started")
+    @ResponseBody
+    public List<Arrangement> getStartedTest(HttpSession httpSession){
+        String studentId = (String)httpSession.getAttribute("loggedId");
+        List<Arrangement> arrangements = testService.getArrangedTestsByStudentId(studentId);
+        //存储已开始的考试安排
+        List<Arrangement> arrs = new ArrayList<>();
+        for (Arrangement arrangement : arrangements) {
+            if (arrangement.getIdentity() == 1)
+                arrs.add(arrangement);
+        }
+        return arrs;
+    }
+
+
 
     @PostMapping(value = "/answer/submit")
     public void submitAnswers() {

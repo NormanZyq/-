@@ -1,0 +1,41 @@
+
+{
+  "status": 0,
+    "data": [  
+        {  
+            "id": "0",  
+            "courseId": "AGGHTH",
+            "questionType":"1",
+			"questionContent":"TXYCGTUIHYBNJOKM???",
+			"rightAnswerString":"TYTUYBIHNJKM"
+        },
+		{  
+		    "id": "1",  
+		    "courseId": "AGGHTH",
+		    "questionType":"0",
+			"questionContent":"TXYCGTUIHYBNJOKM???",
+			"rightAnswerString":"A"
+		},
+		{  
+		    "id": "2",  
+		    "courseId": "AGGHTH",
+		    "questionType":"1",
+			"questionContent":"DFSD???",
+			"rightAnswerString":"CSAAC"
+		},
+		{  
+		    "id": "3",  
+		    "courseId": "ASSHDGJCH",
+		    "questionType":"0",
+			"questionContent":"ACS",
+			"rightAnswerString":"C"
+		},
+		{  
+		    "id": "4",  
+		    "courseId": "AGGHTH",
+		    "questionType":"1",
+			"questionContent":"CSACSAA???",
+			"rightAnswerString":"CA;L,';!!!!"
+		}
+    ]
+}

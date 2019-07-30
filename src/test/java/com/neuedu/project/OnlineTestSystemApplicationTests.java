@@ -2,10 +2,7 @@ package com.neuedu.project;
 
 import com.neuedu.project.dao.CourseMapper;
 import com.neuedu.project.dao.QuestionMapper;
-import com.neuedu.project.domain.ChoiceQuestion;
-import com.neuedu.project.domain.Course;
-import com.neuedu.project.domain.Question;
-import com.neuedu.project.domain.User;
+import com.neuedu.project.domain.*;
 import com.neuedu.project.domain.factories.QuestionFactory;
 import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.*;
@@ -100,7 +97,7 @@ public class OnlineTestSystemApplicationTests {
 
     @Test
     public void testArrange() {
-        arrangeService.arrangeTest(5, "2019-07-08 22:22:22", 70);
+        arrangeService.arrangeTest(7, "2019-07-30 10:22:22", 100);
     }
 
 
@@ -147,6 +144,23 @@ public class OnlineTestSystemApplicationTests {
     @Test
     public void testgetArrangedTestsByStudentId(){
         System.out.println(testService.getArrangedTestsByStudentId("abc"));
+    }
+    @Test
+    public void testTimeLast(){
+        System.out.println(testService.getTimeLast(7));
+    }
+    @Test
+    public void TestgetStartedTest(){
+        List<Arrangement> arrangements = testService.getArrangedTestsByStudentId("aaaa");
+        //存储已开始的考试安排
+        List<Arrangement> arrs = new ArrayList<>();
+        for (Arrangement arrangement : arrangements) {
+            if (arrangement.getIdentity() == 1)
+                arrs.add(arrangement);
+        }
+        //System.out.println("------------------------------------------------------");
+        System.out.println(arrs);
+        //System.out.println("------------------------------------------------------");
     }
 
 }

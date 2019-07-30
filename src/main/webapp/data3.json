@@ -1,0 +1,34 @@
+
+{
+  "status": 0,
+    "data": [  
+        {  
+           
+            "id": "0",  
+            "studentid": "845164152651",
+            "studentname":"ESFDTFYGUH",
+			"mark":"5"
+        },
+		{  
+		   
+		    "id": "1",  
+		   "studentid": "441653145",
+		   "studentname":"A3010",
+		   "mark":"25"
+		},
+		{  
+		   
+		     "id": "2",  
+		    "studentid": "7984651",
+		    "studentname":"A3006",
+		    "mark":"2"
+		},
+		{  
+		   
+		     "id": "3",  
+		    "studentid": "24851",
+		    "studentname":"A3033",
+		    "mark":"20"
+		}
+    ]
+}

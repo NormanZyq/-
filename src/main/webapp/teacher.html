@@ -24,14 +24,14 @@
 				}
 			}
 		</script>
-		
+
 		<script type="text/javascript">
 			function changepsw() {
-				$("#psw").prop("hidden",true);
-				$("#pswchange").prop("hidden",false);
+				$("#psw").prop("hidden", true);
+				$("#pswchange").prop("hidden", false);
 			}
 		</script>
-		
+
 	</head>
 	<body class="text-center">
 		<div class="container">
@@ -80,9 +80,9 @@
 				<div id="1" class="container tab-pane active"><br>
 					<br /><br /><br /><br />
 					<h1 class="display-4" align="center">个人信息</h1>
-					
+
 					<br /><br /><br /><br />
-					
+
 					<table class="table">
 						<thead>
 							<tr>
@@ -108,34 +108,33 @@
 								<td id="pswchange" hidden="">
 									<form class="form-inline ">
 										<div class="form-group mx-auto">
-									
+
 											<input type="text" class="form-control" placeholder="新密码">
 											<button type="submit" class="btn btn-outline-success">确认</button>
 										</div>
-										
+
 									</form>
 								</td>
 								<td>
 									<div id="pasedi" style="display: none;" class="pa">
-										<button type="button" class="btn btn-outline-info"
-										onclick="changepsw()">修改</button>
+										<button type="button" class="btn btn-outline-info" onclick="changepsw()">修改</button>
 									</div>
 								</td>
 							</tr>
-					
+
 						</tbody>
 					</table>
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-8">
-					
+
 							<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-primary">编辑</button>
-					
+
 						</div>
 					</div>
 				</div>
 				<script>
-					 $(function(){
+					$(function(){
 				    $.ajax({
 				        url:'data.json',
 				        type:'get',
@@ -184,11 +183,11 @@
 										<br /><br />
 										<h2 class="card-title">添加课程</h2>
 										<br /><br />
-										<input type="text" id="inputid" placeholder="课程名字(*/ω＼*)"  class="form-control" required autofocus>
+										<input type="text" id="inputid" placeholder="课程名字(*/ω＼*)" class="form-control" required autofocus>
 										<br />
-										
+
 										<button id="sbm" type="button" class="btn btn-success  btn-lg" data-dismiss="modal">
-										&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
 									</div>
 								</div>
@@ -203,44 +202,8 @@
 					<br /><br /><br /><br /><br /><br /><br /><br />
 					<table class="table">
 
-						<tbody id="body2">
-							<tr>
-								<td>题目1</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi" style="display: ">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>题目2</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi2" style="display: ">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>题目3</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi3" style="display: ;">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>题目4</td>
-								<td>SOME</td>
-								<td>
-									<div id="namedi4" style="display: ;">
-										<button type="button" class="btn btn-outline-info" onclick="window.location.href = 'exercise.html'">修改</button>
-									</div>
-								</td>
-							</tr>
-
+						<tbody id="exerbody1">
+							
 						</tbody>
 					</table>
 					<br /><br />
@@ -252,21 +215,91 @@
 						</div>
 					</div>
 				</div>
+				
+				<script>
+					$(function(){
+						$.ajax({
+							url:'data2.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+							//方法中传入的参数data为后台获取的数据
+								for(i in data.data){ //data.data指的是数组，数组里是8个对象，i为数组的索引
+				
+								var tr1;
+								tr1='<tr>'+'<td>'+data.data[i].id+'</td>'
+								
+								if(data.data[i].questionType=="0"){
+									tr1+='<td>'+'选择题'+'</td>'
+								}else if(data.data[i].questionType=="1"){
+									tr1+='<td>'+'主观题'+'</td>'
+								}else{
+									tr1+='<td>'+'常规题'+'</td>'
+								}
+								
+								tr1+='<td>'+'<button type="button" class="btn btn-outline-info" onclick="window.location.href = '+"'"+'exercise.html'+"'"+'">'+'修改'+'</button>'+'</td>'+'</tr>'
+								
+								$("#exerbody1").append(tr1)
+				
+				
+								}
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
+				
 
 				<div id="3" class="container tab-pane "><br>
 					<br /><br />
 					<div class="float-right">
 						<div class="col-md-4 offset-md-2">
 							<ul class="nav nav-tabs">
-								<button type="button" class="btn btn-lg btn-outline-danger">&nbsp;&nbsp;&nbsp;添加新试卷&nbsp;&nbsp;&nbsp;</button>
+								<button type="button" class="btn btn-lg btn-outline-danger" data-toggle="modal" data-target="#myModal22">&nbsp;&nbsp;&nbsp;添加新试卷&nbsp;&nbsp;&nbsp;</button>
 							</ul>
+						</div>
+					</div>
+
+
+					<div class="modal fade" id="myModal22">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+
+									<div class="card-body">
+										<br />
+										<h2 class="card-title">添加新试卷</h2>
+										<br /><br />
+										<h4 class="card-title">将随机抽取题目生成试卷</h4>
+										<br /><br />
+										<input type="text" id="inputid" placeholder="客观题数量" class="form-control" required autofocus>
+										<br />
+										<input type="text" id="inputid" placeholder="主观题数量" class="form-control" required autofocus>
+										<br />
+										<br />
+										<button id="sbm" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal">
+											&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+									</div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 
 					<br /><br /><br /><br />
 					<table class="table">
 
-						<tbody id="body2">
+						<tbody id="exerbody2">
 							<tr>
 								<td>题目1</td>
 								<td>SOME</td>
@@ -276,27 +309,7 @@
 
 								</td>
 							</tr>
-							<tr>
-								<td>题目2</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td>题目3</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td>题目4</td>
-								<td>SOME</td>
-								<td>
-									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">修改</button>
-								</td>
-							</tr>
+							
 
 						</tbody>
 					</table>
@@ -308,92 +321,120 @@
 						</ul>
 
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				</div>
+				
+				<script>
+					$(function(){
+						$.ajax({
+							url:'data2.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+							//方法中传入的参数data为后台获取的数据
+								for(i in data.data){ //data.data指的是数组，数组里是8个对象，i为数组的索引
+				
+								var tr1;
+								tr1='<tr>'+'<td>'+data.data[i].id+'</td>'
+								
+								if(data.data[i].questionType=="0"){
+									tr1+='<td>'+'选择题'+'</td>'
+								}else if(data.data[i].questionType=="1"){
+									tr1+='<td>'+'主观题'+'</td>'
+								}else{
+									tr1+='<td>'+'常规题'+'</td>'
+								}
+								
+								tr1+='<td>'+'<button type="button" class="btn btn-outline-warning" onclick="window.location.href = '+"'"+'exercise.html'+"'"+'">'+'修改'+'</button>'+'</td>'+'</tr>'
+								
+								$("#exerbody2").append(tr1)
+				
+				
+								}
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
+				
+				
+				
+				
+				
+				
 				<div id="4" class="container tab-pane "><br>
 					<br /><br /><br /><br />
 
-					<div id="accordion">
-						<div class="card">
-							<div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseOne">
-									<div class="float-left">
-										试 卷 一
-									</div>
-									<div class="float-right">
-										<button id="te" onclick="window.location.href = 'answer.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
-									</div>
-
-								</a>
-							</div>
-							<div id="collapseOne" class="collapse show" data-parent="#accordion">
-								<div class="card-body">
-									<div class=" m-auto">
-										学生ID 学生姓名
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-									<div class="float-left">
-										试 卷 二
-									</div>
-									<div class="float-right">
-										<button id="te" onclick="window.location.href = 'answer.html'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
-									</div>
-								</a>
-							</div>
-							<div id="collapseTwo" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-									<div class=" m-auto">
-										学生ID 学生姓名
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-									<div class="float-left">
-										试 卷 三
-									</div>
-									<div class="float-right">
-										<button id="te" onclick="window.location.href('answer.html')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>
-									</div>
-								</a>
-							</div>
-							<div id="collapseThree" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-									<div class=" m-auto">
-										学生ID 学生姓名
-									</div>
-
-								</div>
-							</div>
-						</div>
+					<div id="accordion1">
+						
+						
 					</div>
-
-
 				</div>
+				
+				<script>
+					$(function(){
+						$.ajax({
+							url:'data3.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+							//方法中传入的参数data为后台获取的数据
+							//alert(">>"+data.data.length)
+							
+							
+							var tr="";
+							
+							tr+='<div class="card">'+'<div class="card-header">'+'<a class="card-link" data-toggle="collapse" href="#collapseOne">'
+							tr+='<div class="float-left">'+'试卷ID ： '+data.data[0].id+'</div>'+'<div class="float-right">'
+							tr+='<button id="te" onclick="window.location.href = '+"'"+'answer.html'+"'"+'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>'
+							tr+='</div>'+'</a>'+'</div>'+'<div id="collapseOne" class="collapse show" data-parent="#accordion">'		
+							tr+='<div class="card-body">'+'<div class=" m-auto">'+'学生ID :'+data.data[0].studentid+'&nbsp;&nbsp;&nbsp;&nbsp;'+'学生姓名:'+data.data[0].studentname+'&nbsp;&nbsp;&nbsp;&nbsp;'+'客观题得分:'+data.data[0].mark+'</div>'+'</div>'+'</div>'+'</div>'			
+										
+											
+							$("#accordion1").append(tr)		
+								
+							var tr1="";
+								for(i=1;i<data.data.length;i++){ //data.data指的是数组，数组里是8个对象，i为数组的索引
+				//alert(i);
+								
+								
+								tr1+='<div class="card">'+'<div class="card-header">'+'<a class="collapsed card-link" data-toggle="collapse" href="#collapse'+i+'">'
+								
+								tr1+='<div class="float-left">'+'试卷ID ： '+data.data[i].id+'</div>'+'<div class="float-right">'
+								
+								
+								tr1+='<button onclick="window.location.href ='+"'"+'answer.html'+"'"+'" type="button" class="btn btn-sm btn-outline-info">'
+								
+								tr1+='&nbsp;&nbsp;&nbsp;&nbsp;'+'进入'+'&nbsp;&nbsp;&nbsp;&nbsp;'+'</button>'+'</div>'+'</a>'+'</div>'
+											
+								tr1+='<div id="collapse'+i+'" class="collapse" data-parent="#accordion">'+'<div class="card-body">'
+								
+								tr1+='<div class=" m-auto">'+'学生ID :'+data.data[i].studentid+'&nbsp;&nbsp;'+'学生姓名:'+ data.data[i].studentname+'&nbsp;&nbsp;&nbsp;&nbsp;'+'客观题得分:'+data.data[i].mark+'&nbsp;&nbsp;</div>'+'</div>'+'</div>'+'</div>'
+								
+								
+				
+								}
+								$("#accordion1").append(tr1)
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
+				
+				
 				<div id="5" class="container tab-pane "><br>
 					<br /><br /><br />
 
@@ -406,7 +447,7 @@
 								<th>及格率</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="body5">
 							<tr>
 								<td>课程A</td>
 								<td>SOME</td>
@@ -432,6 +473,40 @@
 
 
 				</div>
+				<script>
+					$(function(){
+						$.ajax({
+							url:'data4.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+								
+							var tr1="";
+								for(i=0;i<data.data.length;i++){ 
+									
+									
+									
+								tr1+='<tr>'+'<td>'+data.data[i].id+'</td>'
+								tr1+='<td>'+data.data[i].mark+'</td>'
+								tr1+='<td>'+data.data[i].rank+'</td>'
+								tr1+='<td>'+data.data[i].ji+'</td>'+'</tr>'
+									
+								
+				
+								}
+								$("#body5").append(tr1)
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
 
 				<div id="6" class="container tab-pane "><br>
 					<br /><br />

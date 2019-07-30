@@ -21,12 +21,8 @@
 
 	<script type="text/javascript">
         function login() {
-            var userId = $("#inputid").val();
-            var password = $("#inputPassword").val();
-            alert(userId);
-            alert(password);
             $.ajax({
-                url: "http://localhost:8080/user/login",
+                url: "/user/login",
                 //alert(url)
                 data: {
                     userId: $("#inputid").val(),
@@ -36,9 +32,11 @@
                 type: "POST",
                 dataType: "text",
                 success: function () {
-                    alert("2！");
-                    window.location.href = "/student"
+                    window.location.href = "/mypage"
                 },
+				error: function () {
+					alert('登录失败，请重试');
+				}
             });
         }
 	</script>

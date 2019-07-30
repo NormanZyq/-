@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.AnswerSheetMapper">
+
+    <resultMap id="answersheetMap" type="AnswerSheet">
+        <result column="attend_record_id" property="attendRecordId"/>
+        <result column="choices_answers" property="choiceQuestionAnswer"/>
+        <result column="subjective_answers" property="subjectiveQuestionAnswer"/>
+    </resultMap>
+
+    <insert id="insertAnswers" parameterType="AnswerSheet">
+        insert into student_answer_records (attend_record_id,choices_answers,subjective_answers)
+        values (#{attendRecordId}, #{choiceQuestionAnswer}, #{subjectiveQuestionAnswer});
+    </insert>
+
+</mapper>

@@ -24,6 +24,13 @@ public interface TestService {
      */
     List<Arrangement> getArrangedTestsByStudentId(String studentId);
 
+    /**
+     *
+     * @param testId 考试id
+     * @return 考试剩余时间,未开始返回-1，已完成返回0
+     */
+    public long getTimeLast(int testId);
+
     Test getTestById(int id);
 
 //    int Calcualte_OJLD(int i, int j);

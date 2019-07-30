@@ -57,21 +57,6 @@ public class Test {
         this.subjectiveQuestionIds = subjectiveQuestionIds;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
 
     @Override
     public String toString() {

@@ -5,7 +5,11 @@ import com.neuedu.project.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -74,15 +78,42 @@ public class TestServiceImpl implements TestService {
             //get courseName
             Course course = new Course();
             course.setCourseId(cId);
-            System.out.println("cId="+cId);
             String courseName = courseMapper.queryCourse(course).get(0).getCourseName();
             System.out.println(courseName);
+            //添加状态信息
+            long duration = arr.getDuration() * 60;
+            long time = getTestTime(arr);
+            //当前时间未开始考试
+            if(time < 0)
+                arr.setIdentity(-1);
+            //当前时间已结束考试
+            if(time >=  duration)
+                arr.setIdentity(0);
+            else
+                //当前考试正在进行
+                arr.setIdentity(1);
+
             if(courseName!=null) {
                 arr.setCourseName(courseName);
                 arrangements.add(arr);
             }
         }
+        System.out.println(arrangements);
          return arrangements;
+    }
+
+    @Override
+    public long  getTimeLast(int testId) {
+        Arrangement arr = arrangementMapper.getTestArrangement(testId);
+        long duration = arr.getDuration() * 60;
+        long time = getTestTime(arr);
+        //当前时间未开始考试
+        if(time < 0)
+            return -1;
+        //当前时间已结束考试
+        if(time >=  duration)
+            return 0;
+        return duration-time;
     }
 
     @Override
@@ -125,5 +156,35 @@ public class TestServiceImpl implements TestService {
             return i + j - sum;
         }
         return j;
+    }
+
+    /**
+     * 考试状态信息的辅助函数
+     *
+     * @param arr 考试安排信息
+     * @return 考试剩余时间
+     */
+    private long getTestTime(Arrangement arr){
+        String starttime = arr.getStartTime();
+        //将开始时间转化为long类型,以秒为单位
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(starttime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long startsec=c.getTimeInMillis() / 1000;
+        //将当前时间转化为龙类型,以秒为单位
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(dt);
+        try {
+            c.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(currentTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long nowsec=c.getTimeInMillis() / 1000;
+        return nowsec-startsec;
     }
 }

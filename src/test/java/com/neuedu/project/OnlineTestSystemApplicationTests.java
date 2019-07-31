@@ -169,11 +169,8 @@ public class OnlineTestSystemApplicationTests {
 
         String ca = "A#B#C# #A";
         String sa = "USB#clean";
-        answerService.addAnswerSheet("cccc",7,ca,sa);
-        answerService.addAnswerSheet("dddd",7,ca,sa);
-        answerService.addAnswerSheet("eeee",7,ca,sa);
-        answerService.addAnswerSheet("ffff",7,ca,sa);
-        answerService.addAnswerSheet("gggg",7,ca,sa);
+        answerService.addAnswerSheet("aaaa",1,ca,sa);
+
 
     }
 
@@ -185,7 +182,7 @@ public class OnlineTestSystemApplicationTests {
 
     @Test
     public void TestgetChoiceScore(){
-        System.out.println(answerService.getChoiceScore("aaaa",7));
+        //System.out.println(answerService.getChoiceScore("aaaa",7));
         System.out.println(answerService.getChoiceScore("aaaa",1));
         //System.out.println(answerService.getChoiceScore("aa",7));
     }

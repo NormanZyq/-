@@ -68,6 +68,9 @@ public interface TestService {
      */
     List<Test> getTestsByStudentId(String studentId);
 
+
+    boolean StudentHaveAnswerSheet(String studentId, int testId);
+
 //    int Calcualte_OJLD(int i, int j);
 
 }

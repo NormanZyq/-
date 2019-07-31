@@ -48,9 +48,9 @@ public class AnswerController {
      */
     @PostMapping(value = "/score")
     @ResponseBody
-    public void scoreChoiceQuestion(HttpSession httpSession, int testId){
+    public boolean scoreChoiceQuestion(HttpSession httpSession, int testId){
         String teacherId = (String) httpSession.getAttribute("loggedId");
-        answerService.scoreChoiceQuestion(teacherId,testId);
+        return answerService.scoreChoiceQuestion(teacherId,testId);
     }
 
     /**

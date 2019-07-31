@@ -26,7 +26,7 @@ public interface AnswerService {
      * @param teacherId 老师Id -> 学生id -> 做答信息
      * @param testId 要评选择题分的考试Id -> 正确答案
      */
-    void scoreChoiceQuestion(String teacherId, int testId);
+    boolean scoreChoiceQuestion(String teacherId, int testId);
 
     /**
      * 学生获得考试成绩

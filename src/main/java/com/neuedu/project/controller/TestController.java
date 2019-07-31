@@ -210,6 +210,21 @@ public class TestController {
         return testService.getTimeLast(testId);
     }
 
+
+    /**
+     * 判断学生是否有关于这次考试的答题卡信息
+     *
+     * @param httpSession session
+     * @param testId 考试Id
+     * @return 有->true,没有->false
+     */
+    @GetMapping(value = "/judge")
+    @ResponseBody
+    public boolean StudentHaveAnswerSheet(HttpSession httpSession, int testId) {
+        String studentId = (String) httpSession.getAttribute("loggedId");
+        return testService.StudentHaveAnswerSheet(studentId,testId);
+    }
+
     /**
      * 获得已开始的考试.
      *

@@ -18,12 +18,12 @@ import java.io.PrintWriter;
  * 如果考试时间已结束，不允许参加考试
  */
 @Component
-public class ExamInterceptor implements HandlerInterceptor {
+public class ExamAccessInterceptor implements HandlerInterceptor {
 
     /**
      * logger for this interceptor.
      */
-    private final Logger log = Logger.getLogger(ExamInterceptor.class);
+    private final Logger log = Logger.getLogger(ExamAccessInterceptor.class);
 
     /**
      * 注入service（不确定是否可行）。
@@ -32,20 +32,15 @@ public class ExamInterceptor implements HandlerInterceptor {
     private TestService testService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
-        OutputStream out = response.getOutputStream();
-
-//        PrintWriter out = response.getWriter();
+        //PrintWriter out = response.getWriter();
+        OutputStream os = response.getOutputStream();
 
         // 获得用户的ID
-        String loggedId = (String) request.getSession()
-                .getAttribute("loggedId");
-
+        String loggedId = (String) request.getSession().getAttribute("loggedId");
         int testId = Integer.parseInt(request.getParameter("testId"));
 
         Integer attendId = testService.getAttendTestRecId(loggedId, testId);
@@ -54,28 +49,31 @@ public class ExamInterceptor implements HandlerInterceptor {
             log.info("学生" + loggedId
                     + "未参加考试{id = " + testId + "}或该考试不存在，不允许访问");
             response.sendRedirect("/mypage");
-            out.close();
+            //out.close();
             return false;
         } else {
             log.info("学生" + loggedId
-                    + "参加考试{id = " + testId + "}，正在判断考试状态...");
+                    + "参加考试{testId = " + testId + "}，正在判断考试状态...");
 
             // 判断考试是否开始或结束
             long timeLast = testService.getTimeLast(testId);
             if (timeLast == -1) {
                 // 考试未开始
                 log.info("考试未开始");
-                out.write("<script>alert('考试未开始，不可进入！');window.location.href='/mypage';</script>".getBytes());
+                os.write(("<script>alert('考试未开始，不可进入！');"
+                        + "window.location.href='/mypage';</script>").getBytes());
+                os.flush();
             } else if (timeLast == 0) {
                 // 考试已结束
                 log.info("考试已结束");
-                out.write("<script>alert('考试已结束，不可进入！');window.location.href='/mypage';</script>".getBytes());
+                os.write(("<script>alert('考试已结束，不可进入！');"
+                        + "window.location.href='/mypage';</script>").getBytes());
+                os.flush();
             } else {
                 log.info("考试进行中，允许访问");
-                out.close();
                 return true;
             }
-            out.close();
+            os.close();
             return false;
         }
     }

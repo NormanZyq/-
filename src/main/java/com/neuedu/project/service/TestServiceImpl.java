@@ -11,11 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * 考试相关service层.
- *
- * @author ljq
- */
 @Service
 public class TestServiceImpl implements TestService {
 
@@ -46,7 +41,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public void autoCreateTest(int courseId, int cqCount, int sqCount) {
         Random random = new Random(System.currentTimeMillis());
-        int num = Math.abs(random.nextInt());
+        int num = Math.abs(random.nextInt() % 10000);
         //新建Question做选择标准
         Question temp = new Question();
         temp.setCourseId(courseId);
@@ -70,6 +65,11 @@ public class TestServiceImpl implements TestService {
             test.setChoiceQuestionIds(cIds);
             testMapper.addTest(test);
         }
+    }
+
+    @Override
+    public void deleteTestById(int testId) {
+        testMapper.deleteTestByTestId(testId);
     }
 
     @Override
@@ -110,16 +110,19 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public long getTimeLast(int testId) {
+    public Long getTimeLast(int testId) {
         Arrangement arr = arrangementMapper.getTestArrangement(testId);
+        if (arr == null) {
+            return null;
+        }
         long duration = arr.getDuration() * 60;
         long time = getTestTime(arr);
         //当前时间未开始考试
         if (time < 0)
-            return -1;
+            return (long) -1;
         //当前时间已结束考试
         if (time >= duration)
-            return 0;
+            return 0L;
         return duration - time;
     }
 
@@ -131,6 +134,16 @@ public class TestServiceImpl implements TestService {
     @Override
     public Integer getAttendTestRecId(String studentId, int testId) {
         return attendTestRecMapper.getAttendTestRecId(studentId, testId);
+    }
+
+    @Override
+    public List<Test> getTestsByTeacherId(String teacherId) {
+        return testMapper.getTeacherTests(teacherId);
+    }
+
+    @Override
+    public List<Test> getTestsByStudentId(String studentId) {
+        return null;
     }
 
     /**

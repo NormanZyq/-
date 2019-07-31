@@ -26,10 +26,8 @@
             if (questionId !== undefined) {
                 create = false;
                 // 获得题目的信息
-                let question = getQuestionById(questionId);
-                // 更新界面
+                getQuestionById(questionId);
 
-                // todo
 
             } else {
                 // 创建新题目
@@ -41,14 +39,15 @@
         function typ() {
             /* alert($("#ke").prop("checked"))
              */
-            if ($("#ke").prop("checked") == true) {
+            if ($("#ke").prop("checked") === true) {
                 $("#sel").prop("hidden", false);
                 $("#tex").prop("hidden", true);
-            } else if ($("#zu").prop("checked") == true) {
+                $("#ans1").prop("hidden", false);
+            } else if ($("#zu").prop("checked") === true) {
                 $("#tex").prop("hidden", false);
                 $("#sel").prop("hidden", true);
+                $("#ans1").prop("hidden", true);
             }
-            $("#")
         }
     </script>
 
@@ -92,8 +91,7 @@
             <td>
                 <form class="form-inline float-right">
                     <div class="form-group">
-
-                        <input type="email" class="form-control" placeholder="题目内容">
+                        <input type="email" class="form-control" placeholder="题目内容" id="question-content">
                     </div>
                     <button type="submit" class="btn btn-outline-info">确认</button>
                 </form>
@@ -104,8 +102,7 @@
             <td>
                 <form class="form-inline float-right">
                     <div class="form-group">
-
-                        <input type="email" class="form-control" placeholder="默认分值">
+                        <input type="email" class="form-control" placeholder="分值" id="question-score" value="2">
                     </div>
                     <button type="submit" class="btn btn-outline-info">确认</button>
                 </form>
@@ -114,26 +111,38 @@
         <tr hidden="hidden" id="sel">
             <td>选项设置</td>
             <td>
+                <div class="row">
+                    <div class="col-6 offset-6" id="sel-content">
+
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        <tr hidden="hidden" id="ans1">
+            <td>正确答案</td>
+            <td>
                 <form class="form-inline float-right">
-                    <input type="checkbox" name="optradio0" id="ex">
-                    &nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label><input type="checkbox" name="optradio0" id="ex">
-                        &nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <label><input type="checkbox" name="optradio0" id="ex">
-                        &nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <label><input type="checkbox" name="optradio0" id="ex">
-                        &nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <!--<button type="submit" class="btn btn-outline-info">确认</button>-->
+                    <div class="row">
+                        <label><input type="radio" name="optradio0" id="ex-A">
+                            &nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="optradio0" id="ex-B">
+                            &nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="optradio0" id="ex-C">
+                            &nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="optradio0" id="ex-D">
+                            &nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <!--<button type="submit" class="btn btn-outline-info">确认</button>-->
+                    </div>
+
                 </form>
             </td>
         </tr>
         <tr hidden="hidden" id="tex">
-
             <td>正确答案</td>
             <td>
                 <form class="form-inline float-right">
                     <div class="form-group">
-
                         <input type="email" class="form-control" placeholder="正确答案">
                     </div>
                     <button type="submit" class="btn btn-outline-info">确认</button>

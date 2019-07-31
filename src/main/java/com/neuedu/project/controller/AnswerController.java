@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * 答案相关的控制器.
+ *
+ * @author ljq
+ */
 @Controller
 @RequestMapping("/answer")
 public class AnswerController {
@@ -26,15 +31,15 @@ public class AnswerController {
 
     @PostMapping(value = "/????")
     @ResponseBody
-    public void scoreChoiceQuestion(HttpSession httpSession, int testId){
+    public void scoreChoiceQuestion(HttpSession httpSession, int testId) {
         String studentId = (String) httpSession.getAttribute("loggedId");
-        answerService.scoreChoiceQuestion(studentId,testId);
+        answerService.scoreChoiceQuestion(studentId, testId);
     }
 
     @PostMapping(value = "/?????")
     @ResponseBody
-    public Integer getChoiceScore(HttpSession httpSession, int testId){
+    public Integer getChoiceScore(HttpSession httpSession, int testId) {
         String studentId = (String) httpSession.getAttribute("loggedId");
-        return answerService.getChoiceScore(studentId,testId);
+        return answerService.getChoiceScore(studentId, testId);
     }
 }

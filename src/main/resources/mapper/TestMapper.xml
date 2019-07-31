@@ -20,10 +20,24 @@
         where test_id = #{id};
     </delete>
 
-    <update id="updateTest">
+    <select id="getTestsByStudentId" resultMap="testMap">
+        select t.*
+        from course_selection cs,
+             tests t
+        where cs.student_id = #{studentId}
+          and t.course_id = cs.course_id;
+    </select>
 
-    </update>
-
+    <select id="getTeacherTests" resultMap="testMap" resultType="Test">
+        select t.*, c.course_name courseName
+        from course_teaching ct,
+             tests t,
+             course c
+        where ct.teacher_id = #{teacherId}
+          and t.course_id = ct.course_id
+          and c.course_id = ct.course_id
+    </select>
+    
     <insert id="addTest" parameterType="Test">
         insert into tests (course_id, choice_question, subjective_question)
         values (#{courseId}, #{choiceQuestionIds}, #{subjectiveQuestionIds});

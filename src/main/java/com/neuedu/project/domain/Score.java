@@ -2,11 +2,24 @@ package com.neuedu.project.domain;
 
 public class Score {
 
-
     private String teacherId;
+
     private int answerSheetId;
+
     private int choicesScore;
+
     private int subjectiveScore;
+
+    public Score(String teacherId, int answerSheetId, int choicesScore, int subjectiveScore) {
+        this.teacherId = teacherId;
+        this.answerSheetId = answerSheetId;
+        this.choicesScore = choicesScore;
+        this.subjectiveScore = subjectiveScore;
+    }
+
+    public Score() {
+
+    }
 
     public String getTeacherId() {
         return teacherId;
@@ -38,16 +51,6 @@ public class Score {
 
     public void setSubjectiveScore(int subjectiveScore) {
         this.subjectiveScore = subjectiveScore;
-    }
-
-    public Score(String teacherId, int answerSheetId, int choicesScore, int subjectiveScore) {
-        this.teacherId = teacherId;
-        this.answerSheetId = answerSheetId;
-        this.choicesScore = choicesScore;
-        this.subjectiveScore = subjectiveScore;
-    }
-    public Score(){
-
     }
 
     @Override

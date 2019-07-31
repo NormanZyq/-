@@ -27,7 +27,7 @@ public class PageController {
     @GetMapping(value = "/exam/{id}")
     public String exam(HttpServletRequest request, @PathVariable int id) {
         request.setAttribute("testId", id);
-        return "/exam.html?testId=" + id;
+        return "redirect:/exam.html?testId=" + id;
     }
 
     /**
@@ -43,13 +43,13 @@ public class PageController {
     }
 
     /**
-     * 主页 todo 现在没有主页，用登录代替。
+     * 主页 
      *
      * @return 主页
      */
     @GetMapping({"/", "/index"})
     public String index() {
-        return "/login";
+        return "/head.html";
     }
 
     /**

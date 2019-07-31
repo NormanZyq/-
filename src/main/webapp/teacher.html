@@ -73,7 +73,7 @@
 					<a class="nav-link" data-toggle="pill" href="#2" onclick="getTeachCourse()">题库管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#3">试卷管理</a>
+					<a class="nav-link" data-toggle="pill" href="#3" onclick="getTeacherTests()">试卷管理</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="pill" href="#4">试卷批阅</a>
@@ -235,9 +235,9 @@
 										<br /><br />
 										<h4 class="card-title">将随机抽取题目生成试卷</h4>
 										<br /><br />
-										<input type="text" id="inputid" placeholder="客观题数量" class="form-control" required autofocus>
+										<input type="number" id="cq-number" placeholder="客观题数量" class="form-control" required autofocus>
 										<br />
-										<input type="text" id="inputid" placeholder="主观题数量" class="form-control" required autofocus>
+										<input type="number" id="sq-number" placeholder="主观题数量" class="form-control" required autofocus>
 										<br />
 										<br />
 										<button id="sbm" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal">
@@ -255,16 +255,22 @@
 
 						<tbody id="exerbody2">
 							<tr>
+								<th>课程名称</th>
+								<th>选择题数量</th>
+								<th>主观题数量</th>
+								<th>操作</th>
+							</tr>
+							<tr>
 								<td>题目1</td>
 								<td>SOME</td>
 								<td>
 
-									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">修改</button>
+									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">发布</button>
+									&nbsp;
+									<button type="button" class="btn btn-outline-warning" onclick="window.location.href = 'exercise.html'">删除</button>
 
 								</td>
 							</tr>
-							
-
 						</tbody>
 					</table>
 

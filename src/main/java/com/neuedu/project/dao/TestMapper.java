@@ -34,6 +34,13 @@ public interface TestMapper {
     List<Test> getStudentTests(String studentId);
 
     /**
+     * 获得教师所有的考试。
+     * @param teacherId 工号
+     * @return  考试列表
+     */
+    List<Test> getTeacherTests(String teacherId);
+
+    /**
      * 基本查询功能，有testId获取整个test信息
      *
      * @param tId testId

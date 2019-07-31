@@ -22,6 +22,10 @@ public class Course {
                 '}';
     }
 
+    public void setTeachers(List<User> teachers) {
+        this.teachers = teachers;
+    }
+
     public int getCourseId() {
         return courseId;
     }

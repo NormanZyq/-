@@ -1,7 +1,6 @@
 package com.neuedu.project.config;
 
 import com.neuedu.project.interceptor.AdminAccess;
-import com.neuedu.project.interceptor.ExamInterceptor;
 import com.neuedu.project.interceptor.StudentAccess;
 import com.neuedu.project.interceptor.TeacherAccess;
 import org.apache.log4j.Logger;

@@ -201,6 +201,7 @@
 						dataType:"json",
 						success:function(data){
 							alert("删除成功啦！");
+							window.location.reload();
 						},
 						error: function (XMLHttpRequest, textStatus, errorThrown) {
 							alert("出错惹(•́へ•́╬)");
@@ -279,15 +280,15 @@
 				if(identity==0){
 					//获取即将要修改的用户的ID
 					var IDchange= user.rows[i+1].cells[0].innerHTML;
-					alert(IDchange);
+					//alert(IDchange);
 					//var newpwd = $("#chpwd");
 					var Npwdnum = "chpwd" + i;
 					var newpwd = $("#" + Npwdnum + "").val();
-					alert(newpwd)
+					//alert(newpwd)
 					//var newType = $("#chType")
 					var NTypenum = "chType" + i;
 					var newType = $("#" + NTypenum + "").val();
-					alert(newType)
+					//alert(newType)
 					//alert("操作成功啦٩( ´︶` )( ´︶` )۶");
 					$.ajax({
 						type:"POST",
@@ -349,9 +350,47 @@
 			function add(option){
 				//alert(option)
 				//option:0为用户表注册,1为课程信息表添加,2为添加选课关系,3为添加教授关系
-				if(option==1){
+				if(option==0){
+					var regType = $("#regtype").val();
+					//alert(regType);
+					var regId = $("#regid").val();
+					//alert(regId);
+					var regName = $("#regname").val();
+					//alert(regName);
+					var regPassword = $("#regpassword").val();
+					//alert(regPassword);
+					var data={
+						"user_id":regId,
+						"password":regPassword,
+						"name":regName,
+						"identity":regType
+					}
+					$.ajax({
+						url:'data.json',
+						data:data,
+						type:"POST",
+						dataType:'json',
+						success:function(result){
+							alert("注册成功啦(✪ω✪)~");
+							
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错了(ಥ_ಥ) ！！！");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+						}
+							
+					});
+					
+				}
+				else if(option==1){
 					var courseId = $("#courseid").val();
 					var courseName = $("#coursename").val();
+					//alert(courseId);
 					var data={
 						"course_id":courseId,
 						"course_name":courseName
@@ -589,27 +628,29 @@
 										<h2 class="card-title">注册</h2>
 										<br /><br />
 										<form>
-											<table class="table">
+											<!-- <table class="table">
 												<thead>
 													<tr>
-														<th><label><input type="radio" name="optradio" id="stu" checked="">&nbsp;&nbsp;学生类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-														<th><label><input type="radio" name="optradio" id="tea" checked="">&nbsp;&nbsp;教师类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
-
+														<th><label><input type="radio" name="optradio" id="regstu" checked="">&nbsp;&nbsp;学生类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
+														<th><label><input type="radio" name="optradio" id="regtea" checked="">&nbsp;&nbsp;教师类型&nbsp;&nbsp;&nbsp;&nbsp;</label></th>
 													</tr>
 												</thead>
-											</table>
+											</table> -->
 
 										</form>
+										<label for="inputid" class="sr-only">身份类型</label>
+										<input type="text" id="regtype" class="form-control" placeholder="学生/教授/管理员" required autofocus>
+										<br />
 										<label for="inputid" class="sr-only">ID</label>
-										<input type="text" id="inputid" class="form-control" placeholder="ID" required autofocus>
+										<input type="text" id="regid" class="form-control" placeholder="ID" required autofocus>
 										<br />
 										<label for="inputid" class="sr-only">姓名</label>
-										<input type="text" id="inputid" class="form-control" placeholder="姓名" required autofocus>
+										<input type="text" id="regname" class="form-control" placeholder="姓名" required autofocus>
 										<br />
 										<label for="inputPassword" class="sr-only">密码</label>
-										<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+										<input type="password" id="regpassword" class="form-control" placeholder="Password" required autofocus>
 										<br />
-										<button id="sbm" type="button" class="btn btn-info  btn-lg" data-dismiss="modal">
+										<button id="sbm" type="button" class="btn btn-info  btn-lg" data-dismiss="modal" onclick="add(0)">
 											&nbsp;&nbsp;&nbsp;&nbsp;提交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
 									</div>

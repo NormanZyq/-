@@ -402,26 +402,7 @@
 							</tr>
 						</thead>
 						<tbody id="body5">
-							<tr>
-								<td>课程A</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>课程B</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>课程C</td>
-								<td>SOME</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-
-
+							
 						</tbody>
 					</table>
 
@@ -477,30 +458,31 @@
 					<br />
 					<br /><br /><br />
 					<table class="table w-75 mx-auto">
-						<tbody>
+						<thead>
 							<tr>
-								<td>难易程度</td>
-								<td>
-									5
+								<th>评教指标</th>
+								<th>等级(1为最低,5为最高)</th>
+							</tr>
+						</thead>
+						<tbody id="body6">
+							<tr>
+								<td>试卷难易程度</td>
+								<td id="eva1">
 								</td>
 							</tr>
 							<tr>
-								<td>SOME</td>
-								<td>
-									5
-								</td>
-							</tr>
-
-							<tr>
-								<td>SOME</td>
-								<td>
-									5
+								<td>授课接受程度</td>
+								<td id="eva2">
 								</td>
 							</tr>
 							<tr>
-								<td>SOME</td>
-								<td>
-									5
+								<td>教学创新度</td>
+								<td id="eva3">
+								</td>
+							</tr>
+							<tr>
+								<td>教学内容与试卷内容符合度</td>
+								<td id="eva4">
 								</td>
 							</tr>
 						</tbody>
@@ -510,10 +492,36 @@
 				</div>
 
 			</div>
-
-
-
 		</div>
+		<script>
+			$(function(){
+				$.ajax({
+					url:'data3.json',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						var str1 = data.data[0].mark
+						$("#eva1").append(str1)
+						var str2 = data.data[1].mark
+						$("#eva2").append(str2)
+						var str3 = data.data[2].mark
+						$("#eva3").append(str3)
+						var str4 = data.data[3].mark
+						$("#eva4").append(str4)
+						
+						//$("#body6").append(tr1)
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						// 状态码
+						console.log(XMLHttpRequest.status);
+						// 状态
+						console.log(XMLHttpRequest.readyState);
+						// 错误信息
+						console.log(textStatus);
+					}
+				})
+			})
+		</script>
 
 	</body>
 </html>

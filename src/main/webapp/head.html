@@ -28,40 +28,221 @@
 
 
 
-		<nav class="navbar navbar-expand-sm nav-justified navbar-light  justify-content-end">
+		<nav class="navbar navbar-expand-sm nav-justified navbar-light bg-light justify-content-end fixed-top">
 			<ul class="navbar-nav">
 
 
 				<li class="nav-item ">
 
 					<a class="nav-link mx-auto" href="pic1.html">
-						<img id="pic11" src="846532.png" class="img-fluid float-left">
+						<img id="pic11" src="846532.png" class="img-fluid float-left" width="50%" height="50%">
 
 					</a>
 				</li>
 
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Active</a>
+					<a class="nav-link" href="">系统介绍</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
+
 				<li class="nav-item">
 					<a class="nav-link " href="#gh">GitHub</a>
 				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+						功能简述
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#stud">学生页面</a>
+						<a class="dropdown-item" href="#teac">教师页面</a>
+						<a class="dropdown-item" href="#admi">管理员页面</a>
+					</div>
+				</li>
+
 			</ul>
 		</nav>
-		<br /><br /><br />
+
+		<br /><br /><br /><br /><br />
+
+		<div id="demo" class="carousel slide" data-ride="carousel">
+
+			<!-- 指示符 -->
+			<ul class="carousel-indicators">
+				<li data-target="#demo" data-slide-to="0" class="active"></li>
+				<li data-target="#demo" data-slide-to="1"></li>
+				<li data-target="#demo" data-slide-to="2"></li>
+			</ul>
+
+			<!-- 轮播图片 -->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+				</div>
+				<div class="carousel-item">
+					<img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+				</div>
+				<div class="carousel-item">
+					<img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+				</div>
+			</div>
+
+			<!-- 左右切换按钮 -->
+			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</a>
+			<a class="carousel-control-next" href="#demo" data-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</a>
+
 		</div>
 
-		<div id="gh" class="bg-light">
-			<br /><br />
+		<br /><br /><br /><br /><br /><br /><br /><br />
+		<div class="container" id="gn">
+			<div class="col-3">
+				<h1 class="display-4">功&nbsp;&nbsp;能</h1>
+			</div>
+			<br /><br /><br />
+
+			<div class="row">
+				<div class="col">
+					<button type="button" class="btn btn-lg btn-outline-success">个人中心</button>
+
+				</div>
+				<div class="col">
+					<a href="#650">
+						<button type="button" class="btn btn-lg btn-outline-success">学生选课</button>
+					</a>
+
+				</div>
+				<div class="col">
+
+					<button type="button" class="btn btn-lg btn-outline-success">在线答题</button>
+
+				</div>
+				<div class="col">
+					<a href="#400">
+						<button type="button" class="btn btn-lg btn-outline-success">考试管理</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#550">
+						<button type="button" class="btn btn-lg btn-outline-success">成绩管理</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#376">
+						<button type="button" class="btn btn-lg btn-outline-success">申请复核</button>
+					</a>
+				</div>
+
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+
+			</div>
+			<br />
+			<div class="row">
+				<div class="col">
+					<a href="#700">
+						<button type="button" class="btn btn-lg btn-outline-info">题库管理</button>
+					</a>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-lg btn-outline-info">试卷管理</button>
+
+
+				</div>
+				<div class="col">
+					<a href="#600">
+						<button type="button" class="btn btn-lg btn-outline-info">试卷批阅</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#500">
+						<button type="button" class="btn btn-lg btn-outline-info">成绩管理</button>
+					</a>
+				</div>
+				<div class="col">
+
+					<button type="button" class="btn btn-lg btn-outline-info">教学评价</button>
+
+				</div>
+
+
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+
+			</div>
+			<br />
+			<div class="row">
+				<div class="col">
+					<a href="#375">
+						<button type="button" class="btn btn-lg btn-outline-primary">用户表</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#371">
+						<button type="button" class="btn btn-lg btn-outline-primary">课程信息表</button>
+					</a>
+
+				</div>
+				<div class="col">
+					<a href="#374">
+						<button type="button" class="btn btn-lg btn-outline-primary">选课关系表</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#373">
+						<button type="button" class="btn btn-lg btn-outline-primary">教授关系表</button>
+					</a>
+				</div>
+				<div class="col">
+					<a href="#372">
+						<button type="button" class="btn btn-lg btn-outline-primary">审查复核</button>
+					</a>
+				</div>
+
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+				<div class="col">
+
+				</div>
+
+			</div>
+
+		</div>
+		<br /><br />
+		<div id="gh" class="bg-light container-fluid">
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 			<h1 class="display-1">GitHub</h1>
 			<br />
-			
+
 			<p class="font-weight-bold">
 				<h3>Commit 记录概览</h3>
 			</p>
@@ -147,14 +328,383 @@
 				</div>
 			</div>
 			<br /><br />
-			
-			<p >
+
+			<p>
 				<a href="https://github.com/NormanZyq/PracticeProject-Online-Test-System.git">
-				https://github.com/NormanZyq/PracticeProject-Online-Test-System.git
+					https://github.com/NormanZyq/PracticeProject-Online-Test-System.git
 				</a>
 			</p>
 			<br /><br />
 		</div>
+
+
+		<br /><br /><br />
+		<div id="stud">
+			<br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<div class="row bg-light">
+				<div class="col">
+					<br /><br /><br />
+					<h1 class=" font-weight-light display-4 ">学生页面</h1>
+					<br /><br /><br />
+				</div>
+			</div>
+			<br /><br /><br />
+			
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="550">
+							<img src="xuanke.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">学生选课</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">学生可以查看已选课程和待选课程并加入课程</font>
+						</p>
+						<br /><br /><br />
+			
+					</div>
+			
+				</div>
+			</div>
+			<br /><br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="400">
+							<img src="kaoshixinxi.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br /><br /><br />
+						<h1 class=" font-weight-light float-left">考试管理</h1>
+						<br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">提供学生近期进行的考试信息</font>
+						</p>
+						<br /><br /><br /><br />
+						<p class="lead  float-left">包含考试名称、考试地点、考试时间、考试时长等</p>
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br /><br />
+
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="550">
+							<img src="tiku1.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">成绩管理</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">学生可以查看课程的平均分与自己的排名</font>
+						</p>
+						<br /><br /><br />
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+			<br /><br /><br />
+
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="376">
+							<img src="屏幕截图(376).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">申请复核</h1>
+						<br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">学生需要填写复核的课程与对应授课教师</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">详细说明复核理由后提交复核申请</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="teac">
+			<br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<div class="row bg-light">
+				<div class="col">
+					<br /><br /><br />
+					<h1 class=" font-weight-light display-4 ">教师页面</h1>
+					<br /><br /><br />
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="700">
+							<img src="tiku.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">题库管理</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">选择课程后显示当前课程包含的题目</font>
+						</p>
+						<br /><br /><br />
+						<p class="  float-left">
+							<font size="4">教师可添加或修改题库中的题目</font>
+						</p>
+						<br /><br /><br />
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+
+						<img src="shiti.jpg" class="float-left img-fluid" />
+
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">试题管理</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">包含题目类型、题干内容、默认分数与生确答案</font>
+						</p>
+						<br /><br /><br />
+						<p class="  float-left">
+							<font size="4">选择客观题则弹出选项框，主观题为正答文本框</font>
+						</p>
+						<br /><br /><br />
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="600">
+							<img src="yuejuan.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">试卷批阅</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">客观题由系统自动判卷</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">主观题由教师手动批阅</font>
+						</p>
+						<br /><br /><br />
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<br /><br /><br />
+
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="500">
+							<img src="chengji.jpg" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">成绩管理</h1>
+						<br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">教师可以查看课程的平均分、排名与及格率</font>
+						</p>
+						<br /><br /><br />
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="admi">
+			<br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<div class="row bg-light">
+				<div class="col">
+					<br /><br /><br />
+					<h1 class=" font-weight-light display-4 ">管理员页面</h1>
+					<br /><br /><br />
+				</div>
+			</div>
+			<div class="container-fluid">
+				<br /><br /><br />
+				<div class="row">
+					<div class="col">
+						<div id="375">
+							<img src="屏幕截图(375).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br />
+						<h1 class=" font-weight-light float-left">用户表</h1>
+						<br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">包含学生、教师和管理员的用户数据</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">可以由管理员注册、编辑和删除</p>
+
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col">
+						<img src="屏幕截图(370).png" class="float-left img-fluid" />
+					</div>
+					<div class="col">
+						<br /><br /><br /><br /><br /><br />
+						<h1 class=" font-weight-light float-left">用户注册</h1>
+						<br /><br /><br /><br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">需要用户的ID、姓名和密码</font>
+						</p>
+						<br /><br /><br /><br /><br />
+						<p class="lead  float-left">选择学生或教师选项进行注册</p>
+						<br /><br /><br /><br /><br />
+						<p class="lead  float-left">成为管理员需要联系开发方</p>
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="371">
+							<img src="屏幕截图(371).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br /><br />
+						<h1 class=" font-weight-light float-left">课程信息表</h1>
+						<br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">包含名字课程的ID和名字</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">可以由管理员添加、编辑和删除</p>
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="374">
+							<img src="屏幕截图(374).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">选课关系表</h1>
+						<br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">通过选择课程查询学生信息</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">可以添加或删除参加课程的学生</p>
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="373">
+							<img src="屏幕截图(373).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">教授关系表</h1>
+						<br /><br /><br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">通过选择课程查询授课教师的信息</font>
+						</p>
+						<br /><br /><br />
+						<p class="lead  float-left">可以添加或删除参加课程的教师</p>
+
+					</div>
+
+				</div>
+			</div>
+			<br /><br />
+			<div class="container-fluid">
+				<br />
+				<div class="row">
+					<div class="col">
+						<div id="372">
+							<img src="屏幕截图(372).png" class="float-left img-fluid" />
+						</div>
+					</div>
+					<div class="col">
+						<br /><br />
+						<h1 class=" font-weight-light float-left">审查复核信息</h1>
+						<br /><br /><br />
+						<p class="lead  float-left">
+							<font size="5">管理员可以接收学生提出的复核申请</font>
+						</p>
+						<br /><br /><br />
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<p></p>
+
+
+
 
 
 		</div>

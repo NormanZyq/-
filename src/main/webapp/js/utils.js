@@ -351,6 +351,19 @@ function getRequestParam() {
     }
 }
 
+function calScores(id) {
+    $.ajax({
+        url: "/answer/calScore",
+        type: "POST",
+        async: false,
+        data: {
+            testId: id
+        },
+        success: function (result) {
+            alert('自动评分成功！')
+        }
+    })
+}
 
 
 

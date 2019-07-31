@@ -43,8 +43,8 @@
             </if>
             <if test="courseId != 0">
                 and c_table.course_id = #{courseId}
-                and ct_table.course_id = c_table.course_id
             </if>
+            and ct_table.course_id = c_table.course_id
             and ct_table.teacher_id = u_table.user_id
         </where>
     </select>

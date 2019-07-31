@@ -98,7 +98,6 @@ public class CourseController {
     @ResponseBody
     public String getCoursesByName(@PathVariable String name) {
         List<Course> courseByName = courseService.getCourseByName(name);
-        log.info(courseByName);
         return JSON.toJSONString(courseByName);
     }
 

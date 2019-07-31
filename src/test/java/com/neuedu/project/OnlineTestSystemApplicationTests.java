@@ -184,4 +184,11 @@ public class OnlineTestSystemApplicationTests {
         //System.out.println(answerService.scoreChoiceQuestion("iii",7));
     }
 
+    @Test
+    public void TestgetChoiceScore(){
+        System.out.println(answerService.getChoiceScore("aaaa",7));
+        System.out.println(answerService.getChoiceScore("aaaa",1));
+        //System.out.println(answerService.getChoiceScore("aa",7));
+    }
+
 }

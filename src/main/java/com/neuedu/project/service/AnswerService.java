@@ -32,7 +32,7 @@ public interface AnswerService {
      * @param studentId 学生Id
      * @param testId 考试Id
      */
-    //void getChoiceScore(String studentId, int testId);
+    Integer getChoiceScore(String studentId, int testId);
 
 
     /**

@@ -25,4 +25,10 @@
     where s_table.attend_record_id = t_table.attend_record_id;
     </select>
 
+    <select id="queryAnswerSheetByAttendRecordId" parameterType="int" resultMap="answersheetMap">
+        select *
+        from student_answer_records
+        where attend_record_id = #{attendRecordId};
+    </select>
+
 </mapper>

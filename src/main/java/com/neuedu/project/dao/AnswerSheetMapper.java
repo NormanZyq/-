@@ -21,5 +21,11 @@ public interface AnswerSheetMapper {
      */
     List<AnswerSheet> queryAnswerSheetAboutTest(int testid);
 
-
+    /**
+     * 用attendRecordId查询AnswerSheet
+     *
+     * @param attendRecordId 考试参与信息
+     * @return 答题卡
+     */
+    AnswerSheet queryAnswerSheetByAttendRecordId(int attendRecordId);
 }

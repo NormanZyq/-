@@ -4,9 +4,11 @@ import com.neuedu.project.dao.*;
 import com.neuedu.project.domain.AnswerSheet;
 import com.neuedu.project.domain.Question;
 import com.neuedu.project.domain.Score;
+import com.neuedu.project.domain.ScoreData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,11 +95,33 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Score getRankByChoiceScore(String studentId, int testId){
         List<Score> scores = scoreMapper.getRankByChoiceScore(testId);
+        if(scores == null)
+            return null;
         for(Score score:scores){
             if(score.getStudentId().equals(studentId))
                 return score;
         }
         return null;
+    }
+
+    @Override
+    public ScoreData getGradeManageByTeacher(int testId){
+        ScoreData scoreData = new ScoreData();
+        List<Score> scores = scoreMapper.getRankByChoiceScore(testId);
+        if(scores == null || scores.size() == 0)
+            return null;
+        int
+                size = scores.size();
+        double sum = 0.0;
+        for(Score score:scores){
+            sum+=score.getChoicesScore();
+        }
+        BigDecimal b = new BigDecimal(sum/(double) size);
+        scoreData.setAverage(b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
+        scoreData.setMax((double) scores.get(0).getChoicesScore());
+        scoreData.setMin((double) scores.get(size-1).getChoicesScore());
+        scoreData.setTestId(testId);
+        return scoreData;
     }
     /**
      * From Internet

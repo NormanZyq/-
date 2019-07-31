@@ -2,6 +2,7 @@ package com.neuedu.project.service;
 
 import com.neuedu.project.domain.AnswerSheet;
 import com.neuedu.project.domain.Score;
+import com.neuedu.project.domain.ScoreData;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,6 +52,15 @@ public interface AnswerService {
      * @return 排名信息
      */
     Score getRankByChoiceScore(String studentId, int testId);
+
+
+    /**
+     * 老师获得成绩管理信息
+     *
+     * @param testId 考试Id
+     * @return
+     */
+    ScoreData getGradeManageByTeacher(int testId);
 
 
 }

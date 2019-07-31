@@ -1,6 +1,7 @@
 package com.neuedu.project.controller;
 
 import com.neuedu.project.domain.Score;
+import com.neuedu.project.domain.ScoreData;
 import com.neuedu.project.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,5 +81,11 @@ public class AnswerController {
     public Score getRankByChoiceScore(HttpSession httpSession, int testId){
         String studentId = (String) httpSession.getAttribute("loggedId");
         return answerService.getRankByChoiceScore(studentId,testId);
+    }
+
+    @PostMapping(value = "/ranks")
+    @ResponseBody
+    public ScoreData getGradeManageByTeacher(int testId){
+        return answerService.getGradeManageByTeacher(testId);
     }
 }

@@ -191,8 +191,14 @@ public class OnlineTestSystemApplicationTests {
     }
 
     @Test
-    public void getRankByChoiceScore(){
+    public void TestgetRankByChoiceScore(){
         System.out.println(answerService.getRankByChoiceScore("aaaa",7));
     }
 
+    @Test
+    public void TestgetGradeManageByTeacher(){
+        //System.out.println("------------------------------------------------------");
+        System.out.println(answerService.getGradeManageByTeacher(7));
+        //System.out.println("------------------------------------------------------");
+    }
 }

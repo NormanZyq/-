@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author WZJ
+ * 答案相关的控制器.
+ *
+ * @author ljq
  */
 @Controller
 @RequestMapping("/answer")
@@ -79,6 +81,4 @@ public class AnswerController {
         String studentId = (String) httpSession.getAttribute("loggedId");
         return answerService.getRankByChoiceScore(studentId,testId);
     }
-
-
 }

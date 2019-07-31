@@ -24,7 +24,6 @@ import static java.lang.String.valueOf;
  */
 @Controller
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
 
     /**
@@ -94,15 +93,17 @@ public class UserController {
                 case 2:
                     pageAvailable = "/admin";
                     break;
+                default:
+                    throw new RuntimeException("未查询到用户信息");
             }
             // 标记为成功登录
-            request.getSession().setAttribute("loggedUser", loggedIn);
+//            request.getSession().setAttribute("loggedUser", loggedIn);
             request.getSession().setAttribute("loggedId", userId);
             request.getSession().setAttribute("allowPage", pageAvailable);
             request.getSession().setAttribute("loggedIdentity", loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());
 
-            log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
+           log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
 //            response.sendRedirect(pageAvailable);
             return "redirect:" + pageAvailable;
 

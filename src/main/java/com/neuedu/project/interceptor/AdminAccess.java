@@ -6,8 +6,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class AdminAccess implements HandlerInterceptor {
+public final class AdminAccess implements HandlerInterceptor {
 
     private Logger logger = Logger.getLogger(AdminAccess.class);
 

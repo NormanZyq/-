@@ -71,8 +71,7 @@ public class Score {
     @Override
     public String toString() {
         return "Score{" +
-                "studentId='" + studentId + '\'' +
-                ", teacherId='" + teacherId + '\'' +
+                "teacherId='" + teacherId + '\'' +
                 ", answerSheetId=" + answerSheetId +
                 ", choicesScore=" + choicesScore +
                 ", subjectiveScore=" + subjectiveScore +

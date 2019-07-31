@@ -9,6 +9,7 @@ import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.ArrangeService;
 import com.neuedu.project.service.QuestionService;
 import com.neuedu.project.service.TestService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
+
+    private final Logger log = Logger.getLogger(TestController.class);
 
     /**
      * service for test.
@@ -83,24 +87,56 @@ public class TestController {
         return "发布考试成功，请通知学生按时参加考试";
     }
 
+    @PostMapping(value = "/delete")
+    public void deleteTest(int testId) {
+
+    }
+
     /**
      * 获得已登录学生所有的考试安排。
      *
-     * @param httpSession session用于获取学号
+     * @param session session用于获取学号
      * @return 所有考试安排
      */
     @PostMapping(value = "/get/all")
     @ResponseBody
-    public List<Arrangement> getArrangedTestsByStudentId(HttpSession httpSession) {
-        String studentId = (String) httpSession.getAttribute("loggedId");
+    public List<Arrangement> getArrangedTestsByStudentId(HttpSession session) {
+        String studentId = (String) session.getAttribute("loggedId");
         return testService.getArrangedTestsByStudentId(studentId);
+    }
+
+    /**
+     * 获得已登录学生或教师所有的考试.
+     *
+     * @param session session用于获取学号/工号
+     * @return 所有考试安排
+     */
+    @PostMapping(value = "/get/all2")
+    @ResponseBody
+    public List<Test> getTest(HttpSession session) {
+        String userId = (String) session.getAttribute("loggedId");
+        int identity = (int) session.getAttribute("loggedIdentity");
+
+        if (identity == 0) {
+            // student
+            log.info("学生" + userId + "请求获得考试");
+            return testService.getTestsByStudentId(userId);
+        } else if (identity == 1) {
+            // teacher
+            log.info("教师" + userId + "请求获得考试");
+            return testService.getTestsByTeacherId(userId);
+        } else {
+            // gg
+            log.info("不明身份的人请求获得考试");
+            return null;
+        }
     }
 
     /**
      * 参与考试。
      *
      * @param id 考试ID
-     * @return  考试页面
+     * @return 考试页面
      */
     @PostMapping(value = "/attend")
     public String attendTest(int id) {
@@ -170,18 +206,19 @@ public class TestController {
      */
     @GetMapping(value = "/get/time")
     @ResponseBody
-    public long getTimeLast(int testId) {
+    public Long getTimeLast(int testId) {
         return testService.getTimeLast(testId);
     }
 
     /**
+     * 获得已开始的考试.
      *
      * @return 学生已开始的考试
      */
-    @GetMapping(value = "/get/started")
+    @PostMapping(value = "/get/started")
     @ResponseBody
-    public List<Arrangement> getStartedTest(HttpSession httpSession){
-        String studentId = (String)httpSession.getAttribute("loggedId");
+    public List<Arrangement> getStartedTest(HttpSession httpSession) {
+        String studentId = (String) httpSession.getAttribute("loggedId");
         List<Arrangement> arrangements = testService.getArrangedTestsByStudentId(studentId);
         //存储已开始的考试安排
         List<Arrangement> arrs = new ArrayList<>();
@@ -189,6 +226,8 @@ public class TestController {
             if (arrangement.getIdentity() == 1)
                 arrs.add(arrangement);
         }
+        arrs.sort(Comparator.comparing(Arrangement::getStartTime));
+
         return arrs;
     }
 
@@ -198,7 +237,7 @@ public class TestController {
     }
 
     @PostMapping(value = "/answer/check")
-    public void checkAnwsers() {
+    public void checkAnswers() {
 
     }
 

@@ -114,15 +114,13 @@ public class CourseController {
     @GetMapping(value = "/get/my")
     @ResponseBody
     public List<Course> getAll(HttpSession session) {
-        Object obj = session.getAttribute("loggedUser");
+        Object obj = session.getAttribute("loggedId");
         if (obj == null) {
             return null;
         } else {
-            User user = (User) obj;
+            String id = (String) obj;
 
             int identity = (int) session.getAttribute("loggedIdentity");
-
-            String id = user.getUserId();
 
             if (identity == 0) {
                 // 获得学生所选课程

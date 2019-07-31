@@ -3,9 +3,6 @@ package com.neuedu.project.domain.factories;
 import com.neuedu.project.domain.Question;
 
 public class QuestionFactory {
-
-    private String extract = "";
-
     /**
      * create a choice question with passed in choices and other arguments.
      *

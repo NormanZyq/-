@@ -5,7 +5,6 @@ function getSelectedCourse() {
     $.ajax({
         url: "/course/get/my",
         dataType: "json",
-
         success: function (result) {
             // 解析选课内容
             for (let course of result) {
@@ -111,9 +110,9 @@ function searchCourses() {
 }
 
 /**
- * 获得所有考试
+ * 获得所有考试。
  */
-function getTests() {
+function getStudentTests() {
     $('#exam').html('');
 
     $.ajax({
@@ -129,6 +128,49 @@ function getTests() {
             alert(result)
         }
     })
+}
+
+function getTeacherTests() {
+    $('#exerbody2').html('<tr>' +
+        '<th>课程名称</th>' +
+        '<th>选择题数量</th>' +
+        '<th>主观题数量</th>' +
+        '<th>操作</th>' +
+        '</tr>');
+
+    $.ajax({
+        url: "/test/get/all2",
+        type: "POST",
+        dataType: "json",
+        success: function (result) {
+            for (let test of result) {
+                appendTeacherTest(test)
+            }
+        },
+        error: function (result) {
+            alert('获取考试失败惹')
+        }
+    })
+}
+
+function getStartedTests() {
+    $('#st-accordion').html('');
+
+    $.ajax({
+        url: "/test/get/started",
+        type: "POST",
+        dataType: "json",
+        success: function (result) {
+            // result.so
+            for (let test of result) {
+                appendStartedTestCard(test);
+            }
+        },
+        error: function (result) {
+            alert("获取考试信息出错，请刷新页面");
+        }
+    })
+
 }
 
 /**
@@ -197,7 +239,33 @@ function getQuestionById(id) {
         type: "GET",
         dataType: "json",
         success: function (result) {
-            return result;
+            // 更新界面
+            console.log(result);
+
+            if (result.questionType === 0) {
+                // 选择题
+                $('#ke').attr('checked', 'checked');
+                $('#question-content').val(result.questionContent);
+                let choices = `<br>A. ${result.choices.A}<br /><br />B. ${result.choices.B}<br /><br />C. ${result.choices.C}<br /><br />D. ${result.choices.D}<br /><br />`;
+                $('#sel-content').html(choices);
+
+                let rightAns = result.rightAnswer[0];
+
+                typ();
+
+                $('#ex-' + rightAns).attr("checked", "checked");
+
+            } else if (result.questionType === 1) {
+                // 主观题
+                $('#zu').attr('checked', 'checked');
+                typ();
+
+            } else {
+                // 不存在
+
+            }
+
+
         },
         error: function (result) {
             alert('获取题目详情失败，请刷新页面');

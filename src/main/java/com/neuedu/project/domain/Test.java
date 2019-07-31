@@ -9,10 +9,11 @@ public class Test {
 
     private int testId;
 
+    private String courseName;
+
     private String choiceQuestionIds;
 
     private String subjectiveQuestionIds;
-
 
     public Test() {
     }
@@ -22,6 +23,14 @@ public class Test {
         this.testId = testId;
         this.choiceQuestionIds = choiceQuestionIds;
         this.subjectiveQuestionIds = subjectiveQuestionIds;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public int getCourseId() {

@@ -75,8 +75,6 @@ function selectCourse(id) {
 }
 
 function appendTestCard(test) {
-    console.log(test);
-
     let status = test.identity;
 
     var tip;
@@ -129,6 +127,117 @@ function appendTestCard(test) {
         </div>`;
 
     $('#exam').append(card);
+}
+
+function appendTeacherTest(test) {
+    var cqCount;
+    var sqCount;
+    if (test.choiceQuestionIds.trim() === "") {
+        cqCount = 0;
+    } else {
+        cqCount = test.choiceQuestionIds.split(' ').length;
+    }
+    if (test.subjectiveQuestionIds.trim() === "") {
+        sqCount = 0;
+    } else {
+        sqCount = test.subjectiveQuestionIds.split(' ').length;
+    }
+
+    var time = undefined;
+    $.ajax({
+        url: '/test/get/time',
+        type: 'GET',
+        async: false,
+        data: {
+            testId: test.testId
+        },
+        success: function (result) {
+            time = result;
+        }
+    });
+
+    var button = ``;
+    if (time === undefined) {
+        // 考试未发布
+        button =
+            `<button type="button" class="btn btn-outline-warning" onclick="releaseTest(${test.testId})">发布试卷</button>
+            &nbsp;
+            <button type="button" class="btn btn-outline-warning" onclick="deleteTest(${test.testId})">删除</button>`;
+    } else {
+        // 考试已发布
+        button = `<button type="button" class="btn btn-outline-warning disabled" onclick="">试卷已发布</button>`;
+
+    }
+
+    let content =
+        `<tr>
+            <td>${test.courseName}</td>
+            <td>${cqCount}</td>
+            <td>${sqCount}</td>
+            <td>${button}</td>
+        </tr>`;
+    $('#exerbody2').append(content);
+}
+
+function releaseTest(id) {
+    $.ajax({
+        url: '/arrange',
+        type: "POST",
+        data: {
+            testId: id,
+            startTime: '20190801150000',
+            duration: 90
+        },
+        success: function (result) {
+            alert('考试已发布');
+        },
+        error: function (result) {
+            alert('发布失败');
+        }
+    })
+}
+
+function deleteTest(id) {
+    $.ajax({
+        url: '/delete',
+        type: "POST",
+        data: {
+            testId: id
+        },
+        success: function (result) {
+            alert('删除成功！')
+        },
+        error: function (result) {
+            alert('删除失败');
+        }
+    })
+}
+
+function appendStartedTestCard(test) {
+    let content =
+        `<div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    <div class="float-left">
+                        ${test.courseName}
+                    </div>
+                    <div class="float-right">
+                        <a href="/exam/${test.testId}" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </div>
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="container">
+                        <p>科目：${test.courseName}</p>
+                        <p>开始时间：${test.startTime}</p>
+                        <p>考试时长：${test.duration}分钟</p>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+    $('#st-accordion').append(content);
 
 }
 
@@ -149,16 +258,17 @@ function appendSearchResult(course) {
         }
     }
 
-    let content = `<tr>
-                        <td id="search-result-id" style="display: none;">${course.courseId}</td>
-                        <td>${course.courseName}</td>
-                        <td>${teacherString}</td>
-                        <td>
-                            <div >
-                                <button type="button" id="btn-select-${course.courseId}" class="btn btn-outline-success" onclick="selectCourse(${course.courseId})">加入</button>
-                            </div>
-                        </td>
-                    </tr>`;
+    let content =
+        `<tr>
+            <td id="search-result-id" style="display: none;">${course.courseId}</td>
+            <td>${course.courseName}</td>
+            <td>${teacherString}</td>
+            <td>
+                <div >
+                    <button type="button" id="btn-select-${course.courseId}" class="btn btn-outline-success" onclick="selectCourse(${course.courseId})">加入</button>
+                </div>
+            </td>
+        </tr>`;
 
     $('#course-table-body').append(content);
 }

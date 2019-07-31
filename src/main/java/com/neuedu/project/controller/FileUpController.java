@@ -18,17 +18,17 @@ import java.io.IOException;
 public class FileUpController {
 
     //fileUp
-    @RequestMapping(value = "/fileUp",method = RequestMethod.POST)
-    public String up(MultipartFile img){
+    @RequestMapping(value = "/fileUp", method = RequestMethod.POST)
+    public String up(MultipartFile img) {
         System.out.println(img);
         //img  ----服务器的D://images   ---虚拟目录
-        if(img!=null) {
+        if (img != null) {
             String fileName = img.getOriginalFilename();
-            System.out.println("上传的文件名字："+fileName);
+            System.out.println("上传的文件名字：" + fileName);
             //xxxseconds.xxx
             int index = fileName.indexOf('.');
-            String newFileName = fileName.substring(0, index)+System.currentTimeMillis()+fileName.substring(index);
-            File file = new File("/Users/anothertask/Downloads/images",newFileName);
+            String newFileName = fileName.substring(0, index) + System.currentTimeMillis() + fileName.substring(index);
+            File file = new File("/images", newFileName);
             try {
                 img.transferTo(file);
             } catch (IllegalStateException e) {

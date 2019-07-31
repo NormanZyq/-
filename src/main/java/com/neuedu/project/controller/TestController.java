@@ -25,20 +25,24 @@ public class TestController {
     /**
      * service for test.
      */
-    @Autowired
-    private TestService testService;
+    private final TestService testService;
 
     /**
      * service for arrangement.
      */
-    @Autowired
-    private ArrangeService arrangeService;
+    private final ArrangeService arrangeService;
 
     /**
      * service fo question.
      */
+    private final QuestionService questionService;
+
     @Autowired
-    private QuestionService questionService;
+    public TestController(TestService testService, ArrangeService arrangeService, QuestionService questionService) {
+        this.testService = testService;
+        this.arrangeService = arrangeService;
+        this.questionService = questionService;
+    }
 
     /**
      * auto create a test with passed in number of 客观题和主观题.
@@ -124,9 +128,9 @@ public class TestController {
                 Question question = questionService.getQuestionById(id);
                 forChoiceQuestions.add(question);
             }
-            List<ChoiceQuestion> choiceQuestions = QuestionUtils.getInstance().parseAsChoiceQuestionList(forChoiceQuestions);
-            // 解析选择题完成
-            return choiceQuestions;
+            // 解析完成并返回
+            return QuestionUtils.getInstance()
+                    .parseAsChoiceQuestionList(forChoiceQuestions);
         } else {
             return null;
         }
@@ -188,15 +192,13 @@ public class TestController {
         return arrs;
     }
 
-
-
     @PostMapping(value = "/answer/submit")
     public void submitAnswers() {
 
     }
 
     @PostMapping(value = "/answer/check")
-    public void checkAnsers() {
+    public void checkAnwsers() {
 
     }
 

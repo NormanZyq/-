@@ -10,14 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 题目相关工具。
+ *
+ * @author zyq
+ */
 public class QuestionUtils {
     private static QuestionUtils ourInstance = new QuestionUtils();
 
-    public static QuestionUtils getInstance() {
-        return ourInstance;
+    private QuestionUtils() {
     }
 
-    private QuestionUtils() {
+    public static QuestionUtils getInstance() {
+        return ourInstance;
     }
 
     public Map<String, String> parseChoiceString(String choiceString) {
@@ -27,10 +32,9 @@ public class QuestionUtils {
         // 根据choiceString解析出json对象
         JSONObject choices = JSON.parseObject(choiceString);
 
-        //
         int choiceCount = choices.size();
         for (int i = 0; i < choiceCount; i++) {
-            String lower = String.valueOf((char)(97 + i));
+            String lower = String.valueOf((char) (97 + i));
             String capital = String.valueOf((char) (65 + i));
             String choiceContent = choices.getString(lower);
             if (choiceContent == null) {

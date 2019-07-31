@@ -119,7 +119,6 @@ function getTests() {
         dataType: "json",
         success: function (result) {
             for (let test of result) {
-                console.log(test);
                 appendTestCard(test)
             }
         },
@@ -141,7 +140,7 @@ function getXuanze(testId) {
         },
         success: function (result) {
             // 解析选择题
-            console.log(result);
+            // console.log(result);
             var index = 1;
             for (question of result) {
                 appendCQ(question, index);
@@ -168,8 +167,8 @@ function getZhuguan(testId, clear) {
             testId: testId
         },
         success: function (result) {
-            // 解析选择题
-            console.log(result);
+            // 解析主观题
+            // console.log(result);
             var index = 1;
             for (question of result) {
                 appendSQ(question, index);
@@ -177,7 +176,7 @@ function getZhuguan(testId, clear) {
             }
         },
         error: function (result) {
-            alert(result);
+            alert('获取题目出错，请刷新页面');
             console.log(result);
         }
     })
@@ -192,7 +191,7 @@ function getQuestionById(id) {
             return result;
         },
         error: function (result) {
-            alert(result);
+            alert('获取题目详情失败，请刷新页面');
             console.log(result);
         }
     })

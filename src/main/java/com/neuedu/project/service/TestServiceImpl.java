@@ -11,6 +11,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * 考试相关service层.
+ *
+ * @author ljq
+ */
 @Service
 public class TestServiceImpl implements TestService {
 

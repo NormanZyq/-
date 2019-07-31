@@ -19,8 +19,8 @@
 		<script src="/js/fetchData.js"></script>
 
 		<script type="text/javascript">
-
 			let params = getRequestParam();
+
 			let testId = params.testId;
 			if (testId === undefined) {
 				window.location.href = "/mypage";
@@ -40,18 +40,18 @@
 					for (var j = 0; j < exschild.length; j++) {
 						//alert("inner for"+$(exschild[j]).attr("type"));
 						//alert($(exschild[j]).prop("checked"));
-						if ($(exschild[j]).prop("checked") == true) {
+						if ($(exschild[j]).prop("checked") === true) {
 							bo = true;
 							continue;
 						}
 					}
-					if (bo == false) {
+					if (bo === false) {
 						alert("第" + (i + 1) + "题没有做鸭 ヽ(。>д<)ｐ");
 					}
 				}
 
-				if (bo == true) {
-					alert("提交成功惹d(´ω｀*)")
+				if (bo === true) {
+					alert("提交成功惹d(´ω｀*)");
 					window.history.back()
 				} else {
 					alert("提交失败惹(◍´꒳`◍)")
@@ -86,13 +86,13 @@
 				time_now = time_now.getTime();
 				time_distance = time_end - time_now;
 				if (time_distance > 0) {
-					int_day = Math.floor(time_distance / 86400000)
+					int_day = Math.floor(time_distance / 86400000);
 					time_distance -= int_day * 86400000;
-					int_hour = Math.floor(time_distance / 3600000)
+					int_hour = Math.floor(time_distance / 3600000);
 					time_distance -= int_hour * 3600000;
-					int_minute = Math.floor(time_distance / 60000)
+					int_minute = Math.floor(time_distance / 60000);
 					time_distance -= int_minute * 60000;
-					int_second = Math.floor(time_distance / 1000)
+					int_second = Math.floor(time_distance / 1000);
 
 					if (int_hour < 10)
 						int_hour = "0" + int_hour;
@@ -127,11 +127,11 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<form class="form-inline mx-auto">
-						<font color="coral" size="5px">
+						<span style="color: coral; ">
 							<b>
 								<div id="timer"></div>
 							</b>
-						</font>
+						</span>
 					</form>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -171,7 +171,6 @@
 		<form class="form-inline col-md-1 offset-md-11 m-auto">
 			<button class="btn btn-lg btn-info" type="button" onclick="check()">&nbsp;&nbsp;交&nbsp;卷&nbsp;&nbsp;</button>
 			<p><br /><br /><br /><br /><br /><br /><br /><br /><br />&nbsp;</p>
-
 		</form>
 
 

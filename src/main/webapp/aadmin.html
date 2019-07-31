@@ -53,59 +53,40 @@
 			}
 		</script>
 		<script>
+			//根据ID进行修改信息,页面变化功能在此实现，ajax功能实现在check函数里
 			function update(i,identity){
-				//identity:0为用户表,1为课程信息表,2为选课关系表,3为教授关系表
+				//identity:0为用户表,1为课程信息表
 				//alert(i)
 				//alert(identity)
-				
 				if(identity==0){
-					//alert(i)
-					var IDnum = "uID" + i;
-					var exschild1 = $("#" + IDnum + "");
-					//alert(IDnum)
-					//alert(exschild1.prop("hidden"))
 					var pwdnum = "pwd" + i;
 					var exschild2 = $("#" + pwdnum + "");
 					var Typenum = "uType" + i;
 					var exschild3 = $("#" + Typenum + ""); 
-					exschild2.prop("hidden", true);
-					exschild1.prop("hidden", true);
-					exschild3.prop("hidden", true); 
 					var CIDnum = "changeID" + i;
 					var exschild4 = $("#" + CIDnum + "");
 					var Cpwdnum = "changepwd" + i;
 					var exschild5 = $("#" + Cpwdnum + "");
 					var CTypenum = "changeType" + i;
 					var exschild6 = $("#" + CTypenum + "");
-					exschild4.prop("hidden", false);
-					exschild5.prop("hidden", false);
-					exschild6.prop("hidden", false);
 					var Cedition = "edition" + i;
 					var exschild7 = $("#" + Cedition + "");
 					var Cdel = "del" + i;
 					var exschild8 = $("#" + Cdel + "");
 					var Csure = "besure" + i;
 					var exschild9 = $("#" + Csure + "");
+					exschild2.prop("hidden", true);
+					exschild3.prop("hidden", true); 
+					exschild4.prop("hidden", false);
+					exschild5.prop("hidden", false);
+					exschild6.prop("hidden", false);
 					exschild7.prop("hidden", true);
 					exschild8.prop("hidden", true);
 					exschild9.prop("hidden",false);
-					//var newID = $("#chID");
-					var NIDnum = "chID" + i;
-					var newID = $("#" + NIDnum + "").val();
-					//alert(newID)
-					//var newpwd = $("#chpwd");
-					var Npwdnum = "chpwd" + i;
-					var newpwd = $("#" + Npwdnum + "").val();
-					//alert(newpwd)
-					//var newType = $("#chType")
-					var NTypenum = "chType" + i;
-					var newType = $("#" + NTypenum + "").val();
-					//alert(newType)
-					
-					 $.ajax({
+					/* $.ajax({
 						type:"POST",
 						url:'data.json',
-						data:{"ID":newID,"Password":newpwd,"Type":newType},
+						data:{"ID":IDchange,"Password":newpwd,"Type":newType},
 						dataType:"json",
 						success:function(data){
 							
@@ -121,14 +102,18 @@
 							alert("出错了！");
 						}
 						
-					}) 
+					}) */
 				}
 				else if(identity==1){
-					var cid = "crsid" + i;
-					var exschild1 = $("#" + cid + "");
+					//获取即将要修改的课程的ID
+					//alert(courser.rows.length)
+					var changecID = courser.rows[i+1].cells[0].innerHTML;
+					alert(changecID)
+					//var cid = "crsid" + i;
+					//var exschild1 = $("#" + cid + "");
 					var cname = "crsname" + i;
 					var exschild2 = $("#" + cname + "");
-					exschild1.prop("hidden", true);
+					//exschild1.prop("hidden", true);
 					exschild2.prop("hidden", true);
 					var ccrid = "ccid" + i;
 					var exschild3 = $("#" + ccrid + "");
@@ -145,20 +130,173 @@
 					exschild5.prop("hidden", true);
 					exschild6.prop("hidden", true);
 					exschild7.prop("hidden",false);
-					
-					var cIDnum = "chcid" + i;
-					var newID = $("#" + cIDnum + "").val();
-					
 					var cpwdnum = "chcname" + i;
 					var newname = $("#" + cpwdnum + "").val();
-					$.ajax({
+					/* $.ajax({
 						type:"POST",
 						url:'coursedata.json',
-						data:{"course_id":newID,"course_name":newname},
+						data:{"course_id":changecID,"course_name":newname},
 						dataType:"json",
 						success:function(data){
 							
 							alert("编辑成功啦٩(*Ӧ)و");
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错惹(•́へ•́╬)");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+							
+						}
+						
+					}) */
+				}
+
+				
+			}
+		</script>
+		<script>
+			//传回用户ID,根据ID来删除信息
+			function del(i,identity){
+				//identity:0为用户表,1为课程信息表,2为选课关系表,3为教授关系表
+				//alert(user.rows.length)
+				if(identity==0){
+					//获取即将要被删除的ID
+					//alert(user.rows.length);
+					var delID = user.rows[i+1].cells[0].innerHTML;
+					//alert(delID);
+					$.ajax({
+						type:"POST",
+						url:'data.json',
+						data:{"ID":delID},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功啦！");
+							window.location.reload();
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错惹(•́へ•́╬)");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+						}
+						
+					});
+				}
+				else if(identity==1){
+					//获取即将要被删除的课程ID
+					//alert(courser.rows.length)
+					var delcID = courser.rows[i+1].cells[0].innerHTML;
+					alert(delcID)
+					$.ajax({
+						type:"POST",
+						url:'coursedata.json',
+						data:{"course_id":delID},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功啦！");
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错惹(•́へ•́╬)");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+						}
+						
+					});
+				}
+				else if(identity==2){
+					//获取即将要被删除的课程ID与学生ID
+					//alert(courser.rows.length)
+					var delcstuID = cstudenter.rows[i+1].cells[0].innerHTML;
+					alert(delcstuID)
+					//var stuidnum = "stuID"+i;
+					//var studelID = $("#" + stuidnum + "").val();
+					$.ajax({
+						type:"POST",
+						url:'data.json',
+						data:{"ID":delcstuID},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功啦！");
+							window.location.reload();
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错惹(•́へ•́╬)");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+						}
+						
+					});
+				}
+				else if(identity==3){
+					//获取即将要被删除的课程ID与教授ID
+					//alert(courser.rows.length)
+					var delcteaID = teacher.rows[i+1].cells[0].innerHTML;
+					alert(delcteaID)
+					//var tidnum = "teaID"+i;
+					//var tdelID = $("#" + tidnum + "").val();
+					$.ajax({
+						type:"POST",
+						url:'data.json',
+						data:{"ID":delcteaID},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功啦！");
+							window.location.reload();
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+							alert("出错了！");
+							// 状态码
+							console.log(XMLHttpRequest.status);
+							// 状态
+							console.log(XMLHttpRequest.readyState);
+							// 错误信息
+							console.log(textStatus);
+						}
+						
+					});
+				}
+				//window.location.reload();
+			}
+		</script>
+		<script>
+			function check(i,identity){
+				//identity:0为用户表,1为课程信息表,2为选课关系表,3为教授关系表
+				if(identity==0){
+					//获取即将要修改的用户的ID
+					var IDchange= user.rows[i+1].cells[0].innerHTML;
+					alert(IDchange);
+					//var newpwd = $("#chpwd");
+					var Npwdnum = "chpwd" + i;
+					var newpwd = $("#" + Npwdnum + "").val();
+					alert(newpwd)
+					//var newType = $("#chType")
+					var NTypenum = "chType" + i;
+					var newType = $("#" + NTypenum + "").val();
+					alert(newType)
+					//alert("操作成功啦٩( ´︶` )( ´︶` )۶");
+					$.ajax({
+						type:"POST",
+						url:'data.json',
+						data:{"ID":IDchange,"Password":newpwd,"Type":newType},
+						dataType:"json",
+						success:function(data){
+							alert("编辑成功啦٩(*Ӧ)و");
+							window.location.reload();
 						},
 						error: function (XMLHttpRequest, textStatus, errorThrown) {
 							// 状态码
@@ -171,142 +309,40 @@
 						}
 						
 					}) 
-				}
-
-				
-			}
-		</script>
-		<script>
-			function del(i,identity){
-				if(identity==0){
-					var IDnum = "uID" + i;
-					var delID = $("#" + IDnum + "").val();
-					alert(IDnum)
-					alert(delID)
-					$.ajax({
-						type:"POST",
-						url:'data.json',
-						data:{"ID":delID},
-						dataType:"json",
-						success:function(data){
-							alert("删除成功啦！");
-						},
-						error: function (XMLHttpRequest, textStatus, errorThrown) {
-							// 状态码
-							console.log(XMLHttpRequest.status);
-							// 状态
-							console.log(XMLHttpRequest.readyState);
-							// 错误信息
-							console.log(textStatus);
-						}
-						
-					});
+					//window.location.reload();
 				}
 				else if(identity==1){
-					var cidnum = "crsid"+i;
-					var cdelID = $("#" + cidnum + "").val();
+					//获取即将要修改的课程ID
+					var changecID = courser.rows[i+1].cells[0].innerHTML;
+					//alert(changecID)
+					//获取修改后内容
+					var cNpwdnum = "chcname" + i;
+					var cnewname = $("#" + cNpwdnum + "").val();
+					//alert(cnewname)
 					$.ajax({
 						type:"POST",
 						url:'coursedata.json',
-						data:{"course_id":cdelID},
+						data:{"course_id":changecID,"course_name":cnewname},
 						dataType:"json",
 						success:function(data){
-							alert("删除成功啦！");
+							alert("编辑成功啦٩(*Ӧ)و");
+							window.location.reload();
 						},
 						error: function (XMLHttpRequest, textStatus, errorThrown) {
-							alert("出错了！");
+							alert("出错惹(•́へ•́╬)");
 							// 状态码
 							console.log(XMLHttpRequest.status);
 							// 状态
 							console.log(XMLHttpRequest.readyState);
 							// 错误信息
 							console.log(textStatus);
+							
 						}
 						
-					});
-				}
-				else if(identity==2){
-					var stuidnum = "stuID"+i;
-					var studelID = $("#" + stuidnum + "").val();
-					$.ajax({
-						type:"POST",
-						url:'data.json',
-						data:{"ID":studelID},
-						dataType:"json",
-						success:function(data){
-							alert("删除成功啦！");
-						},
-						error: function (XMLHttpRequest, textStatus, errorThrown) {
-							alert("出错了！");
-							// 状态码
-							console.log(XMLHttpRequest.status);
-							// 状态
-							console.log(XMLHttpRequest.readyState);
-							// 错误信息
-							console.log(textStatus);
-						}
-						
-					});
-				}
-				else if(identity==3){
-					var tidnum = "teaID"+i;
-					var tdelID = $("#" + tidnum + "").val();
-					$.ajax({
-						type:"POST",
-						url:'data.json',
-						data:{"ID":tdelID},
-						dataType:"json",
-						success:function(data){
-							alert("删除成功啦！");
-						},
-						error: function (XMLHttpRequest, textStatus, errorThrown) {
-							alert("出错了！");
-							// 状态码
-							console.log(XMLHttpRequest.status);
-							// 状态
-							console.log(XMLHttpRequest.readyState);
-							// 错误信息
-							console.log(textStatus);
-						}
-						
-					});
+					}) 
 				}
 				
-			}
-		</script>
-		<script>
-			function check(i,identity){
-
-				if(identity==0){
-					//var newID = $("#chID");
-					var NIDnum = "chID" + i;
-					var newID = $("#" + NIDnum + "").val();
-					//alert(newID)
-					//var newpwd = $("#chpwd");
-					var Npwdnum = "chpwd" + i;
-					var newpwd = $("#" + Npwdnum + "").val();
-					//alert(newpwd)
-					//var newType = $("#chType")
-					var NTypenum = "chType" + i;
-					var newType = $("#" + NTypenum + "").val();
-					//alert(newType)
-					alert("操作成功啦٩( ´︶` )( ´︶` )۶");
-					window.location.reload();
-				}
-				else if(identity==1){
-					//var newID = $("#chID");
-					var cNIDnum = "chcid" + i;
-					var cnewID = $("#" + cNIDnum + "").val();
-					//alert(newID)
-					//var newpwd = $("#chpwd");
-					var cNpwdnum = "chcname" + i;
-					var cnewname = $("#" + cNpwdnum + "").val();
-					//alert(newpwd)
-					alert("操作成功啦٩( ´︶` )( ´︶` )۶");
-					window.location.reload();
-				}
-				
-				
+				//window.location.reload();
 			}
 		</script>
 		<script>
@@ -594,7 +630,7 @@
 
 					<br /><br />
 					<br /><br />
-					<table class="table  table-striped">
+					<table class="table  table-striped" id="user">
 						<thead>
 							<tr>
 								<th>用户ID</th>
@@ -617,11 +653,13 @@
 				        type:'get',
 				        dataType:'json',
 				        success:function(data){
+							//var t = document.getElementsByTagName("table")[0].rows[0].cells[0].innerHTML;
+							//alert(t);
 				            //方法中传入的参数data为后台获取的数据
 				            for(i in data.data){
 								//ID格式
 								//var t11=data.data[i].ID
-								var tr1='<td id="uID'+i+'">'+data.data[i].ID+'</td>'+'<td id="changeID'+i+'" hidden="">'+'<form class="form-inline ">'+'<div  class="form-group mx-auto">'+'<input type="text" class="form-control" id="chID'+i+'" placeholder="'+data.data[i].ID+'">'+'</div>'+'</td>'
+								var tr1='<td id="uID'+i+'">'+data.data[i].ID+'</td>'+'<form class="form-inline ">'
 								var tr3='<td id="uType'+i+'">'+data.data[i].Type+'</td>'+'<td id="changeType'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chType'+i+'" placeholder="'+data.data[i].Type+'">'+'</div>'+'</td>'
 								var tr2='<td id="pwd'+i+'">'+data.data[i].Password+'</td>'+'<td id="changepwd'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chpwd'+i+'" placeholder="'+data.data[i].Password+'">'+'</div>'+'</td>'
 								var str1='<button type="button" id="edition'+i+'" class="btn  btn-outline-danger" onclick=update('+i+',"0")>'+'编辑'+'</button>'
@@ -669,7 +707,7 @@
 					
 					<br /><br />
 					<br /><br />
-					<table class="table  table-striped">
+					<table class="table  table-striped" id="courser">
 						<thead>
 							<tr>
 								<th>课程ID</th>
@@ -692,7 +730,7 @@
 				            for(i in data.data){
 								//ID格式
 								//var t11=data.data[i].ID
-								var tr1='<td id="crsid'+i+'">'+data.data[i].course_id+'</td>'+'<td id="ccid'+i+'" hidden="">'+'<form class="form-inline ">'+'<div  class="form-group mx-auto">'+'<input type="text" class="form-control" id="chcid'+i+'" placeholder="'+data.data[i].course_id+'">'+'</div>'+'</td>'
+								var tr1='<td id="crsid'+i+'">'+data.data[i].course_id+'</td>'+'<form class="form-inline ">'
 								var tr2='<td id="crsname'+i+'">'+data.data[i].course_name+'</td>'+'<td id="ccname'+i+'" hidden="">'+'<div class="form-group mx-auto">'+'<input type="text" class="form-control" id="chcname'+i+'" placeholder="'+data.data[i].course_name+'">'+'</div>'+'</td>'
 								var str1='<button type="button" id="cedition'+i+'" class="btn  btn-outline-danger" onclick=update('+i+',"1")>'+'编辑'+'</button>'
 								var str2='<button type="button" id="cdel'+i+'" class="btn  btn-outline-dark" onclick=del('+i+',"1")>'+'删除'+'</button>'
@@ -752,7 +790,7 @@
 					<br /><br />
 					<br /><br />
 					<br /><br />
-					<table class="table ">
+					<table class="table " id="cstudenter">
 						<thead>
 							<tr>
 								<th>学生ID</th>
@@ -839,7 +877,7 @@
 					<br /><br />
 					<br /><br />
 					<br /><br />
-					<table class="table ">
+					<table class="table " id="teacher">
 						<thead>
 							<tr>
 								<th>教师ID</th>

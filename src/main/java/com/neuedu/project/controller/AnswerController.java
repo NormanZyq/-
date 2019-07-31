@@ -20,4 +20,18 @@ public class AnswerController {
         String studentId = (String) httpSession.getAttribute("loggedId");
         answerService.addAnswerSheet(studentId,testId,ca,sa);
     }
+
+    @PostMapping(value = "/????")
+    @ResponseBody
+    public void scoreChoiceQuestion(HttpSession httpSession, int testId){
+        String studentId = (String) httpSession.getAttribute("loggedId");
+        answerService.scoreChoiceQuestion(studentId,testId);
+    }
+
+    @PostMapping(value = "/?????")
+    @ResponseBody
+    public Integer getChoiceScore(HttpSession httpSession, int testId){
+        String studentId = (String) httpSession.getAttribute("loggedId");
+        return answerService.getChoiceScore(studentId,testId);
+    }
 }

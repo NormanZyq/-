@@ -74,6 +74,21 @@ public class AnswerServiceImpl implements AnswerService {
         }
     }
 
+    @Override
+        public Integer getChoiceScore(String studentId, int testId){
+        //排除学生选课但未参加考试，数据库没有答题记录的情况
+        if(attendTestRecMapper.getAttendTestRecId(studentId,testId)==null)
+            return 0;
+        int attendRecordId = attendTestRecMapper.getAttendTestRecId(studentId,testId);
+        System.out.println("attendRecordId = "+attendRecordId);
+        System.out.println(answerSheetMapper.queryAnswerSheetByAttendRecordId(attendRecordId));
+        //排除非这一科科学生查询这课成绩情况
+        if(answerSheetMapper.queryAnswerSheetByAttendRecordId(attendRecordId) == null)
+            return 0;
+        int answerRecordId = answerSheetMapper.queryAnswerSheetByAttendRecordId(attendRecordId).getId();
+        Integer CS = scoreMapper.queryScoreByAnswerRecordId(answerRecordId).getChoicesScore();
+        return CS;
+    }
     /**
      * From Internet
      * 字符串切割

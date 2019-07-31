@@ -18,5 +18,11 @@
         values (#{teacherId}, #{answerSheetId}, #{choicesScore}, #{subjectiveScore});
     </insert>
 
+    <select id="queryScoreByAnswerRecordId" parameterType="int" resultMap="scoreMap">
+        select *
+        from check_test_record
+        where answer_record_id = #{answerRecordId};
+    </select>
+
 
 </mapper>

@@ -13,6 +13,7 @@
         <result column="subjective_score" property="subjectiveScore"/>
     </resultMap>
 
+
     <insert id="insertScore" parameterType="Score">
         insert into check_test_record (check_teacher_id, answer_record_id,choices_score,subjective_score)
         values (#{teacherId}, #{answerSheetId}, #{choicesScore}, #{subjectiveScore});
@@ -24,5 +25,39 @@
         where answer_record_id = #{answerRecordId};
     </select>
 
+    <select id="getRankByChoiceScore" resultMap="scoreMap" resultType="Score">
+        SELECT
+            obj_new.student_id studentId,
+            obj_new.choices_score,
+            obj_new.rownum scoreRank
+        FROM
+            (
+                SELECT
+                    obj.student_id,
+                    obj.choices_score,
+                    @rownum := @rownum + 1 AS num_tmp,
+                    @incrnum := CASE
+                                    WHEN @rowtotal = obj.choices_score THEN
+                                        @incrnum
+                                    WHEN @rowtotal := obj.choices_score THEN
+                                        @rownum
+                        END AS rownum
+                FROM
+                    (
+                        select tar.student_id, ctr.choices_score
+                        from test_attend_records tar,
+                             student_answer_records sar,
+                             check_test_record ctr
+                        where test_id = #{testId}
+                          and sar.attend_record_id = tar.attend_record_id
+                          and ctr.answer_record_id = sar.answer_record_id
+                        ORDER BY ctr.choices_score desc
+                    ) AS obj,
+                    (
+                        SELECT
+                            @rownum := 0 ,@rowtotal := NULL ,@incrnum := 0
+                    ) r
+            ) AS obj_new
+    </select>
 
 </mapper>

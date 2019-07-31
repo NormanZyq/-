@@ -54,4 +54,11 @@
         where question_id = #{id};
     </select>
 
+    <delete id="deletequestionById">
+        delete
+        from questions
+        where question_id = #{id};
+    </delete>
+
+
 </mapper>

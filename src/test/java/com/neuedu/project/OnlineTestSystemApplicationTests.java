@@ -175,7 +175,6 @@ public class OnlineTestSystemApplicationTests {
         answerService.addAnswerSheet("ffff",7,ca,sa);
         answerService.addAnswerSheet("gggg",7,ca,sa);
 
-
     }
 
     @Test
@@ -189,6 +188,11 @@ public class OnlineTestSystemApplicationTests {
         System.out.println(answerService.getChoiceScore("aaaa",7));
         System.out.println(answerService.getChoiceScore("aaaa",1));
         //System.out.println(answerService.getChoiceScore("aa",7));
+    }
+
+    @Test
+    public void getRankByChoiceScore(){
+        System.out.println(answerService.getRankByChoiceScore("aaaa",7));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.neuedu.project.service;
 
 import com.neuedu.project.domain.AnswerSheet;
+import com.neuedu.project.domain.Score;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface AnswerService {
      * @param studentId 学生Id
      * @param testId 考试Id
      */
-    Integer getChoiceScore(String studentId, int testId);
+    Score getChoiceScore(String studentId, int testId);
 
 
     /**
@@ -41,6 +42,15 @@ public interface AnswerService {
      * @param testId 考试Id
      */
     //void getSubjectiveAnswer(int testId);
+
+    /**
+     * 获取排名信息
+     *
+     * @param studentId 学生Id
+     * @param testId 考试Id
+     * @return 排名信息
+     */
+    Score getRankByChoiceScore(String studentId, int testId);
 
 
 }

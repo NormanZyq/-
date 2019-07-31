@@ -23,6 +23,8 @@ public interface QuestionMapper {
 
     Question getQuestionById(int id);
 
+    void deletequestionById(int id);
+
 //    List<Question> getSubjectiveQuestionsByCourseId(int coueseId);
 
 

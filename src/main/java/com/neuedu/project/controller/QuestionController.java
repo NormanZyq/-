@@ -171,6 +171,18 @@ public class QuestionController {
         return cqs;
     }
 
+    /**
+     * 删除问题id为id的问题
+     *
+     * @param id 问题id
+     */
+    @GetMapping(value = "/delete/{id}")
+    @ResponseBody
+    public void deleteQuestionById(@PathVariable int id){
+        questionService.deleteQuestionById(id);
+    }
+
+
 }
 
 

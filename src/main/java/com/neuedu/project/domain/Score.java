@@ -2,11 +2,12 @@ package com.neuedu.project.domain;
 
 public class Score {
 
-
+    private String studentId;
     private String teacherId;
     private int answerSheetId;
     private int choicesScore;
     private int subjectiveScore;
+    private int scoreRank;
 
     public String getTeacherId() {
         return teacherId;
@@ -40,12 +41,29 @@ public class Score {
         this.subjectiveScore = subjectiveScore;
     }
 
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public int getScoreRank() {
+        return scoreRank;
+    }
+
+    public void setScoreRank(int scoreRank) {
+        this.scoreRank = scoreRank;
+    }
+
     public Score(String teacherId, int answerSheetId, int choicesScore, int subjectiveScore) {
         this.teacherId = teacherId;
         this.answerSheetId = answerSheetId;
         this.choicesScore = choicesScore;
         this.subjectiveScore = subjectiveScore;
     }
+
     public Score(){
 
     }
@@ -53,10 +71,12 @@ public class Score {
     @Override
     public String toString() {
         return "Score{" +
-                "teacherId='" + teacherId + '\'' +
+                "studentId='" + studentId + '\'' +
+                ", teacherId='" + teacherId + '\'' +
                 ", answerSheetId=" + answerSheetId +
                 ", choicesScore=" + choicesScore +
                 ", subjectiveScore=" + subjectiveScore +
+                ", scoreRank=" + scoreRank +
                 '}';
     }
 }

@@ -58,4 +58,10 @@ public class QuestionServiceImpl implements QuestionService {
     public Question getQuestionById(int id) {
         return questionMapper.getQuestionById(id);
     }
+
+    @Override
+    public void deleteQuestionById(int id){
+        questionMapper.deletequestionById(id);
+    }
+
 }

@@ -42,6 +42,8 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void addAnswerSheet(String studentId, int testId, String ca,String sa){
         int attendTestRecId = attendTestRecMapper.getAttendTestRecId(studentId,testId);
+        if(answerSheetMapper.queryAnswerSheetByAttendRecordId(attendTestRecId) != null)
+            return;
         AnswerSheet answerSheet = new AnswerSheet();
         answerSheet.setAttendRecordId(attendTestRecId);
         answerSheet.setChoiceQuestionAnswer(ca);
@@ -49,7 +51,7 @@ public class AnswerServiceImpl implements AnswerService {
         answerSheetMapper.insertAnswers(answerSheet);
     }
     @Override
-    public void scoreChoiceQuestion(String teacherId, int testId){
+    public boolean scoreChoiceQuestion(String teacherId, int testId){
         //testid -> List<AnswerSheet>
         List<AnswerSheet> answerSheets = answerSheetMapper.queryAnswerSheetAboutTest(testId);
         //testid -> List<questionid> -> list<question>
@@ -61,6 +63,9 @@ public class AnswerServiceImpl implements AnswerService {
             questions.add(questionMapper.getQuestionById(temp));
         }
         for(AnswerSheet as:answerSheets){
+            if(scoreMapper.queryScoreByAnswerRecordId(as.getId()) != null) {
+                return false;
+            }
             List<String> choiceAnswers = analyseQuestionId(as.getChoiceQuestionAnswer(),"#");
             int sum = 0;
             for(int i = 0; i<Math.min(choiceAnswers.size(),questions.size());i++){
@@ -74,6 +79,7 @@ public class AnswerServiceImpl implements AnswerService {
             score.setChoicesScore(sum);
             scoreMapper.insertScore(score);
         }
+        return true;
     }
 
     @Override

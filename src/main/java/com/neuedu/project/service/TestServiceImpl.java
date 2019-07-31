@@ -24,18 +24,26 @@ public class TestServiceImpl implements TestService {
 
     private final CourseMapper courseMapper;
 
+    private final AnswerSheetMapper answerSheetMapper;
+
     /**
      * logger.
      */
     private final Logger log = Logger.getLogger(TestServiceImpl.class);
 
     @Autowired
-    public TestServiceImpl(TestMapper testMapper, QuestionMapper questionMapper, AttendTestRecMapper attendTestRecMapper, ArrangementMapper arrangementMapper, CourseMapper courseMapper) {
+    public TestServiceImpl(TestMapper testMapper,
+                           QuestionMapper questionMapper,
+                           AttendTestRecMapper attendTestRecMapper,
+                           ArrangementMapper arrangementMapper,
+                           CourseMapper courseMapper,
+                           AnswerSheetMapper answerSheetMapper) {
         this.testMapper = testMapper;
         this.questionMapper = questionMapper;
         this.attendTestRecMapper = attendTestRecMapper;
         this.arrangementMapper = arrangementMapper;
         this.courseMapper = courseMapper;
+        this.answerSheetMapper = answerSheetMapper;
     }
 
     @Override
@@ -144,6 +152,15 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<Test> getTestsByStudentId(String studentId) {
         return testMapper.getStudentTests(studentId);
+    }
+
+    @Override
+    public boolean StudentHaveAnswerSheet(String studentId, int testId){
+        int attendRecordId = attendTestRecMapper.getAttendTestRecId(studentId, testId);
+        if(answerSheetMapper.queryAnswerSheetByAttendRecordId(attendRecordId) == null)
+            return false;
+        else
+            return true;
     }
 
     /**

@@ -3,17 +3,23 @@
         {  
            
             "course_id": "SE111",  
-            "course_name": "软件构造"
+            "course_name": "软件构造",
+			"score":95,
+			"rank":5
         },
 		{  
 		   
 		    "course_id": "SE222",  
-		    "course_name": "英语"
+		    "course_name": "英语",
+			"score":93,
+			"rank":8
 		},
 		{  
 		   
 		    "course_id": "SE333",  
-            "course_name": "工科数学分析"
+            "course_name": "工科数学分析",
+			"score":99,
+			"rank":1
 		}
     ]
 }

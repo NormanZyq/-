@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -408,7 +409,7 @@
 									<h5>教学班排名： SOME</h5>
 									<br /><br />
 								</div>
-
+								
 								<!-- 模态框底部 -->
 								<div class="modal-footer">
 									<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
@@ -428,28 +429,41 @@
 								<th>教学班排名</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>课程A</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>课程B</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
-							<tr>
-								<td>课程C</td>
-								<td>SOME</td>
-								<td>SOME</td>
-							</tr>
+						<tbody id="coursebody">
+							
 
 
 						</tbody>
 					</table>
 				</div>
-
+				<script>
+					$(function(){
+						$.ajax({
+							url:'coursedata.json',
+							type:'get',
+							dataType:'json',
+							success:function(data){
+								for(i in data.data){
+									//ID格式
+									//var t11=data.data[i].ID
+									var tr1='<td>'+data.data[i].course_id+'</td>'+'<form class="form-inline ">'
+									var tr2='<td>'+data.data[i].score+'</td>'
+									var tr3='<td>'+data.data[i].rank+'</td>'
+									$("#coursebody").append('<tr>'+tr1+tr2+tr3+'</tr>')
+									//$("#userList").append(tr4)
+								}
+							},
+							error: function (XMLHttpRequest, textStatus, errorThrown) {
+								// 状态码
+								console.log(XMLHttpRequest.status);
+								// 状态
+								console.log(XMLHttpRequest.readyState);
+								// 错误信息
+								console.log(textStatus);
+							}
+						})
+					})
+				</script>
 				<div id="6" class="container tab-pane fade"><br>
 					<div class="dropdown float-right">
 						<br /><br /><br />
@@ -468,7 +482,7 @@
 					<table class="table">
 						<tbody>
 							<tr>
-								<td>SOME</td>
+								<td>试卷难易程度</td>
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
@@ -481,7 +495,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>SOME</td>
+								<td>授课接受程度</td>
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
@@ -495,7 +509,7 @@
 							</tr>
 
 							<tr>
-								<td>SOME</td>
+								<td>教学创新度</td>
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
@@ -507,7 +521,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>SOME</td>
+								<td>教学内容与试卷内容符合度</td>
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">

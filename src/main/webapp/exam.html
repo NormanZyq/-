@@ -25,38 +25,80 @@
 			if (testId === undefined) {
 				window.location.href = "/mypage";
 			}
+			// 获取选择题
 			getXuanze(testId);
 
 			function check() {
-				var bo = false;
+				let answers = assembleAnswers();
 
-				//var exs = $("radio");
-				for (var i = 0; i < 3; i++) {
-					var name = "optradio" + i;
-					var exschild = $("input[name='" + name + "']");
-					bo = false;
-					//alert(exschild.length);
+				if (answers !== false) {
+					// 答案可以开始提交
+					// 处理成字符串
+					var answerString = '';
+					for (let answer of answers) {
+						answerString += answer;
+						answerString += "#"
+					}
 
-					for (var j = 0; j < exschild.length; j++) {
-						//alert("inner for"+$(exschild[j]).attr("type"));
-						//alert($(exschild[j]).prop("checked"));
-						if ($(exschild[j]).prop("checked") === true) {
-							bo = true;
-							continue;
+					answerString = answerString.substr(0, answerString.length - 1);
+					console.log(answerString);
+
+					$.ajax({
+						url: "/answer/add",
+						dataType: "text",
+						type: "POST",
+						data: {
+							testId: testId,
+							ca: answerString,
+							sa: ''
+						},
+						success: function (result) {
+							alert(result);
+							window.location.href = '/mypage';
+						},
+						error: function (result) {
+							alert('交卷失败，请重试');
+						}
+					})
+
+				}
+
+			}
+
+			function assembleAnswers() {
+				var radios = $('input[type=radio]');
+
+				let questionCount = radios.length / 4;
+
+				var values = [];
+
+				for (let i = 0; i < questionCount; i++) {
+					// 标记这道题是否有选
+					var selected = false;
+
+					// 获得每一题的选项
+					for (var selectionIndex = 0; selectionIndex < 4; selectionIndex++) {
+						let radioIndex = i * 4 + selectionIndex;
+						if (radios[radioIndex].checked) {
+							selected = true;
+							values.push(radios[radioIndex].value);
+							break;
 						}
 					}
-					if (bo === false) {
+
+					if (!selected) {
 						alert("第" + (i + 1) + "题没有做鸭 ヽ(。>д<)ｐ");
+						return false;
 					}
 				}
 
-				if (bo === true) {
-					alert("提交成功惹d(´ω｀*)");
-					window.history.back()
-				} else {
-					alert("提交失败惹(◍´꒳`◍)")
-				}
+				console.log(values);
+				return values;
+
 			}
+
+
+
 		</script>
 
 

@@ -26,6 +26,6 @@ public class ExamControlConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getAccessInterceptor()).addPathPatterns(examControl);
+//        registry.addInterceptor(getAccessInterceptor()).addPathPatterns(examControl);
     }
 }

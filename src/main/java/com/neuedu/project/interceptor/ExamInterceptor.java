@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 /**
@@ -37,7 +38,9 @@ public class ExamInterceptor implements HandlerInterceptor {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
-        PrintWriter out = response.getWriter();
+        OutputStream out = response.getOutputStream();
+
+//        PrintWriter out = response.getWriter();
 
         // 获得用户的ID
         String loggedId = (String) request.getSession()
@@ -51,23 +54,28 @@ public class ExamInterceptor implements HandlerInterceptor {
             log.info("学生" + loggedId
                     + "未参加考试{id = " + testId + "}或该考试不存在，不允许访问");
             response.sendRedirect("/mypage");
+            out.close();
             return false;
         } else {
             log.info("学生" + loggedId
-                    + "参加考试{id = " + testId + "}，允许访问");
+                    + "参加考试{id = " + testId + "}，正在判断考试状态...");
 
             // 判断考试是否开始或结束
             long timeLast = testService.getTimeLast(testId);
             if (timeLast == -1) {
                 // 考试未开始
-                out.println("<script>alert('考试未开始，不可进入！');window.location.href='/mypage';</script>");
+                log.info("考试未开始");
+                out.write("<script>alert('考试未开始，不可进入！');window.location.href='/mypage';</script>".getBytes());
             } else if (timeLast == 0) {
                 // 考试已结束
-                out.println("<script>alert('考试已结束，不可进入！');window.location.href='/mypage';</script>");
+                log.info("考试已结束");
+                out.write("<script>alert('考试已结束，不可进入！');window.location.href='/mypage';</script>".getBytes());
             } else {
+                log.info("考试进行中，允许访问");
+                out.close();
                 return true;
             }
-
+            out.close();
             return false;
         }
     }

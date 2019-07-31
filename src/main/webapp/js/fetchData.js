@@ -110,6 +110,9 @@ function searchCourses() {
     })
 }
 
+/**
+ * 获得所有考试
+ */
 function getTests() {
     $('#exam').html('');
 
@@ -128,6 +131,10 @@ function getTests() {
     })
 }
 
+/**
+ * 获得选择题。
+ * @param testId 考试ID
+ */
 function getXuanze(testId) {
     $('#exer').html('');
     // 获得选择题
@@ -135,6 +142,7 @@ function getXuanze(testId) {
         url: "/test/get/xuanze",
         type: "POST",
         dataType: "json",
+        // async: false,
         data: {
             testId: testId
         },
@@ -146,9 +154,10 @@ function getXuanze(testId) {
                 appendCQ(question, index);
                 index++;
             }
+            return index;
         },
         error: function (result) {
-            alert(result);
+            alert('获取选择题出错，请刷新页面');
             console.log(result);
         }
     })
@@ -176,7 +185,7 @@ function getZhuguan(testId, clear) {
             }
         },
         error: function (result) {
-            alert('获取题目出错，请刷新页面');
+            alert('获取主观题出错，请刷新页面');
             console.log(result);
         }
     })

@@ -75,13 +75,32 @@ function selectCourse(id) {
 }
 
 function appendTestCard(test) {
+    console.log(test);
+
+    let status = test.identity;
+
+    var tip;
+    var textClass = '';
+    var btn = '';
+
+    if (status === 1) {
+        textClass = 'text-danger';
+        btn = "<a class='btn btn-sm btn-outline-primary' href='/exam.html?testId=" + test.testId + "'>进入</a>";
+        tip = '考试进行中';
+    } else if (status === 0) {
+        // textClass = 'text-danger';
+        tip = '考试已结束';
+    } else if (status === -1) {
+        tip = '考试未开始';
+    }
+
     let card = `<div class="col-sm-4 mt-4">
         <div class="card m-auto shadow shadow-sm">
             <span id="test-id" style="display: none;">${test.testId}</span>
             <h3 class="card-title"><br /><br /><br />${test.courseName}</h3>
             <div class="card-body">
-                <br />
-                <table class="table">
+                <p class="text-center"><h5 class="${textClass}">${tip}</h5></p>
+                <table class="table mt-5">
                     <thead>
                         <tr>
                             <th>
@@ -105,6 +124,7 @@ function appendTestCard(test) {
                         </tr>
                     </tbody>
                 </table>
+                ${btn}
             </div>
         </div>`;
 
@@ -169,9 +189,9 @@ function appendSelectedResult(course) {
     $('#selected-table-body').append(content);
 }
 
-function appendCQ(question, count) {
+function appendCQ(question, index) {
     let content = `<div class="card w-75 mx-auto shadow shadow-sm">
-				<div class="card-header">第${count}题</div>
+				<div class="card-header">第${index}题</div>
 				<div class="card-body">${question.questionContent}`;
 
     let choicesString = ``;
@@ -185,13 +205,13 @@ function appendCQ(question, count) {
     // 题目内容<br /><br />${question.d}<br /><br />B<br /><br />C<br /><br />D<br /><br />
     let selectField = `</div>
 				<div class="card-footer">
-					<label><input type="radio" name="optradio0" id="cq-${count}">
+					<label><input type="radio" name="optradio-${index}" id="cq-${index}" value="A">
 						&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="cq-${count}">
+					<label><input type="radio" name="optradio-${index}" id="cq-${index}" value="B">
 						&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="cq-${count}">
+					<label><input type="radio" name="optradio-${index}" id="cq-${index}" value="C">
 						&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<label><input type="radio" name="optradio0" id="cq-${count}">
+					<label><input type="radio" name="optradio-${index}" id="cq-${index}" value="D">
 						&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</div>

@@ -18,8 +18,9 @@ public class AnswerController {
 
     @PostMapping(value = "/add")
     @ResponseBody
-    public void addAnswerSheet(HttpSession session, int testId, String ca, String sa){
+    public String addAnswerSheet(HttpSession session, int testId, String ca, String sa) {
         String studentId = (String) session.getAttribute("loggedId");
-        answerService.addAnswerSheet(studentId,testId,ca,sa);
+        answerService.addAnswerSheet(studentId, testId, ca, sa);
+        return "交卷成功！";
     }
 }

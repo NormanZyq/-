@@ -111,6 +111,15 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    public boolean duclipSubmitAnswerSheet(String studentId, int testId){
+        int attendTestRecId = attendTestRecMapper.getAttendTestRecId(studentId,testId);
+        if(answerSheetMapper.queryAnswerSheetByAttendRecordId(attendTestRecId) != null)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
     public ScoreData getGradeManageByTeacher(int testId){
         ScoreData scoreData = new ScoreData();
         List<Score> scores = scoreMapper.getRankByChoiceScore(testId);

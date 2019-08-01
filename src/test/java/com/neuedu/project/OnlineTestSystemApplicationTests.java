@@ -96,12 +96,24 @@ public class OnlineTestSystemApplicationTests {
 
     @Test
     public void testTest() {
-        testService.autoCreateTest(1, 5, 2);
+
+        testService.autoCreateTest(1, 4, 0);
+        testService.autoCreateTest(1, 4, 0);
+        testService.autoCreateTest(2, 4, 0);
+        testService.autoCreateTest(2, 4, 0);
+        testService.autoCreateTest(3, 4, 0);
+        testService.autoCreateTest(3, 4, 0);
+        testService.autoCreateTest(4, 4, 0);
+        testService.autoCreateTest(5, 4, 0);
+        testService.autoCreateTest(6, 4, 0);
+
+
+
     }
 
     @Test
     public void testArrange() {
-        arrangeService.arrangeTest(7, "2119-07-30 11:22:22", 100);
+        arrangeService.arrangeTest(7, "2019-08-01 18:22:22", 500);
     }
 
 
@@ -147,7 +159,7 @@ public class OnlineTestSystemApplicationTests {
     }
     @Test
     public void testgetArrangedTestsByStudentId(){
-        System.out.println(testService.getArrangedTestsByStudentId("abc"));
+        System.out.println(testService.getArrangedTestsByStudentId("10001"));
     }
     @Test
     public void testTimeLast(){

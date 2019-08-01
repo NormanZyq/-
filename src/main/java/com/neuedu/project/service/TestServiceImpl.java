@@ -104,7 +104,7 @@ public class TestServiceImpl implements TestService {
             //当前时间已结束考试
             if (time >= duration)
                 arr.setIdentity(0);
-            else
+            if(time < duration && time >0)
                 //当前考试正在进行
                 arr.setIdentity(1);
 

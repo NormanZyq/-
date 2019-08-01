@@ -22,7 +22,8 @@
     select s_table.*
     from test_attend_records t_table,
          student_answer_records s_table
-    where s_table.attend_record_id = t_table.attend_record_id;
+    where s_table.attend_record_id = t_table.attend_record_id
+    and t_table.test_id = #{testId};
     </select>
 
     <select id="queryAnswerSheetByAttendRecordId" parameterType="int" resultMap="answersheetMap">

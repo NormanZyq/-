@@ -79,7 +79,7 @@ public class PageController {
      */
     @GetMapping(value = "/admin")
     public String admin() {
-        return "/admin.html";
+        return "/aadmin.html";
     }
 
     /**

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.ComplaintMapper">
+
+    <resultMap id="complaintMap" type="Complaint">
+        <id column="complain_id" property="complainId"/>
+        <result column="student_id" property="studentId"/>
+        <result column="test_id" property="testId"/>
+        <result column="complain_content" property="content"/>
+        <result column="complain_reply" property="reply"/>
+    </resultMap>
+
+    <insert id="addComplaint">
+        insert into complaints (student_id, test_id, complain_content)
+        values (#{studentId}, #{testId}, #{content});
+    </insert>
+
+    <update id="updateComplaint" parameterType="Complaint">
+        update complaints
+        <set>
+            <if test="reply != null and reply != ''">
+                complain_reply = #{reply}
+            </if>
+        </set>
+        where complain_id = #{complainId};
+    </update>
+
+    <delete id="deleteComplaint">
+        delete
+        from complaints
+        where complain_id = #{id};
+    </delete>
+
+    <select id="queryAll" resultMap="complaintMap">
+        select *
+        from complaints;
+    </select>
+
+</mapper>

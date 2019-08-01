@@ -253,7 +253,7 @@ function appendSearchResult(course) {
         count++;
         teacherString += t.name + " ";
         if (size >= 2) {
-            teacherString += "等多人";
+            teacherString += "等" + size + "人";
             break;
         }
     }
@@ -285,7 +285,7 @@ function appendSelectedResult(course) {
         count++;
         teacherString += t.name + " ";
         if (size >= 2) {
-            teacherString += "等多人";
+            teacherString += "等" + size + "人";
             break;
         }
     }
@@ -364,6 +364,7 @@ function calScores(id) {
         }
     })
 }
+
 
 
 

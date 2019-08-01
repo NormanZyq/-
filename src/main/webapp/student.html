@@ -91,10 +91,10 @@
 					<a class="nav-link" data-toggle="pill" href="#5" onclick="studentGetScores()">成绩管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6" onclick="">教学评价</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#7">申请复核</a>
+					<a class="nav-link" data-toggle="pill" href="#7" onclick="getComplaintMenu()">申请复核</a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
@@ -492,28 +492,16 @@
 					<table class="table">
 						<tbody>
 							<tr>
-								<td>复核课程ID</td>
+								<td>选择复核考试</td>
 								<td>
-									<form class="form-inline float-right">
-										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="课程ID">
-										</div>
-										<button type="submit" class="btn btn-info">确认</button>
-									</form>
-								</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>授课教师</td>
-								<td>
-									<form class="form-inline float-right">
-										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="题目ID">
-										</div>
-										<button type="submit" class="btn btn-info">确认</button>
-									</form>
+									<button type="button" class="btn btn-outline-info dropdown-toggle float-right" data-toggle="dropdown" id="btn-com-menu">
+										我的考试
+									</button>
+									<div class="dropdown-menu" id="test-menu-comp">
+										<a class="dropdown-item" href="#">class 1</a>
+										<a class="dropdown-item" href="#">class 2</a>
+										<a class="dropdown-item" href="#">class 3</a>
+									</div>
 								</td>
 								<td></td>
 							</tr>
@@ -523,10 +511,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="题目内容">
+											<input type="text" class="form-control" id="complaint-content" placeholder="申诉信息" required>
 										</div>
-										<button type="submit" class="btn btn-info">确认</button>
 									</form>
 								</td>
 							</tr>
@@ -534,11 +520,62 @@
 					</table>
 					<br /><br /><br />
 					<div class="float-right">
-						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
-
+						<button id="edit" onclick="complain()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
 					</div>
 
 				</div>
+
+				<script>
+					var complainTestId = -1;
+
+					function getComplaintMenu() {
+						$('#test-menu-comp').html('');
+						$.ajax({
+							url: '/test/get/all',
+							type: 'POST',
+							success: function (result) {
+								for (let test of result) {
+									let content = `<a class="dropdown-item" onclick="complainTestId = ${test.testId};$('#btn-com-menu').html('${test.courseName}');">${test.courseName}</a>`;
+									$('#test-menu-comp').append(content);
+								}
+							}
+						})
+					}
+
+					// 发送复核申请
+					function complain() {
+						alert(complainTestId);
+						if (complainTestId === -1) {
+							alert('请选择要申诉的考试');
+							return;
+						}
+						// 不能为空
+                        let content = $('#complaint-content').val();
+                        if (content.trim === '') {
+                            alert('申诉内容不可为空');
+                            return;
+                        }
+
+						$.ajax({
+							url: '/complaint/add',
+							type: 'POST',
+							data: {
+								testId: complainTestId,
+								content: content,
+							},
+							success: function (result) {
+								alert(result);
+								// 清空输入框
+								$('#complaint-content').val('');
+							},
+							error: function (result) {
+								alert(result);
+							}
+						});
+					}
+				</script>
+
+
 			</div>
 		</div>
 

@@ -56,8 +56,6 @@ public class UserController {
     @ResponseBody
     public User getLoginUser(HttpSession session) {
         log.info("正在获取用户数据");
-//        User user = (User) request.getSession().getAttribute("loggedUser");
-//        log.info(user);
         return userService.getUserInfo((String) session.getAttribute("loggedId"));
     }
 
@@ -82,7 +80,7 @@ public class UserController {
 
             //设置身份，判断用户是学生(0)还是老师(1)，或者管理员(2)
             //request.getSession().setAttribute("loggedIdentity",0);
-            String pageAvailable = "/login";
+            String pageAvailable;
             switch (loggedIn.getIdentity()) {
                 case 0:
                     pageAvailable = "/student";
@@ -94,7 +92,7 @@ public class UserController {
                     pageAvailable = "/admin";
                     break;
                 default:
-                    throw new RuntimeException("未查询到用户信息");
+                    pageAvailable = "/login";
             }
             // 标记为成功登录
 //            request.getSession().setAttribute("loggedUser", loggedIn);

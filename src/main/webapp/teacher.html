@@ -20,6 +20,8 @@
 
 
 		<script type="text/javascript">
+			var updatingCourseId;
+
 			function display() {
 				var traget2 = document.getElementById('pasedi');
 				if (traget2.style.display == "none") {
@@ -50,11 +52,11 @@
 
 			<ul class="nav ">
 				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+					<img src="84653211.png" class=" img-thumbnail  m-auto" height="80" width="80" />
 				</li>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+					<p class="text-primary display-4 mx-auto">一只超强的考试系统</p>
 				</li>
 
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
@@ -76,10 +78,10 @@
 					<a class="nav-link" data-toggle="pill" href="#3" onclick="getTeacherTests()">试卷管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#4">试卷批阅</a>
+					<a class="nav-link" data-toggle="pill" href="#4" onclick="checkTests()">试卷批阅</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#5">成绩管理</a>
+					<a class="nav-link" data-toggle="pill" href="#5" onclick="teacherGetScores()">成绩管理</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
@@ -205,7 +207,9 @@
 					<div class="float-right">
 						<div class="col-md-8">
 							<ul class="nav nav-tabs">
-								<button id="edit2" type="button" class="btn btn-lg btn-outline-success" onclick="window.location.href = 'exercise.html'">添加</button>
+								<li>
+									<button id="edit2" type="button" class="btn btn-lg btn-outline-success" onclick="window.location.href = 'exercise.html?course=' + updatingCourseId">添加</button>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -240,7 +244,7 @@
 										<input type="number" id="sq-number" placeholder="主观题数量" class="form-control" required autofocus>
 										<br />
 										<br />
-										<button id="sbm" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal">
+										<button id="sbm2" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal" onclick="createExam()">
 											&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
 									</div>
@@ -282,126 +286,22 @@
 
 					</div>
 				</div>
-				
-				<script>
-					$(function(){
-						$.ajax({
-							url:'data2.json',
-							type:'get',
-							dataType:'json',
-							success:function(data){
-							//方法中传入的参数data为后台获取的数据
-								for(i in data.data){ //data.data指的是数组，数组里是8个对象，i为数组的索引
-				
-								var tr1;
-								tr1='<tr>'+'<td>'+data.data[i].id+'</td>'
-								
-								if(data.data[i].questionType=="0"){
-									tr1+='<td>'+'选择题'+'</td>'
-								}else if(data.data[i].questionType=="1"){
-									tr1+='<td>'+'主观题'+'</td>'
-								}else{
-									tr1+='<td>'+'常规题'+'</td>'
-								}
-								
-								tr1+='<td>'+'<button type="button" class="btn btn-outline-warning" onclick="window.location.href = '+"'"+'exercise.html'+"'"+'">'+'修改'+'</button>'+'</td>'+'</tr>'
-								
-								$("#exerbody2").append(tr1)
-				
-				
-								}
-							},
-							error: function (XMLHttpRequest, textStatus, errorThrown) {
-								// 状态码
-								console.log(XMLHttpRequest.status);
-								// 状态
-								console.log(XMLHttpRequest.readyState);
-								// 错误信息
-								console.log(textStatus);
-							}
-						})
-					})
-				</script>
-				
-				
-				
-				
-				
-				
+
 				<div id="4" class="container tab-pane "><br>
 					<br /><br /><br /><br />
-
 					<div id="accordion1">
 						
 						
 					</div>
 				</div>
-				
-				<script>
-					$(function(){
-						$.ajax({
-							url:'data3.json',
-							type:'get',
-							dataType:'json',
-							success:function(data){
-							//方法中传入的参数data为后台获取的数据
-							//alert(">>"+data.data.length)
-							
-							
-							var tr="";
-							
-							tr+='<div class="card">'+'<div class="card-header">'+'<a class="card-link" data-toggle="collapse" href="#collapseOne">'
-							tr+='<div class="float-left">'+'试卷ID ： '+data.data[0].id+'</div>'+'<div class="float-right">'
-							tr+='<button id="te" onclick="window.location.href = '+"'"+'answer.html'+"'"+'" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;进入&nbsp;&nbsp;&nbsp;&nbsp;</button>'
-							tr+='</div>'+'</a>'+'</div>'+'<div id="collapseOne" class="collapse show" data-parent="#accordion">'		
-							tr+='<div class="card-body">'+'<div class=" m-auto">'+'学生ID :'+data.data[0].studentid+'&nbsp;&nbsp;&nbsp;&nbsp;'+'学生姓名:'+data.data[0].studentname+'&nbsp;&nbsp;&nbsp;&nbsp;'+'客观题得分:'+data.data[0].mark+'</div>'+'</div>'+'</div>'+'</div>'			
-										
-											
-							$("#accordion1").append(tr)		
-								
-							var tr1="";
-								for(i=1;i<data.data.length;i++){ //data.data指的是数组，数组里是8个对象，i为数组的索引
-				//alert(i);
-								
-								
-								tr1+='<div class="card">'+'<div class="card-header">'+'<a class="collapsed card-link" data-toggle="collapse" href="#collapse'+i+'">'
-								
-								tr1+='<div class="float-left">'+'试卷ID ： '+data.data[i].id+'</div>'+'<div class="float-right">'
-								
-								
-								tr1+='<button onclick="window.location.href ='+"'"+'answer.html'+"'"+'" type="button" class="btn btn-sm btn-outline-info">'
-								
-								tr1+='&nbsp;&nbsp;&nbsp;&nbsp;'+'进入'+'&nbsp;&nbsp;&nbsp;&nbsp;'+'</button>'+'</div>'+'</a>'+'</div>'
-											
-								tr1+='<div id="collapse'+i+'" class="collapse" data-parent="#accordion">'+'<div class="card-body">'
-								
-								tr1+='<div class=" m-auto">'+'学生ID :'+data.data[i].studentid+'&nbsp;&nbsp;'+'学生姓名:'+ data.data[i].studentname+'&nbsp;&nbsp;&nbsp;&nbsp;'+'客观题得分:'+data.data[i].mark+'&nbsp;&nbsp;</div>'+'</div>'+'</div>'+'</div>'
-								
-								
-				
-								}
-								$("#accordion1").append(tr1)
-							},
-							error: function (XMLHttpRequest, textStatus, errorThrown) {
-								// 状态码
-								console.log(XMLHttpRequest.status);
-								// 状态
-								console.log(XMLHttpRequest.readyState);
-								// 错误信息
-								console.log(textStatus);
-							}
-						})
-					})
-				</script>
-				
-				
+
 				<div id="5" class="container tab-pane "><br>
 					<br /><br /><br />
 
 					<table class="table  table-striped">
 						<thead>
 							<tr>
-								<th>课程ID</th>
+								<th>课程</th>
 								<th>平均成绩</th>
 								<th>平均分排名</th>
 								<th>及格率</th>
@@ -414,40 +314,6 @@
 
 
 				</div>
-				<script>
-					$(function(){
-						$.ajax({
-							url:'data4.json',
-							type:'get',
-							dataType:'json',
-							success:function(data){
-								
-							var tr1="";
-								for(i=0;i<data.data.length;i++){ 
-									
-									
-									
-								tr1+='<tr>'+'<td>'+data.data[i].id+'</td>'
-								tr1+='<td>'+data.data[i].mark+'</td>'
-								tr1+='<td>'+data.data[i].rank+'</td>'
-								tr1+='<td>'+data.data[i].ji+'</td>'+'</tr>'
-									
-								
-				
-								}
-								$("#body5").append(tr1)
-							},
-							error: function (XMLHttpRequest, textStatus, errorThrown) {
-								// 状态码
-								console.log(XMLHttpRequest.status);
-								// 状态
-								console.log(XMLHttpRequest.readyState);
-								// 错误信息
-								console.log(textStatus);
-							}
-						})
-					})
-				</script>
 
 				<div id="6" class="container tab-pane "><br>
 					<br /><br />

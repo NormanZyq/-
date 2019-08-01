@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-//配置拦截器的配置信息
-
 /**
  * 角色控制相关的拦截。
  * 登录前只允许访问少量页面，如主页、登录页面
@@ -18,15 +16,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CharacterAccessConfig implements WebMvcConfigurer {
 
-    private Logger logger = Logger.getLogger(CharacterAccessConfig.class);
+    /**
+     * logger for this configuration.
+     */
+    private final Logger logger = Logger.getLogger(CharacterAccessConfig.class);
 
+    /**
+     * sites that teachers can access.
+     */
     private final String[] teacherCanAccess = {"/teacher", "/course/add", "/course/addTeacher", "/teacher.html"};
 
+    /**
+     * sites that students can access.
+     */
     private final String[] studentCanAccess = {"/course/selectCourse",
             "/student", "/student.html", "/exam", "/exam.html"};
 
-    private final String[] adminCanAccess = {"/admin", "/admin.html"};
+    /**
+     * sites that admins can access.
+     */
+    private final String[] adminCanAccess = {"/admin", "/aadmin.html"};
 
+    /**
+     * exclude sites.
+     */
     private final String[] exclude = {"/index", "/index.html", "/login", "/login.html"};
 
 

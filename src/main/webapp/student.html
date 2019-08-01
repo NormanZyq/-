@@ -54,12 +54,13 @@
 		<div class="container">
 			<ul class="nav ">
 				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+					<img src="84653211.png" class=" img-thumbnail  m-auto" height="80" width="80" />
 				</li>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+					<p class="text-primary display-4 mx-auto">一只超强的考试系统</p>
 				</li>
+				
 
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
 					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
@@ -70,9 +71,6 @@
 		</div>
 
 		<br /><br />
-
-
-
 
 
 		<div class="container">
@@ -91,13 +89,13 @@
 					<a class="nav-link" data-toggle="pill" href="#4" onclick="getStudentTests()">考试管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#5">成绩管理</a>
+					<a class="nav-link" data-toggle="pill" href="#5" onclick="studentGetScores()">成绩管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6" onclick="">教学评价</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#7">申请复核</a>
+					<a class="nav-link" data-toggle="pill" href="#7" onclick="getComplaintMenu()">申请复核</a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
@@ -323,68 +321,13 @@
 					</div>
 				</div>
 
-
-				<script>
-					$(function () {
-						return;
-						$.ajax({
-							url: 'data1.json',
-							type: 'get',
-							dataType: 'json',
-							success: function (data) {
-								//方法中传入的参数data为后台获取的数据
-								for (i in data.data) { //data.data指的是数组，数组里是8个对象，i为数组的索引
-
-									var tr1;
-									tr1 = '<div class="col">' + '<div class="card m-auto shadow shadow-sm" style="width:300px">'
-
-									tr1 = tr1 + '<h3 class="card-title">' + '<br />' + '<br />' + '<br />' + '考&nbsp;&nbsp;试&nbsp;&nbsp;' + i + '</h3>'
-
-									tr1 = tr1 + '<div class="card-body">' + '<br />' + '<table class="table">' + '<thead>' + '<tr>'
-
-									tr1 = tr1 + '<th>' + '<h5>' + '考试 &nbsp;I D' + '</h5>' + '</th>'
-
-									tr1 = tr1 + '<th>' + data.data[i].id + '</th>' + '</tr>' + '</thead>'
-
-									tr1 = tr1 + '<tbody>' + '<tr>' + '<td>' + '<h5>' + '考试时间' + '</h5>' + '</td>'
-
-									tr1 = tr1 + '<td>' + data.data[i].startTime + '</td>' + '</tr>'
-
-									tr1 = tr1 + '<tr>' + '<td>' + '<h5>' + '考试地点' + '</h5>' + '</td>'
-
-									tr1 = tr1 + '<td>' + data.data[i].address + '</td>' + '</tr>'
-
-									tr1 = tr1 + '<tr>' + '<td>' + '<h5>' + '考试时长' + '</h5>' + '</td>'
-
-									tr1 = tr1 + '<td>' + data.data[i].time + '</td>'
-
-									tr1 = tr1 + '</tr>' + '</tbody>' + '</table>' + '</div>' + '</div>' + '</div>';
-
-
-									$("#exam").append(tr1)
-
-
-								}
-							},
-							error: function (XMLHttpRequest, textStatus, errorThrown) {
-								// 状态码
-								console.log(XMLHttpRequest.status);
-								// 状态
-								console.log(XMLHttpRequest.readyState);
-								// 错误信息
-								console.log(textStatus);
-							}
-						})
-					});
-				</script>
-
 				<div id="5" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
 
 					<div class="float-right">
 						<form class="form-inline ">
 
-							<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+							<input class="form-control" type="text" placeholder="搜索课程名称" aria-label="Search">
 							<button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#myModal">Search</button>
 
 						</form>
@@ -424,9 +367,9 @@
 					<table class="table  table-striped">
 						<thead>
 							<tr>
-								<th>课程ID</th>
+								<th>课程</th>
 								<th>成绩</th>
-								<th>教学班排名</th>
+								<th>课程排名</th>
 							</tr>
 						</thead>
 						<tbody id="coursebody">
@@ -550,28 +493,16 @@
 					<table class="table">
 						<tbody>
 							<tr>
-								<td>复核课程ID</td>
+								<td>选择复核考试</td>
 								<td>
-									<form class="form-inline float-right">
-										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="课程ID">
-										</div>
-										<button type="submit" class="btn btn-info">确认</button>
-									</form>
-								</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>授课教师</td>
-								<td>
-									<form class="form-inline float-right">
-										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="题目ID">
-										</div>
-										<button type="submit" class="btn btn-info">确认</button>
-									</form>
+									<button type="button" class="btn btn-outline-info dropdown-toggle float-right" data-toggle="dropdown" id="btn-com-menu">
+										我的考试
+									</button>
+									<div class="dropdown-menu" id="test-menu-comp">
+										<a class="dropdown-item" href="#">class 1</a>
+										<a class="dropdown-item" href="#">class 2</a>
+										<a class="dropdown-item" href="#">class 3</a>
+									</div>
 								</td>
 								<td></td>
 							</tr>
@@ -581,10 +512,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="题目内容">
+											<input type="text" class="form-control" id="complaint-content" placeholder="申诉信息" required>
 										</div>
-										<button type="submit" class="btn btn-info">确认</button>
 									</form>
 								</td>
 							</tr>
@@ -592,11 +521,61 @@
 					</table>
 					<br /><br /><br />
 					<div class="float-right">
-						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
-
+						<button id="edit" onclick="complain()" type="button" class="btn btn-lg btn-outline-warning">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
 					</div>
 
 				</div>
+
+				<script>
+					var complainTestId = -1;
+
+					function getComplaintMenu() {
+						$('#test-menu-comp').html('');
+						$.ajax({
+							url: '/test/get/all',
+							type: 'POST',
+							success: function (result) {
+								for (let test of result) {
+									let content = `<a class="dropdown-item" onclick="complainTestId = ${test.testId};$('#btn-com-menu').html('${test.courseName}');">${test.courseName}</a>`;
+									$('#test-menu-comp').append(content);
+								}
+							}
+						})
+					}
+
+					// 发送复核申请
+					function complain() {
+						if (complainTestId === -1) {
+							alert('请选择要申诉的考试');
+							return;
+						}
+						// 不能为空
+                        let content = $('#complaint-content').val();
+                        if (content.trim === '') {
+                            alert('申诉内容不可为空');
+                            return;
+                        }
+
+						$.ajax({
+							url: '/complaint/add',
+							type: 'POST',
+							data: {
+								testId: complainTestId,
+								content: content,
+							},
+							success: function (result) {
+								alert(result);
+								// 清空输入框
+								$('#complaint-content').val('');
+							},
+							error: function (result) {
+								alert(result);
+							}
+						});
+					}
+				</script>
+
+
 			</div>
 		</div>
 

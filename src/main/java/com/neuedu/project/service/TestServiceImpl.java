@@ -151,7 +151,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<Test> getTestsByStudentId(String studentId) {
-        return null;
+        return testMapper.getStudentTests(studentId);
     }
 
     @Override
@@ -231,11 +231,10 @@ public class TestServiceImpl implements TestService {
     /**
      * From Internet
      * 字符串切割
-     *
      */
-    private List<String> analyseQuestionId(String questionIds){
+    private List<String> analyseQuestionId(String questionIds) {
         String[] temp = questionIds.split("#");
-        List<String>  questions = new ArrayList<>();
+        List<String> questions = new ArrayList<>();
         Collections.addAll(questions, temp);
         return questions;
     }

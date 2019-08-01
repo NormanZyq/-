@@ -64,6 +64,10 @@ public class Question {
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public int getCourseId() {
         return courseId;
     }

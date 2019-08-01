@@ -37,8 +37,9 @@ function getTeachCourse() {
         success: function (result) {
             // 解析选课内容
             for (let course of result) {
-                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `')">${course.courseName}</a>`;
+                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `');">${course.courseName}</a>`;
                 $('#my-course-dropdown').append(content);
+                updatingCourseId = course.courseId;
             }
         }
     })
@@ -69,7 +70,7 @@ function getQuestions(courseId) {
                 } else {
                     // 其他（不存在的）
                 }
-                tr1 += `<td><a type="button" class="btn btn-outline-info" href="/exercise.html?id=${question.questionId}">修改</a></td></tr>`;
+                tr1 += `<td><a type="button" class="btn btn-outline-info" href="/exercise.html?id=${question.questionId}&course=${courseId}">修改</a></td></tr>`;
             }
             $("#exerbody1").append(tr1);
 
@@ -161,7 +162,10 @@ function getStartedTests() {
         type: "POST",
         dataType: "json",
         success: function (result) {
-            // result.so
+            if (result.length === 0) {
+                $('#st-accordion').html('<p class="text-center">当前没有正在进行的考试</p>')
+            }
+            // result
             for (let test of result) {
                 appendStartedTestCard(test);
             }
@@ -170,7 +174,6 @@ function getStartedTests() {
             alert("获取考试信息出错，请刷新页面");
         }
     })
-
 }
 
 /**
@@ -240,14 +243,17 @@ function getQuestionById(id) {
         dataType: "json",
         success: function (result) {
             // 更新界面
-            console.log(result);
-
             if (result.questionType === 0) {
                 // 选择题
                 $('#ke').attr('checked', 'checked');
                 $('#question-content').val(result.questionContent);
-                let choices = `<br>A. ${result.choices.A}<br /><br />B. ${result.choices.B}<br /><br />C. ${result.choices.C}<br /><br />D. ${result.choices.D}<br /><br />`;
-                $('#sel-content').html(choices);
+                $('#c-a').val(result.choices.A);
+                $('#c-b').val(result.choices.B);
+                $('#c-c').val(result.choices.C);
+                $('#c-d').val(result.choices.D);
+
+                // let choices = `<br>A. ${}<br /><br />B. ${}<br /><br />C. ${}<br /><br />D. ${}<br /><br />`;
+                // $('#sel-content').html(choices);
 
                 let rightAns = result.rightAnswer[0];
 
@@ -259,10 +265,8 @@ function getQuestionById(id) {
                 // 主观题
                 $('#zu').attr('checked', 'checked');
                 typ();
-
             } else {
                 // 不存在
-
             }
 
 
@@ -274,5 +278,130 @@ function getQuestionById(id) {
     })
 }
 
+function checkTests() {
+    $("#accordion1").html('');
+
+    $(function () {
+        $.ajax({
+            url: '/test/get/all2',
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                console.log(data);
+
+                var tr1 = "";
+                for (let test of data) {
+                    var time = undefined;
+                    $.ajax({
+                        url: '/test/get/time',
+                        type: 'GET',
+                        async: false,
+                        data: {
+                            testId: test.testId
+                        },
+                        success: function (result) {
+                            time = result;
+                        }
+                    });
+
+                    if (time === 0) {
+                        // 考试已结束
+                        tr1 += '<div class="card">' + '<div class="card-header">' + '<a class="collapsed card-link" data-toggle="collapse">';
+
+                        tr1 += '<div class="float-left">' + '考试科目 ： ' + test.courseName + '</div>' + '<div class="float-right">';
+
+                        tr1 += '<button onclick="calScores(' + test.testId + ')" type="button" class="btn btn-sm btn-outline-info">&nbsp;&nbsp;&nbsp;&nbsp;' + '自动评卷' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '</button>' + '</div>' + '</a>' + '</div>'
+
+                        // tr1+='<div id="collapse'+i+'" class="collapse" data-parent="#accordion">'+'<div class="card-body">'
+                        //
+                        // tr1+='<div class=" m-auto">'+'学生ID :'+data.data[i].studentid+'&nbsp;&nbsp;'+'学生姓名:'+ data.data[i].studentname+'&nbsp;&nbsp;&nbsp;&nbsp;'+'客观题得分:'+data.data[i].mark+'&nbsp;&nbsp;</div>'+'</div>'+'</div>'+'</div>'
+                    }
+
+                }
+                $("#accordion1").append(tr1);
+
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                // 状态码
+                console.log(XMLHttpRequest.status);
+                // 状态
+                console.log(XMLHttpRequest.readyState);
+                // 错误信息
+                console.log(textStatus);
+            }
+        })
+    })
+}
+
+/**
+ * 教师获得考试情况（最高分最低分平均分）
+ */
+function teacherGetScores() {
+    $('#body5').html('');
+    $.ajax({
+        url: "/test/get/all2",
+        type: "POST",
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+            for (let test of result) {
+                let testId = test.testId;
+                $.ajax({
+                    url: '/answer/ranks/' + testId,
+                    success: function (scoreData) {
+                        if (scoreData !== undefined
+                            && scoreData != null
+                            && scoreData !== '') {
+                            let content =
+                                `<tr>
+                                <td>${test.courseName}</td>
+                                <td>${scoreData.average}</td>
+                                <td>${scoreData.max}</td>
+                                <td>${scoreData.min}</td>
+                            </tr>`;
+                            $("#body5").append(content);
+                        }
+
+                    }
+
+                })
+            }
+        },
+        error: function (result) {
+            alert('获取考试失败惹')
+        }
+    })
+}
+
+function studentGetScores() {
+    $('#coursebody').html('');
+    // 首先获得考试列表
+    $.ajax({
+        url: '/test/get/all',
+        type: 'POST',
+        success: function (result) {
+            console.log(result);
+            // 对每个考试查询分数和排名
+            for (let test of result) {
+                let testId = test.testId;
+                $.ajax({
+                    url: '/answer/rank/' + testId,
+                    success: function (data) {
+                        console.log(data);
+                        if (data !== undefined
+                            && data != null
+                            && data !== '') {
+                            let content = `<tr><td>${test.courseName}</td><td>${data.choicesScore + data.subjectiveScore}</td><td>${data.scoreRank}</td></tr>`;
+                            $('#coursebody').append(content);
+                        }
+
+                    }
+                })
+            }
+        }
+    })
+}
 
 

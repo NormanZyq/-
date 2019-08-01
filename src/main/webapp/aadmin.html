@@ -14,6 +14,10 @@
 
 		<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+		<script src="js/utils.js"></script>
+		<script src="js/fetchData.js"></script>
+
 		<script type="text/javascript">
 			function display() {
 				var traget2 = document.getElementById('pasedi');
@@ -23,6 +27,11 @@
 					traget2.style.display = "none";
 				}
 			}
+
+			window.onload = function () {
+				getUserInfo();
+			};
+
 		</script>
 		
 		<script type="text/javascript">
@@ -38,7 +47,7 @@
 					dataType:"json",
 					success:function(newP){
 						var newcode;
-						newcode=newP
+						newcode=newP;
 						$("#psw").append(newcode)
 					},
 					error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -476,18 +485,20 @@
 				
 			}
 		</script>
+
 	</head>
 	<body class="text-center">
 
 		<div class="container">
 			<ul class="nav ">
 				<li class="nav-item">
-					<img src="rua.jpg" class=" img-thumbnail  m-auto" height="100" width="100" />
+					<img src="84653211.png" class=" img-thumbnail  m-auto" height="80" width="80" />
 				</li>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li class="nav-item">
-					<p class="text-primary display-4 m-auto">[谁来起个名字(￣∇￣)]</p>
+					<p class="text-primary display-4 mx-auto">一只超强的考试系统</p>
 				</li>
+				
 
 				<form class="form-inline col-md-1 offset-md-11 m-auto">
 					<button class="btn btn-lg btn-outline-primary " type="button" onclick="window.history.back()">EXIT</button>
@@ -517,7 +528,7 @@
 					<a class="nav-link" data-toggle="pill" href="#5">教授关系表</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">申诉信息</a>
+					<a class="nav-link" data-toggle="pill" href="#6" onclick="getAllComplaints()">申诉信息</a>
 				</li>
 
 			</ul>
@@ -583,34 +594,9 @@
 						</div>
 					</div>
 				</div>
-				<script>
-					 $(function(){
-				    $.ajax({
-				        url:'data.json',
-				        type:'get',
-				        dataType:'json',
-				        success:function(data){
-				            //方法中传入的参数data为后台获取的数据
-				            //for(i in data.data) //data.data指的是数组，数组里是8个对象，i为数组的索引
-				                var tr1;
-								tr1=data.data[2].ID
-				                $("#t1").append(tr1)
-								var tr2;
-								tr2=data.data[2].Name
-								$("#t2").append(tr2)
-								var tr3;
-								tr3=data.data[2].Password
-								$("#psw").append(tr3)
-				            //alert("显示成功！");
-				        }
-				    })
-				})
-				 </script>
+
 				<div id="2" class="container tab-pane fade"><br>
 					<br />
-
-
-
 
 					<div class="float-right">
 						<button type="button" class="btn btn-lg btn-outline-success" data-toggle="modal" data-target="#myModal">注册</button>
@@ -960,10 +946,11 @@
 					<table class="table  table-striped">
 						<thead>
 							<tr>
-								<th>申请记录ID</th>
+								<th>序号</th>
 								<th>考试ID</th>
-								<th>学生ID</th>
+								<th>学生学号</th>
 								<th>申请说明</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody id="applyList">
@@ -975,28 +962,63 @@
 			</div>
 		</div>
 		<script>
-					$(function(){
-					    $.ajax({
-					        url:'Smessage.json',
-					        type:'get',
-					        dataType:'json',
-					        success:function(data){
-					            //方法中传入的参数data为后台获取的数据
-					            for(i in data.data){
-									//ID格式
-									//var t11=data.data[i].ID
-									var tr1='<td id="cordID'+i+'">'+data.data[i].recordID+'</td>'+'<form class="form-inline ">'
-									var tr2='<td id="testID'+i+'">'+data.data[i].testID+'</td>'
-									var tr3='<td id="studentID'+i+'">'+data.data[i].stuID+'</td>'
-									var tr4='<td id="detail'+i+'">'+data.data[i].detail+'</td>'
-									$("#applyList").append('<tr>'+tr1+tr2+tr3+tr4+'</form>'+'</tr>')
-									//$("#userList").append(tr4)
-								} //data.data指的是数组，数组里是8个对象，i为数组的索引
-					                
-					            
-					        }
-					    })
-					})
-				</script>
+			function getAllComplaints() {
+				$.ajax({
+					url:'/complaint/get/all',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						console.log(data);
+						$('#applyList').html('');
+						for (i in data) {
+							var tr5;
+							if (data[i].reply !== undefined && data[i].reply !== null && data[i].reply.trim() !== '') {
+								tr5 = `<td><button class="btn btn-outline-success disabled btn-sm" disabled onclick="">已处理</button></td>`;
+							} else {
+								tr5 = '<td>' +
+										'<button class="btn btn-outline-success btn-sm" onclick="reply(' + data[i].complainId + ', 0)">标记为已处理</button>' +
+										'&nbsp;<button class="btn btn-outline-danger btn-sm" onclick="reply(' + data[i].complainId + ', 1)">驳回</button>' +
+										'</td>';
+							}
+
+							//ID格式
+							var tr1 = '<td id="cordID' + i + '">' + data[i].complainId + '</td>' + '<form class="form-inline ">';
+							var tr2 = '<td id="testID' + i + '">' + data[i].testId + '</td>';
+							var tr3 = '<td id="studentID' + i + '">' + data[i].studentId + '</td>';
+							var tr4 = '<td id="detail' + i + '">' + data[i].content + '</td>';
+							$("#applyList").append('<tr>' + tr1 + tr2 + tr3 + tr4 + tr5 + '</form>' + '</tr>')
+							//$("#userList").append(tr4)
+						} //data.data指的是数组，数组里是8个对象，i为数组的索引
+
+					},
+					error: function (result) {
+						alert(result);
+					}
+				})
+			}
+
+			function reply(id, stauts) {
+				var replyContent;
+				if (stauts === 0) {
+					replyContent = "学生你好，该问题已受理";
+				} else {
+					replyContent = "已被驳回";
+				}
+
+				$.ajax({
+					url: '/complaint/reply',
+					type: 'POST',
+					data: {
+						complaintId: id,
+						reply: replyContent
+					},
+					success: function (result) {
+						alert(result);
+						getAllComplaints();
+					}
+				});
+			}
+
+		</script>
 	</body>
 </html>

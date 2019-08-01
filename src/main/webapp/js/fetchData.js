@@ -37,9 +37,9 @@ function getTeachCourse() {
         success: function (result) {
             // 解析选课内容
             for (let course of result) {
-                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `');">${course.courseName}</a>`;
+                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `');updatingCourseId = ${course.courseId};">${course.courseName}</a>`;
                 $('#my-course-dropdown').append(content);
-                updatingCourseId = course.courseId;
+
             }
         }
     })

@@ -43,11 +43,11 @@ public class CourseController {
     @PostMapping(value = "/add")
     @ResponseBody
     public String addCourse(String courseName, HttpSession session) {
-        Object obj = session.getAttribute("loggedUser");
+        Object obj = session.getAttribute("loggedId");
         if (obj == null) {
             return null;
         } else {
-            courseService.addCourse(((User) obj).getUserId(), courseName);
+            courseService.addCourse((String) obj, courseName);
             return "成功添加课程";
         }
     }
@@ -76,10 +76,9 @@ public class CourseController {
     public void studentSelectCourse(int courseId,
                                     HttpSession session,
                                     HttpServletResponse response) {
-        Object obj = session.getAttribute("loggedUser");
+        Object obj = session.getAttribute("loggedId");
         if (obj != null) {
-            User user = (User) obj;
-            String id = user.getUserId();
+            String id = (String) obj;
             courseService.addStudentToCourse(id, courseId);
             response.setStatus(MyHttpStatus.OK.value());
         } else {
@@ -92,7 +91,7 @@ public class CourseController {
      * （用作搜索功能的实现）
      *
      * @param name name you are searching
-     * @return  a list that courses' names are all name @param name
+     * @return a list that courses' names are all name @param name
      */
     @GetMapping(value = "/get/{name}")
     @ResponseBody
@@ -103,12 +102,12 @@ public class CourseController {
 
     /**
      * get the logged in user's all courses.
-     *
+     * <p>
      * 学生获得他们所选课程
      * 老师获得他们所教课程
      *
-     * @param session   session
-     * @return  选课列表或授课列白哦
+     * @param session session
+     * @return 选课列表或授课列白哦
      */
     @GetMapping(value = "/get/my")
     @ResponseBody

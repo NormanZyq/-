@@ -92,7 +92,7 @@
 					<a class="nav-link" data-toggle="pill" href="#5" onclick="studentGetScores()">成绩管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6" onclick="">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6" onclick="getCourses2()">教学评价</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="pill" href="#7" onclick="getComplaintMenu()">申请复核</a>
@@ -410,13 +410,11 @@
 				<div id="6" class="container tab-pane fade"><br>
 					<div class="dropdown float-right">
 						<br /><br /><br />
-						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的课程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" id="btn-review-course">
+							我的课程
 						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">class 1</a>
-							<a class="dropdown-item" href="#">class 2</a>
-							<a class="dropdown-item" href="#">class 3</a>
+						<div class="dropdown-menu" id="review-course-menu">
+
 						</div>
 					</div>
 					<br /><br /><br />
@@ -429,10 +427,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="1~5">
+											<input type="number" min="1" max="5" class="form-control" placeholder="1~5" value="3" id="r-1">
 										</div>
-										<button type="submit" class="btn btn-outline-success">确认</button>
 									</form>
 								</td>
 								<td></td>
@@ -442,10 +438,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="1~5">
+											<input type="number" min="1" max="5" class="form-control" placeholder="1~5" value="3" id="r-2">
 										</div>
-										<button type="submit" class="btn btn-outline-success">确认</button>
 									</form>
 								</td>
 								<td></td>
@@ -456,10 +450,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="1~5">
+											<input type="number" min="1" max="5" class="form-control" placeholder="1~5" value="3" id="r-3">
 										</div>
-										<button type="submit" class="btn btn-outline-success">确认</button>
 									</form>
 								</td>
 							</tr>
@@ -468,10 +460,8 @@
 								<td>
 									<form class="form-inline float-right">
 										<div class="form-group">
-
-											<input type="email" class="form-control" placeholder="1~5">
+											<input type="number" min="1" max="5" class="form-control" placeholder="1~5" value="3" id="r-4">
 										</div>
-										<button type="submit" class="btn btn-outline-success">确认</button>
 									</form>
 								</td>
 							</tr>
@@ -479,16 +469,56 @@
 					</table>
 					<br /><br />
 					<div class="float-right">
-						<button id="edit" onclick="display()" type="button" class="btn btn-lg btn-outline-info">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+						<button id="btn-review" onclick="releaseReview()" type="button" class="btn btn-lg btn-outline-info">&nbsp;&nbsp;&nbsp;提&nbsp;交&nbsp;&nbsp;&nbsp;</button>
 
 					</div>
 
 				</div>
+
+				<script>
+					var reviewingCourseId;
+					function releaseReview() {
+						let id = reviewingCourseId;
+						var content = $('#r-1').val();
+						content += ' ';
+						content += $('#r-2').val();
+						content += ' ';
+						content += $('#r-3').val();
+						content += ' ';
+						content += $('#r-4').val();
+						$.ajax({
+							url: '/review/add',
+							type: 'POST',
+							data: {
+								courseId: id,
+								content: content
+							},
+							success: function (result) {
+								alert(result);
+							},
+							error: function (result) {
+								alert('评教失败...');
+							}
+						})
+					}
+
+					function getCourses2() {
+						$('#review-course-menu').html('');
+						$.ajax({
+							url: '/course/get/my',
+							success: function (result) {
+								for (course of result) {
+									let cou = `<a class="dropdown-item" onclick="$('#btn-review-course').html('${course.courseName}');reviewingCourseId = ${course.courseId}">${course.courseName}</a>`;
+									$('#review-course-menu').append(cou);
+								}
+							}
+						})
+					}
+				</script>
+
+
 				<div id="7" class="container tab-pane fade"><br>
 					<br /><br /><br /><br />
-
-
-
 
 					<table class="table">
 						<tbody>

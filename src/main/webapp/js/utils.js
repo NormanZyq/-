@@ -47,7 +47,6 @@ function makeActive(id) {
 
 
 function selectCourse(id) {
-    alert(id);
     $.ajax({
         url: "/course/selectCourse",
         method: "POST",
@@ -75,6 +74,7 @@ function selectCourse(id) {
 }
 
 function appendTestCard(test) {
+    console.log(test);
     let status = test.identity;
 
     var tip;
@@ -161,9 +161,9 @@ function appendTeacherTest(test) {
     if (time === undefined || time === null || time === '') {
         // 考试未发布
         button =
-            `<button type="button" class="btn btn-outline-warning" onclick="releaseTest(${test.testId})">发布试卷</button>
+            `<button id="btn-release-test" type="button" class="btn btn-outline-warning" onclick="releaseTest(${test.testId})">发布试卷</button>
             &nbsp;
-            <button type="button" class="btn btn-outline-warning" onclick="deleteTest(${test.testId})">删除</button>`;
+            <button id="btn-delete-test" type="button" class="btn btn-outline-warning" onclick="deleteTest(${test.testId})">删除</button>`;
     } else {
         // 考试已发布
         button = `<button type="button" class="btn btn-outline-secondary disabled" onclick="">试卷已发布</button>`;
@@ -182,7 +182,7 @@ function appendTeacherTest(test) {
 
 function releaseTest(id) {
     $.ajax({
-        url: '/arrange',
+        url: '/test/arrange',
         type: "POST",
         data: {
             testId: id,
@@ -190,6 +190,8 @@ function releaseTest(id) {
             duration: 120
         },
         success: function (result) {
+            $('#btn-release-test').attr('onclick', '').addClass('disabled').html('试卷已发布');
+            $('btn-delete-test').remove();
             alert('考试已发布');
         },
         error: function (result) {
@@ -354,7 +356,7 @@ function getRequestParam() {
 
 function calScores(id) {
     $.ajax({
-        url: "/answer/calScore",
+        url: "/answer/score",
         type: "POST",
         async: false,
         data: {

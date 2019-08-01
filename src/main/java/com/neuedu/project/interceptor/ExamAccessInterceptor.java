@@ -1,5 +1,6 @@
 package com.neuedu.project.interceptor;
 
+import com.neuedu.project.service.AnswerService;
 import com.neuedu.project.service.TestService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ExamAccessInterceptor implements HandlerInterceptor {
      */
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private AnswerService answerService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

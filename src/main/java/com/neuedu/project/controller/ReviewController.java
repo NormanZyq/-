@@ -69,9 +69,9 @@ public class ReviewController {
      * @param courseId 课程Id
      * @return 老师
      */
-    @PostMapping(value = "/get/review")
+    @GetMapping(value = "/get/{courseId}")
     @ResponseBody
-    public double[] TeacherReviewQuery(int courseId) {
+    public double[] TeacherReviewQuery(@PathVariable int courseId) {
         return reviewService.TeacherReviewQuery(courseId);
     }
 

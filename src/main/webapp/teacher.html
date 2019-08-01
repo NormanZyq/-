@@ -84,7 +84,7 @@
 					<a class="nav-link" data-toggle="pill" href="#5" onclick="teacherGetScores()">成绩管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="pill" href="#6">教学评价</a>
+					<a class="nav-link" data-toggle="pill" href="#6" onclick="getCoursesForReview()">教学评价</a>
 				</li>
 			</ul>
 
@@ -290,8 +290,8 @@
 				<div id="4" class="container tab-pane "><br>
 					<br /><br /><br /><br />
 					<div id="accordion1">
-						
-						
+
+
 					</div>
 				</div>
 
@@ -308,7 +308,7 @@
 							</tr>
 						</thead>
 						<tbody id="body5">
-							
+
 						</tbody>
 					</table>
 
@@ -318,10 +318,10 @@
 				<div id="6" class="container tab-pane "><br>
 					<br /><br />
 					<div class="dropdown col-md-1 offset-md-6">
-						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" id="rev-course-name">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的课程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</button>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu" id="rev-dropdown">
 							<a class="dropdown-item" href="#">class 1</a>
 							<a class="dropdown-item" href="#">class 2</a>
 							<a class="dropdown-item" href="#">class 3</a>
@@ -366,33 +366,58 @@
 			</div>
 		</div>
 		<script>
-			$(function(){
+			function getCoursesForReview() {
+				$('#rev-dropdown').html('');
 				$.ajax({
-					url:'data3.json',
-					type:'get',
-					dataType:'json',
-					success:function(data){
-						var str1 = data.data[0].mark
-						$("#eva1").append(str1)
-						var str2 = data.data[1].mark
-						$("#eva2").append(str2)
-						var str3 = data.data[2].mark
-						$("#eva3").append(str3)
-						var str4 = data.data[3].mark
-						$("#eva4").append(str4)
-						
-						//$("#body6").append(tr1)
-					},
-					error: function (XMLHttpRequest, textStatus, errorThrown) {
-						// 状态码
-						console.log(XMLHttpRequest.status);
-						// 状态
-						console.log(XMLHttpRequest.readyState);
-						// 错误信息
-						console.log(textStatus);
+					url: "/course/get/my",
+					dataType: "json",
+
+					success: function (result) {
+						// 解析选课内容
+						for (course of result) {
+							let content = `<a class="dropdown-item" onclick="getReview('` + course.courseId + `');$('#rev-course-name').html('` + course.courseName + `');">${course.courseName}</a>`;
+							$('#rev-dropdown').append(content);
+						}
 					}
+				});
+
+			}
+
+			function getReview(courseId) {
+                for (var i = 1; i <= 4; i++) {
+                    $('#eva' + i).html('');
+                }
+                $.ajax({
+                    url: '/review/get/' + courseId,
+                    type: 'get',
+                    success: function (data) {
+                        if (data === undefined || data === null || data === '') {
+                            data = [];
+                            for (var i = 0; i < 4; i++) {
+                                data.push('无评教信息');
+                            }
+                        }
+                        var str1 = data[0];
+                        $("#eva1").append(str1);
+                        var str2 = data[1];
+                        $("#eva2").append(str2);
+                        var str3 = data[2];
+                        $("#eva3").append(str3);
+                        var str4 = data[3];
+                        $("#eva4").append(str4);
+                        //$("#body6").append(tr1)
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // 状态码
+                        console.log(XMLHttpRequest.status);
+                        // 状态
+                        console.log(XMLHttpRequest.readyState);
+                        // 错误信息
+                        console.log(textStatus);
+                    }
 				})
-			})
+			}
+
 		</script>
 
 	</body>

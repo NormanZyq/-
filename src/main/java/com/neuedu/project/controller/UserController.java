@@ -48,9 +48,9 @@ public class UserController {
 
     /**
      * 获取登录用户的信息.
-     * //     * @param request
      *
-     * @return
+     * @param session session
+     * @return todo 待定
      */
     @GetMapping(value = "/get/login")
     @ResponseBody
@@ -59,6 +59,15 @@ public class UserController {
         return userService.getUserInfo((String) session.getAttribute("loggedId"));
     }
 
+    /**
+     * user login operation.
+     *
+     * @param userId   user id
+     * @param password password
+     * @param request  request
+     * @param response response
+     * @return the available page
+     */
     @PostMapping(value = "/login")
     public String login(String userId, String password,
                         HttpServletRequest request,
@@ -101,8 +110,7 @@ public class UserController {
             request.getSession().setAttribute("loggedIdentity", loggedIn.getIdentity());
             response.setStatus(MyHttpStatus.OK.value());
 
-           log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
-//            response.sendRedirect(pageAvailable);
+            log.info("User '" + loggedIn.getUserId() + "' logged in success. Redirecting to " + pageAvailable);
             return "redirect:" + pageAvailable;
 
         }
@@ -116,7 +124,6 @@ public class UserController {
                            HttpServletResponse response) {
         response.setStatus(HttpStatus.FORBIDDEN.value());
         return "../success.html";
-//        System.out.println("In");
 //        userService.register(userId, password, name, identity);
     }
 

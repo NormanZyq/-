@@ -5,11 +5,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * mapper for answer sheet.
+ *
+ * @author ljq
+ */
 @Mapper
 public interface AnswerSheetMapper {
     /**
      * 添加一份作答到数据库.
-     * @param answerSheet   答题卡
+     *
+     * @param answerSheet 答题卡
      */
     void insertAnswers(AnswerSheet answerSheet);
 

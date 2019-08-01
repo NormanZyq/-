@@ -393,6 +393,11 @@ function studentGetScores() {
                         if (data !== undefined
                             && data != null
                             && data !== '') {
+
+                            if (data.scoreRank === 0) {
+                                data.scoreRank = '-';
+                            }
+
                             let content = `<tr><td>${test.courseName}</td><td>${data.choicesScore + data.subjectiveScore}</td><td>${data.scoreRank}</td></tr>`;
                             $('#coursebody').append(content);
                         }

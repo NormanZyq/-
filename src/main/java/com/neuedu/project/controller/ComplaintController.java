@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * 申诉的controller。
+ *
  * @author zyq
  */
 @Controller
@@ -33,13 +34,22 @@ public final class ComplaintController {
 
     /**
      * force injection.
-     * @param complaintService  service
+     *
+     * @param complaintService service
      */
     @Autowired
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
     }
 
+    /**
+     * add a complaint.
+     *
+     * @param session session
+     * @param testId  test id
+     * @param content complaint content
+     * @return tips
+     */
     @PostMapping(value = "/add")
     @ResponseBody
     public String complain(HttpSession session, Integer testId, String content) {
@@ -60,6 +70,13 @@ public final class ComplaintController {
 
     }
 
+    /**
+     * reply to a complaint.
+     *
+     * @param complaintId complaint id
+     * @param reply       reply content
+     * @return tip
+     */
     @PostMapping(value = "/reply")
     @ResponseBody
     public String reply(int complaintId, String reply) {
@@ -67,6 +84,11 @@ public final class ComplaintController {
         return "成功";
     }
 
+    /**
+     * get all complaints.
+     *
+     * @return a list of complaint
+     */
     @GetMapping(value = "/get/all")
     @ResponseBody
     public List<Complaint> queryAll() {

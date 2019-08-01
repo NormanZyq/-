@@ -37,10 +37,14 @@ public class QuestionController {
 
     /**
      * 添加单个问题。
-     * 要求前端按照Java类中的字段名称传入数据
      *
-     * @param question 题目对象
-     * @return 成功或失败
+     * @param courseId          course id
+     * @param questionType      question type: 0 or 1
+     * @param questionContent   content
+     * @param score             score
+     * @param choicesString     客观题选项设置
+     * @param rightAnswerString 正确答案
+     * @return tips
      */
     @PostMapping("/add/single")
     @ResponseBody
@@ -105,6 +109,17 @@ public class QuestionController {
                 length, choiceCount, subjectiveCount);
     }
 
+    /**
+     * update a question dynamically.
+     *
+     * @param courseId          course id
+     * @param questionType      0 or 1 as question type
+     * @param questionContent   content
+     * @param score             score
+     * @param choicesString     客观题选项设置
+     * @param rightAnswerString 正确答案
+     * @return 提示语
+     */
     @PostMapping(value = "/update")
     @ResponseBody
     public String updateQuestion(int courseId, int questionType, String questionContent,
@@ -141,8 +156,9 @@ public class QuestionController {
 
     /**
      * 用问题ID获得问题详情。
-     * @param
-     * @return
+     *
+     * @param id question id
+     * @return question object
      */
     @GetMapping(value = "/get/{id}")
     @ResponseBody
@@ -161,7 +177,7 @@ public class QuestionController {
     }
 
     /**
-     * 根据课程ID获得所有题目
+     * 根据课程ID获得所有题目.
      *
      * @param id 课程ID
      * @return 题目的json字符串
@@ -177,13 +193,13 @@ public class QuestionController {
     }
 
     /**
-     * 删除问题id为id的问题
+     * 删除问题id为id的问题.
      *
      * @param id 问题id
      */
     @GetMapping(value = "/delete/{id}")
     @ResponseBody
-    public void deleteQuestionById(@PathVariable int id){
+    public void deleteQuestionById(@PathVariable int id) {
         questionService.deleteQuestionById(id);
     }
 

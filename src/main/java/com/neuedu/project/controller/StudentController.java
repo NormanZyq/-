@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 这个controller主要负责和学生相关的请求处理，所有url都要有/student.
+ * 这个controller主要负责和学生相关的请求处理，所有url都要有/student
+ *
+ * @author zyq
  */
 @Controller
 @RequestMapping("/student")

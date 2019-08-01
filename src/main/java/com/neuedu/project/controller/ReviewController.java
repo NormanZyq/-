@@ -48,23 +48,23 @@ public class ReviewController {
     }
 
     /**
-     * 添加学生评教信息（仅第一次）
+     * 添加学生评教信息（仅第一次）.
      *
-     * @param session session用于获取学号
+     * @param session  session用于获取学号
      * @param courseId 课程Id
-     * @param content 评教内容
+     * @param content  评教内容
      * @return 成功
      */
     @PostMapping(value = "/add")
     @ResponseBody
     public String addStudentReview(HttpSession session, int courseId, String content) {
         String studentId = (String) session.getAttribute("loggedId");
-        reviewService.studentReviewStore(studentId,courseId,content);
+        reviewService.studentReviewStore(studentId, courseId, content);
         return "在线评教成功";
     }
 
     /**
-     *老师获取这一科评教信息
+     * 老师获取这一科评教信息.
      *
      * @param courseId 课程Id
      * @return 老师
@@ -76,9 +76,9 @@ public class ReviewController {
     }
 
     /**
-     * 判断是否重复评教
+     * 判断是否重复评教.
      *
-     * @param session session用于获取学号
+     * @param session  session用于获取学号
      * @param courseId 课程Id
      * @return 重复评教->true,没有评教->false
      */
@@ -86,10 +86,8 @@ public class ReviewController {
     @ResponseBody
     public boolean DuclipReview(HttpSession session, int courseId) {
         String studentId = (String) session.getAttribute("loggedId");
-        return reviewService.DuclipReview(studentId,courseId);
+        return reviewService.DuclipReview(studentId, courseId);
     }
-
-
 
 
 }

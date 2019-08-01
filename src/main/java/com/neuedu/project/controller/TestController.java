@@ -20,6 +20,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * 考试相关controller
+ *
+ * @author ljq
+ * @author zyq
+ */
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -215,14 +221,14 @@ public class TestController {
      * 判断学生是否有关于这次考试的答题卡信息
      *
      * @param httpSession session
-     * @param testId 考试Id
+     * @param testId      考试Id
      * @return 有->true,没有->false
      */
     @GetMapping(value = "/judge")
     @ResponseBody
     public boolean StudentHaveAnswerSheet(HttpSession httpSession, int testId) {
         String studentId = (String) httpSession.getAttribute("loggedId");
-        return testService.StudentHaveAnswerSheet(studentId,testId);
+        return testService.StudentHaveAnswerSheet(studentId, testId);
     }
 
     /**

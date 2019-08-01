@@ -16,19 +16,19 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/answer")
-public class AnswerController {
+public final class AnswerController {
 
     @Autowired
     private AnswerService answerService;
 
     /**
-     * 添加答题卡
+     * 添加答题卡。
      *
      * @param session session
      * @param testId  考试Id
      * @param ca      选择题作答字符串
      * @param sa      主观题作答字符串
-     * @return
+     * @return 提示语
      */
     @PostMapping(value = "/add")
     @ResponseBody
@@ -39,10 +39,11 @@ public class AnswerController {
     }
 
     /**
-     * 给考这门试的学生评选择题分
+     * 给考这门试的学生评选择题分。
      *
      * @param httpSession session
      * @param testId      考试Id
+     * @return 成功或失败
      */
     @PostMapping(value = "/score")
     @ResponseBody
@@ -52,7 +53,7 @@ public class AnswerController {
     }
 
     /**
-     * 学生查选择题分
+     * 学生查选择题分。
      * 1. 排除学生选课但未参加考试，数据库没有答题记录的情况,返回null
      * 2. 排除非这一科科学生查询这课成绩情况,返回null
      *
@@ -68,7 +69,7 @@ public class AnswerController {
     }
 
     /**
-     * 学生查询自己考试分数及教学班排名
+     * 学生查询自己考试分数及教学班排名.
      *
      * @param httpSession session
      * @param testId      考试Id

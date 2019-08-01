@@ -75,6 +75,16 @@ public class ExamAccessInterceptor implements HandlerInterceptor {
                 os.flush();
             } else {
                 log.info("考试进行中，允许访问");
+
+                if (answerService.duclipSubmitAnswerSheet(loggedId, testId)) {
+                    log.info("该学生已提交答卷，不再允许进入");
+                    os.write(("<script>alert('已提交答卷，不可再次进入！');"
+                            + "window.location.href='/mypage';</script>").getBytes());
+                    os.flush();
+                    return false;
+                }
+
+
                 return true;
             }
             os.close();

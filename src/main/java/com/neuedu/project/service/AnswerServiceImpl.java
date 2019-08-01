@@ -122,6 +122,7 @@ public class AnswerServiceImpl implements AnswerService {
         for(Score score:scores){
             sum+=score.getChoicesScore();
         }
+        //小数点后保留两位
         BigDecimal b = new BigDecimal(sum/(double) size);
         scoreData.setAverage(b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
         scoreData.setMax((double) scores.get(0).getChoicesScore());
@@ -134,7 +135,7 @@ public class AnswerServiceImpl implements AnswerService {
      * 字符串切割
      * " "   "#"  ","
      */
-    private List<String> analyseQuestionId(String questionIds,String split){
+    public List<String> analyseQuestionId(String questionIds,String split){
         String[] temp = questionIds.split(split);
         List<String>  questions = new ArrayList<>();
         Collections.addAll(questions, temp);

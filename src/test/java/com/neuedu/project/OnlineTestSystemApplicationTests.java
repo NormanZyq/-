@@ -38,6 +38,9 @@ public class OnlineTestSystemApplicationTests {
     @Autowired
     private AnswerService answerService;
 
+    @Autowired
+    private ReviewService reviewService;
+
     @Test
     public void contextLoads() {
         assert true;
@@ -197,5 +200,23 @@ public class OnlineTestSystemApplicationTests {
         //System.out.println("------------------------------------------------------");
         System.out.println(answerService.getGradeManageByTeacher(7));
         //System.out.println("------------------------------------------------------");
+    }
+
+    @Test
+    public void TeststudentReviewStore(){
+        reviewService.studentReviewStore("aaaa",1,"1 2 3 4 5");
+        reviewService.studentReviewStore("bbbb",1,"5 2 3 4 5");
+        reviewService.studentReviewStore("cccc",1,"4 2 3 4 5");
+        reviewService.studentReviewStore("dddd",1,"3 2 3 4 5");
+        reviewService.studentReviewStore("eeee",1,"2 2 3 4 5");
+        reviewService.studentReviewStore("ffff",1,"2 2 3 4 5");
+        reviewService.studentReviewStore("eeee",1,"5 2 3 4 5");
+        reviewService.studentReviewStore("ffff",1,"2 2 3 4 5");
+    }
+
+    @Test
+    public void TestTeacherReviewQuery(){
+        double[] sum = reviewService.TeacherReviewQuery(1);
+        System.out.println(sum[0]+"\n"+sum[1]+"\n"+sum[2]+"\n"+sum[3]+"\n"+"\n"+"\n");
     }
 }

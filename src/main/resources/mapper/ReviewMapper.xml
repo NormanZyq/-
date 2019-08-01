@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neuedu.project.dao.ReviewMapper">
+
+    <resultMap id="reviewMap" type="Review">
+        <result column="from_student_id" property="studentId"/>
+        <result column="to_course_id" property="courseId"/>
+        <result column="review_content" property="content"/>
+    </resultMap>
+
+
+    <insert id="insertReview" parameterType="Review">
+        insert into review(from_student_id,to_course_id , review_content)
+        values (#{studentId}, #{courseId}, #{content});
+    </insert>
+
+    <select id="queryReviewCourse" resultMap="reviewMap">
+        select r.*
+        from review r,
+              course_teaching ct
+        where r.to_course_id = #{courseId}
+        and ct.course_id = r.to_course_id
+
+    </select>
+
+    <select id="queryReviewDuclip" resultMap="reviewMap">
+        select *
+        from review
+        where from_student_id = #{studentId}
+        and to_course_id = #{courseId};
+    </select>
+
+
+</mapper>

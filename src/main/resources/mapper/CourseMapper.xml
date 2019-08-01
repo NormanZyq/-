@@ -75,6 +75,13 @@
           and ct_table.course_id = c_table.course_id;
     </select>
 
+
+    <select id="getTeacherIdFromCourse" resultType="String">
+      select teacher_id
+      from course_teaching
+      where course_id = #{courseId};
+    </select>
+
 </mapper>
 
 

@@ -67,5 +67,13 @@ public interface CourseMapper {
      */
     List<String> getStudentIdFromCourse(int courseId);
 
+    /**
+     * 获取这门课的授课老师
+     *
+     * @param courseId 课程ID
+     * @return 授课老师集合
+     */
+    List<String> getTeacherIdFromCourse(int courseId);
+
 
 }

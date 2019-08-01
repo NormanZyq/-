@@ -157,7 +157,8 @@ function appendTeacherTest(test) {
     });
 
     var button = ``;
-    if (time === undefined) {
+
+    if (time === undefined || time === null || time === '') {
         // 考试未发布
         button =
             `<button type="button" class="btn btn-outline-warning" onclick="releaseTest(${test.testId})">发布试卷</button>
@@ -165,7 +166,7 @@ function appendTeacherTest(test) {
             <button type="button" class="btn btn-outline-warning" onclick="deleteTest(${test.testId})">删除</button>`;
     } else {
         // 考试已发布
-        button = `<button type="button" class="btn btn-outline-warning disabled" onclick="">试卷已发布</button>`;
+        button = `<button type="button" class="btn btn-outline-secondary disabled" onclick="">试卷已发布</button>`;
 
     }
 
@@ -185,8 +186,8 @@ function releaseTest(id) {
         type: "POST",
         data: {
             testId: id,
-            startTime: '20190801150000',
-            duration: 90
+            startTime: '20190802150000',
+            duration: 120
         },
         success: function (result) {
             alert('考试已发布');
@@ -365,8 +366,24 @@ function calScores(id) {
     })
 }
 
+function createExam() {
+    // let courseId = 1;
+    $.ajax({
+        url: '/test/autoCreate/15',
+        type: 'POST',
+        data: {
+            cqCount: $('#cq-number').val(),
+            sqCount: $('#sq-number').val()
+        },
+        success: function (result) {
+            alert('创建试卷成功，请及时发布');
+        },
+        error: function (result) {
+            alert('发布失败，可能是题目数量不足');
+        }
+    })
 
-
+}
 
 
 

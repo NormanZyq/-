@@ -21,17 +21,24 @@
     <script type="text/javascript">
         // 标记：如果是true表示创建新题目，如果是false，表示更新题目
         var create;
+        var courseId;
+
         window.onload = function () {
             let questionId = getRequestParam().id;
+            courseId = getRequestParam().course;
+
             if (questionId !== undefined) {
                 create = false;
                 // 获得题目的信息
                 getQuestionById(questionId);
-
-
             } else {
                 // 创建新题目
                 create = true;
+            }
+
+            if (courseId === undefined) {
+                alert('错误');
+                window.location.href = '/mypage';
             }
         };
 
@@ -48,6 +55,72 @@
                 $("#sel").prop("hidden", true);
                 $("#ans1").prop("hidden", true);
             }
+        }
+
+        function submitChanges() {
+            let questionContent = $('#question-content').val();
+            let score = $('#question-score').val();
+            if ($("#ke").prop("checked") === true) {
+                // 选择题
+                var connecting = '{A: "';
+                let choicesString = connecting.concat($('#c-a').val()).concat('", B: "')
+                    .concat($('#c-b').val()).concat('", C: "')
+                    .concat($('#c-c').val()).concat('", D: "')
+                    .concat($('#c-d').val()).concat('"}');
+                var url;
+
+                var ans;
+                if ($("#ex-A").prop("checked")) {
+                    ans = "A";
+                } else if ($("#ex-B").prop("checked")) {
+                    ans = "B";
+                } else if ($("#ex-C").prop("checked")) {
+                    ans = "C";
+                } else if ($("#ex-D").prop("checked")) {
+                    ans = "D";
+                }
+
+                if (ans === undefined) {
+                    alert('正确答案呢？(｡ì _ í｡)');
+                    return;
+                }
+
+                if (create) {
+                    // 创建题目
+                    url = '/question/add/single';
+                } else {
+                    // 修改题目
+                    url = '/question/update';
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        courseId: courseId,
+                        questionType: 0,
+                        questionContent: $('#question-content').val(),
+                        score: $('#question-score').val(),
+                        choicesString: choicesString,
+                        rightAnswerString: ans
+                    },
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (result) {
+                        alert('失败惹(>﹏<)');
+                    }
+                })
+
+            } else if ($("#zu").prop("checked") === true) {
+                // 主观题
+                // todo
+            } else {
+                // 未指定
+                alert('请选择题目类型（＾ω＾）');
+                return;
+            }
+
         }
     </script>
 
@@ -91,9 +164,8 @@
             <td>
                 <form class="form-inline float-right">
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="题目内容" id="question-content">
+                        <input type="text" class="form-control" placeholder="题目内容" id="question-content">
                     </div>
-                    <button type="submit" class="btn btn-outline-info">确认</button>
                 </form>
             </td>
         </tr>
@@ -102,9 +174,8 @@
             <td>
                 <form class="form-inline float-right">
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="分值" id="question-score" value="2">
+                        <input type="number" class="form-control" placeholder="分值" id="question-score" value="2">
                     </div>
-                    <button type="submit" class="btn btn-outline-info">确认</button>
                 </form>
             </td>
         </tr>
@@ -112,8 +183,16 @@
             <td>选项设置</td>
             <td>
                 <div class="row">
-                    <div class="col-6 offset-6" id="sel-content">
 
+                    <div class="col-6 offset-6" id="sel-content">
+                        <!--<label for="c-a">A：</label>-->
+                        <input class="form-control" placeholder="A选项内容" id="c-a">
+                        <!--<label for="c-b">B：</label>-->
+                        <input class="form-control mt-3" placeholder="B选项内容" id="c-b">
+                        <!--<label for="c-c">C：</label>-->
+                        <input class="form-control mt-3" placeholder="C选项内容" id="c-c">
+                        <!--<label for="c-d">D：</label>-->
+                        <input class="form-control mt-3" placeholder="D选项内容" id="c-d">
                     </div>
                 </div>
 
@@ -157,12 +236,10 @@
 
 
     <button id="sbm" type="button" class="btn btn-outline-success btn-lg "
-            onclick="window.history.back()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            onclick="submitChanges()">
+        提交
     </button>
 </div>
-<div class="container">
 
-
-</div>
 </body>
 </html>

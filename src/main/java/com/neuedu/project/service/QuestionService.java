@@ -21,6 +21,8 @@ public interface QuestionService {
      */
     void addSubjectiveQuestion(Question subjectiveQuestion);
 
+    void updateQuestion(Question question);
+
     /**
      * fetch all questions whose course is the course with id: courseId
      * @param courseId  course id

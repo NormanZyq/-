@@ -20,6 +20,8 @@
 
 
 		<script type="text/javascript">
+			var updatingCourseId;
+
 			function display() {
 				var traget2 = document.getElementById('pasedi');
 				if (traget2.style.display == "none") {
@@ -205,7 +207,9 @@
 					<div class="float-right">
 						<div class="col-md-8">
 							<ul class="nav nav-tabs">
-								<button id="edit2" type="button" class="btn btn-lg btn-outline-success" onclick="window.location.href = 'exercise.html'">添加</button>
+								<li>
+									<button id="edit2" type="button" class="btn btn-lg btn-outline-success" onclick="window.location.href = 'exercise.html?course=' + updatingCourseId">添加</button>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -240,7 +244,7 @@
 										<input type="number" id="sq-number" placeholder="主观题数量" class="form-control" required autofocus>
 										<br />
 										<br />
-										<button id="sbm" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal">
+										<button id="sbm2" type="button" class="btn btn-warning  btn-lg" data-dismiss="modal" onclick="createExam()">
 											&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
 									</div>

@@ -31,6 +31,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public void updateQuestion(Question question) {
+        questionMapper.updateQuestion(question);
+    }
+
+    @Override
     public List<Question> getAllQuestionsByCourseId(int courseId) {
         return null;
     }

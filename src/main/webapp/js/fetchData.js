@@ -37,8 +37,9 @@ function getTeachCourse() {
         success: function (result) {
             // 解析选课内容
             for (let course of result) {
-                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `')">${course.courseName}</a>`;
+                let content = `<a class="dropdown-item" onclick="getQuestions('` + course.courseId + `');$('#course-name').html('` + course.courseName + `');">${course.courseName}</a>`;
                 $('#my-course-dropdown').append(content);
+                updatingCourseId = course.courseId;
             }
         }
     })
@@ -69,7 +70,7 @@ function getQuestions(courseId) {
                 } else {
                     // 其他（不存在的）
                 }
-                tr1 += `<td><a type="button" class="btn btn-outline-info" href="/exercise.html?id=${question.questionId}">修改</a></td></tr>`;
+                tr1 += `<td><a type="button" class="btn btn-outline-info" href="/exercise.html?id=${question.questionId}&course=${courseId}">修改</a></td></tr>`;
             }
             $("#exerbody1").append(tr1);
 
@@ -246,8 +247,13 @@ function getQuestionById(id) {
                 // 选择题
                 $('#ke').attr('checked', 'checked');
                 $('#question-content').val(result.questionContent);
-                let choices = `<br>A. ${result.choices.A}<br /><br />B. ${result.choices.B}<br /><br />C. ${result.choices.C}<br /><br />D. ${result.choices.D}<br /><br />`;
-                $('#sel-content').html(choices);
+                $('#c-a').val(result.choices.A);
+                $('#c-b').val(result.choices.B);
+                $('#c-c').val(result.choices.C);
+                $('#c-d').val(result.choices.D);
+
+                // let choices = `<br>A. ${}<br /><br />B. ${}<br /><br />C. ${}<br /><br />D. ${}<br /><br />`;
+                // $('#sel-content').html(choices);
 
                 let rightAns = result.rightAnswer[0];
 

@@ -2,15 +2,12 @@ package com.neuedu.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.neuedu.project.domain.ChoiceQuestion;
-import com.neuedu.project.domain.MyHttpStatus;
 import com.neuedu.project.domain.Question;
-import com.neuedu.project.domain.utils.QuestionUtils;
 import com.neuedu.project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -43,21 +40,19 @@ public class QuestionController {
      * 要求前端按照Java类中的字段名称传入数据
      *
      * @param question 题目对象
-     * @param response response，用于设置状态码
      * @return 成功或失败
      */
     @PostMapping("/add/single")
     @ResponseBody
-    public String add(@RequestParam Question question,
-                      HttpServletResponse response) {
-        int type = question.getQuestionType();
-        if (type == 0) {
+    public String add(int courseId, int questionType, String questionContent,
+                      int score, String choicesString, String rightAnswerString) {
+        Question question = new Question(courseId, questionType, questionContent, choicesString, rightAnswerString, null);
+        question.setScore(score);
+        if (questionType == 0) {
             questionService.addChoiceQuestion(question);
-            response.setStatus(MyHttpStatus.OK.value());
             return "成功添加一道题";
         } else {
             questionService.addSubjectiveQuestion(question);
-            response.setStatus(MyHttpStatus.FAIL.value());
             return "添加失败，请重试";
         }
     }
@@ -108,6 +103,16 @@ public class QuestionController {
         return String.format("添加成功！一共添加了%d道题，"
                         + "包括%d道客观题和%d道主观题。",
                 length, choiceCount, subjectiveCount);
+    }
+
+    @PostMapping(value = "/update")
+    @ResponseBody
+    public String updateQuestion(int courseId, int questionType, String questionContent,
+                                 int score, String choicesString, String rightAnswerString) {
+        Question question = new Question(courseId, questionType, questionContent, choicesString, rightAnswerString, null);
+        question.setScore(score);
+        questionService.updateQuestion(question);
+        return "成功更新一道题（＾ν＾）";
     }
 
     /**

@@ -63,4 +63,14 @@ public interface AnswerService {
     ScoreData getGradeManageByTeacher(int testId);
 
 
+    /**
+     * 判断重复提交试卷
+     *
+     * @param studentId
+     * @param testId
+     * @return 重复为true，单次为false
+     */
+    boolean duclipSubmitAnswerSheet(String studentId, int testId);
+
+
 }

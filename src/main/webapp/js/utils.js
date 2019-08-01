@@ -182,7 +182,7 @@ function appendTeacherTest(test) {
 
 function releaseTest(id) {
     $.ajax({
-        url: '/arrange',
+        url: '/test/arrange',
         type: "POST",
         data: {
             testId: id,
